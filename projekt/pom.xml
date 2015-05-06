@@ -41,7 +41,7 @@
 		<configuration>
 			<archive>
 				<manifest>
-					<mainClass>PrijavaForma</mainClass>
+					<mainClass>ba.unsa.etf.si.projekt.PrijavaForma</mainClass>
 				</manifest>
 			</archive>
 			<descriptorRefs>
