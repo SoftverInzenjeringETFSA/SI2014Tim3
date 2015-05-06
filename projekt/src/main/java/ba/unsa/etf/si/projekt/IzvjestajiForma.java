@@ -17,12 +17,12 @@ import javax.swing.JPanel;
 public class IzvjestajiForma {
 
 	private JFrame frmIzvjetaji;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_7;
+	private JTextField pocetnoVrijemeSati;
+	private JTextField pocetnoVrijemeMinute;
+	private JTextField krajnjeVrijemeMinute;
+	private JTextField krajnjeVrijemeSati;
+	private JTextField imeVozac;
+	private JTextField prezimeVozac;
 
 	/**
 	 * Launch the application.
@@ -63,13 +63,13 @@ public class IzvjestajiForma {
 		frmIzvjetaji.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmIzvjetaji.getContentPane().setLayout(null);
 		
-		JButton button = new JButton("Nazad");
-		button.setBounds(282, 11, 89, 23);
-		frmIzvjetaji.getContentPane().add(button);
+		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.setBounds(282, 11, 89, 23);
+		frmIzvjetaji.getContentPane().add(nazadBtn);
 		
-		JButton button_1 = new JButton("Odjava");
-		button_1.setBounds(387, 11, 89, 23);
-		frmIzvjetaji.getContentPane().add(button_1);
+		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.setBounds(387, 11, 89, 23);
+		frmIzvjetaji.getContentPane().add(odjavaBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(21, 73, 438, 270);
@@ -79,10 +79,10 @@ public class IzvjestajiForma {
 		tabbedPane.addTab("Prodane karte", null, panel, null);
 		panel.setLayout(null);
 		
-		JDateChooser dateChooser_2 = new JDateChooser();
-		dateChooser_2.setDateFormatString("dd/MM/yyyy");
-		dateChooser_2.setBounds(175, 50, 178, 20);
-		panel.add(dateChooser_2);
+		JDateChooser pocetniProdaneDate = new JDateChooser();
+		pocetniProdaneDate.setDateFormatString("dd/MM/yyyy");
+		pocetniProdaneDate.setBounds(175, 50, 178, 20);
+		panel.add(pocetniProdaneDate);
 		
 		JLabel label_8 = new JLabel("Početni datum:");
 		label_8.setBounds(93, 53, 72, 14);
@@ -92,23 +92,23 @@ public class IzvjestajiForma {
 		label_9.setBounds(94, 100, 72, 14);
 		panel.add(label_9);
 		
-		JDateChooser dateChooser_3 = new JDateChooser();
-		dateChooser_3.setDateFormatString("dd/MM/yyyy");
-		dateChooser_3.setBounds(176, 97, 178, 20);
-		panel.add(dateChooser_3);
+		JDateChooser krajnjiProdaneDate = new JDateChooser();
+		krajnjiProdaneDate.setDateFormatString("dd/MM/yyyy");
+		krajnjiProdaneDate.setBounds(176, 97, 178, 20);
+		panel.add(krajnjiProdaneDate);
 		
-		JButton button_3 = new JButton("Generiši izvještaj");
-		button_3.setBounds(241, 208, 113, 23);
-		panel.add(button_3);
+		JButton generisiProdaneBtn = new JButton("Generiši izvještaj");
+		generisiProdaneBtn.setBounds(241, 208, 113, 23);
+		panel.add(generisiProdaneBtn);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Autobuske linije", null, panel_1, null);
 		panel_1.setLayout(null);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setDateFormatString("dd/MM/yyyy");
-		dateChooser.setBounds(171, 11, 178, 20);
-		panel_1.add(dateChooser);
+		JDateChooser pocetniLinijeDate = new JDateChooser();
+		pocetniLinijeDate.setDateFormatString("dd/MM/yyyy");
+		pocetniLinijeDate.setBounds(171, 11, 178, 20);
+		panel_1.add(pocetniLinijeDate);
 		
 		JLabel label = new JLabel("Početni datum:");
 		label.setBounds(89, 14, 72, 14);
@@ -118,34 +118,34 @@ public class IzvjestajiForma {
 		label_1.setBounds(90, 61, 72, 14);
 		panel_1.add(label_1);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setDateFormatString("dd/MM/yyyy");
-		dateChooser_1.setBounds(172, 58, 178, 20);
-		panel_1.add(dateChooser_1);
+		JDateChooser krajnjiLinijeDate = new JDateChooser();
+		krajnjiLinijeDate.setDateFormatString("dd/MM/yyyy");
+		krajnjiLinijeDate.setBounds(172, 58, 178, 20);
+		panel_1.add(krajnjiLinijeDate);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(171, 103, 67, 20);
-		panel_1.add(textField);
+		pocetnoVrijemeSati = new JTextField();
+		pocetnoVrijemeSati.setColumns(10);
+		pocetnoVrijemeSati.setBounds(171, 103, 67, 20);
+		panel_1.add(pocetnoVrijemeSati);
 		
 		JLabel label_2 = new JLabel("Početno vrijeme:");
 		label_2.setBounds(72, 106, 89, 14);
 		panel_1.add(label_2);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(270, 103, 61, 20);
-		panel_1.add(textField_1);
+		pocetnoVrijemeMinute = new JTextField();
+		pocetnoVrijemeMinute.setColumns(10);
+		pocetnoVrijemeMinute.setBounds(270, 103, 61, 20);
+		panel_1.add(pocetnoVrijemeMinute);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(270, 149, 61, 20);
-		panel_1.add(textField_2);
+		krajnjeVrijemeMinute = new JTextField();
+		krajnjeVrijemeMinute.setColumns(10);
+		krajnjeVrijemeMinute.setBounds(270, 149, 61, 20);
+		panel_1.add(krajnjeVrijemeMinute);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(171, 149, 67, 20);
-		panel_1.add(textField_3);
+		krajnjeVrijemeSati = new JTextField();
+		krajnjeVrijemeSati.setColumns(10);
+		krajnjeVrijemeSati.setBounds(171, 149, 67, 20);
+		panel_1.add(krajnjeVrijemeSati);
 		
 		JLabel label_3 = new JLabel("Krajnje vrijeme:");
 		label_3.setBounds(79, 152, 82, 14);
@@ -167,34 +167,34 @@ public class IzvjestajiForma {
 		label_7.setBounds(341, 152, 8, 14);
 		panel_1.add(label_7);
 		
-		JButton button_2 = new JButton("Generiši izvještaj");
-		button_2.setBounds(236, 208, 113, 23);
-		panel_1.add(button_2);
+		JButton generisiLinijeBtn = new JButton("Generiši izvještaj");
+		generisiLinijeBtn.setBounds(236, 208, 113, 23);
+		panel_1.add(generisiLinijeBtn);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Vozači", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(204, 67, 113, 20);
-		panel_2.add(textField_4);
+		imeVozac = new JTextField();
+		imeVozac.setColumns(10);
+		imeVozac.setBounds(204, 67, 113, 20);
+		panel_2.add(imeVozac);
 		
 		JLabel lblImeVozaa = new JLabel("Ime vozača:");
 		lblImeVozaa.setBounds(135, 70, 59, 14);
 		panel_2.add(lblImeVozaa);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(204, 113, 113, 20);
-		panel_2.add(textField_7);
+		prezimeVozac = new JTextField();
+		prezimeVozac.setColumns(10);
+		prezimeVozac.setBounds(204, 113, 113, 20);
+		panel_2.add(prezimeVozac);
 		
 		JLabel lblPrezimeVozaa = new JLabel("Prezime vozača:");
 		lblPrezimeVozaa.setBounds(116, 116, 78, 14);
 		panel_2.add(lblPrezimeVozaa);
 		
-		JButton button_4 = new JButton("Generiši izvještaj");
-		button_4.setBounds(204, 208, 113, 23);
-		panel_2.add(button_4);
+		JButton generisiVozaciBtn = new JButton("Generiši izvještaj");
+		generisiVozaciBtn.setBounds(204, 208, 113, 23);
+		panel_2.add(generisiVozaciBtn);
 	}
 }

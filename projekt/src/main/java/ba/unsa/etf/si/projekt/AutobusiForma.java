@@ -20,13 +20,13 @@ import javax.swing.AbstractListModel;
 public class AutobusiForma {
 
 	private JFrame frmEvidencijaAutobusa;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField modelDodaj;
+	private JTextField registracijeDodaj;
+	private JTextField modelModifikuj;
+	private JTextField registracijeModifikuj;
+	private JTextField modelIzbrisi;
+	private JTextField registracijeIzbrisi;
+	private JTextField registracijePretraga;
 
 	/**
 	 * Launch the application.
@@ -83,35 +83,35 @@ public class AutobusiForma {
 		tabbedPane.addTab("Dodaj", null, panel, null);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(199, 71, 155, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		modelDodaj = new JTextField();
+		modelDodaj.setBounds(199, 71, 155, 20);
+		panel.add(modelDodaj);
+		modelDodaj.setColumns(10);
 		
 		JLabel lblModel = new JLabel("Model:");
 		lblModel.setBounds(157, 74, 32, 14);
 		panel.add(lblModel);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(199, 107, 155, 20);
-		panel.add(spinner);
+		JSpinner kapacitetDodajSpinner = new JSpinner();
+		kapacitetDodajSpinner.setBounds(199, 107, 155, 20);
+		panel.add(kapacitetDodajSpinner);
 		
 		JLabel lblKapacitet = new JLabel("Kapacitet:");
 		lblKapacitet.setBounds(140, 110, 49, 14);
 		panel.add(lblKapacitet);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(199, 140, 155, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		registracijeDodaj = new JTextField();
+		registracijeDodaj.setBounds(199, 140, 155, 20);
+		panel.add(registracijeDodaj);
+		registracijeDodaj.setColumns(10);
 		
 		JLabel lblRegistracije = new JLabel("Registracije:");
 		lblRegistracije.setBounds(129, 143, 60, 14);
 		panel.add(lblRegistracije);
 		
-		JButton btnUnesi = new JButton("Unesi");
-		btnUnesi.setBounds(265, 200, 89, 23);
-		panel.add(btnUnesi);
+		JButton unesiDodajBtn = new JButton("Unesi");
+		unesiDodajBtn.setBounds(265, 200, 89, 23);
+		panel.add(unesiDodajBtn);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, panel_1, null);
@@ -121,8 +121,8 @@ public class AutobusiForma {
 		scrollPane.setBounds(10, 47, 238, 245);
 		panel_1.add(scrollPane);
 		
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
+		JList autobusiModifikujLista = new JList();
+		autobusiModifikujLista.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20"};
 			public int getSize() {
 				return values.length;
@@ -131,7 +131,7 @@ public class AutobusiForma {
 				return values[index];
 			}
 		});
-		scrollPane.setViewportView(list);
+		scrollPane.setViewportView(autobusiModifikujLista);
 		
 		JLabel lblAutobusi = new JLabel("Autobusi:");
 		lblAutobusi.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -142,14 +142,14 @@ public class AutobusiForma {
 		label.setBounds(282, 50, 32, 14);
 		panel_1.add(label);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(324, 47, 155, 20);
-		panel_1.add(textField_2);
+		modelModifikuj = new JTextField();
+		modelModifikuj.setColumns(10);
+		modelModifikuj.setBounds(324, 47, 155, 20);
+		panel_1.add(modelModifikuj);
 		
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(324, 83, 155, 20);
-		panel_1.add(spinner_1);
+		JSpinner kapacitetModifikujSpinner = new JSpinner();
+		kapacitetModifikujSpinner.setBounds(324, 83, 155, 20);
+		panel_1.add(kapacitetModifikujSpinner);
 		
 		JLabel label_1 = new JLabel("Kapacitet:");
 		label_1.setBounds(265, 86, 49, 14);
@@ -159,14 +159,14 @@ public class AutobusiForma {
 		label_2.setBounds(254, 119, 60, 14);
 		panel_1.add(label_2);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(324, 116, 155, 20);
-		panel_1.add(textField_3);
+		registracijeModifikuj = new JTextField();
+		registracijeModifikuj.setColumns(10);
+		registracijeModifikuj.setBounds(324, 116, 155, 20);
+		panel_1.add(registracijeModifikuj);
 		
-		JButton btnIzmijeni = new JButton("Izmijeni");
-		btnIzmijeni.setBounds(390, 269, 89, 23);
-		panel_1.add(btnIzmijeni);
+		JButton izmijeniModifikujBtn = new JButton("Izmijeni");
+		izmijeniModifikujBtn.setBounds(390, 269, 89, 23);
+		panel_1.add(izmijeniModifikujBtn);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Izbriši", null, panel_2, null);
@@ -176,14 +176,14 @@ public class AutobusiForma {
 		label_3.setBounds(144, 101, 32, 14);
 		panel_2.add(label_3);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(186, 98, 155, 20);
-		panel_2.add(textField_4);
+		modelIzbrisi = new JTextField();
+		modelIzbrisi.setColumns(10);
+		modelIzbrisi.setBounds(186, 98, 155, 20);
+		panel_2.add(modelIzbrisi);
 		
-		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(186, 134, 155, 20);
-		panel_2.add(spinner_2);
+		JSpinner kapacitetIzbrisi = new JSpinner();
+		kapacitetIzbrisi.setBounds(186, 134, 155, 20);
+		panel_2.add(kapacitetIzbrisi);
 		
 		JLabel label_4 = new JLabel("Kapacitet:");
 		label_4.setBounds(127, 137, 49, 14);
@@ -193,27 +193,27 @@ public class AutobusiForma {
 		label_5.setBounds(116, 170, 60, 14);
 		panel_2.add(label_5);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(186, 167, 155, 20);
-		panel_2.add(textField_5);
+		registracijeIzbrisi = new JTextField();
+		registracijeIzbrisi.setColumns(10);
+		registracijeIzbrisi.setBounds(186, 167, 155, 20);
+		panel_2.add(registracijeIzbrisi);
 		
-		JButton btnIzbrii = new JButton("Izbriši");
-		btnIzbrii.setBounds(252, 220, 89, 23);
-		panel_2.add(btnIzbrii);
+		JButton izbrisiBtn = new JButton("Izbriši");
+		izbrisiBtn.setBounds(252, 220, 89, 23);
+		panel_2.add(izbrisiBtn);
 		
 		JLabel label_6 = new JLabel("Registracije:");
 		label_6.setBounds(85, 46, 60, 14);
 		panel_2.add(label_6);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(155, 43, 155, 20);
-		panel_2.add(textField_6);
+		registracijePretraga = new JTextField();
+		registracijePretraga.setColumns(10);
+		registracijePretraga.setBounds(155, 43, 155, 20);
+		panel_2.add(registracijePretraga);
 		
-		JButton btnPronai = new JButton("Pronađi");
-		btnPronai.setBounds(320, 42, 89, 23);
-		panel_2.add(btnPronai);
+		JButton pronadiIzbrisiBtn = new JButton("Pronađi");
+		pronadiIzbrisiBtn.setBounds(320, 42, 89, 23);
+		panel_2.add(pronadiIzbrisiBtn);
 	}
 
 }
