@@ -15,8 +15,8 @@ import javax.swing.JButton;
 public class PrijavaForma {
 
 	private JFrame frmPrijava;
-	private JTextField textField;
-	private JPasswordField passwordField;
+	private JTextField ime;
+	private JPasswordField sifra;
 
 	/**
 	 * Launch the application.
@@ -56,14 +56,14 @@ public class PrijavaForma {
 		frmPrijava.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPrijava.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(165, 91, 118, 20);
-		frmPrijava.getContentPane().add(textField);
-		textField.setColumns(10);
+		ime = new JTextField();
+		ime.setBounds(165, 91, 118, 20);
+		frmPrijava.getContentPane().add(ime);
+		ime.setColumns(10);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(165, 137, 118, 20);
-		frmPrijava.getContentPane().add(passwordField);
+		sifra = new JPasswordField();
+		sifra.setBounds(165, 137, 118, 20);
+		frmPrijava.getContentPane().add(sifra);
 		
 		JLabel lblNewLabel = new JLabel("Korisničko ime:");
 		lblNewLabel.setBounds(71, 94, 70, 14);
@@ -78,8 +78,8 @@ public class PrijavaForma {
 		lblDobrodoli.setBounds(115, 28, 102, 25);
 		frmPrijava.getContentPane().add(lblDobrodoli);
 		
-		JButton btnPrijava = new JButton("Prijava");
-		btnPrijava.setBounds(194, 179, 89, 23);
-		frmPrijava.getContentPane().add(btnPrijava);
+		JButton prijavaBtn = new JButton("Prijava");
+		prijavaBtn.setBounds(194, 179, 89, 23);
+		frmPrijava.getContentPane().add(prijavaBtn);
 	}
 }

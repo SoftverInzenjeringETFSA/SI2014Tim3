@@ -14,17 +14,17 @@ import javax.swing.UIManager;
 public class KorisniciForma {
 
 	private JFrame frmKorisnikiRauni;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField imeDodaj;
+	private JTextField prezimeDodaj;
+	private JTextField jmbgDodaj;
+	private JTextField korisnickoDodaj;
+	private JTextField sifraDodaj;
+	private JTextField pronadiModifikuj;
+	private JTextField imeModifikuj;
+	private JTextField prezimeModifikuj;
+	private JTextField korisnickoModifikuj;
+	private JTextField sifraModifikuj;
+	private JTextField korisnickoIzbrisi;
 
 	/**
 	 * Launch the application.
@@ -84,15 +84,15 @@ public class KorisniciForma {
 		label.setBounds(138, 29, 22, 14);
 		panel.add(label);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(186, 26, 193, 20);
-		panel.add(textField);
+		imeDodaj = new JTextField();
+		imeDodaj.setColumns(10);
+		imeDodaj.setBounds(186, 26, 193, 20);
+		panel.add(imeDodaj);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(186, 64, 193, 20);
-		panel.add(textField_1);
+		prezimeDodaj = new JTextField();
+		prezimeDodaj.setColumns(10);
+		prezimeDodaj.setBounds(186, 64, 193, 20);
+		panel.add(prezimeDodaj);
 		
 		JLabel label_1 = new JLabel("Prezime:");
 		label_1.setBounds(114, 67, 46, 14);
@@ -102,14 +102,14 @@ public class KorisniciForma {
 		label_2.setBounds(128, 105, 34, 14);
 		panel.add(label_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(186, 102, 193, 20);
-		panel.add(textField_2);
+		jmbgDodaj = new JTextField();
+		jmbgDodaj.setColumns(10);
+		jmbgDodaj.setBounds(186, 102, 193, 20);
+		panel.add(jmbgDodaj);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(186, 146, 193, 20);
-		panel.add(comboBox);
+		JComboBox tipDodajCombo = new JComboBox();
+		tipDodajCombo.setBounds(186, 146, 193, 20);
+		panel.add(tipDodajCombo);
 		
 		JLabel label_3 = new JLabel("Tip radnog mjesta:");
 		label_3.setBounds(67, 149, 101, 14);
@@ -119,23 +119,23 @@ public class KorisniciForma {
 		label_4.setBounds(90, 191, 70, 14);
 		panel.add(label_4);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(186, 188, 193, 20);
-		panel.add(textField_3);
+		korisnickoDodaj = new JTextField();
+		korisnickoDodaj.setColumns(10);
+		korisnickoDodaj.setBounds(186, 188, 193, 20);
+		panel.add(korisnickoDodaj);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(186, 226, 193, 20);
-		panel.add(textField_4);
+		sifraDodaj = new JTextField();
+		sifraDodaj.setColumns(10);
+		sifraDodaj.setBounds(186, 226, 193, 20);
+		panel.add(sifraDodaj);
 		
 		JLabel label_5 = new JLabel("Šifra:");
 		label_5.setBounds(132, 229, 34, 14);
 		panel.add(label_5);
 		
-		JButton btnDodajNovogKorisnika = new JButton("Dodaj novog korisnika");
-		btnDodajNovogKorisnika.setBounds(242, 297, 137, 23);
-		panel.add(btnDodajNovogKorisnika);
+		JButton dodajBtn = new JButton("Dodaj novog korisnika");
+		dodajBtn.setBounds(242, 297, 137, 23);
+		panel.add(dodajBtn);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, panel_1, null);
@@ -145,19 +145,19 @@ public class KorisniciForma {
 		lblKorisnikoIme.setBounds(67, 33, 70, 14);
 		panel_1.add(lblKorisnikoIme);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(147, 30, 151, 20);
-		panel_1.add(textField_5);
+		pronadiModifikuj = new JTextField();
+		pronadiModifikuj.setColumns(10);
+		pronadiModifikuj.setBounds(147, 30, 151, 20);
+		panel_1.add(pronadiModifikuj);
 		
-		JButton button_3 = new JButton("Pronađi");
-		button_3.setBounds(308, 29, 89, 23);
-		panel_1.add(button_3);
+		JButton pronadiBtn = new JButton("Pronađi");
+		pronadiBtn.setBounds(308, 29, 89, 23);
+		panel_1.add(pronadiBtn);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(168, 78, 193, 20);
-		panel_1.add(textField_6);
+		imeModifikuj = new JTextField();
+		imeModifikuj.setColumns(10);
+		imeModifikuj.setBounds(168, 78, 193, 20);
+		panel_1.add(imeModifikuj);
 		
 		JLabel label_7 = new JLabel("Ime:");
 		label_7.setBounds(130, 81, 22, 14);
@@ -167,27 +167,27 @@ public class KorisniciForma {
 		label_8.setBounds(106, 119, 46, 14);
 		panel_1.add(label_8);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(168, 116, 193, 20);
-		panel_1.add(textField_7);
+		prezimeModifikuj = new JTextField();
+		prezimeModifikuj.setColumns(10);
+		prezimeModifikuj.setBounds(168, 116, 193, 20);
+		panel_1.add(prezimeModifikuj);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(168, 161, 193, 20);
-		panel_1.add(comboBox_1);
+		JComboBox tipModifikuj = new JComboBox();
+		tipModifikuj.setBounds(168, 161, 193, 20);
+		panel_1.add(tipModifikuj);
 		
 		JLabel label_9 = new JLabel("Tip radnog mjesta:");
 		label_9.setBounds(57, 164, 101, 14);
 		panel_1.add(label_9);
 		
-		JButton btnModifikujKorisnika = new JButton("Modifikuj korisnika");
-		btnModifikujKorisnika.setBounds(278, 297, 119, 23);
-		panel_1.add(btnModifikujKorisnika);
+		JButton modifikujBtn = new JButton("Modifikuj korisnika");
+		modifikujBtn.setBounds(278, 297, 119, 23);
+		panel_1.add(modifikujBtn);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(168, 205, 193, 20);
-		panel_1.add(textField_8);
+		korisnickoModifikuj = new JTextField();
+		korisnickoModifikuj.setColumns(10);
+		korisnickoModifikuj.setBounds(168, 205, 193, 20);
+		panel_1.add(korisnickoModifikuj);
 		
 		JLabel label_6 = new JLabel("Korisničko ime:");
 		label_6.setBounds(72, 208, 70, 14);
@@ -197,10 +197,10 @@ public class KorisniciForma {
 		label_10.setBounds(114, 246, 34, 14);
 		panel_1.add(label_10);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		textField_9.setBounds(168, 243, 193, 20);
-		panel_1.add(textField_9);
+		sifraModifikuj = new JTextField();
+		sifraModifikuj.setColumns(10);
+		sifraModifikuj.setBounds(168, 243, 193, 20);
+		panel_1.add(sifraModifikuj);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Izbriši", null, panel_2, null);
@@ -210,14 +210,14 @@ public class KorisniciForma {
 		label_11.setBounds(105, 60, 70, 14);
 		panel_2.add(label_11);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(185, 57, 151, 20);
-		panel_2.add(textField_10);
+		korisnickoIzbrisi = new JTextField();
+		korisnickoIzbrisi.setColumns(10);
+		korisnickoIzbrisi.setBounds(185, 57, 151, 20);
+		panel_2.add(korisnickoIzbrisi);
 		
-		JButton btnIzbriiKorisnika = new JButton("Izbriši korisnika");
-		btnIzbriiKorisnika.setBounds(219, 115, 112, 23);
-		panel_2.add(btnIzbriiKorisnika);
+		JButton izbrisiBtn = new JButton("Izbriši korisnika");
+		izbrisiBtn.setBounds(219, 115, 112, 23);
+		panel_2.add(izbrisiBtn);
 	}
 
 }

@@ -58,29 +58,29 @@ public class MenadzerPocetna {
 		lblPrijavljeniSteKao.setBounds(41, 17, 249, 23);
 		frmMenaderPoetna.getContentPane().add(lblPrijavljeniSteKao);
 		
-		JButton btnOdjava = new JButton("Odjava");
-		btnOdjava.setBounds(333, 17, 89, 23);
-		frmMenaderPoetna.getContentPane().add(btnOdjava);
+		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.setBounds(333, 17, 89, 23);
+		frmMenaderPoetna.getContentPane().add(odjavaBtn);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(41, 94, 381, 208);
 		frmMenaderPoetna.getContentPane().add(panel);
 		panel.setLayout(new GridLayout(0, 1, 0, 5));
 		
-		JButton btnIzvjetaji = new JButton("Izvještaji");
-		panel.add(btnIzvjetaji);
+		JButton izvjestajiBtn = new JButton("Izvještaji");
+		panel.add(izvjestajiBtn);
 		
-		JButton btnEvidencijaRadnika = new JButton("Evidencija radnika");
-		panel.add(btnEvidencijaRadnika);
+		JButton radniciBtn = new JButton("Evidencija radnika");
+		panel.add(radniciBtn);
 		
-		JButton btnEvidencijaAutobuskihLinija = new JButton("Evidencija autobuskih linija");
-		panel.add(btnEvidencijaAutobuskihLinija);
+		JButton linijeBtn = new JButton("Evidencija autobuskih linija");
+		panel.add(linijeBtn);
 		
-		JButton btnEvidencijaAutobusa = new JButton("Evidencija autobusa");
-		panel.add(btnEvidencijaAutobusa);
+		JButton autobusiBtn = new JButton("Evidencija autobusa");
+		panel.add(autobusiBtn);
 		
-		JButton btnPravljenjeNaloga = new JButton("Pravljenje naloga");
-		panel.add(btnPravljenjeNaloga);
+		JButton naloziBtn = new JButton("Pravljenje naloga");
+		panel.add(naloziBtn);
 		
 		JLabel lblPrijavljeniSteKao_1 = new JLabel("Prijavljeni ste kao menadžer!");
 		lblPrijavljeniSteKao_1.setFont(new Font("Tahoma", Font.PLAIN, 15));

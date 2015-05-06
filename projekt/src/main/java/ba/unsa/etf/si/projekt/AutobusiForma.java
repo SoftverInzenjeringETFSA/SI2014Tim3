@@ -67,13 +67,13 @@ public class AutobusiForma {
 		frmEvidencijaAutobusa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEvidencijaAutobusa.getContentPane().setLayout(null);
 		
-		JButton button = new JButton("Odjava");
-		button.setBounds(428, 11, 89, 23);
-		frmEvidencijaAutobusa.getContentPane().add(button);
+		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.setBounds(428, 11, 89, 23);
+		frmEvidencijaAutobusa.getContentPane().add(odjavaBtn);
 		
-		JButton button_1 = new JButton("Nazad");
-		button_1.setBounds(329, 11, 89, 23);
-		frmEvidencijaAutobusa.getContentPane().add(button_1);
+		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.setBounds(329, 11, 89, 23);
+		frmEvidencijaAutobusa.getContentPane().add(nazadBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(23, 53, 494, 331);
@@ -109,9 +109,9 @@ public class AutobusiForma {
 		lblRegistracije.setBounds(129, 143, 60, 14);
 		panel.add(lblRegistracije);
 		
-		JButton unesiDodajBtn = new JButton("Unesi");
-		unesiDodajBtn.setBounds(265, 200, 89, 23);
-		panel.add(unesiDodajBtn);
+		JButton dodajBtn = new JButton("Unesi");
+		dodajBtn.setBounds(265, 200, 89, 23);
+		panel.add(dodajBtn);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, panel_1, null);
@@ -164,9 +164,9 @@ public class AutobusiForma {
 		registracijeModifikuj.setBounds(324, 116, 155, 20);
 		panel_1.add(registracijeModifikuj);
 		
-		JButton izmijeniModifikujBtn = new JButton("Izmijeni");
-		izmijeniModifikujBtn.setBounds(390, 269, 89, 23);
-		panel_1.add(izmijeniModifikujBtn);
+		JButton izmijeniBtn = new JButton("Izmijeni");
+		izmijeniBtn.setBounds(390, 269, 89, 23);
+		panel_1.add(izmijeniBtn);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Izbriši", null, panel_2, null);

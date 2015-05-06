@@ -19,7 +19,7 @@ import javax.swing.AbstractListModel;
 public class NaloziForma {
 
 	private JFrame frmPravljenjeNaloga;
-	private JTextField textField;
+	private JTextField vrijeme;
 
 	/**
 	 * Launch the application.
@@ -64,8 +64,8 @@ public class NaloziForma {
 		scrollPane.setBounds(23, 86, 277, 256);
 		frmPravljenjeNaloga.getContentPane().add(scrollPane);
 		
-		JList list = new JList();
-		list.setModel(new AbstractListModel() {
+		JList linijeList = new JList();
+		linijeList.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30"};
 			public int getSize() {
 				return values.length;
@@ -74,29 +74,29 @@ public class NaloziForma {
 				return values[index];
 			}
 		});
-		scrollPane.setViewportView(list);
+		scrollPane.setViewportView(linijeList);
 		
-		JButton button = new JButton("Nazad");
-		button.setBounds(338, 11, 89, 23);
-		frmPravljenjeNaloga.getContentPane().add(button);
+		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.setBounds(338, 11, 89, 23);
+		frmPravljenjeNaloga.getContentPane().add(nazadBtn);
 		
-		JButton button_1 = new JButton("Odjava");
-		button_1.setBounds(437, 11, 89, 23);
-		frmPravljenjeNaloga.getContentPane().add(button_1);
+		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.setBounds(437, 11, 89, 23);
+		frmPravljenjeNaloga.getContentPane().add(odjavaBtn);
 		
 		JLabel lblAutobuskeLinije = new JLabel("Autobuske linije:");
 		lblAutobuskeLinije.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblAutobuskeLinije.setBounds(23, 55, 112, 20);
 		frmPravljenjeNaloga.getContentPane().add(lblAutobuskeLinije);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(410, 86, 116, 20);
-		frmPravljenjeNaloga.getContentPane().add(dateChooser);
+		JDateChooser datumDate = new JDateChooser();
+		datumDate.setBounds(410, 86, 116, 20);
+		frmPravljenjeNaloga.getContentPane().add(datumDate);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(410, 129, 116, 20);
-		frmPravljenjeNaloga.getContentPane().add(textField);
+		vrijeme = new JTextField();
+		vrijeme.setColumns(10);
+		vrijeme.setBounds(410, 129, 116, 20);
+		frmPravljenjeNaloga.getContentPane().add(vrijeme);
 		
 		JLabel label = new JLabel("Vrijeme polaska:");
 		label.setBounds(322, 132, 78, 14);
@@ -106,8 +106,8 @@ public class NaloziForma {
 		label_1.setBounds(322, 88, 78, 14);
 		frmPravljenjeNaloga.getContentPane().add(label_1);
 		
-		JButton btnNapraviNalog = new JButton("Napravi nalog");
-		btnNapraviNalog.setBounds(410, 319, 116, 23);
-		frmPravljenjeNaloga.getContentPane().add(btnNapraviNalog);
+		JButton napraviBtn = new JButton("Napravi nalog");
+		napraviBtn.setBounds(410, 319, 116, 23);
+		frmPravljenjeNaloga.getContentPane().add(napraviBtn);
 	}
 }

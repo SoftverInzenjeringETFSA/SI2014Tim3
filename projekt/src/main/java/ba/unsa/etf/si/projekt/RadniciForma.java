@@ -14,15 +14,15 @@ import javax.swing.UIManager;
 public class RadniciForma {
 
 	private JFrame frmEvidencijaRadnika;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_10;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField imeDodaj;
+	private JTextField prezimeDodaj;
+	private JTextField jmbgDodaj;
+	private JTextField imeModifikuj;
+	private JTextField prezimeModifikuj;
+	private JTextField jmbgModifikujPronadji;
+	private JTextField jmbgIzbrisiPronadi;
+	private JTextField imeIzbrisi;
+	private JTextField prezimeIzbrisi;
 
 	/**
 	 * Launch the application.
@@ -70,24 +70,24 @@ public class RadniciForma {
 		tabbedPane.addTab("Dodaj", null, dodajRadnikaTab, null);
 		dodajRadnikaTab.setLayout(null);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(151, 64, 193, 20);
-		dodajRadnikaTab.add(textField_1);
-		textField_1.setColumns(10);
+		prezimeDodaj = new JTextField();
+		prezimeDodaj.setBounds(151, 64, 193, 20);
+		dodajRadnikaTab.add(prezimeDodaj);
+		prezimeDodaj.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setBounds(151, 26, 193, 20);
-		dodajRadnikaTab.add(textField);
-		textField.setColumns(10);
+		imeDodaj = new JTextField();
+		imeDodaj.setBounds(151, 26, 193, 20);
+		dodajRadnikaTab.add(imeDodaj);
+		imeDodaj.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(151, 102, 193, 20);
-		dodajRadnikaTab.add(textField_2);
-		textField_2.setColumns(10);
+		jmbgDodaj = new JTextField();
+		jmbgDodaj.setBounds(151, 102, 193, 20);
+		dodajRadnikaTab.add(jmbgDodaj);
+		jmbgDodaj.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(151, 146, 193, 20);
-		dodajRadnikaTab.add(comboBox);
+		JComboBox tipDodajCombo = new JComboBox();
+		tipDodajCombo.setBounds(151, 146, 193, 20);
+		dodajRadnikaTab.add(tipDodajCombo);
 		
 		JLabel lblIme = new JLabel("Ime:");
 		lblIme.setBounds(103, 29, 22, 14);
@@ -105,18 +105,18 @@ public class RadniciForma {
 		lblTipRadnogMjesta.setBounds(32, 149, 101, 14);
 		dodajRadnikaTab.add(lblTipRadnogMjesta);
 		
-		JButton btnDodajRadnika = new JButton("Dodaj");
-		btnDodajRadnika.setBounds(263, 207, 81, 23);
-		dodajRadnikaTab.add(btnDodajRadnika);
+		JButton dodajBtn = new JButton("Dodaj");
+		dodajBtn.setBounds(263, 207, 81, 23);
+		dodajRadnikaTab.add(dodajBtn);
 		
 		JPanel modifikujRadnikaTab = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, modifikujRadnikaTab, null);
 		modifikujRadnikaTab.setLayout(null);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(161, 81, 183, 20);
-		modifikujRadnikaTab.add(textField_3);
+		imeModifikuj = new JTextField();
+		imeModifikuj.setColumns(10);
+		imeModifikuj.setBounds(161, 81, 183, 20);
+		modifikujRadnikaTab.add(imeModifikuj);
 		
 		JLabel label = new JLabel("Ime:");
 		label.setBounds(113, 84, 22, 14);
@@ -126,35 +126,35 @@ public class RadniciForma {
 		label_1.setBounds(89, 122, 46, 14);
 		modifikujRadnikaTab.add(label_1);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(161, 119, 183, 20);
-		modifikujRadnikaTab.add(textField_4);
+		prezimeModifikuj = new JTextField();
+		prezimeModifikuj.setColumns(10);
+		prezimeModifikuj.setBounds(161, 119, 183, 20);
+		modifikujRadnikaTab.add(prezimeModifikuj);
 		
 		JLabel label_3 = new JLabel("Tip radnog mjesta:");
 		label_3.setBounds(40, 167, 101, 14);
 		modifikujRadnikaTab.add(label_3);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(161, 164, 183, 20);
-		modifikujRadnikaTab.add(comboBox_1);
+		JComboBox tipModifikujCombo = new JComboBox();
+		tipModifikujCombo.setBounds(161, 164, 183, 20);
+		modifikujRadnikaTab.add(tipModifikujCombo);
 		
-		JButton btnModifikujRadnika = new JButton("Spasi promjene");
-		btnModifikujRadnika.setBounds(271, 214, 109, 23);
-		modifikujRadnikaTab.add(btnModifikujRadnika);
+		JButton modifikujBtn = new JButton("Spasi promjene");
+		modifikujBtn.setBounds(271, 214, 109, 23);
+		modifikujRadnikaTab.add(modifikujBtn);
 		
 		JLabel lblRadnik = new JLabel("JMBG radnika:");
 		lblRadnik.setBounds(52, 36, 68, 14);
 		modifikujRadnikaTab.add(lblRadnik);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		textField_10.setBounds(130, 33, 151, 20);
-		modifikujRadnikaTab.add(textField_10);
+		jmbgModifikujPronadji = new JTextField();
+		jmbgModifikujPronadji.setColumns(10);
+		jmbgModifikujPronadji.setBounds(130, 33, 151, 20);
+		modifikujRadnikaTab.add(jmbgModifikujPronadji);
 		
-		JButton btnProna = new JButton("Pronađi");
-		btnProna.setBounds(291, 32, 89, 23);
-		modifikujRadnikaTab.add(btnProna);
+		JButton pronadjiModifikujBtn = new JButton("Pronađi");
+		pronadjiModifikujBtn.setBounds(291, 32, 89, 23);
+		modifikujRadnikaTab.add(pronadjiModifikujBtn);
 		
 		JPanel izbrisiRadnikaTab = new JPanel();
 		tabbedPane.addTab("Izbriši", null, izbrisiRadnikaTab, null);
@@ -164,32 +164,32 @@ public class RadniciForma {
 		label_4.setBounds(46, 36, 68, 14);
 		izbrisiRadnikaTab.add(label_4);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(124, 33, 151, 20);
-		izbrisiRadnikaTab.add(textField_6);
+		jmbgIzbrisiPronadi = new JTextField();
+		jmbgIzbrisiPronadi.setColumns(10);
+		jmbgIzbrisiPronadi.setBounds(124, 33, 151, 20);
+		izbrisiRadnikaTab.add(jmbgIzbrisiPronadi);
 		
-		JButton button = new JButton("Pronađi");
-		button.setBounds(285, 32, 89, 23);
-		izbrisiRadnikaTab.add(button);
+		JButton pronadiIzbrisiBtn = new JButton("Pronađi");
+		pronadiIzbrisiBtn.setBounds(285, 32, 89, 23);
+		izbrisiRadnikaTab.add(pronadiIzbrisiBtn);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(155, 81, 183, 20);
-		izbrisiRadnikaTab.add(textField_7);
+		imeIzbrisi = new JTextField();
+		imeIzbrisi.setColumns(10);
+		imeIzbrisi.setBounds(155, 81, 183, 20);
+		izbrisiRadnikaTab.add(imeIzbrisi);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(155, 119, 183, 20);
-		izbrisiRadnikaTab.add(textField_8);
+		prezimeIzbrisi = new JTextField();
+		prezimeIzbrisi.setColumns(10);
+		prezimeIzbrisi.setBounds(155, 119, 183, 20);
+		izbrisiRadnikaTab.add(prezimeIzbrisi);
 		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(155, 162, 183, 20);
-		izbrisiRadnikaTab.add(comboBox_2);
+		JComboBox tipIzbrisiCombo = new JComboBox();
+		tipIzbrisiCombo.setBounds(155, 162, 183, 20);
+		izbrisiRadnikaTab.add(tipIzbrisiCombo);
 		
-		JButton btnIzbripi = new JButton("Izbriši");
-		btnIzbripi.setBounds(285, 214, 89, 23);
-		izbrisiRadnikaTab.add(btnIzbripi);
+		JButton izbrisiBtn = new JButton("Izbriši");
+		izbrisiBtn.setBounds(285, 214, 89, 23);
+		izbrisiRadnikaTab.add(izbrisiBtn);
 		
 		JLabel label_5 = new JLabel("Tip radnog mjesta:");
 		label_5.setBounds(36, 165, 101, 14);
@@ -203,12 +203,12 @@ public class RadniciForma {
 		label_8.setBounds(107, 84, 22, 14);
 		izbrisiRadnikaTab.add(label_8);
 		
-		JButton btnOdjava = new JButton("Odjava");
-		btnOdjava.setBounds(338, 11, 89, 23);
-		frmEvidencijaRadnika.getContentPane().add(btnOdjava);
+		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.setBounds(338, 11, 89, 23);
+		frmEvidencijaRadnika.getContentPane().add(odjavaBtn);
 		
-		JButton btnNazad = new JButton("Nazad");
-		btnNazad.setBounds(239, 11, 89, 23);
-		frmEvidencijaRadnika.getContentPane().add(btnNazad);
+		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.setBounds(239, 11, 89, 23);
+		frmEvidencijaRadnika.getContentPane().add(nazadBtn);
 	}
 }
