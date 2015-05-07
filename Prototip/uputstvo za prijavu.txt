@@ -1,0 +1,6 @@
+Za prijavu ukucajte ime kao jedno od nabrojanih:
+administrator
+menadjer
+salterski
+
+Sifru ostavite praznu
