@@ -3,6 +3,7 @@ package ba.unsa.etf.si.projekt;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
@@ -11,6 +12,9 @@ import javax.swing.UIManager;
 import java.awt.Font;
 
 import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PrijavaForma {
 
@@ -53,7 +57,7 @@ public class PrijavaForma {
 		frmPrijava = new JFrame();
 		frmPrijava.setTitle("Prijava");
 		frmPrijava.setBounds(100, 100, 353, 264);
-		frmPrijava.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPrijava.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmPrijava.getContentPane().setLayout(null);
 		
 		ime = new JTextField();
@@ -78,8 +82,33 @@ public class PrijavaForma {
 		lblDobrodoli.setBounds(115, 28, 102, 25);
 		frmPrijava.getContentPane().add(lblDobrodoli);
 		
+		
 		JButton prijavaBtn = new JButton("Prijava");
+		prijavaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (ime.getText().equals("administrator")) {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				}else if (ime.getText().equals("menadjer")) {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}else if (ime.getText().equals("salterski")) {
+					SalterskiRadnikForma s = new SalterskiRadnikForma();
+					s.setVisible(true);
+					setVisible(false);
+				}
+			}
+		});
 		prijavaBtn.setBounds(194, 179, 89, 23);
 		frmPrijava.getContentPane().add(prijavaBtn);
+		
+		
+	}
+	
+	public void setVisible(boolean visible) {
+		frmPrijava.setVisible(visible);
 	}
 }

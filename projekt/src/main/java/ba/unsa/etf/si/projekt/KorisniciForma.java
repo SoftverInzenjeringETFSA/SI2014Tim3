@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class KorisniciForma {
 
@@ -25,6 +27,7 @@ public class KorisniciForma {
 	private JTextField korisnickoModifikuj;
 	private JTextField sifraModifikuj;
 	private JTextField korisnickoIzbrisi;
+	private String tipKorisnika;
 
 	/**
 	 * Launch the application.
@@ -54,6 +57,12 @@ public class KorisniciForma {
 		initialize();
 	}
 
+	public KorisniciForma(String tipKorisnika) {
+		// TODO Auto-generated constructor stub
+		this.tipKorisnika = tipKorisnika;
+		initialize();
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -61,14 +70,34 @@ public class KorisniciForma {
 		frmKorisnikiRauni = new JFrame();
 		frmKorisnikiRauni.setTitle("Korisnički računi");
 		frmKorisnikiRauni.setBounds(100, 100, 533, 469);
-		frmKorisnikiRauni.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmKorisnikiRauni.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmKorisnikiRauni.getContentPane().setLayout(null);
 		
 		JButton button = new JButton("Nazad");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipKorisnika == "administrator") {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				} else if (tipKorisnika == "menadjer") {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}
+			}
+		});
 		button.setBounds(319, 11, 89, 23);
 		frmKorisnikiRauni.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("Odjava");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		button_1.setBounds(418, 11, 89, 23);
 		frmKorisnikiRauni.getContentPane().add(button_1);
 		
@@ -219,5 +248,7 @@ public class KorisniciForma {
 		izbrisiBtn.setBounds(219, 115, 112, 23);
 		panel_2.add(izbrisiBtn);
 	}
-
+	public void setVisible(boolean visible) {
+		frmKorisnikiRauni.setVisible(visible);
+	}
 }

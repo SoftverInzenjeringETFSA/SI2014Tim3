@@ -16,6 +16,8 @@ import javax.swing.UIManager;
 import java.awt.Font;
 
 import javax.swing.AbstractListModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AutobusiForma {
 
@@ -27,6 +29,7 @@ public class AutobusiForma {
 	private JTextField modelIzbrisi;
 	private JTextField registracijeIzbrisi;
 	private JTextField registracijePretraga;
+	private String tipKorisnika;
 
 	/**
 	 * Launch the application.
@@ -57,6 +60,12 @@ public class AutobusiForma {
 		initialize();
 	}
 
+	public AutobusiForma(String tipKorisnika) {
+		// TODO Auto-generated constructor stub
+		this.tipKorisnika = tipKorisnika;
+		initialize();
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -64,14 +73,34 @@ public class AutobusiForma {
 		frmEvidencijaAutobusa = new JFrame();
 		frmEvidencijaAutobusa.setTitle("Evidencija autobusa");
 		frmEvidencijaAutobusa.setBounds(100, 100, 557, 434);
-		frmEvidencijaAutobusa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmEvidencijaAutobusa.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmEvidencijaAutobusa.getContentPane().setLayout(null);
 		
 		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		odjavaBtn.setBounds(428, 11, 89, 23);
 		frmEvidencijaAutobusa.getContentPane().add(odjavaBtn);
 		
 		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipKorisnika == "administrator") {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				} else if (tipKorisnika == "menadjer") {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}
+			}
+		});
 		nazadBtn.setBounds(329, 11, 89, 23);
 		frmEvidencijaAutobusa.getContentPane().add(nazadBtn);
 		
@@ -215,5 +244,7 @@ public class AutobusiForma {
 		pronadiIzbrisiBtn.setBounds(320, 42, 89, 23);
 		panel_2.add(pronadiIzbrisiBtn);
 	}
-
+	public void setVisible(boolean visible) {
+		frmEvidencijaAutobusa.setVisible(visible);
+	}
 }

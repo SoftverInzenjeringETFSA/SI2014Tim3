@@ -13,9 +13,10 @@ import javax.swing.UIManager;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AutobuskeLinijeForma {
 
@@ -38,6 +39,7 @@ public class AutobuskeLinijeForma {
 	private JTextField polazisteIzbrisi;
 	private JTextField odredisteIzbrisi;
 	private JTextField vrijemeIzbrisi;
+	private String tipKorisnika;
 
 	/**
 	 * Launch the application.
@@ -69,6 +71,12 @@ public class AutobuskeLinijeForma {
 		initialize();
 	}
 
+	public AutobuskeLinijeForma(String tipKorisnika) {
+		// TODO Auto-generated constructor stub
+		this.tipKorisnika = tipKorisnika;
+		initialize();
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -76,14 +84,34 @@ public class AutobuskeLinijeForma {
 		frmAutobuskeLinije = new JFrame();
 		frmAutobuskeLinije.setTitle("Autobuske linije");
 		frmAutobuskeLinije.setBounds(100, 100, 551, 506);
-		frmAutobuskeLinije.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAutobuskeLinije.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAutobuskeLinije.getContentPane().setLayout(null);
 		
 		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		odjavaBtn.setBounds(433, 11, 89, 23);
 		frmAutobuskeLinije.getContentPane().add(odjavaBtn);
 		
 		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipKorisnika == "administrator") {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				} else if (tipKorisnika == "menadjer") {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}
+			}
+		});
 		nazadBtn.setBounds(334, 11, 89, 23);
 		frmAutobuskeLinije.getContentPane().add(nazadBtn);
 		
@@ -472,5 +500,9 @@ public class AutobuskeLinijeForma {
 		JButton izbrisiBtn = new JButton("Izbriši");
 		izbrisiBtn.setBounds(398, 338, 89, 23);
 		panel_2.add(izbrisiBtn);
+	}
+	
+	public void setVisible(boolean visible) {
+		frmAutobuskeLinije.setVisible(visible);
 	}
 }

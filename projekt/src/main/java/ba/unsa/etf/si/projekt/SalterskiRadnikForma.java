@@ -22,6 +22,8 @@ import java.awt.Font;
 
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SalterskiRadnikForma {
 
@@ -74,10 +76,17 @@ public class SalterskiRadnikForma {
 		frmalterskiRadnik = new JFrame();
 		frmalterskiRadnik.setTitle("Šalterski radnik");
 		frmalterskiRadnik.setBounds(100, 100, 629, 495);
-		frmalterskiRadnik.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmalterskiRadnik.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmalterskiRadnik.getContentPane().setLayout(null);
 		
 		JButton button = new JButton("Odjava");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		button.setBounds(514, 11, 89, 23);
 		frmalterskiRadnik.getContentPane().add(button);
 		
@@ -362,5 +371,9 @@ public class SalterskiRadnikForma {
 		JButton obrisiBtn = new JButton("Obriši");
 		obrisiBtn.setBounds(334, 327, 98, 34);
 		panel_4.add(obrisiBtn);
+	}
+	
+	public void setVisible(boolean visible) {
+		frmalterskiRadnik.setVisible(visible);
 	}
 }

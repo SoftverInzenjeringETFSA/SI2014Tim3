@@ -15,11 +15,14 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NaloziForma {
 
 	private JFrame frmPravljenjeNaloga;
 	private JTextField vrijeme;
+	private String tipKorisnika;
 
 	/**
 	 * Launch the application.
@@ -49,7 +52,12 @@ public class NaloziForma {
 	public NaloziForma() {
 		initialize();
 	}
-
+	
+	public NaloziForma(String tipKorisnika) {
+		initialize();
+		this.tipKorisnika = tipKorisnika;
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -57,7 +65,7 @@ public class NaloziForma {
 		frmPravljenjeNaloga = new JFrame();
 		frmPravljenjeNaloga.setTitle("Pravljenje naloga");
 		frmPravljenjeNaloga.setBounds(100, 100, 552, 392);
-		frmPravljenjeNaloga.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPravljenjeNaloga.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmPravljenjeNaloga.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -77,10 +85,30 @@ public class NaloziForma {
 		scrollPane.setViewportView(linijeList);
 		
 		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipKorisnika == "administrator") {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				} else if (tipKorisnika == "menadjer") {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}
+			}
+		});
 		nazadBtn.setBounds(338, 11, 89, 23);
 		frmPravljenjeNaloga.getContentPane().add(nazadBtn);
 		
 		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		odjavaBtn.setBounds(437, 11, 89, 23);
 		frmPravljenjeNaloga.getContentPane().add(odjavaBtn);
 		
@@ -109,5 +137,9 @@ public class NaloziForma {
 		JButton napraviBtn = new JButton("Napravi nalog");
 		napraviBtn.setBounds(410, 319, 116, 23);
 		frmPravljenjeNaloga.getContentPane().add(napraviBtn);
+	}
+	
+	public void setVisible(boolean visible) {
+		frmPravljenjeNaloga.setVisible(visible);
 	}
 }

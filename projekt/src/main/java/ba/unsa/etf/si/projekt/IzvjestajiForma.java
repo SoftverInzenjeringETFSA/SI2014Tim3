@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import com.toedter.calendar.JDateChooser;
@@ -13,6 +14,9 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IzvjestajiForma {
 
@@ -24,6 +28,7 @@ public class IzvjestajiForma {
 	private JTextField imeVozac;
 	private JTextField prezimeVozac;
 
+	private String tipKorisnika;
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +57,11 @@ public class IzvjestajiForma {
 	public IzvjestajiForma() {
 		initialize();
 	}
+	
+	public IzvjestajiForma(String tipKorisnika) {
+		initialize();
+		this.tipKorisnika = tipKorisnika;
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -60,14 +70,38 @@ public class IzvjestajiForma {
 		frmIzvjetaji = new JFrame();
 		frmIzvjetaji.setTitle("Izvještaji");
 		frmIzvjetaji.setBounds(100, 100, 502, 393);
-		frmIzvjetaji.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmIzvjetaji.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmIzvjetaji.getContentPane().setLayout(null);
 		
 		JButton nazadBtn = new JButton("Nazad");
+		
+		// Klik na dugme nazad
+		nazadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipKorisnika == "administrator") {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				} else if (tipKorisnika == "menadjer") {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}				
+			}
+		});
 		nazadBtn.setBounds(282, 11, 89, 23);
 		frmIzvjetaji.getContentPane().add(nazadBtn);
 		
 		JButton odjavaBtn = new JButton("Odjava");
+		
+		// Klik na dugme odjava
+		odjavaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		odjavaBtn.setBounds(387, 11, 89, 23);
 		frmIzvjetaji.getContentPane().add(odjavaBtn);
 		
@@ -196,5 +230,27 @@ public class IzvjestajiForma {
 		JButton generisiVozaciBtn = new JButton("Generiši izvještaj");
 		generisiVozaciBtn.setBounds(204, 208, 113, 23);
 		panel_2.add(generisiVozaciBtn);
+		
+		
+		/*
+		frmIzvjetaji.addWindowListener(new java.awt.event.WindowAdapter() {
+		    @Override
+		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        if (JOptionPane.showConfirmDialog(frmIzvjetaji, 
+		            "Da li želite zatvoriti prozor?", 
+		            "Zatvaranje", JOptionPane.YES_NO_OPTION,
+		            JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
+		        	AdministratorPocetna a = new AdministratorPocetna();
+		        	a.frmAdministratorPoetna.setVisible(true);
+		            frmIzvjetaji.setVisible(false);
+		        }
+		    }
+		});
+		*/
 	}
+	
+	public void setVisible(boolean visible) {
+		frmIzvjetaji.setVisible(visible);
+	}
+	
 }

@@ -10,6 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RadniciForma {
 
@@ -23,6 +25,7 @@ public class RadniciForma {
 	private JTextField jmbgIzbrisiPronadi;
 	private JTextField imeIzbrisi;
 	private JTextField prezimeIzbrisi;
+	private String tipKorisnika;
 
 	/**
 	 * Launch the application.
@@ -52,6 +55,12 @@ public class RadniciForma {
 		initialize();
 	}
 
+	public RadniciForma(String tipKorisnika) {
+		// TODO Auto-generated constructor stub
+		initialize();
+		this.tipKorisnika = tipKorisnika;
+	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -59,7 +68,7 @@ public class RadniciForma {
 		frmEvidencijaRadnika = new JFrame();
 		frmEvidencijaRadnika.setTitle("Evidencija radnika");
 		frmEvidencijaRadnika.setBounds(100, 100, 479, 373);
-		frmEvidencijaRadnika.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmEvidencijaRadnika.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmEvidencijaRadnika.getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -204,11 +213,35 @@ public class RadniciForma {
 		izbrisiRadnikaTab.add(label_8);
 		
 		JButton odjavaBtn = new JButton("Odjava");
+		odjavaBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrijavaForma p = new PrijavaForma();
+				p.setVisible(true);
+				setVisible(false);
+			}
+		});
 		odjavaBtn.setBounds(338, 11, 89, 23);
 		frmEvidencijaRadnika.getContentPane().add(odjavaBtn);
 		
 		JButton nazadBtn = new JButton("Nazad");
+		nazadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tipKorisnika == "administrator") {
+					AdministratorPocetna a = new AdministratorPocetna();
+					a.setVisible(true);
+					setVisible(false);
+				} else if (tipKorisnika == "menadjer") {
+					MenadzerPocetna m = new MenadzerPocetna();
+					m.setVisible(true);
+					setVisible(false);
+				}
+			}
+		});
 		nazadBtn.setBounds(239, 11, 89, 23);
 		frmEvidencijaRadnika.getContentPane().add(nazadBtn);
+	}
+	
+	public void setVisible(boolean visible) {
+		frmEvidencijaRadnika.setVisible(visible);
 	}
 }
