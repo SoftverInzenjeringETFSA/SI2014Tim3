@@ -1,4 +1,4 @@
-package ba.unsa.etf.si.projekt;
+package ba.unsa.etf.si.projekt.forme;
 
 import java.awt.EventQueue;
 
