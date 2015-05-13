@@ -23,8 +23,6 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.RowSpec;
 
-import net.miginfocom.swing.MigLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JSplitPane;
 
