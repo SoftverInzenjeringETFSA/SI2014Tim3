@@ -133,7 +133,7 @@ public class AutobuskaLinija implements java.io.Serializable{
 	String polaziste;
 	String odrediste;
 	Autobus autobus;
-//	Radnik vozac; 
+	//Radnik vozac; 
 	int datumPolaska_dan;
 	int datumPolaska_mjesec;
 	int datumPolaska_godina;
