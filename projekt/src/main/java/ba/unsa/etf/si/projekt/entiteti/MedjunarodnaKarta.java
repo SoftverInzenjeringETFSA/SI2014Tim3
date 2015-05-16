@@ -1,13 +1,6 @@
 package ba.unsa.etf.si.projekt.entiteti;
 
 public class MedjunarodnaKarta extends Karta implements java.io.Serializable{
-	long id;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	public String getIme() {
 		return ime;
 	}
