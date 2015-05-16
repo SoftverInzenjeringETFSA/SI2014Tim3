@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2015 4:48:00 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.projekt.entiteti.IzvjestajAutobuskeLinije" table="IZVJESTAJAUTOBUSKELINIJE">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="pocetniDatumDan" type="int">
+            <column name="POCETNIDATUMDAN" />
+        </property>
+        <property name="pocetniDatumGodina" type="int">
+            <column name="POCETNIDATUMGODINA" />
+        </property>
+        <property name="pocetniDatumMjesec" type="int">
+            <column name="POCETNIDATUMMJESEC" />
+        </property>
+        <property name="krajnjiDatumDan" type="int">
+            <column name="KRAJNJIDATUMDAN" />
+        </property>
+        <property name="krajnjiDatumGodina" type="int">
+            <column name="KRAJNJIDATUMGODINA" />
+        </property>
+        <property name="krajnjiDatumMjesec" type="int">
+            <column name="KRAJNJIDATUMMJESEC" />
+        </property>
+        <property name="pocetnoVrijemeSati" type="int">
+            <column name="POCETNOVRIJEMESATI" />
+        </property>
+        <property name="pocetnoVrijemeMinute" type="int">
+            <column name="POCETNOVRIJEMEMINUTE" />
+        </property>
+        <property name="pocetnoVrijemeSekunde" type="int">
+            <column name="POCETNOVRIJEMESEKUNDE" />
+        </property>
+        <property name="krejnjeVrijemeSati" type="int">
+            <column name="KREJNJEVRIJEMESATI" />
+        </property>
+        <property name="krejnjeVrijemeMinute" type="int">
+            <column name="KREJNJEVRIJEMEMINUTE" />
+        </property>
+        <property name="krejnjeVrijemeSekunde" type="int">
+            <column name="KREJNJEVRIJEMESEKUNDE" />
+        </property>
+    </class>
+</hibernate-mapping>

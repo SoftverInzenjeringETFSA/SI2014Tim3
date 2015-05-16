@@ -7,8 +7,5 @@
         <key>
             <column name="ID" />
         </key>
-        <property name="id" type="long">
-            <column name="ID" />
-        </property>
     </joined-subclass>
 </hibernate-mapping>

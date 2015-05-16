@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC
-		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/Tim3</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <mapping resource="ba/unsa/etf/si/projekt/entiteti/Autobus.hbm.xml"/>
-		  <mapping resource="ba/unsa/etf/si/projekt/entiteti/AutobuskaLinija.hbm.xml"/>
-		  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Karta.hbm.xml"/>
-		  <mapping resource="ba/unsa/etf/si/projekt/entiteti/KorisnickiRacun.hbm.xml"/>
-		  <mapping resource="ba/unsa/etf/si/projekt/entiteti/MedjunarodnaKarta.hbm.xml"/>
-		  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Nalog.hbm.xml"/>
-		  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Rezervacija.hbm.xml"/>
-    </session-factory>
+ <session-factory name="">
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost/Tim3</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Administrator.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Autobus.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/AutobuskaLinija.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/IzvjestajAutobuskeLinije.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/IzvjestajProdaneKarte.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/IzvjestajVozaci.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Karta.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/KorisnickiRacun.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/MedjunarodnaKarta.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Nalog.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Radnik.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Rezervacija.hbm.xml"/>
+  <mapping resource="ba/unsa/etf/si/projekt/entiteti/SalterskiRadnik.hbm.xml"/>
+  
+ </session-factory>
 </hibernate-configuration>

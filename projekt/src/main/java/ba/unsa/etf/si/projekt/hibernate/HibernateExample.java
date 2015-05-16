@@ -8,7 +8,7 @@ public class HibernateExample {
 	public static void main(String[] args) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		dodajAutobus(session);
-		nadjiAutobus(session, 12);
+		nadjiAutobus(session, 1);
 		session.close();
 	}
 	private static void dodajAutobus(Session session) {
