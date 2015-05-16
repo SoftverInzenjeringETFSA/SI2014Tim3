@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 16, 2015 12:13:50 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun" table="KORISNICKIRACUN">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="korisnickoIme" type="java.lang.String">
+            <column name="KORISNICKOIME" />
+        </property>
+        <property name="sifra" type="java.lang.String">
+            <column name="SIFRA" />
+        </property>
+        <property name="ime" type="java.lang.String">
+            <column name="IME" />
+        </property>
+        <property name="prezime" type="java.lang.String">
+            <column name="PREZIME" />
+        </property>
+        <property name="jmbg" type="java.lang.String">
+            <column name="JMBG" />
+        </property>
+        <property name="tipKorisnickogRacuna">
+            <column name="TIPKORISNICKOGRACUNA" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">ba.unsa.etf.si.projekt.entiteti.TipKorisnickogRacuna</param>
+            </type>
+        </property>
+    </class>
+</hibernate-mapping>
