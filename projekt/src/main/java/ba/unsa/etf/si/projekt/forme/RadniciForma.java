@@ -165,6 +165,9 @@ public class RadniciForma {
 				{
 					JOptionPane.showMessageDialog(dodajBtn, "Dodavanje nije bilo uspješno.");
 					JOptionPane.showMessageDialog(dodajBtn, "e4.");
+				
+					
+					
 				}
 			}
 		});

@@ -138,6 +138,7 @@ public class KorisniciForma {
 		
 		JComboBox tipDodajCombo = new JComboBox();
 		tipDodajCombo.setBounds(186, 146, 193, 20);
+		
 		panel.add(tipDodajCombo);
 		
 		JLabel label_3 = new JLabel("Tip radnog mjesta:");
@@ -163,6 +164,12 @@ public class KorisniciForma {
 		panel.add(label_5);
 		
 		JButton dodajBtn = new JButton("Dodaj novog korisnika");
+		dodajBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {//dodavanje korisnika
+			
+			}
+		});
 		dodajBtn.setBounds(242, 297, 137, 23);
 		panel.add(dodajBtn);
 		

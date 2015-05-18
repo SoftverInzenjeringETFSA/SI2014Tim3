@@ -162,6 +162,8 @@ public class AutobusiForma {
 				
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat autobus.");
 				
+				
+				
 				session.close();
 				}
 				
