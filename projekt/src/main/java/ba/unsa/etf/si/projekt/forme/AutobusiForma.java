@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -16,8 +17,15 @@ import javax.swing.UIManager;
 import java.awt.Font;
 
 import javax.swing.AbstractListModel;
+
+import org.hibernate.Session;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import ba.unsa.etf.si.projekt.entiteti.Autobus;
+import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 public class AutobusiForma {
 
@@ -121,7 +129,7 @@ public class AutobusiForma {
 		lblModel.setBounds(157, 74, 32, 14);
 		panel.add(lblModel);
 		
-		JSpinner kapacitetDodajSpinner = new JSpinner();
+		 final JSpinner kapacitetDodajSpinner = new JSpinner();
 		kapacitetDodajSpinner.setBounds(199, 107, 155, 20);
 		panel.add(kapacitetDodajSpinner);
 		
@@ -138,7 +146,32 @@ public class AutobusiForma {
 		lblRegistracije.setBounds(129, 143, 60, 14);
 		panel.add(lblRegistracije);
 		
-		JButton dodajBtn = new JButton("Unesi");
+		final JButton dodajBtn = new JButton("Unesi");
+		dodajBtn.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent arg0) { //event za dodavanje novih autobusaaa
+				
+				try
+				{
+				HibernateAutobus noviautobus=new HibernateAutobus();
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				int dodavanje=Integer.parseInt(kapacitetDodajSpinner.getValue().toString());
+				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText(), modelDodaj.getText());
+				
+				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat autobus.");
+				
+				session.close();
+				}
+				
+				catch(Exception e2)
+				{
+					JOptionPane.showMessageDialog(dodajBtn, "Neuspješno dodavanje.");
+					JOptionPane.showMessageDialog(dodajBtn, e2);
+				}
+			}
+		});
 		dodajBtn.setBounds(265, 200, 89, 23);
 		panel.add(dodajBtn);
 		
@@ -210,7 +243,7 @@ public class AutobusiForma {
 		modelIzbrisi.setBounds(186, 98, 155, 20);
 		panel_2.add(modelIzbrisi);
 		
-		JSpinner kapacitetIzbrisi = new JSpinner();
+		final JSpinner kapacitetIzbrisi = new JSpinner();
 		kapacitetIzbrisi.setBounds(186, 134, 155, 20);
 		panel_2.add(kapacitetIzbrisi);
 		
@@ -227,7 +260,38 @@ public class AutobusiForma {
 		registracijeIzbrisi.setBounds(186, 167, 155, 20);
 		panel_2.add(registracijeIzbrisi);
 		
-		JButton izbrisiBtn = new JButton("Izbriši");
+		final JButton izbrisiBtn = new JButton("Izbriši");
+		izbrisiBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) { //button za brisanjeeee
+				
+				if(registracijeIzbrisi.getText()!="")
+				{
+					try
+					{
+				HibernateAutobus brisanjeautobus=new HibernateAutobus();
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				brisanjeautobus.brisanjeAutobusa(session, registracijeIzbrisi.getText());
+				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno ste izbrisali autobus.");
+				session.close();
+					}
+					
+					catch(Exception e1)
+					{
+						JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.");
+						JOptionPane.showMessageDialog(izbrisiBtn, e1);
+					}
+					
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(izbrisiBtn, "Autobus čije ste registracije unijeli ne postoji!.");
+				}
+				
+				
+			}
+		});
 		izbrisiBtn.setBounds(252, 220, 89, 23);
 		panel_2.add(izbrisiBtn);
 		
@@ -240,7 +304,43 @@ public class AutobusiForma {
 		registracijePretraga.setBounds(155, 43, 155, 20);
 		panel_2.add(registracijePretraga);
 		
-		JButton pronadiIzbrisiBtn = new JButton("Pronađi");
+		final JButton pronadiIzbrisiBtn = new JButton("Pronađi");
+		pronadiIzbrisiBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {//event da pronadje autobus koji se briseeee
+			    
+				try
+			    {
+				HibernateAutobus brisanjeautobus=new HibernateAutobus();
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				Autobus a=new Autobus();
+				a=brisanjeautobus.nadjiAutobus(session,registracijePretraga.getText());
+				
+				if(a!=null)
+				{
+					
+				modelIzbrisi.setText(a.getModel());
+				registracijeIzbrisi.setText(a.getRegistracija());
+				Object kap=(Integer)a.getKapacitet();
+				kapacitetIzbrisi.setValue(kap);
+				}
+				
+				else
+				{
+					JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Ne postoji autobus, čije ste registracije unijeli.");
+				}
+				
+				session.close();
+			    }
+			    
+				catch(Exception e)
+			    {
+			    	JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Neuspješna pretraga.");
+			    	JOptionPane.showMessageDialog(pronadiIzbrisiBtn, e);
+			    }
+			}
+		});
 		pronadiIzbrisiBtn.setBounds(320, 42, 89, 23);
 		panel_2.add(pronadiIzbrisiBtn);
 	}

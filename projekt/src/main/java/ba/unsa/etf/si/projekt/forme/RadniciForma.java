@@ -3,6 +3,7 @@ package ba.unsa.etf.si.projekt.forme;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -10,8 +11,16 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+
+import org.hibernate.Session;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import ba.unsa.etf.si.projekt.entiteti.Radnik;
+import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 public class RadniciForma {
 
@@ -94,8 +103,14 @@ public class RadniciForma {
 		dodajRadnikaTab.add(jmbgDodaj);
 		jmbgDodaj.setColumns(10);
 		
-		JComboBox tipDodajCombo = new JComboBox();
+		final JComboBox tipDodajCombo = new JComboBox();
 		tipDodajCombo.setBounds(151, 146, 193, 20);
+		TipRadnogMjesta administrator=TipRadnogMjesta.Administrator;
+		TipRadnogMjesta menadzer=TipRadnogMjesta.Menadzer;
+		TipRadnogMjesta salteras=TipRadnogMjesta.SalterskiRadnik;
+		tipDodajCombo.addItem(menadzer);
+		tipDodajCombo.addItem(salteras);
+		tipDodajCombo.addItem(administrator);
 		dodajRadnikaTab.add(tipDodajCombo);
 		
 		JLabel lblIme = new JLabel("Ime:");
@@ -114,7 +129,45 @@ public class RadniciForma {
 		lblTipRadnogMjesta.setBounds(32, 149, 101, 14);
 		dodajRadnikaTab.add(lblTipRadnogMjesta);
 		
-		JButton dodajBtn = new JButton("Dodaj");
+		final JButton dodajBtn = new JButton("Dodaj");
+		dodajBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) { //dodavanje radnika novih
+			
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateRadnik noviradnik= new HibernateRadnik();
+					
+					if(tipDodajCombo.getSelectedItem().toString()=="Administrator")
+					{
+						TipRadnogMjesta r=TipRadnogMjesta.Administrator;
+						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r);
+						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+						
+					}
+					
+					if(tipDodajCombo.getSelectedItem().toString()=="Menadzer")
+					{
+					TipRadnogMjesta r1=TipRadnogMjesta.Menadzer;
+					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
+					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					}
+					
+					else
+					{
+					TipRadnogMjesta r2=TipRadnogMjesta.SalterskiRadnik;
+					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r2);
+					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					}
+				}
+				catch(Exception e4)
+				{
+					JOptionPane.showMessageDialog(dodajBtn, "Dodavanje nije bilo uspješno.");
+					JOptionPane.showMessageDialog(dodajBtn, "e4.");
+				}
+			}
+		});
 		dodajBtn.setBounds(263, 207, 81, 23);
 		dodajRadnikaTab.add(dodajBtn);
 		
@@ -144,11 +197,53 @@ public class RadniciForma {
 		label_3.setBounds(40, 167, 101, 14);
 		modifikujRadnikaTab.add(label_3);
 		
-		JComboBox tipModifikujCombo = new JComboBox();
+		final JComboBox tipModifikujCombo = new JComboBox();
 		tipModifikujCombo.setBounds(161, 164, 183, 20);
+		TipRadnogMjesta administrator1=TipRadnogMjesta.Administrator;
+		TipRadnogMjesta menadzer1=TipRadnogMjesta.Menadzer;
+		TipRadnogMjesta salteras1=TipRadnogMjesta.SalterskiRadnik;
+		tipModifikujCombo.addItem(administrator1);
+		tipModifikujCombo.addItem(menadzer1);
+		tipModifikujCombo.addItem(salteras1);
 		modifikujRadnikaTab.add(tipModifikujCombo);
 		
-		JButton modifikujBtn = new JButton("Spasi promjene");
+		final JButton modifikujBtn = new JButton("Spasi promjene");
+		modifikujBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {//izmjene radnika
+			
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateRadnik promjenaradnik= new HibernateRadnik();
+
+					if(tipModifikujCombo.getSelectedItem().toString()=="Administrator")
+					{
+					TipRadnogMjesta k=TipRadnogMjesta.Administrator;
+					promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), k);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
+					}
+					if(tipModifikujCombo.getSelectedItem().toString()=="Menadzer")
+					{
+					TipRadnogMjesta k=TipRadnogMjesta.Menadzer;
+					promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), k);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
+					}
+					if(tipModifikujCombo.getSelectedItem().toString()=="SalterskiRadnik")
+					{
+					TipRadnogMjesta k=TipRadnogMjesta.SalterskiRadnik;
+					promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), k);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
+					}
+				}
+				
+				catch(Exception e6)
+				{
+					JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje radnika.");
+					JOptionPane.showMessageDialog(modifikujBtn, e6);
+				}
+			}
+		});
 		modifikujBtn.setBounds(271, 214, 109, 23);
 		modifikujRadnikaTab.add(modifikujBtn);
 		
@@ -161,7 +256,39 @@ public class RadniciForma {
 		jmbgModifikujPronadji.setBounds(130, 33, 151, 20);
 		modifikujRadnikaTab.add(jmbgModifikujPronadji);
 		
-		JButton pronadjiModifikujBtn = new JButton("Pronađi");
+		final JButton pronadjiModifikujBtn = new JButton("Pronađi");
+		pronadjiModifikujBtn.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) { // pronađi odgovarajuceg radnika
+				
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateRadnik pronadjeniradnik= new HibernateRadnik();
+					Radnik r=new Radnik();
+					r=pronadjeniradnik.nadjiRadnika(session, jmbgModifikujPronadji.getText());
+					
+					if(r!=null)
+					{
+						imeModifikuj.setText(r.getIme());
+						prezimeModifikuj.setText(r.getPrezime());
+						tipModifikujCombo.setSelectedItem(r.dajTipRadnogMjesta());
+					}
+					
+					else
+					{
+						JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Ne postoji radnik, čiji ste JMBG unijeli.");
+					}
+				}
+				
+				catch(Exception e5)
+				{
+					JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Neusješna pretraga");
+					JOptionPane.showMessageDialog(pronadjiModifikujBtn, e5);
+				}
+			
+			}
+		});
 		pronadjiModifikujBtn.setBounds(291, 32, 89, 23);
 		modifikujRadnikaTab.add(pronadjiModifikujBtn);
 		
@@ -178,7 +305,41 @@ public class RadniciForma {
 		jmbgIzbrisiPronadi.setBounds(124, 33, 151, 20);
 		izbrisiRadnikaTab.add(jmbgIzbrisiPronadi);
 		
-		JButton pronadiIzbrisiBtn = new JButton("Pronađi");
+		final JComboBox tipIzbrisiCombo = new JComboBox();
+		tipIzbrisiCombo.setBounds(155, 162, 183, 20);
+		izbrisiRadnikaTab.add(tipIzbrisiCombo);
+		
+		final JButton pronadiIzbrisiBtn = new JButton("Pronađi");
+		pronadiIzbrisiBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { //pronadji za brisanje radnika
+				
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateRadnik pronadjeniradnik= new HibernateRadnik();
+					Radnik r=new Radnik();
+					r=pronadjeniradnik.nadjiRadnika(session, jmbgIzbrisiPronadi.getText());
+					
+					if(r!=null)
+					{
+						imeIzbrisi.setText(r.getIme());
+						prezimeIzbrisi.setText(r.getPrezime());
+						tipIzbrisiCombo.setSelectedItem(r.dajTipRadnogMjesta());
+					}
+					
+					else
+					{
+						JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Ne postoji radnik, čiji ste JMBG unijeli.");
+					}
+				}
+				catch(Exception e6)
+				{
+					JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Neusješna pretraga");
+					JOptionPane.showMessageDialog(pronadiIzbrisiBtn, e6);
+				}
+				
+			}
+		});
 		pronadiIzbrisiBtn.setBounds(285, 32, 89, 23);
 		izbrisiRadnikaTab.add(pronadiIzbrisiBtn);
 		
@@ -192,11 +353,26 @@ public class RadniciForma {
 		prezimeIzbrisi.setBounds(155, 119, 183, 20);
 		izbrisiRadnikaTab.add(prezimeIzbrisi);
 		
-		JComboBox tipIzbrisiCombo = new JComboBox();
-		tipIzbrisiCombo.setBounds(155, 162, 183, 20);
-		izbrisiRadnikaTab.add(tipIzbrisiCombo);
 		
-		JButton izbrisiBtn = new JButton("Izbriši");
+		
+		final JButton izbrisiBtn = new JButton("Izbriši");
+		izbrisiBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {//brisanjee radnika
+			try
+			{
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				HibernateRadnik brisanjeradnik= new HibernateRadnik();
+				brisanjeradnik.brisiRadnika(session, jmbgIzbrisiPronadi.getText());
+				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje.");
+				
+			}
+			catch(Exception e7)
+			{
+				JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.");
+				JOptionPane.showMessageDialog(izbrisiBtn, e7);
+			}
+			}
+		});
 		izbrisiBtn.setBounds(285, 214, 89, 23);
 		izbrisiRadnikaTab.add(izbrisiBtn);
 		

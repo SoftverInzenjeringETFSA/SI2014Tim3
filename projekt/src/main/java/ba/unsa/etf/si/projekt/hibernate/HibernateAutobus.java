@@ -34,7 +34,7 @@ public class HibernateAutobus {
 		*/
 		session.close();
 	}
-	private static void dodajAutobus(Session session,int kapacitetautobusa, String registracijaautobusa, String modelautobusa)
+	public static void dodajAutobus(Session session,int kapacitetautobusa, String registracijaautobusa, String modelautobusa)
 	{
 		Transaction t = session.beginTransaction();
 		
@@ -51,7 +51,7 @@ public class HibernateAutobus {
 		else 
 			throw new IllegalArgumentException("Morate unijeti kapacitet i model autobusa.");
 	}
-	private static void modifikujAutobus(Session session, String registracijaautobusa, String modelautobusa, int kapacitetautobusa, Autobus stari)
+	public static void modifikujAutobus(Session session, String registracijaautobusa, String modelautobusa, int kapacitetautobusa, Autobus stari)
 	{
 		Transaction t = session.beginTransaction();
 		
