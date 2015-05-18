@@ -1,11 +1,14 @@
 package ba.unsa.etf.si.projekt.hibernate;
 
 import org.hibernate.Transaction;
+
 import javax.management.Query;
+
 import org.hibernate.Session;
 
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
+import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 
 public class HibernateKarta {
@@ -19,7 +22,7 @@ public class HibernateKarta {
 		
 		java.util.List karte1;
 		karte1=sveKarte(session);
-		java.util.List karte=IzvjestajOProdanimKartama(session,karte1,2014,2,2,2015,7,30);
+		java.util.List karte=IzvjestajOProdanimKartama(session,2014,2,2,2015,7,30);
 		for(int i=0;i<karte.size();i++)
 		{
 			Karta au=(Karta)karte.get(i);
@@ -55,23 +58,15 @@ public class HibernateKarta {
 		
 	}
 	
-	public static java.util.List IzvjestajOProdanimKartama(Session session,java.util.List karte,int pocetnagodina, int pocetnimjesec, int pocetnidan, int krajnjagodina, int krajnjimjesec, int krajnjidan)
+	public static java.util.List IzvjestajOProdanimKartama(Session session,int pocetnagodina, int pocetnimjesec, int pocetnidan, int krajnjagodina, int krajnjimjesec, int krajnjidan)
 	{
 		Transaction t = session.beginTransaction();
-		//java.util.List karte;
-		//karte=sveKarte(session);
-		java.util.List<Karta> rezultujuceKarte=null;
-		for(int i=0;i<karte.size();i++)
-		{
-			Karta a=(Karta)karte.get(i);
-			if(a.getDatumPolaska_dan()>=pocetnidan && a.getDatumPolaska_dan()<=krajnjidan && a.getDatumPolaska_godina()>=pocetnagodina && a.getDatumPolaska_godina()<=krajnjagodina && a.getDatumPolaska_mjesec()>=pocetnimjesec && a.getDatumPolaska_mjesec()<=krajnjimjesec)
-			{
-
-				boolean da=rezultujuceKarte.add(a);
-			}
-		}
-		
-		return rezultujuceKarte;
+		HibernateRadnik radnik=new HibernateRadnik();
+		java.util.List linije;
+		linije=session.createQuery("FROM Karta where datumPolaska_dan>="+pocetnidan+" and datumPolaska_dan<="+krajnjidan+" and datumPolaska_mjesec>="+pocetnimjesec+" and datumPolaska_mjesec<="+krajnjimjesec+"and datumPolaska_dan>="+pocetnidan+" and datumPolaska_dan<="+krajnjidan+"").list();
+        System.out.println(linije.size());
+		return linije;
+	
 	}
 
 	

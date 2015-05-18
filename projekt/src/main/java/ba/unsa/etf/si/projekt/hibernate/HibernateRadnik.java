@@ -82,6 +82,17 @@ public class HibernateRadnik {
 		t.commit();
 		return r;
 	}
+	
+	public static Radnik nadjiRadnikaPoImenu(Session session, String ime)
+	{
+        Transaction t = session.beginTransaction();
+		
+		Criteria k=session.createCriteria(Radnik.class);
+		k.add(Restrictions.eq("ime", ime));
+		Radnik r=(Radnik) k.uniqueResult();
+		t.commit();
+		return r;
+	}
 	public static java.util.List sviRadnici(Session session)
 	{
 		Transaction t = session.beginTransaction();

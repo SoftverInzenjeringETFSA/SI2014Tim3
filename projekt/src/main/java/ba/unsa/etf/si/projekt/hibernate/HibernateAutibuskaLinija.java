@@ -5,7 +5,8 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import antlr.collections.List;
+
+
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
@@ -18,20 +19,19 @@ public class HibernateAutibuskaLinija {
 		Autobus a = HibernateAutobus.nadjiAutobus(session, "abc-d-efg");
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
 		
-		dodajAutobuskuLiniju(session,"Zenica","Tuzla",a,r,2015,5,17,2,2,2,100,24,2,20,40);
+		//dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,2,100,24,2,20,40);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
 		
-		/*
+		
 		java.util.List linije;
-		linije=sveLinije(session);
-		java.util.List linije1=IzvjestajORadnicima(session,linije,"Ilvana","Brankovic");
+		java.util.List linije1=IzvjestajOAutobuskimLinijama(session,2014,3,2,2015,5,18,1,1,13,13);
 		for(int i=0;i<linije1.size();i++)
 		{
 			AutobuskaLinija au=(AutobuskaLinija)linije1.get(i);
 			System.out.println(au.getBrojLinije());
 		}
-		*/
+		
 		session.close();
 	}
 	
@@ -46,6 +46,7 @@ public class HibernateAutibuskaLinija {
 		linija.setVozac(r);
 		linija.setDatumPolaska_godina(godina);
 		linija.setDatumPolaska_mjesec(mjesec);
+		linija.setDatumPolaska_dan(dan);
 		linija.setVrijemePolaska_sati(sati);
 		linija.setVrijemePolaska_minute(minute);
 		linija.setPeron(peronlinije);
@@ -126,31 +127,23 @@ public class HibernateAutibuskaLinija {
 		
 	}
 	
-	public static java.util.List IzvjestajORadnicima(Session session, java.util.List listalinija,String imevozaca, String prezimevozaca)
+	public static java.util.List IzvjestajORadnicima(Session session,String imevozaca, String prezimevozaca)
 	{
-		java.util.List listalinijavozaca=null;
-		for(int i=0;i<listalinija.size();i++)
-		{
-			AutobuskaLinija a=(AutobuskaLinija)listalinija.get(i);
-			if(a.getVozac().getIme()==imevozaca && a.getVozac().getIme()==prezimevozaca)
-			{
-				listalinijavozaca.add(a);
-			}
-		}
-		return listalinijavozaca;
+		HibernateRadnik radnik=new HibernateRadnik();
+		Radnik r=radnik.nadjiRadnikaPoImenu(session, imevozaca);
+		java.util.List linije;
+		linije=session.createQuery("FROM AutobuskaLinija where vozac=:vozac1").setParameter("vozac1", r).list();
+        System.out.println(linije.size());
+		return linije;
+		
 	}
 	
-	public static java.util.List IzvjestajOAutobuskimLinijama(Session session, java.util.List listalinija, int pocetnagod, int pocetnimjes, int pocetnidan, int krajnjagod, int krajnjimjesec, int krajnjidan, int pocetnisati, int pocetneminute, int krajnjisati, int krajnjeminute)
+	public static java.util.List IzvjestajOAutobuskimLinijama(Session session, int pocetnagod, int pocetnimjes, int pocetnidan, int krajnjagod, int krajnjimjesec, int krajnjidan, int pocetnisati, int pocetneminute, int krajnjisati, int krajnjeminute)
 	{
-		java.util.List linije=null;
-		for(int i=0;i<listalinija.size();i++)
-		{
-			AutobuskaLinija a=(AutobuskaLinija)listalinija.get(i);
-			if(a.getDatumPolaska_godina()>=pocetnagod  && a.getDatumPolaska_godina()<=krajnjagod && a.getDatumPolaska_mjesec()>=pocetnimjes && a.getDatumPolaska_mjesec()<=krajnjimjesec && a.getDatumPolaska_dan()>=pocetnidan && a.getDatumPolaska_dan()<=krajnjidan && a.getVrijemePolaska_sati()>=pocetnisati && a.getVrijemePolaska_sati()<=krajnjisati && a.getVrijemePolaska_minute()>=pocetneminute && a.getVrijemePolaska_minute()<=krajnjeminute) 
-			{
-				linije.add(a);
-			}
-		}
+		HibernateRadnik radnik=new HibernateRadnik();
+		java.util.List linije;
+		linije=session.createQuery("FROM AutobuskaLinija where datumPolaska_dan>="+pocetnidan+" and datumPolaska_dan<="+krajnjidan+" and datumPolaska_mjesec>="+pocetnimjes+" and datumPolaska_mjesec<="+krajnjimjesec+" and datumPolaska_godina>="+pocetnagod+" and datumPolaska_godina<="+krajnjagod+"and vrijemePolaska_sati>="+pocetnisati+" and vrijemePolaska_sati<="+krajnjisati+" and vrijemePolaska_minute>="+pocetneminute+" and vrijemePolaska_minute<="+krajnjeminute+"").list();
+        System.out.println(linije.size());
 		return linije;
 	}
 		
