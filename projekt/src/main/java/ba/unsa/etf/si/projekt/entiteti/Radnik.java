@@ -42,12 +42,16 @@ public class Radnik implements java.io.Serializable {
 	}
 
 
-
+    public void setTipRadnogMjesta(TipRadnogMjesta mjesto)
+    {
+    	this.tipRadnogMjesta=mjesto;
+    }
 	
 	public	
 	TipRadnogMjesta dajTipRadnogMjesta()
 	{
-		return tipRadnogMjesta;}
+		Radnik r=new Radnik();
+		return r.tipRadnogMjesta;}
 	
 	public Radnik(){}
 
