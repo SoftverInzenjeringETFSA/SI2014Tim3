@@ -14,11 +14,12 @@ public class HibernateRadnik {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		TipRadnogMjesta m=TipRadnogMjesta.SalterskiRadnik;
-		//dodajRadnika(session, "Sumeja","Botulja","2412993178512",m);
+		TipRadnogMjesta m=TipRadnogMjesta.Vozac;
+		dodajRadnika(session, "Sumeja","Botulja","2412993178512",m);
 		//modifikujRadnika(session,"Sumeja1","Botulja","2412993178512",m);
 		//dodajRadnika(session,"Mirhat","Babic","2412993178514",m);
 		//brisiRadnika(session,"2412993178514");
+		/*
 		nadjiRadnika(session,"2412993178512");
 		java.util.List radnici;
 		radnici=sviRadnici(session);
@@ -27,6 +28,8 @@ public class HibernateRadnik {
 			Radnik au=(Radnik)radnici.get(i);
 			System.out.println(au.getIme());
 		}
+		*/
+		session.close();
 	}
 	public static void dodajRadnika( Session session, String imeradnika, String prezimeradnika, String JMBGradnika, TipRadnogMjesta tipradnogmjestaradnika)
 	{

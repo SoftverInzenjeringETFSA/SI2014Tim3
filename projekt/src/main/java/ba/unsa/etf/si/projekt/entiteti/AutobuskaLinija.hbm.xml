@@ -17,6 +17,9 @@
         <many-to-one name="autobus" class="ba.unsa.etf.si.projekt.entiteti.Autobus" fetch="join">
             <column name="AUTOBUS" />
         </many-to-one>
+        <many-to-one name="vozac" class="ba.unsa.etf.si.projekt.entiteti.Radnik" fetch="join">
+            <column name="VOZAC" />
+        </many-to-one>
         <property name="datumPolaska_dan" type="int">
             <column name="DATUMPOLASKA_DAN" />
         </property>

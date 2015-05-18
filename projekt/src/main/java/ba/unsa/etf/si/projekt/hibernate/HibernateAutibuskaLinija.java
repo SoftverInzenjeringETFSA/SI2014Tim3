@@ -15,19 +15,14 @@ public class HibernateAutibuskaLinija {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Autobus a=new Autobus();
-		a.setKapacitet(34);
-		long id=12;
-		a.setId(id);
-		a.setModel("Škoda");
-		a.setRegistracija("iii-i-iii");
-		Radnik r=new Radnik();
-		r.setIme("Ilvana");
-		r.setJmbg("2412993178512");
-		r.setPrezime("Prezime");
-		//dodajAutobuskuLiniju(session,"Zenica","Tuzla",a,r,2015,5,17,2,2,2,100,24,2,20,40);
+		Autobus a = HibernateAutobus.nadjiAutobus(session, "abc-d-efg");
+		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
+		
+		dodajAutobuskuLiniju(session,"Zenica","Tuzla",a,r,2015,5,17,2,2,2,100,24,2,20,40);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
+		
+		/*
 		java.util.List linije;
 		linije=sveLinije(session);
 		java.util.List linije1=IzvjestajORadnicima(session,linije,"Ilvana","Brankovic");
@@ -36,6 +31,7 @@ public class HibernateAutibuskaLinija {
 			AutobuskaLinija au=(AutobuskaLinija)linije1.get(i);
 			System.out.println(au.getBrojLinije());
 		}
+		*/
 		session.close();
 	}
 	

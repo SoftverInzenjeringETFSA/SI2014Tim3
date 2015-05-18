@@ -20,17 +20,18 @@ public class HibernateAutobus {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//dodajAutobus(session, 32,"abc-d-efg","BMW");
-	    brisanjeAutobusa(session,"abc-d-efg");
+		dodajAutobus(session, 32,"abc-d-efg","BMW");
+	    //brisanjeAutobusa(session,"abc-d-efg");
 		//modifikujAutobus(session,"eee-e-eee","audi",242);
 		//Autobus a=nadjiAutobus(session, "eee-e-eed");
-	    java.util.List autobusi;
+	    /*java.util.List autobusi;
 		autobusi=sviAutobusi(session);
 		for(int i=0;i<autobusi.size();i++)
 		{
 			Autobus au=(Autobus)autobusi.get(i);
 			System.out.println(au.getRegistracija());
 		}
+		*/
 		session.close();
 	}
 	private static void dodajAutobus(Session session,int kapacitetautobusa, String registracijaautobusa, String modelautobusa)
@@ -73,7 +74,7 @@ public class HibernateAutobus {
 		
 	}
 	
-	private static Autobus nadjiAutobus(Session session,String registracijaautobusa)
+	public static Autobus nadjiAutobus(Session session,String registracijaautobusa)
 	{
          Transaction t = session.beginTransaction();
 		
@@ -89,7 +90,7 @@ public class HibernateAutobus {
 			throw new IllegalArgumentException("Morate unijeti registraciju autobusa");
 	}
 	
-	private static void brisanjeAutobusa(Session session,String registracijaautobusa)
+	public static void brisanjeAutobusa(Session session,String registracijaautobusa)
 	{
 		Transaction t = session.beginTransaction();
 		if(registracijaautobusa!="")
