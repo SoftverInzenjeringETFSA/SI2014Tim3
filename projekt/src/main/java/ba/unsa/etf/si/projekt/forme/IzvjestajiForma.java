@@ -154,7 +154,7 @@ public class IzvjestajiForma {
 					int mjesec2=datum2.getMonth();
 					int dan2=datum2.getDay();
 					k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2);
-					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
+					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o prodanim kartama.");
 					
 				}
 				catch(Exception ex4)
@@ -172,7 +172,7 @@ public class IzvjestajiForma {
 		tabbedPane.addTab("Autobuske linije", null, panel_1, null);
 		panel_1.setLayout(null);
 		
-		JDateChooser pocetniLinijeDate = new JDateChooser();
+		final JDateChooser pocetniLinijeDate = new JDateChooser();
 		pocetniLinijeDate.setDateFormatString("dd/MM/yyyy");
 		pocetniLinijeDate.setBounds(171, 11, 178, 20);
 		panel_1.add(pocetniLinijeDate);
@@ -185,7 +185,7 @@ public class IzvjestajiForma {
 		label_1.setBounds(90, 61, 72, 14);
 		panel_1.add(label_1);
 		
-		JDateChooser krajnjiLinijeDate = new JDateChooser();
+		final JDateChooser krajnjiLinijeDate = new JDateChooser();
 		krajnjiLinijeDate.setDateFormatString("dd/MM/yyyy");
 		krajnjiLinijeDate.setBounds(172, 58, 178, 20);
 		panel_1.add(krajnjiLinijeDate);
@@ -234,7 +234,39 @@ public class IzvjestajiForma {
 		label_7.setBounds(341, 152, 8, 14);
 		panel_1.add(label_7);
 		
-		JButton generisiLinijeBtn = new JButton("Generiši izvještaj");
+		final JButton generisiLinijeBtn = new JButton("Generiši izvještaj");
+		generisiLinijeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) { //generisanje izvjestaja o Autobuskim linijama
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					
+					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
+					Date datum1=pocetniLinijeDate.getDate();
+					int godina1=datum1.getYear();
+					int mjesec1=datum1.getMonth();
+					int dan1=datum1.getDay();
+					Date datum2=krajnjiLinijeDate.getDate();
+					int godina2=datum2.getYear();
+					int mjesec2=datum2.getMonth();
+					int dan2=datum2.getDay();
+					int pocetnisati=Integer.parseInt(pocetnoVrijemeSati.getText());
+					int pocetneminute=Integer.parseInt(pocetnoVrijemeMinute.getText());
+					int krajnjisati=Integer.parseInt(krajnjeVrijemeSati.getText());
+					int krajnjeminute=Integer.parseInt(krajnjeVrijemeMinute.getText());
+					
+					
+					linija.IzvjestajOAutobuskimLinijama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2, pocetnisati, pocetneminute, krajnjisati, krajnjeminute);
+					JOptionPane.showMessageDialog(generisiLinijeBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
+				}
+				catch(Exception ex1)
+				{
+					JOptionPane.showMessageDialog(generisiLinijeBtn, "Neuspješno kreiranje izvještaja.");
+					JOptionPane.showMessageDialog(generisiLinijeBtn, ex1);
+				}
+				
+			}
+		});
 		generisiLinijeBtn.setBounds(236, 208, 113, 23);
 		panel_1.add(generisiLinijeBtn);
 		

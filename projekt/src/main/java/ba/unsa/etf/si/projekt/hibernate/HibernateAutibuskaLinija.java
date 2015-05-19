@@ -19,7 +19,7 @@ public class HibernateAutibuskaLinija {
 		Autobus a = HibernateAutobus.nadjiAutobus(session, "abc-d-efg");
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
 		
-		//dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,2,100,24,2,20,40);
+		 //dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,2,100,24,2,20,40,true);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
 		
