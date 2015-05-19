@@ -3,6 +3,7 @@ package ba.unsa.etf.si.projekt.forme;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -10,6 +11,8 @@ import javax.swing.UIManager;
 
 import java.awt.Font;
 
+import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateNalog;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
@@ -23,6 +26,7 @@ import org.hibernate.Session;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
 
 public class NaloziForma {
 
@@ -78,8 +82,26 @@ public class NaloziForma {
 		scrollPane.setBounds(23, 86, 277, 256);
 		frmPravljenjeNaloga.getContentPane().add(scrollPane);
 		
-		JList linijeList = new JList();
-		linijeList.setModel(new AbstractListModel() {
+		final JList linijeList = new JList();
+		
+			//AutobuskaLinija l=(AutobuskaLinija)lista.get(i);
+			linijeList.setModel(new AbstractListModel()
+			{
+				HibernateAutibuskaLinija listalinija=new HibernateAutibuskaLinija();
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				java.util.List lista=listalinija.sveLinije(session);	
+				public int getSize() {
+					return lista.size();
+				}
+				public Object getElementAt(int index) {
+					AutobuskaLinija a=(AutobuskaLinija)lista.get(index);
+					//return a.getOdrediste()+" "+a.getPolaziste()+" "+a.getBrojLinije()+" "+a.getDatumPolaska_dan()+" "+a.getDatumPolaska_mjesec()+" "+a.getDatumPolaska_godina();
+				return a.getBrojLinije();
+				}
+			});
+			
+		
+		/*linijeList.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30"};
 			public int getSize() {
 				return values.length;
@@ -87,7 +109,7 @@ public class NaloziForma {
 			public Object getElementAt(int index) {
 				return values[index];
 			}
-		});
+		});*/
 		scrollPane.setViewportView(linijeList);
 		
 		JButton nazadBtn = new JButton("Nazad");
@@ -123,7 +145,7 @@ public class NaloziForma {
 		lblAutobuskeLinije.setBounds(23, 55, 112, 20);
 		frmPravljenjeNaloga.getContentPane().add(lblAutobuskeLinije);
 		
-		JDateChooser datumDate = new JDateChooser();
+		final JDateChooser datumDate = new JDateChooser();
 		datumDate.setBounds(410, 86, 116, 20);
 		frmPravljenjeNaloga.getContentPane().add(datumDate);
 		
@@ -140,7 +162,7 @@ public class NaloziForma {
 		label_1.setBounds(322, 88, 78, 14);
 		frmPravljenjeNaloga.getContentPane().add(label_1);
 		
-		JButton napraviBtn = new JButton("Napravi nalog");
+		final JButton napraviBtn = new JButton("Napravi nalog");
 		napraviBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //pravljenje nalogaaa
 				
@@ -148,11 +170,24 @@ public class NaloziForma {
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateNalog n=new HibernateNalog();
-					//n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
+					HibernateAutibuskaLinija linija1=new HibernateAutibuskaLinija();
+					AutobuskaLinija linija=new AutobuskaLinija();
+					int broj=Integer.parseInt(linijeList.getSelectedValue().toString());
+					linija=linija1.nadjiAutobuskuLiniju(session, broj);
+					java.util.Date d=datumDate.getDate();
+					int godina=d.getYear();
+					int dan=d.getDay();
+					int mjesec=d.getMonth();
+					int sati=d.getHours();
+					int minute=d.getMinutes();
+					n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
+					JOptionPane.showMessageDialog(napraviBtn, "Uspješno ste kreirali nalog.");
+
 				}
 				catch(Exception ec)
 				{
-					
+					JOptionPane.showMessageDialog(napraviBtn, "Neuspješno kreiranje naloga.");
+					JOptionPane.showMessageDialog(napraviBtn, "ec");
 				}
 			}
 		});
