@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
+import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
@@ -24,6 +26,7 @@ import org.hibernate.Session;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Date;
+import java.util.List;
 
 public class IzvjestajiForma {
 
@@ -153,7 +156,9 @@ public class IzvjestajiForma {
 					int godina2=datum2.getYear();
 					int mjesec2=datum2.getMonth();
 					int dan2=datum2.getDay();
-					k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2);
+					GenerisanjePDF.prodaneKartePDF(k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2), 
+							datum1, datum2);
+					
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o prodanim kartama.");
 					
 				}

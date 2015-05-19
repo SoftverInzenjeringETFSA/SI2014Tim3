@@ -26,18 +26,14 @@ import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class KorisniciForma {
 
 	private JFrame frmKorisnikiRauni;
-	private JTextField imeDodaj;
-	private JTextField prezimeDodaj;
-	private JTextField jmbgDodaj;
 	private JTextField korisnickoDodaj;
 	private JTextField sifraDodaj;
 	private JTextField pronadiModifikuj;
-	private JTextField imeModifikuj;
-	private JTextField prezimeModifikuj;
 	private JTextField korisnickoModifikuj;
 	private JTextField sifraModifikuj;
 	private JTextField korisnickoIzbrisi;
@@ -83,7 +79,7 @@ public class KorisniciForma {
 	private void initialize() {
 		frmKorisnikiRauni = new JFrame();
 		frmKorisnikiRauni.setTitle("Korisnički računi");
-		frmKorisnikiRauni.setBounds(100, 100, 533, 469);
+		frmKorisnikiRauni.setBounds(100, 100, 533, 412);
 		frmKorisnikiRauni.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmKorisnikiRauni.getContentPane().setLayout(null);
 		
@@ -116,39 +112,17 @@ public class KorisniciForma {
 		frmKorisnikiRauni.getContentPane().add(button_1);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(25, 60, 465, 359);
+		tabbedPane.setBounds(25, 60, 465, 297);
 		frmKorisnikiRauni.getContentPane().add(tabbedPane);
 		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Dodaj", null, panel, null);
 		panel.setLayout(null);
 		
-		JLabel label = new JLabel("Ime:");
-		label.setBounds(138, 29, 22, 14);
-		panel.add(label);
-		
-		imeDodaj = new JTextField();
-		imeDodaj.setColumns(10);
-		imeDodaj.setBounds(186, 26, 193, 20);
-		panel.add(imeDodaj);
-		
-		prezimeDodaj = new JTextField();
-		prezimeDodaj.setColumns(10);
-		prezimeDodaj.setBounds(186, 64, 193, 20);
-		panel.add(prezimeDodaj);
-		
-		JLabel label_1 = new JLabel("Prezime:");
-		label_1.setBounds(114, 67, 46, 14);
-		panel.add(label_1);
-		
-		JLabel label_2 = new JLabel("JMBG:");
-		label_2.setBounds(128, 105, 34, 14);
-		panel.add(label_2);
-		
-		jmbgDodaj = new JTextField();
-		jmbgDodaj.setColumns(10);
-		jmbgDodaj.setBounds(186, 102, 193, 20);
-		panel.add(jmbgDodaj);
+		JLabel lblRadnik = new JLabel("Radnik:");
+		lblRadnik.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblRadnik.setBounds(55, 49, 111, 14);
+		panel.add(lblRadnik);
 		
 		final JComboBox tipDodajCombo = new JComboBox();
 		TipKorisnickogRacuna k=TipKorisnickogRacuna.administrator;
@@ -158,33 +132,38 @@ public class KorisniciForma {
 		TipKorisnickogRacuna k2=TipKorisnickogRacuna.salterskiRadnik;
 		tipDodajCombo.addItem(k2);
 		
-		tipDodajCombo.setBounds(186, 146, 193, 20);
+		tipDodajCombo.setBounds(186, 91, 193, 20);
 		
 		panel.add(tipDodajCombo);
 		
 		JLabel label_3 = new JLabel("Tip radnog mjesta:");
-		label_3.setBounds(67, 149, 101, 14);
+		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_3.setBounds(40, 94, 128, 14);
 		panel.add(label_3);
 		
 		JLabel label_4 = new JLabel("Korisničko ime:");
-		label_4.setBounds(90, 191, 70, 14);
+		label_4.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_4.setBounds(40, 136, 120, 14);
 		panel.add(label_4);
 		
 		korisnickoDodaj = new JTextField();
 		korisnickoDodaj.setColumns(10);
-		korisnickoDodaj.setBounds(186, 188, 193, 20);
+		korisnickoDodaj.setBounds(186, 133, 193, 20);
 		panel.add(korisnickoDodaj);
 		
 		sifraDodaj = new JTextField();
 		sifraDodaj.setColumns(10);
-		sifraDodaj.setBounds(186, 226, 193, 20);
+		sifraDodaj.setBounds(186, 171, 193, 20);
 		panel.add(sifraDodaj);
 		
 		JLabel label_5 = new JLabel("Šifra:");
-		label_5.setBounds(132, 229, 34, 14);
+		label_5.setHorizontalAlignment(SwingConstants.RIGHT);
+		label_5.setBounds(55, 174, 111, 14);
 		panel.add(label_5);
 		
+		
 		final JButton dodajBtn = new JButton("Dodaj novog korisnika");
+		/*
 		dodajBtn.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {//dodavanje korisnika
@@ -227,8 +206,14 @@ public class KorisniciForma {
 			
 			}
 		});
-		dodajBtn.setBounds(242, 297, 137, 23);
+		
+		*/
+		dodajBtn.setBounds(242, 227, 137, 23);
 		panel.add(dodajBtn);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(186, 46, 193, 20);
+		panel.add(comboBox);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, panel_1, null);
@@ -244,6 +229,7 @@ public class KorisniciForma {
 		panel_1.add(pronadiModifikuj);
 		
 		final JButton pronadiBtn = new JButton("Pronađi");
+		/*
 		pronadiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //pronalazenje korisnika za modifikovanje
 				try
@@ -273,42 +259,15 @@ public class KorisniciForma {
 				
 			}
 		});
+		*/
 		pronadiBtn.setBounds(308, 29, 89, 23);
 		panel_1.add(pronadiBtn);
-		
-		imeModifikuj = new JTextField();
-		imeModifikuj.setColumns(10);
-		imeModifikuj.setBounds(168, 78, 193, 20);
-		panel_1.add(imeModifikuj);
-		
-		JLabel label_7 = new JLabel("Ime:");
-		label_7.setBounds(130, 81, 22, 14);
-		panel_1.add(label_7);
-		
-		JLabel label_8 = new JLabel("Prezime:");
-		label_8.setBounds(106, 119, 46, 14);
-		panel_1.add(label_8);
-		
-		prezimeModifikuj = new JTextField();
-		prezimeModifikuj.setColumns(10);
-		prezimeModifikuj.setBounds(168, 116, 193, 20);
-		panel_1.add(prezimeModifikuj);
-		
-		final JComboBox tipModifikuj = new JComboBox();
 		TipKorisnickogRacuna k4=TipKorisnickogRacuna.administrator;
-		tipModifikuj.addItem(k4);
 		TipKorisnickogRacuna k5=TipKorisnickogRacuna.menadzer;
-		tipModifikuj.addItem(k5);
 		TipKorisnickogRacuna k6=TipKorisnickogRacuna.salterskiRadnik;
-		tipModifikuj.addItem(k6);
-		tipModifikuj.setBounds(168, 161, 193, 20);
-		panel_1.add(tipModifikuj);
-		
-		JLabel label_9 = new JLabel("Tip radnog mjesta:");
-		label_9.setBounds(57, 164, 101, 14);
-		panel_1.add(label_9);
 		
 		final JButton modifikujBtn = new JButton("Modifikuj korisnika");
+		/*
 		modifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {  //modifikovanje korisnickih racuna
 				try
@@ -347,25 +306,26 @@ public class KorisniciForma {
 				
 			}
 		});
-		modifikujBtn.setBounds(278, 297, 119, 23);
+		*/
+		modifikujBtn.setBounds(273, 177, 119, 23);
 		panel_1.add(modifikujBtn);
 		
 		korisnickoModifikuj = new JTextField();
 		korisnickoModifikuj.setColumns(10);
-		korisnickoModifikuj.setBounds(168, 205, 193, 20);
+		korisnickoModifikuj.setBounds(163, 85, 193, 20);
 		panel_1.add(korisnickoModifikuj);
 		
 		JLabel label_6 = new JLabel("Korisničko ime:");
-		label_6.setBounds(72, 208, 70, 14);
+		label_6.setBounds(67, 88, 70, 14);
 		panel_1.add(label_6);
 		
 		JLabel label_10 = new JLabel("Šifra:");
-		label_10.setBounds(114, 246, 34, 14);
+		label_10.setBounds(109, 126, 34, 14);
 		panel_1.add(label_10);
 		
 		sifraModifikuj = new JTextField();
 		sifraModifikuj.setColumns(10);
-		sifraModifikuj.setBounds(168, 243, 193, 20);
+		sifraModifikuj.setBounds(163, 123, 193, 20);
 		panel_1.add(sifraModifikuj);
 		
 		JPanel panel_2 = new JPanel();
