@@ -29,6 +29,7 @@ import org.hibernate.Session;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
 import java.util.Date;
 
 public class AutobuskeLinijeForma {
@@ -294,9 +295,11 @@ public class AutobuskeLinijeForma {
 				radnik=rad1.nadjiRadnikaPoImenu(session, vozacDodajCombo.getSelectedItem().toString());
 				
 				Date datum=datumDodajDate.getDate();
-				int godina1=datum.getYear();
-				int mjesec1=datum.getMonth();
-				int dan1=datum.getDay();
+				Calendar cal=Calendar.getInstance();
+				cal.setTime(datum);
+				int godina1=cal.get(Calendar.YEAR);
+				int mjesec1=cal.get(Calendar.MONTH);
+				int dan1=cal.get(Calendar.DAY_OF_MONTH);
 				int sati=datum.getHours();
 				int minute=datum.getMinutes();
 				
@@ -541,9 +544,11 @@ public class AutobuskeLinijeForma {
 				radnik=rad1.nadjiRadnikaPoImenu(session, vozacModifikujCombo.getSelectedItem().toString());
 				
 				Date datum=polazakModifikujDate.getDate();
-				int godina1=datum.getYear();
-				int mjesec1=datum.getMonth();
-				int dan1=datum.getDay();
+				Calendar cal=Calendar.getInstance();
+				cal.setTime(datum);
+				int godina1=cal.get(Calendar.YEAR);
+				int mjesec1=cal.get(Calendar.MONTH);
+				int dan1=cal.get(Calendar.DAY_OF_MONTH);
 				int sati=datum.getHours();
 				int minute=datum.getMinutes();
 				

@@ -19,7 +19,7 @@ public class HibernateAutibuskaLinija {
 		Autobus a = HibernateAutobus.nadjiAutobus(session, "abc-d-efg");
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
 		
-		 //dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,2,100,24,2,20,40,true);
+		 dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,25,100,24,2,20,40,true);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
 		
@@ -56,13 +56,15 @@ public class HibernateAutibuskaLinija {
 		linija.setCijenaDvosmjerna(cijenadvosmjernakarta);
 		linija.setBrojLinije(brojlinije);
 		linija.setMedjunarodna(medjunarodna1);
+		int broj=linija.getZauzeto();
+		linija.setZauzeto(0);
 		
 		Long id=(Long) session.save(linija);
 		t.commit();
 		
 	}
 	
-	public static void modifikujAutobuskuLiniju(Session session, String polazistelinije, String odredistelinije, Autobus a,Radnik r, int godina, int mjesec, int dan, int sati,int minute,int peronlinije, double distancalinije, double trajanjelinije, int brojlinije, double cijenajednosmjernakarta, double cijenadvosmjernakarta )
+	public static void modifikujAutobuskuLiniju(Session session, String polazistelinije, String odredistelinije, Autobus a,Radnik r, int godina, int mjesec, int dan, int sati,int minute,int peronlinije, double distancalinije, double trajanjelinije, int brojlinije, double cijenajednosmjernakarta, double cijenadvosmjernakarta)
 	{
 		Transaction t = session.beginTransaction();
 		
@@ -86,6 +88,7 @@ public class HibernateAutibuskaLinija {
 		izmjenjenalinija.setTrajanje(trajanjelinije);
 		izmjenjenalinija.setCijenaJednosmjerna(cijenajednosmjernakarta);
 		izmjenjenalinija.setCijenaDvosmjerna(cijenadvosmjernakarta);
+		//izmjenjenalinija.setZauzeto(zauzeto);
 		
 		session.save(izmjenjenalinija);
 		t.commit();

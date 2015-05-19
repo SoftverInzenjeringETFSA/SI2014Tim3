@@ -27,6 +27,7 @@ import org.hibernate.Session;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
+import java.util.Calendar;
 
 public class NaloziForma {
 
@@ -96,7 +97,7 @@ public class NaloziForma {
 				public Object getElementAt(int index) {
 					AutobuskaLinija a=(AutobuskaLinija)lista.get(index);
 					//return a.getOdrediste()+" "+a.getPolaziste()+" "+a.getBrojLinije()+" "+a.getDatumPolaska_dan()+" "+a.getDatumPolaska_mjesec()+" "+a.getDatumPolaska_godina();
-				return a.getBrojLinije();
+				return "Odredište:"+a.getOdrediste()+" "+"Polazište:"+a.getPolaziste()+" "+"Broj linije:"+" "+a.getBrojLinije()+"Datum polaska:"+ " "+a.getDatumPolaska_dan()+"."+a.getDatumPolaska_mjesec()+"."+ a.getDatumPolaska_godina();
 				}
 			});
 			
@@ -172,12 +173,23 @@ public class NaloziForma {
 					HibernateNalog n=new HibernateNalog();
 					HibernateAutibuskaLinija linija1=new HibernateAutibuskaLinija();
 					AutobuskaLinija linija=new AutobuskaLinija();
-					int broj=Integer.parseInt(linijeList.getSelectedValue().toString());
+					String selektovano=(linijeList.getSelectedValue().toString());
+					java.util.List listasvihlinija=linija1.sveLinije(session);
+					int broj=0;
+					for(int i=0;i<listasvihlinija.size();i++)
+					{
+						AutobuskaLinija a=(AutobuskaLinija)listasvihlinija.get(i);
+						String uporedi="Odredište:"+a.getOdrediste()+" "+"Polazište:"+a.getPolaziste()+" "+"Broj linije:"+" "+a.getBrojLinije()+"Datum polaska:"+ " "+a.getDatumPolaska_dan()+"."+a.getDatumPolaska_mjesec()+"."+ a.getDatumPolaska_godina();
+					    if(selektovano.equals(uporedi)==true)
+					    	broj=a.getBrojLinije();
+					}
 					linija=linija1.nadjiAutobuskuLiniju(session, broj);
 					java.util.Date d=datumDate.getDate();
-					int godina=d.getYear();
-					int dan=d.getDay();
-					int mjesec=d.getMonth();
+					Calendar cal=Calendar.getInstance();
+					cal.setTime(d);
+					int godina=cal.get(Calendar.YEAR);
+					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					int mjesec=cal.get(Calendar.MONTH);
 					int sati=d.getHours();
 					int minute=d.getMinutes();
 					n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
