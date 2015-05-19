@@ -38,6 +38,9 @@
         <property name="peron" type="int">
             <column name="PERON" />
         </property>
+        <property name="zauzeto" type="int">
+            <column name="ZAUZETO" />
+        </property>
         <property name="distanca" type="double">
             <column name="DISTANCA" />
         </property>

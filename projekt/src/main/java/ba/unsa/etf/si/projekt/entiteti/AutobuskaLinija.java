@@ -139,6 +139,14 @@ public class AutobuskaLinija implements java.io.Serializable{
 		this.vozac = vozac;
 	}
 
+	public int getZauzeto() {
+		return zauzeto;
+	}
+
+	public void setZauzeto(int zauzeto) {
+		this.zauzeto = zauzeto;
+	}
+	
 	String polaziste;
 	String odrediste;
 	Autobus autobus;
@@ -155,6 +163,9 @@ public class AutobuskaLinija implements java.io.Serializable{
 	double cijenaJednosmjerna;
 	double cijenaDvosmjerna;
 	boolean medjunarodna;
+	int zauzeto;
 	
+	
+
 	public AutobuskaLinija () {} 
 }
