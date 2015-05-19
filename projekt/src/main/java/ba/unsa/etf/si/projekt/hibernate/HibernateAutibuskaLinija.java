@@ -35,7 +35,7 @@ public class HibernateAutibuskaLinija {
 		session.close();
 	}
 	
-	public static void dodajAutobuskuLiniju(Session session, String polazistelinije, String odredistelinije, Autobus a,Radnik r, int godina, int mjesec, int dan, int sati,int minute,int peronlinije, double distancalinije, double trajanjelinije, int brojlinije, double cijenajednosmjernakarta, double cijenadvosmjernakarta )
+	public static void dodajAutobuskuLiniju(Session session, String polazistelinije, String odredistelinije, Autobus a,Radnik r, int godina, int mjesec, int dan, int sati,int minute,int peronlinije, double distancalinije, double trajanjelinije, int brojlinije, double cijenajednosmjernakarta, double cijenadvosmjernakarta,boolean medjunarodna1 )
 	{
 		Transaction t = session.beginTransaction();
 		
@@ -55,6 +55,7 @@ public class HibernateAutibuskaLinija {
 		linija.setCijenaJednosmjerna(cijenajednosmjernakarta);
 		linija.setCijenaDvosmjerna(cijenadvosmjernakarta);
 		linija.setBrojLinije(brojlinije);
+		linija.setMedjunarodna(medjunarodna1);
 		
 		Long id=(Long) session.save(linija);
 		t.commit();

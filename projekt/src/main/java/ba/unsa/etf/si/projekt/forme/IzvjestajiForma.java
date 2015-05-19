@@ -9,14 +9,21 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JTextField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 
+import org.hibernate.Session;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 public class IzvjestajiForma {
 
@@ -113,7 +120,7 @@ public class IzvjestajiForma {
 		tabbedPane.addTab("Prodane karte", null, panel, null);
 		panel.setLayout(null);
 		
-		JDateChooser pocetniProdaneDate = new JDateChooser();
+		final JDateChooser pocetniProdaneDate = new JDateChooser();
 		pocetniProdaneDate.setDateFormatString("dd/MM/yyyy");
 		pocetniProdaneDate.setBounds(175, 50, 178, 20);
 		panel.add(pocetniProdaneDate);
@@ -126,12 +133,38 @@ public class IzvjestajiForma {
 		label_9.setBounds(94, 100, 72, 14);
 		panel.add(label_9);
 		
-		JDateChooser krajnjiProdaneDate = new JDateChooser();
+		final JDateChooser krajnjiProdaneDate = new JDateChooser();
 		krajnjiProdaneDate.setDateFormatString("dd/MM/yyyy");
 		krajnjiProdaneDate.setBounds(176, 97, 178, 20);
 		panel.add(krajnjiProdaneDate);
 		
-		JButton generisiProdaneBtn = new JButton("Generiši izvještaj");
+		final JButton generisiProdaneBtn = new JButton("Generiši izvještaj");
+		generisiProdaneBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {//izvjestaj o kartama
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateKarta k=new HibernateKarta();
+					Date datum1=pocetniProdaneDate.getDate();
+					int godina1=datum1.getYear();
+					int mjesec1=datum1.getMonth();
+					int dan1=datum1.getDay();
+					Date datum2=krajnjiProdaneDate.getDate();
+					int godina2=datum2.getYear();
+					int mjesec2=datum2.getMonth();
+					int dan2=datum2.getDay();
+					k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2);
+					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
+					
+				}
+				catch(Exception ex4)
+				{
+					JOptionPane.showMessageDialog(generisiProdaneBtn, "Niste kreirali izvjestaj.");
+					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o vozačima.");
+				}
+				
+			}
+		});
 		generisiProdaneBtn.setBounds(241, 208, 113, 23);
 		panel.add(generisiProdaneBtn);
 		
@@ -227,7 +260,24 @@ public class IzvjestajiForma {
 		lblPrezimeVozaa.setBounds(116, 116, 78, 14);
 		panel_2.add(lblPrezimeVozaa);
 		
-		JButton generisiVozaciBtn = new JButton("Generiši izvještaj");
+		final JButton generisiVozaciBtn = new JButton("Generiši izvještaj");
+		generisiVozaciBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
+					java.util.List radnici=linija.IzvjestajORadnicima(session,imeVozac.getText() , prezimeVozac.getText());
+					JOptionPane.showMessageDialog(generisiVozaciBtn, "Uspješno ste kreirali izvještaj o vozačima.");
+
+				}
+				catch(Exception ex3)
+				{
+					JOptionPane.showMessageDialog(generisiVozaciBtn, "Niste uspješno kreirali izvještaj.");
+					JOptionPane.showMessageDialog(generisiVozaciBtn, ex3);
+				}
+			}
+		});
 		generisiVozaciBtn.setBounds(204, 208, 113, 23);
 		panel_2.add(generisiVozaciBtn);
 		

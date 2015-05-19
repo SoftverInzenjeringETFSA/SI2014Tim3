@@ -10,11 +10,17 @@ import javax.swing.UIManager;
 
 import java.awt.Font;
 
+import ba.unsa.etf.si.projekt.hibernate.HibernateNalog;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
+
+import org.hibernate.Session;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -135,6 +141,21 @@ public class NaloziForma {
 		frmPravljenjeNaloga.getContentPane().add(label_1);
 		
 		JButton napraviBtn = new JButton("Napravi nalog");
+		napraviBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { //pravljenje nalogaaa
+				
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateNalog n=new HibernateNalog();
+					//n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
+				}
+				catch(Exception ec)
+				{
+					
+				}
+			}
+		});
 		napraviBtn.setBounds(410, 319, 116, 23);
 		frmPravljenjeNaloga.getContentPane().add(napraviBtn);
 	}

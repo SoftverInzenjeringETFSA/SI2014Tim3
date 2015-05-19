@@ -46,7 +46,7 @@ public class HibernateKorisnickiRacuni {
 		t.commit();
 	}
 	
-	public static void modifikujKorisnickiRacun(Session session, String imekorisnika, String starokorisnickoime, String prezimekorisnika, String jmbgkorisnika, String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika)
+	public static void modifikujKorisnickiRacun(Session session, String imekorisnika, String starokorisnickoime, String prezimekorisnika,  String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika)
 	{
 		Transaction t = session.beginTransaction();
 		
@@ -58,7 +58,6 @@ public class HibernateKorisnickiRacuni {
 		{
 		kr.setIme(imekorisnika);
 		kr.setPrezime(prezimekorisnika);
-		kr.setJmbg(jmbgkorisnika);
 		kr.setTipKorisnickogRacuna(tipracunakorisnika);
 		kr.setSifra(passkorisnika);
 		kr.setKorisnickoIme(korisnickoimekorisnika);

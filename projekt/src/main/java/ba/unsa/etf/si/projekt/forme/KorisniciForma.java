@@ -4,12 +4,26 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+
+
+
+
+
+import org.hibernate.Session;
+
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
+import ba.unsa.etf.si.projekt.entiteti.TipKorisnickogRacuna;
+import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -136,7 +150,14 @@ public class KorisniciForma {
 		jmbgDodaj.setBounds(186, 102, 193, 20);
 		panel.add(jmbgDodaj);
 		
-		JComboBox tipDodajCombo = new JComboBox();
+		final JComboBox tipDodajCombo = new JComboBox();
+		TipKorisnickogRacuna k=TipKorisnickogRacuna.administrator;
+		tipDodajCombo.addItem(k);
+		TipKorisnickogRacuna k1=TipKorisnickogRacuna.menadzer;
+		tipDodajCombo.addItem(k1);
+		TipKorisnickogRacuna k2=TipKorisnickogRacuna.salterskiRadnik;
+		tipDodajCombo.addItem(k2);
+		
 		tipDodajCombo.setBounds(186, 146, 193, 20);
 		
 		panel.add(tipDodajCombo);
@@ -163,10 +184,46 @@ public class KorisniciForma {
 		label_5.setBounds(132, 229, 34, 14);
 		panel.add(label_5);
 		
-		JButton dodajBtn = new JButton("Dodaj novog korisnika");
+		final JButton dodajBtn = new JButton("Dodaj novog korisnika");
 		dodajBtn.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {//dodavanje korisnika
+				
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateKorisnickiRacuni noviracun=new HibernateKorisnickiRacuni();
+					if(tipDodajCombo.getSelectedItem().toString()=="administrator")
+					{
+				    TipKorisnickogRacuna r=TipKorisnickogRacuna.administrator;
+					noviracun.dodajKorisnickiRacun(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), korisnickoDodaj.getText(), sifraDodaj.getText(),r);
+					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+					}
+					if(tipDodajCombo.getSelectedItem().toString()=="menadzer")
+					{
+				    TipKorisnickogRacuna r=TipKorisnickogRacuna.menadzer;
+					noviracun.dodajKorisnickiRacun(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), korisnickoDodaj.getText(), sifraDodaj.getText(),r);
+					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+					}
+					if(tipDodajCombo.getSelectedItem().toString()=="salterskiRadnik")
+					{
+				    TipKorisnickogRacuna r=TipKorisnickogRacuna.salterskiRadnik;
+					noviracun.dodajKorisnickiRacun(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), korisnickoDodaj.getText(), sifraDodaj.getText(),r);
+					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+					}
+					imeDodaj.setText("");
+					prezimeDodaj.setText("");
+					korisnickoDodaj.setText("");
+					sifraDodaj.setText("");
+					jmbgDodaj.setText("");
+					
+				}
+				catch(Exception e7)
+				{
+					JOptionPane.showMessageDialog(dodajBtn, "Neuspješno kreiranje korisničkog računa.");
+					JOptionPane.showMessageDialog(dodajBtn, e7);
+				}
+					
 			
 			}
 		});
@@ -186,7 +243,36 @@ public class KorisniciForma {
 		pronadiModifikuj.setBounds(147, 30, 151, 20);
 		panel_1.add(pronadiModifikuj);
 		
-		JButton pronadiBtn = new JButton("Pronađi");
+		final JButton pronadiBtn = new JButton("Pronađi");
+		pronadiBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) { //pronalazenje korisnika za modifikovanje
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateKorisnickiRacuni pronadjeniracun=new HibernateKorisnickiRacuni();
+					KorisnickiRacun kr=new KorisnickiRacun();
+					kr=pronadjeniracun.nadjiKorisnickiRacun(session,pronadiModifikuj.getText());
+					if(kr!=null)
+					{
+						imeModifikuj.setText(kr.getIme());
+						prezimeModifikuj.setText(kr.getPrezime());
+						korisnickoModifikuj.setText(kr.getKorisnickoIme());
+						sifraModifikuj.setText(kr.getSifra());
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(pronadiBtn, "Ne postoji korisnički račun, sa unesenim korisničkim imenom.");
+					}
+					
+					
+				}
+				catch(Exception e8)
+				{
+					JOptionPane.showMessageDialog(pronadiBtn, "Neuspješna pretraga korisničkih računa.");
+				}
+				
+			}
+		});
 		pronadiBtn.setBounds(308, 29, 89, 23);
 		panel_1.add(pronadiBtn);
 		
@@ -208,7 +294,13 @@ public class KorisniciForma {
 		prezimeModifikuj.setBounds(168, 116, 193, 20);
 		panel_1.add(prezimeModifikuj);
 		
-		JComboBox tipModifikuj = new JComboBox();
+		final JComboBox tipModifikuj = new JComboBox();
+		TipKorisnickogRacuna k4=TipKorisnickogRacuna.administrator;
+		tipModifikuj.addItem(k4);
+		TipKorisnickogRacuna k5=TipKorisnickogRacuna.menadzer;
+		tipModifikuj.addItem(k5);
+		TipKorisnickogRacuna k6=TipKorisnickogRacuna.salterskiRadnik;
+		tipModifikuj.addItem(k6);
 		tipModifikuj.setBounds(168, 161, 193, 20);
 		panel_1.add(tipModifikuj);
 		
@@ -216,7 +308,45 @@ public class KorisniciForma {
 		label_9.setBounds(57, 164, 101, 14);
 		panel_1.add(label_9);
 		
-		JButton modifikujBtn = new JButton("Modifikuj korisnika");
+		final JButton modifikujBtn = new JButton("Modifikuj korisnika");
+		modifikujBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {  //modifikovanje korisnickih racuna
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateKorisnickiRacuni promjenaracun=new HibernateKorisnickiRacuni();
+					if(tipModifikuj.getSelectedItem().toString()=="administrator")
+					{
+				    TipKorisnickogRacuna r=TipKorisnickogRacuna.administrator;
+				    promjenaracun.modifikujKorisnickiRacun(session, imeModifikuj.getText(),pronadiModifikuj.getText(), prezimeModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(),r);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste dodali korisnički račun.");
+					}
+					if(tipModifikuj.getSelectedItem().toString()=="menadzer")
+					{
+				    TipKorisnickogRacuna r=TipKorisnickogRacuna.menadzer;
+				    promjenaracun.modifikujKorisnickiRacun(session,imeModifikuj.getText(),pronadiModifikuj.getText(), prezimeModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(),r);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste dodali korisnički račun.");
+					}
+					if(tipModifikuj.getSelectedItem().toString()=="salterskiRadnik")
+					{
+				    TipKorisnickogRacuna r=TipKorisnickogRacuna.salterskiRadnik;
+				    promjenaracun.modifikujKorisnickiRacun(session, imeModifikuj.getText(),pronadiModifikuj.getText(), prezimeModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(),r);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste dodali korisnički račun.");
+					}
+					imeModifikuj.setText("");
+					prezimeModifikuj.setText("");
+					korisnickoModifikuj.setText("");
+					sifraModifikuj.setText("");
+					pronadiModifikuj.setText("");
+				}
+				catch(Exception e9)
+				{
+					JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje korisničkih računa.");
+					JOptionPane.showMessageDialog(modifikujBtn, e9);
+				}
+				
+			}
+		});
 		modifikujBtn.setBounds(278, 297, 119, 23);
 		panel_1.add(modifikujBtn);
 		
@@ -251,7 +381,26 @@ public class KorisniciForma {
 		korisnickoIzbrisi.setBounds(185, 57, 151, 20);
 		panel_2.add(korisnickoIzbrisi);
 		
-		JButton izbrisiBtn = new JButton("Izbriši korisnika");
+		final JButton izbrisiBtn = new JButton("Izbriši korisnika");
+		izbrisiBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {//brisanje korisnickog racuna
+				
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateKorisnickiRacuni brisanjeracun=new HibernateKorisnickiRacuni();
+					brisanjeracun.brisiKorisnickiRacun(session, korisnickoIzbrisi.getText());
+					JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje korisničkog računa");
+					
+					korisnickoIzbrisi.setText("");
+				}
+				catch(Exception e10)
+				{
+					JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje korisničkog računa");
+					JOptionPane.showMessageDialog(izbrisiBtn, e10);
+				}
+			}
+		});
 		izbrisiBtn.setBounds(219, 115, 112, 23);
 		panel_2.add(izbrisiBtn);
 	}
