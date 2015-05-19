@@ -11,10 +11,10 @@
         <property name="odrediste" type="java.lang.String">
             <column name="ODREDISTE" />
         </property>
-        <property name="vrijemePolaska_sati" type="double">
+        <property name="vrijemePolaska_sati" type="int">
             <column name="VRIJEMEPOLASKA_SATI" />
         </property>
-        <property name="vrijemePolaska_minute" type="double">
+        <property name="vrijemePolaska_minute" type="int">
             <column name="VRIJEMEPOLASKA_MINUTE" />
         </property>
         <property name="tipKarte">

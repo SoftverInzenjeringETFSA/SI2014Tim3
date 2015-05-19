@@ -58,19 +58,19 @@ public class AutobuskaLinija implements java.io.Serializable{
 		this.datumPolaska_godina = datumPolaska_godina;
 	}
 
-	public double getVrijemePolaska_sati() {
+	public int getVrijemePolaska_sati() {
 		return vrijemePolaska_sati;
 	}
 
-	public void setVrijemePolaska_sati(double vrijemePolaska_sati) {
+	public void setVrijemePolaska_sati(int vrijemePolaska_sati) {
 		this.vrijemePolaska_sati = vrijemePolaska_sati;
 	}
 
-	public double getVrijemePolaska_minute() {
+	public int getVrijemePolaska_minute() {
 		return vrijemePolaska_minute;
 	}
 
-	public void setVrijemePolaska_minute(double vrijemePolaska_minute) {
+	public void setVrijemePolaska_minute(int vrijemePolaska_minute) {
 		this.vrijemePolaska_minute = vrijemePolaska_minute;
 	}
 
@@ -154,8 +154,8 @@ public class AutobuskaLinija implements java.io.Serializable{
 	int datumPolaska_dan;
 	int datumPolaska_mjesec;
 	int datumPolaska_godina;
-	double vrijemePolaska_sati;
-	double vrijemePolaska_minute;
+	int vrijemePolaska_sati;
+	int vrijemePolaska_minute;
 	int peron;
 	double distanca;
 	double trajanje;
