@@ -50,8 +50,8 @@ public class Radnik implements java.io.Serializable {
 	public	
 	TipRadnogMjesta dajTipRadnogMjesta()
 	{
-		Radnik r=new Radnik();
-		return r.tipRadnogMjesta;}
+		return tipRadnogMjesta;
+	}
 	
 	public Radnik(){}
 

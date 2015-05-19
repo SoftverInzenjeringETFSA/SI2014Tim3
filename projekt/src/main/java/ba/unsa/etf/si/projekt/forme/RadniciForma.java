@@ -108,9 +108,11 @@ public class RadniciForma {
 		TipRadnogMjesta administrator=TipRadnogMjesta.Administrator;
 		TipRadnogMjesta menadzer=TipRadnogMjesta.Menadzer;
 		TipRadnogMjesta salteras=TipRadnogMjesta.SalterskiRadnik;
+		TipRadnogMjesta vozac=TipRadnogMjesta.Vozac;
 		tipDodajCombo.addItem(menadzer);
 		tipDodajCombo.addItem(salteras);
 		tipDodajCombo.addItem(administrator);
+		tipDodajCombo.addItem(vozac);
 		dodajRadnikaTab.add(tipDodajCombo);
 		
 		JLabel lblIme = new JLabel("Ime:");
@@ -147,11 +149,17 @@ public class RadniciForma {
 						
 					}
 					
-					if(tipDodajCombo.getSelectedItem().toString()=="Menadzer")
+					else if(tipDodajCombo.getSelectedItem().toString()=="Menadzer")
 					{
 					TipRadnogMjesta r1=TipRadnogMjesta.Menadzer;
 					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					}
+					
+					else if (tipDodajCombo.getSelectedItem().toString()=="Vozac") {
+						TipRadnogMjesta r1 = TipRadnogMjesta.Vozac;
+						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
+						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik");
 					}
 					
 					else
@@ -205,9 +213,11 @@ public class RadniciForma {
 		TipRadnogMjesta administrator1=TipRadnogMjesta.Administrator;
 		TipRadnogMjesta menadzer1=TipRadnogMjesta.Menadzer;
 		TipRadnogMjesta salteras1=TipRadnogMjesta.SalterskiRadnik;
+		TipRadnogMjesta vozac1=TipRadnogMjesta.Vozac;
 		tipModifikujCombo.addItem(administrator1);
 		tipModifikujCombo.addItem(menadzer1);
 		tipModifikujCombo.addItem(salteras1);
+		tipModifikujCombo.addItem(vozac1);
 		modifikujRadnikaTab.add(tipModifikujCombo);
 		
 		final JButton modifikujBtn = new JButton("Spasi promjene");
@@ -226,17 +236,22 @@ public class RadniciForma {
 					promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), k);
 					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
 					}
-					if(tipModifikujCombo.getSelectedItem().toString()=="Menadzer")
+					else if(tipModifikujCombo.getSelectedItem().toString()=="Menadzer")
 					{
 					TipRadnogMjesta k=TipRadnogMjesta.Menadzer;
 					promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), k);
 					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
 					}
-					if(tipModifikujCombo.getSelectedItem().toString()=="SalterskiRadnik")
+					else if(tipModifikujCombo.getSelectedItem().toString()=="SalterskiRadnik")
 					{
 					TipRadnogMjesta k=TipRadnogMjesta.SalterskiRadnik;
 					promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), k);
 					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
+					}
+					else if (tipModifikujCombo.getSelectedItem().toString()=="Vozac") {
+						TipRadnogMjesta v=TipRadnogMjesta.Vozac;
+						promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), v);
+						JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
 					}
 				}
 				
@@ -310,6 +325,16 @@ public class RadniciForma {
 		
 		final JComboBox tipIzbrisiCombo = new JComboBox();
 		tipIzbrisiCombo.setBounds(155, 162, 183, 20);
+		TipRadnogMjesta administrator2=TipRadnogMjesta.Administrator;
+		TipRadnogMjesta menadzer2=TipRadnogMjesta.Menadzer;
+		TipRadnogMjesta salteras2=TipRadnogMjesta.SalterskiRadnik;
+		TipRadnogMjesta vozac2=TipRadnogMjesta.Vozac;
+		tipIzbrisiCombo.addItem(menadzer2);
+		tipIzbrisiCombo.addItem(salteras2);
+		tipIzbrisiCombo.addItem(administrator2);
+		tipIzbrisiCombo.addItem(vozac2);
+		
+		
 		izbrisiRadnikaTab.add(tipIzbrisiCombo);
 		
 		final JButton pronadiIzbrisiBtn = new JButton("Pronađi");
@@ -347,11 +372,13 @@ public class RadniciForma {
 		izbrisiRadnikaTab.add(pronadiIzbrisiBtn);
 		
 		imeIzbrisi = new JTextField();
+		imeIzbrisi.setEditable(false);
 		imeIzbrisi.setColumns(10);
 		imeIzbrisi.setBounds(155, 81, 183, 20);
 		izbrisiRadnikaTab.add(imeIzbrisi);
 		
 		prezimeIzbrisi = new JTextField();
+		prezimeIzbrisi.setEditable(false);
 		prezimeIzbrisi.setColumns(10);
 		prezimeIzbrisi.setBounds(155, 119, 183, 20);
 		izbrisiRadnikaTab.add(prezimeIzbrisi);
