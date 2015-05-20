@@ -66,10 +66,10 @@ public class GenerisanjePDF {
 
 			t.addCell(c1);
 
-			PdfPCell c2 = new PdfPCell(new Phrase("Vrijeme polaska"));  
+			PdfPCell c2 = new PdfPCell(new Phrase("Vrijeme"));  
 
 			t.addCell(c2);
-			PdfPCell c3 = new PdfPCell(new Phrase("Datum polaska"));  
+			PdfPCell c3 = new PdfPCell(new Phrase("Datum"));  
 
 			t.addCell(c3);
 			PdfPCell c4 = new PdfPCell(new Phrase("Tip karte"));  

@@ -5,6 +5,7 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
 
@@ -13,25 +14,6 @@ public class HibernateMedjunarodnaKarta {
 	public static void main( String[] args)
 	{
 		
-	}
-	public static void dodajMedjunarodnuKartu(Session session, AutobuskaLinija linija, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte, int godina, int mjesec, int dan, double cijenakarte, String imekupca, String prezimekupca )
-	{
-        Transaction t = session.beginTransaction();
-		//linija.ModifikujZauzetostLinije(session, );
-		MedjunarodnaKarta k=new MedjunarodnaKarta();
-		k.setLinija(linija);
-		k.setVrijemePolaska_sati(vrijeme_sati);
-		k.setVrijemePolaska_minute(vrijeme_minute);
-		k.setTipKarte(tipkarte);
-		k.setDatumPolaska_godina(godina);
-		k.setDatumPolaska_mjesec(mjesec);
-		k.setDatumPolaska_dan(dan);
-		k.setCijena(cijenakarte);
-		k.setIme(imekupca);
-		k.setPrezime(prezimekupca);
-		
-		Long id=(Long) session.save(k);
-		t.commit();
 	}
 	
 	public static java.util.List sveMedjunarodneKarte(Session session)
@@ -44,5 +26,28 @@ public class HibernateMedjunarodnaKarta {
 		
 	}
 	public HibernateMedjunarodnaKarta(){}
+	
+	public static void dodajKartu(Session session, AutobuskaLinija linija,
+			int godina, int mjesec, int dan, int sati, int minute, TipKarte tip,
+			double cijena, String ime, String prezime) {
+		
+		Transaction t = session.beginTransaction();
+		linija.setZauzeto(linija.getZauzeto()+1);
+		MedjunarodnaKarta k=new MedjunarodnaKarta();
+		k.setLinija(linija);
+		k.setVrijemePolaska_sati(sati);
+		k.setVrijemePolaska_minute(minute);
+		k.setTipKarte(tip);
+		k.setDatumPolaska_godina(godina);
+		k.setDatumPolaska_mjesec(mjesec);
+		k.setDatumPolaska_dan(dan);
+		k.setCijena(cijena);
+		k.setIme(ime);
+		k.setPrezime(prezime);
+		
+		Long id=(Long) session.save(k);
+		t.commit();
+		
+	}
 
 }
