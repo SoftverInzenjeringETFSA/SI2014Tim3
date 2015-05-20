@@ -8,7 +8,6 @@
   <property name="hibernate.connection.url">jdbc:mysql://localhost/Tim3</property>
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <mapping resource="ba/unsa/etf/si/projekt/entiteti/Administrator.hbm.xml"/>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/Autobus.hbm.xml"/>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/AutobuskaLinija.hbm.xml"/>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/Karta.hbm.xml"/>
@@ -17,7 +16,6 @@
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/Nalog.hbm.xml"/>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/Radnik.hbm.xml"/>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/Rezervacija.hbm.xml"/>
-  <mapping resource="ba/unsa/etf/si/projekt/entiteti/SalterskiRadnik.hbm.xml"/>
   
  </session-factory>
 </hibernate-configuration>
