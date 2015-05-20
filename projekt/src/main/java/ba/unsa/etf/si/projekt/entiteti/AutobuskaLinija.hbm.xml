@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated May 16, 2015 12:13:50 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated May 20, 2015 10:22:04 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija" table="AUTOBUSKALINIJA">
         <id name="id" type="long">
             <column name="ID" />
-            <generator class="native" />
+            <generator class="assigned" />
         </id>
         <property name="polaziste" type="java.lang.String">
             <column name="POLAZISTE" />
@@ -38,9 +38,6 @@
         <property name="peron" type="int">
             <column name="PERON" />
         </property>
-        <property name="zauzeto" type="int">
-            <column name="ZAUZETO" />
-        </property>
         <property name="distanca" type="double">
             <column name="DISTANCA" />
         </property>
@@ -58,6 +55,9 @@
         </property>
         <property name="medjunarodna" type="boolean">
             <column name="MEDJUNARODNA" />
+        </property>
+        <property name="zauzeto" type="int">
+            <column name="ZAUZETO" />
         </property>
     </class>
 </hibernate-mapping>

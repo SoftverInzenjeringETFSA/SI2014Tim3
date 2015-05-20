@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated May 16, 2015 12:46:41 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated May 20, 2015 10:22:04 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="ba.unsa.etf.si.projekt.entiteti.Radnik" table="RADNIK">
         <id name="id" type="long">
             <column name="ID" />
-            <generator class="native" />
+            <generator class="assigned" />
         </id>
         <property name="ime" type="java.lang.String">
             <column name="IME" />
