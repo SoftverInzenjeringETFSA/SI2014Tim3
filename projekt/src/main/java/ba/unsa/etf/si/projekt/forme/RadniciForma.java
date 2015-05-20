@@ -174,10 +174,7 @@ public class RadniciForma {
 				catch(Exception e4)
 				{
 					JOptionPane.showMessageDialog(dodajBtn, "Dodavanje nije bilo uspješno.");
-					JOptionPane.showMessageDialog(dodajBtn, "e4.");
-				
-					
-					
+					JOptionPane.showMessageDialog(dodajBtn, "e4.");	
 				}
 			}
 		});
