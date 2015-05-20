@@ -7,26 +7,17 @@ public class Validacija
     public static boolean praznoPolje(String vrijednost)
 	{
     	if (vrijednost == null || vrijednost.trim().equals( "" ))
-    	{
     		return true;
-    	}
     	else
-    	{
     		return false;
-    	}
 	}
     
     public static boolean validirajJMBG(String vrijednost)
 	{
-    	if (vrijednost != null && vrijednost.trim().equals( "" ) && jeInt(vrijednost) == true && vrijednost.length() == 13)
-    	{
+    	if (praznoPolje(vrijednost) == false && jeInt(vrijednost) == true && vrijednost.length() == 13)
     		return true;
-    	}
     	else
-    	{
     		return false;
-    		
-    	}
 	}
     
     public static boolean jeInt(String vrijednost)
@@ -44,58 +35,87 @@ public class Validacija
         return true;
     }
     
-    public static boolean sadrziCifru(String s){  
+    public static boolean sadrziCifru(String s)
+    {  
         boolean sadrzi = false;
 
-        if(s != null && ! s.isEmpty()){
-            for(char c : s.toCharArray()){
-                if(sadrzi = Character.isDigit(c)){
+        if(s != null && ! s.isEmpty())
+        {
+            for(char c : s.toCharArray())
+            {
+                if(sadrzi = Character.isDigit(c))
+                {
                 	
                     break;
                 }
             }
         }
-
         return sadrzi;
     }
-    public static boolean alphaNumerickaVrijednost(String s){  
+    
+    public static boolean alphaNumerickaVrijednost(String s)
+    {  
         boolean jeste = true;
-
-        if(s != null && ! s.isEmpty()){
-            for(char c : s.toCharArray()){
-                if(!(Character.isDigit(c) || Character.isLetter(c) )){
+        if(s != null && ! s.isEmpty())
+        {
+            for(char c : s.toCharArray())
+            {
+                if(!(Character.isDigit(c) || Character.isLetter(c) ))
+                {
                 	jeste=false;
                 	break;
-                	}
+                }
             }
         }
-
         return jeste;
     }
     
-    public static boolean validirajPass(String vrijednost){
+    public static boolean validirajPass(String vrijednost)
+    {
     	if (vrijednost != null && vrijednost.trim().equals( "" ) && vrijednost.length() >= 8 && sadrziCifru(vrijednost) && !alphaNumerickaVrijednost(vrijednost))
-    	{
     		return true;
-    	}
     	else
-    	{
     		return false;
-    	}
     	
     }
     
     public static boolean korisnickoIme(List<String> imena, String ime)
     {
-       if(imena.contains(ime)) return false;
-       else return true;
+       if(imena.contains(ime)) 
+    	   return false;
+       else 
+    	   return true;
     }
     
     public static boolean radnaPozicija(String rpozicija)
     {
-       if(rpozicija=="Menadzer"|| rpozicija=="Administrator"|| rpozicija=="SalterskiRadnik") return true;
-       else return false;
+       if(rpozicija=="Menadzer"|| rpozicija=="Administrator"|| rpozicija=="SalterskiRadnik")
+    	   return true;
+       else
+    	   return false;
     }
     
+    public static boolean validirajKapacitet(String kapacitet)
+    {
+    	if (praznoPolje(kapacitet) == false && jeInt(kapacitet) && Integer.parseInt(kapacitet) > 0 && Integer.parseInt(kapacitet) <= 60)
+    		return true;
+    	else
+    		return false;
+    }
     
+    public static boolean validirajBrojPerona(String broj)
+    {
+    	if (Integer.parseInt(broj) > 0 && Integer.parseInt(broj) < 6)
+    		return true;
+    	else
+    		return false;
+    }
+    
+    public static boolean validirajCijenuKarte(String cijena)
+    {
+    	if (Integer.parseInt(cijena) > 0 && Integer.parseInt(cijena) <= 300)
+    		return true;
+    	else 
+    		return false;
+    }
 }
