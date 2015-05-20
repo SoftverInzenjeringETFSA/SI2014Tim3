@@ -25,10 +25,9 @@ public class Validacija
     	else
     	{
     		return false;
+    		
     	}
 	}
-
-   
     
     public static boolean jeInt(String vrijednost)
     {
