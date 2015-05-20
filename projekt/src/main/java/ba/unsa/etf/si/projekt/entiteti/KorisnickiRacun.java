@@ -2,6 +2,9 @@ package ba.unsa.etf.si.projekt.entiteti;
 
 public class KorisnickiRacun implements java.io.Serializable{
 	long id;
+	String korisnickoIme;
+	String sifra;
+	Radnik radnik;
 	public long getId() {
 		return id;
 	}
@@ -20,35 +23,18 @@ public class KorisnickiRacun implements java.io.Serializable{
 	public void setSifra(String sifra) {
 		this.sifra = sifra;
 	}
-	public String getIme() {
-		return ime;
-	}
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-	public String getPrezime() {
-		return prezime;
-	}
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
-	}
-	public String getJmbg() {
-		return jmbg;
-	}
-	public void setJmbg(String jmbg) {
-		this.jmbg = jmbg;
-	}
 	public TipKorisnickogRacuna getTipKorisnickogRacuna() {
 		return tipKorisnickogRacuna;
 	}
 	public void setTipKorisnickogRacuna(TipKorisnickogRacuna tipKorisnickogRacuna) {
 		this.tipKorisnickogRacuna = tipKorisnickogRacuna;
 	}
-	String korisnickoIme;
-	String sifra;
-	String ime;
-	String prezime;
-	String jmbg;
+	public Radnik getRadnik() {
+		return radnik;
+	}
+	public void setRadnik(Radnik radnik) {
+		this.radnik = radnik;
+	}
 	TipKorisnickogRacuna tipKorisnickogRacuna;
 	
 	public KorisnickiRacun() {}
