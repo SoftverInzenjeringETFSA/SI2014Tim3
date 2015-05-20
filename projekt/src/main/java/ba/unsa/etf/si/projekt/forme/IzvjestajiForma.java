@@ -11,8 +11,10 @@ import javax.swing.UIManager;
 
 import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
+import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import com.toedter.calendar.JDateChooser;
@@ -28,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.swing.SwingConstants;
 
 public class IzvjestajiForma {
 
@@ -36,8 +39,7 @@ public class IzvjestajiForma {
 	private JTextField pocetnoVrijemeMinute;
 	private JTextField krajnjeVrijemeMinute;
 	private JTextField krajnjeVrijemeSati;
-	private JTextField imeVozac;
-	private JTextField prezimeVozac;
+	private JTextField JMBGVozac;
 
 	private String tipKorisnika;
 	/**
@@ -268,7 +270,11 @@ public class IzvjestajiForma {
 					int krajnjeminute=Integer.parseInt(krajnjeVrijemeMinute.getText());
 					
 					
-					linija.IzvjestajOAutobuskimLinijama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2, pocetnisati, pocetneminute, krajnjisati, krajnjeminute);
+					GenerisanjePDF.autobuskeLinijePDF(
+					linija.IzvjestajOAutobuskimLinijama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2, pocetnisati, pocetneminute, krajnjisati, krajnjeminute)
+					, datum1, datum2);
+					
+					
 					JOptionPane.showMessageDialog(generisiLinijeBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
 				}
 				catch(Exception ex1)
@@ -286,23 +292,15 @@ public class IzvjestajiForma {
 		tabbedPane.addTab("Vozači", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		imeVozac = new JTextField();
-		imeVozac.setColumns(10);
-		imeVozac.setBounds(204, 67, 113, 20);
-		panel_2.add(imeVozac);
+		JMBGVozac = new JTextField();
+		JMBGVozac.setColumns(10);
+		JMBGVozac.setBounds(204, 67, 113, 20);
+		panel_2.add(JMBGVozac);
 		
-		JLabel lblImeVozaa = new JLabel("Ime vozača:");
+		JLabel lblImeVozaa = new JLabel("JMBG:");
+		lblImeVozaa.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblImeVozaa.setBounds(135, 70, 59, 14);
 		panel_2.add(lblImeVozaa);
-		
-		prezimeVozac = new JTextField();
-		prezimeVozac.setColumns(10);
-		prezimeVozac.setBounds(204, 113, 113, 20);
-		panel_2.add(prezimeVozac);
-		
-		JLabel lblPrezimeVozaa = new JLabel("Prezime vozača:");
-		lblPrezimeVozaa.setBounds(116, 116, 78, 14);
-		panel_2.add(lblPrezimeVozaa);
 		
 		final JButton generisiVozaciBtn = new JButton("Generiši izvještaj");
 		generisiVozaciBtn.addActionListener(new ActionListener() {
@@ -311,7 +309,10 @@ public class IzvjestajiForma {
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
-					java.util.List radnici=linija.IzvjestajORadnicima(session,imeVozac.getText() , prezimeVozac.getText());
+					Radnik r = HibernateRadnik.nadjiRadnika(session, JMBGVozac.getText());
+					
+					GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
+					
 					JOptionPane.showMessageDialog(generisiVozaciBtn, "Uspješno ste kreirali izvještaj o vozačima.");
 
 				}
