@@ -286,7 +286,7 @@ public class AutobuskeLinijeForma {
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				HibernateAutibuskaLinija novalinija=new HibernateAutibuskaLinija();
 				
-				Autobus autobuslinije=new Autobus();//selektivani autobus
+				Autobus autobuslinije=new Autobus();//selektovani autobus
 				HibernateAutobus autobus1=new HibernateAutobus();
 				autobuslinije=autobus1.nadjiAutobus(session, autobusDodajCombo.getSelectedItem().toString());
 				
@@ -331,6 +331,8 @@ public class AutobuskeLinijeForma {
 				trajanjeDodaj.setText("");
 				jednosmjernaDodaj.setText("");
 				dvosmjernaDodaj.setText("");
+				vrijemeDodaj.setText("");
+				datumDodajDate.setDate(null);
 				
 				}
 				catch(Exception e11)
@@ -397,6 +399,15 @@ public class AutobuskeLinijeForma {
 		distancaModifikujSpinner.setBounds(325, 118, 116, 20);
 		panel_1.add(distancaModifikujSpinner);
 		
+		final JDateChooser polazakModifikujDate = new JDateChooser();
+		polazakModifikujDate.setBounds(98, 243, 116, 20);
+		panel_1.add(polazakModifikujDate);
+		
+		vrijemeModifikuj = new JTextField();
+		vrijemeModifikuj.setColumns(10);
+		vrijemeModifikuj.setBounds(98, 286, 116, 20);
+		panel_1.add(vrijemeModifikuj);
+		
 		final JButton pronadjiModifikujBtn = new JButton("Pronađi");
 		pronadjiModifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //pronadji liniju
@@ -415,10 +426,15 @@ public class AutobuskeLinijeForma {
 					vozacModifikujCombo.setSelectedItem(imevozaca);
 					String aut=lin.getAutobus().getRegistracija();
 					autobusModifikujCombo.setSelectedItem(aut);
-					//datum ludiii
+					Date d=new Date();
+					Calendar cal=Calendar.getInstance();
+					cal.setTime(d);
+					cal.set(lin.getDatumPolaska_godina(), lin.getDatumPolaska_mjesec(), lin.getDatumPolaska_dan());
+					polazakModifikujDate.setDate(d);
 					peronModifikujSpinner.setValue(lin.getPeron());
 					//brojModifikujSpinner.setValue(lin.getBrojLinije());
 					distancaModifikujSpinner.setValue(lin.getDistanca());
+				    vrijemeModifikuj.setText(lin.getVrijemePolaska_sati()+":"+lin.getVrijemePolaska_minute());
 					
 					String t=Double.toString(lin.getTrajanje());
 					trajanjeModifikuj.setText(t);
@@ -471,18 +487,12 @@ public class AutobuskeLinijeForma {
 		
 		
 		
-		final JDateChooser polazakModifikujDate = new JDateChooser();
-		polazakModifikujDate.setBounds(98, 243, 116, 20);
-		panel_1.add(polazakModifikujDate);
 		
 		JLabel label_6 = new JLabel("Datum polaska:");
 		label_6.setBounds(10, 245, 78, 14);
 		panel_1.add(label_6);
 		
-		vrijemeModifikuj = new JTextField();
-		vrijemeModifikuj.setColumns(10);
-		vrijemeModifikuj.setBounds(98, 286, 116, 20);
-		panel_1.add(vrijemeModifikuj);
+		
 		
 		JLabel label_7 = new JLabel("Vrijeme polaska:");
 		label_7.setBounds(10, 289, 78, 14);
@@ -561,11 +571,11 @@ public class AutobuskeLinijeForma {
 				int brojperona=(int)Math.round(per);
 				String distanca=distancaModifikujSpinner.getValue().toString();
 				double distanca1=Double.parseDouble(distanca);
-				int trajanje=Integer.parseInt(trajanjeModifikuj.getText());
-				int brojlinije=Integer.parseInt(brojDodajSpinner.getValue().toString());
+				double trajanje=Double.parseDouble(trajanjeModifikuj.getText());
+				int brojlinije=Integer.parseInt(brojPretragaSpinner.getValue().toString());
 				
-				int jednosmjerna=Integer.parseInt(jednosmjernaModifikuj.getText());
-				int dvosmjerna=Integer.parseInt(dvosmjernaModifikuj.getText());
+				double jednosmjerna=Double.parseDouble(jednosmjernaModifikuj.getText());
+				double dvosmjerna=Double.parseDouble(dvosmjernaModifikuj.getText());
 				
 				boolean medjunarodnaLinija=false;
 				if(medunarodnaModifikuj.isSelected())
@@ -583,6 +593,8 @@ public class AutobuskeLinijeForma {
 				trajanjeModifikuj.setText("");
 				jednosmjernaModifikuj.setText("");
 				dvosmjernaModifikuj.setText("");
+				vrijemeModifikuj.setText("");
+				polazakModifikujDate.setDate(null);
 				
 				}
 				catch(Exception e13)
@@ -667,6 +679,10 @@ public class AutobuskeLinijeForma {
 		dvosmjernaIzbrisi.setBounds(325, 245, 116, 20);
 		panel_2.add(dvosmjernaIzbrisi);
 		
+		final JDateChooser polazakIzbrisiDate = new JDateChooser();
+		polazakIzbrisiDate.setBounds(98, 245, 116, 20);
+		panel_2.add(polazakIzbrisiDate);
+		
 		final JButton pronadjiIzbrisiBtn = new JButton("Pronađi");
 		pronadjiIzbrisiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //brisanje linije
@@ -685,10 +701,14 @@ public class AutobuskeLinijeForma {
 					vozacIzbrisiCombo.setSelectedItem(imevozaca);
 					String aut=linija.getAutobus().getRegistracija();
 					autobusIzbrisiCombo.setSelectedItem(aut);
-					//datum ludiii
+					Date d=new Date();
+					Calendar cal=Calendar.getInstance();
+					cal.setTime(d);
+					cal.set(linija.getDatumPolaska_godina(), linija.getDatumPolaska_mjesec(), linija.getDatumPolaska_dan());
+					polazakIzbrisiDate.setDate(d);
 					peronIzbrisiSpinner.setValue(linija.getPeron());
-					//brojModifikujSpinner.setValue(lin.getBrojLinije());
 					distancaIzbrisiSpinner.setValue(linija.getDistanca());
+					vrijemeIzbrisi.setText(linija.getVrijemePolaska_sati()+":"+linija.getVrijemePolaska_minute());
 					
 					String t=Double.toString(linija.getTrajanje());
 					trajanjeIzbrisi.setText(t);
@@ -784,9 +804,7 @@ public class AutobuskeLinijeForma {
 		label_27.setBounds(10, 247, 78, 14);
 		panel_2.add(label_27);
 		
-		JDateChooser polazakIzbrisiDate = new JDateChooser();
-		polazakIzbrisiDate.setBounds(98, 245, 116, 20);
-		panel_2.add(polazakIzbrisiDate);
+	
 		
 		vrijemeIzbrisi = new JTextField();
 		vrijemeIzbrisi.setColumns(10);
@@ -818,6 +836,8 @@ public class AutobuskeLinijeForma {
 				trajanjeIzbrisi.setText("");
 				jednosmjernaIzbrisi.setText("");
 				dvosmjernaIzbrisi.setText("");
+				vrijemeIzbrisi.setText("");
+				polazakIzbrisiDate.setDate(null);
 				
 				}
 				catch(Exception ex1)

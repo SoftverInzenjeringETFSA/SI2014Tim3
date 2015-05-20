@@ -161,8 +161,9 @@ public class AutobusiForma {
 				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText(), modelDodaj.getText());
 				
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat autobus.");
-				
-				
+				kapacitetDodajSpinner.setValue(0);
+				registracijeDodaj.setText("");
+				modelDodaj.setText("");
 				
 				session.close();
 				}
@@ -186,15 +187,6 @@ public class AutobusiForma {
 		panel_1.add(scrollPane);
 		
 		final JList autobusiModifikujLista = new JList();
-		/*autobusiModifikujLista.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});*/
 		autobusiModifikujLista.setModel(new AbstractListModel(){
 
 			Session session = HibernateUtil.getSessionFactory().openSession();
@@ -269,12 +261,13 @@ public class AutobusiForma {
 					}
 					if(model!=""&& registracije!="" && kapacitet!=0)
 					{
-						//modelModifikuj.setText(model);
-						//registracijeModifikuj.setText(registracije);
-						//kapacitetModifikujSpinner.setValue(kapacitet);
+				
 						int kap=Integer.parseInt(kapacitetModifikujSpinner.getValue().toString());
 						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1);
 						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");
+						kapacitetModifikujSpinner.setValue(0);
+						registracijeModifikuj.setText("");
+						modelModifikuj.setText("");
 					}
 				}
 				catch(Exception ex1)
@@ -328,9 +321,13 @@ public class AutobusiForma {
 					{
 				HibernateAutobus brisanjeautobus=new HibernateAutobus();
 				Session session = HibernateUtil.getSessionFactory().openSession();
-				
 				brisanjeautobus.brisanjeAutobusa(session, registracijeIzbrisi.getText());
 				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno ste izbrisali autobus.");
+				registracijeIzbrisi.setText("");
+				modelIzbrisi.setText("");
+				kapacitetIzbrisi.setValue(0);
+				registracijePretraga.setText("");
+				
 				session.close();
 					}
 					
