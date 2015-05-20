@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
+import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
@@ -30,6 +31,7 @@ import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import javax.swing.SwingConstants;
 
 public class IzvjestajiForma {
@@ -155,15 +157,17 @@ public class IzvjestajiForma {
 					Calendar cal=Calendar.getInstance();
 					cal.setTime(datum1);
 					int godina1=cal.get(Calendar.YEAR);
-					int mjesec1=cal.get(Calendar.MONTH);
+					int mjesec1=cal.get(Calendar.MONTH)+1;
 					int dan1=cal.get(Calendar.DAY_OF_MONTH);
 					Date datum2=krajnjiProdaneDate.getDate();
 					Calendar cal1=Calendar.getInstance();
+					cal1.setTime(datum2);
 					int godina2=cal1.get(Calendar.YEAR);
-					int mjesec2=cal1.get(Calendar.MONTH);
+					int mjesec2=cal1.get(Calendar.MONTH)+1;
 					int dan2=cal1.get(Calendar.DAY_OF_MONTH);
-					GenerisanjePDF.prodaneKartePDF(k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2), 
-							datum1, datum2);
+					
+					List<Karta> karte = k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2);
+					GenerisanjePDF.prodaneKartePDF(karte,datum1,datum2);
 					
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o prodanim kartama.");
 					
@@ -257,23 +261,21 @@ public class IzvjestajiForma {
 					Calendar cal= Calendar.getInstance();
 		            cal.setTime(datum1);
 					int godina1=cal.get(Calendar.YEAR);
-					int mjesec1=cal.get(Calendar.MONTH);
+					int mjesec1=cal.get(Calendar.MONTH)+1;
 					int dan1=cal.get(Calendar.DAY_OF_MONTH);
 					Date datum2=krajnjiLinijeDate.getDate();
 					Calendar cal1=Calendar.getInstance();
+					cal1.setTime(datum2);
 					int godina2=cal1.get(Calendar.YEAR);
-					int mjesec2=cal1.get(Calendar.MONTH);
+					int mjesec2=cal1.get(Calendar.MONTH)+1;
 					int dan2=cal1.get(Calendar.DAY_OF_MONTH);
 					int pocetnisati=Integer.parseInt(pocetnoVrijemeSati.getText());
 					int pocetneminute=Integer.parseInt(pocetnoVrijemeMinute.getText());
 					int krajnjisati=Integer.parseInt(krajnjeVrijemeSati.getText());
 					int krajnjeminute=Integer.parseInt(krajnjeVrijemeMinute.getText());
 					
-					
-					GenerisanjePDF.autobuskeLinijePDF(
-					linija.IzvjestajOAutobuskimLinijama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2, pocetnisati, pocetneminute, krajnjisati, krajnjeminute)
-					, datum1, datum2);
-					
+					List<AutobuskaLinija> l = linija.IzvjestajOAutobuskimLinijama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2, pocetnisati, pocetneminute, krajnjisati, krajnjeminute);
+					GenerisanjePDF.autobuskeLinijePDF(l, datum1, datum2);
 					
 					JOptionPane.showMessageDialog(generisiLinijeBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
 				}

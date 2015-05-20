@@ -50,7 +50,7 @@ public class HibernateKarta {
 		Transaction t = session.beginTransaction();
 		HibernateRadnik radnik=new HibernateRadnik();
 		java.util.List linije;
-		linije=session.createQuery("FROM Karta where datumPolaska_dan>="+pocetnidan+" and datumPolaska_dan<="+krajnjidan+" and datumPolaska_mjesec>="+pocetnimjesec+" and datumPolaska_mjesec<="+krajnjimjesec+"and datumPolaska_dan>="+pocetnidan+" and datumPolaska_dan<="+krajnjidan+"").list();
+		linije=session.createQuery("FROM Karta where datumkupovine_dan>="+pocetnidan+" and datumkupovine_dan<="+krajnjidan+" and datumkupovine_mjesec>="+pocetnimjesec+" and datumkupovine_mjesec<="+krajnjimjesec+"and datumkupovine_godina>="+pocetnagodina+" and datumkupovine_godina<="+krajnjagodina+"").list();
         System.out.println(linije.size());
 		return linije;
 	

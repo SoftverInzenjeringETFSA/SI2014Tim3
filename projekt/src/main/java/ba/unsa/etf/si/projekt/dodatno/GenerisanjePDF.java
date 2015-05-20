@@ -84,9 +84,10 @@ public class GenerisanjePDF {
 		    for (Karta karta : karte){
 		        Calendar cal = Calendar.getInstance();
 		        
-		        cal.set(karta.getDatumPolaska_godina(), karta.getDatumPolaska_mjesec(), karta.getDatumPolaska_dan(),
+		        cal.set(karta.getDatumPolaska_godina(), karta.getDatumPolaska_mjesec()-1, karta.getDatumPolaska_dan(),
 		        		karta.getVrijemePolaska_sati(), karta.getVrijemePolaska_minute());
 		    	Date poc = cal.getTime();
+		    	
 		    	
 		    	if (poc.getTime() < pocetak.getTime() || poc.getTime() > kraj.getTime()) {
 					continue;
