@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
+import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipKorisnickogRacuna;
 
 public class HibernateKorisnickiRacuni {
@@ -30,23 +31,23 @@ public class HibernateKorisnickiRacuni {
 		session.close();
 	}
 	
-	public static void dodajKorisnickiRacun(Session session, String imekorisnika, String prezimekorisnika, String jmbgkorisnika, String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika)
+	public static void dodajKorisnickiRacun(Session session, Radnik radnik, TipKorisnickogRacuna tipracuna, String korisnickoimekorisnika, String passkorisnika)
 	{
 		Transaction t = session.beginTransaction();
 		
 		KorisnickiRacun kr=new KorisnickiRacun();
-		kr.setIme(imekorisnika);
-		kr.setPrezime(prezimekorisnika);
-		kr.setJmbg(jmbgkorisnika);
+		kr.setIme(radnik.getIme());
+		kr.setPrezime(radnik.getPrezime());
+		kr.setJmbg(radnik.getJmbg());
 		kr.setKorisnickoIme(korisnickoimekorisnika);
-		kr.setTipKorisnickogRacuna(tipracunakorisnika);
+		kr.setTipKorisnickogRacuna(tipracuna);
 		kr.setSifra(passkorisnika);
 		
 		Long id=(Long) session.save(kr);
 		t.commit();
 	}
 	
-	public static void modifikujKorisnickiRacun(Session session, String imekorisnika, String starokorisnickoime, String prezimekorisnika,  String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika)
+	public static void modifikujKorisnickiRacun(Session session, String starokorisnickoime, String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika)
 	{
 		Transaction t = session.beginTransaction();
 		
@@ -56,8 +57,6 @@ public class HibernateKorisnickiRacuni {
 		
 		if(kr!=null)
 		{
-		kr.setIme(imekorisnika);
-		kr.setPrezime(prezimekorisnika);
 		kr.setTipKorisnickogRacuna(tipracunakorisnika);
 		kr.setSifra(passkorisnika);
 		kr.setKorisnickoIme(korisnickoimekorisnika);

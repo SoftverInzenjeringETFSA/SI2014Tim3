@@ -2,6 +2,8 @@ package ba.unsa.etf.si.projekt.forme;
 
 import java.awt.EventQueue;
 
+import javassist.expr.NewArray;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -16,16 +18,24 @@ import javax.swing.UIManager;
 
 
 
+
+
+
+
 import org.hibernate.Session;
 
 import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
+import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
+import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipKorisnickogRacuna;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 public class KorisniciForma {
@@ -38,6 +48,8 @@ public class KorisniciForma {
 	private JTextField sifraModifikuj;
 	private JTextField korisnickoIzbrisi;
 	private String tipKorisnika;
+	private JComboBox tipModifikuj;
+	private JComboBox radnikDodajCombo;
 
 	/**
 	 * Launch the application.
@@ -136,10 +148,10 @@ public class KorisniciForma {
 		
 		panel.add(tipDodajCombo);
 		
-		JLabel label_3 = new JLabel("Tip radnog mjesta:");
-		label_3.setHorizontalAlignment(SwingConstants.RIGHT);
-		label_3.setBounds(40, 94, 128, 14);
-		panel.add(label_3);
+		JLabel lblTipKorisnikogRauna = new JLabel("Tip korisničkog računa:");
+		lblTipKorisnikogRauna.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblTipKorisnikogRauna.setBounds(10, 94, 158, 14);
+		panel.add(lblTipKorisnikogRauna);
 		
 		JLabel label_4 = new JLabel("Korisničko ime:");
 		label_4.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -163,7 +175,7 @@ public class KorisniciForma {
 		
 		
 		final JButton dodajBtn = new JButton("Dodaj novog korisnika");
-		/*
+		
 		dodajBtn.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {//dodavanje korisnika
@@ -171,30 +183,31 @@ public class KorisniciForma {
 				try
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
-					HibernateKorisnickiRacuni noviracun=new HibernateKorisnickiRacuni();
+					TipKorisnickogRacuna r = null;
+					
 					if(tipDodajCombo.getSelectedItem().toString()=="administrator")
 					{
-				    TipKorisnickogRacuna r=TipKorisnickogRacuna.administrator;
-					noviracun.dodajKorisnickiRacun(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), korisnickoDodaj.getText(), sifraDodaj.getText(),r);
-					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+				     r=TipKorisnickogRacuna.administrator;
 					}
 					if(tipDodajCombo.getSelectedItem().toString()=="menadzer")
 					{
-				    TipKorisnickogRacuna r=TipKorisnickogRacuna.menadzer;
-					noviracun.dodajKorisnickiRacun(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), korisnickoDodaj.getText(), sifraDodaj.getText(),r);
-					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+				     r=TipKorisnickogRacuna.menadzer;
 					}
 					if(tipDodajCombo.getSelectedItem().toString()=="salterskiRadnik")
 					{
-				    TipKorisnickogRacuna r=TipKorisnickogRacuna.salterskiRadnik;
-					noviracun.dodajKorisnickiRacun(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), korisnickoDodaj.getText(), sifraDodaj.getText(),r);
-					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+				     r=TipKorisnickogRacuna.salterskiRadnik;
 					}
-					imeDodaj.setText("");
-					prezimeDodaj.setText("");
+					
+					HibernateKorisnickiRacuni.dodajKorisnickiRacun(session,(Radnik) radnikDodajCombo.getSelectedItem(),(TipKorisnickogRacuna) tipDodajCombo.getSelectedItem(), korisnickoDodaj.getText(), sifraDodaj.getText());
+					
+					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
+					
+					
+					
+					radnikDodajCombo.setSelectedIndex(0);
 					korisnickoDodaj.setText("");
 					sifraDodaj.setText("");
-					jmbgDodaj.setText("");
+					
 					
 				}
 				catch(Exception e7)
@@ -207,13 +220,14 @@ public class KorisniciForma {
 			}
 		});
 		
-		*/
+		
+		
 		dodajBtn.setBounds(242, 227, 137, 23);
 		panel.add(dodajBtn);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(186, 46, 193, 20);
-		panel.add(comboBox);
+	    radnikDodajCombo = new JComboBox();
+		radnikDodajCombo.setBounds(186, 46, 193, 20);
+		panel.add(radnikDodajCombo);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, panel_1, null);
@@ -229,7 +243,7 @@ public class KorisniciForma {
 		panel_1.add(pronadiModifikuj);
 		
 		final JButton pronadiBtn = new JButton("Pronađi");
-		/*
+		
 		pronadiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //pronalazenje korisnika za modifikovanje
 				try
@@ -240,8 +254,7 @@ public class KorisniciForma {
 					kr=pronadjeniracun.nadjiKorisnickiRacun(session,pronadiModifikuj.getText());
 					if(kr!=null)
 					{
-						imeModifikuj.setText(kr.getIme());
-						prezimeModifikuj.setText(kr.getPrezime());
+						tipModifikuj.setSelectedItem(kr.getTipKorisnickogRacuna());
 						korisnickoModifikuj.setText(kr.getKorisnickoIme());
 						sifraModifikuj.setText(kr.getSifra());
 					}
@@ -259,7 +272,7 @@ public class KorisniciForma {
 				
 			}
 		});
-		*/
+		
 		pronadiBtn.setBounds(308, 29, 89, 23);
 		panel_1.add(pronadiBtn);
 		TipKorisnickogRacuna k4=TipKorisnickogRacuna.administrator;
@@ -267,66 +280,38 @@ public class KorisniciForma {
 		TipKorisnickogRacuna k6=TipKorisnickogRacuna.salterskiRadnik;
 		
 		final JButton modifikujBtn = new JButton("Modifikuj korisnika");
-		/*
-		modifikujBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {  //modifikovanje korisnickih racuna
-				try
-				{
-					Session session = HibernateUtil.getSessionFactory().openSession();
-					HibernateKorisnickiRacuni promjenaracun=new HibernateKorisnickiRacuni();
-					if(tipModifikuj.getSelectedItem().toString()=="administrator")
-					{
-				    TipKorisnickogRacuna r=TipKorisnickogRacuna.administrator;
-				    promjenaracun.modifikujKorisnickiRacun(session, imeModifikuj.getText(),pronadiModifikuj.getText(), prezimeModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(),r);
-					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste dodali korisnički račun.");
-					}
-					if(tipModifikuj.getSelectedItem().toString()=="menadzer")
-					{
-				    TipKorisnickogRacuna r=TipKorisnickogRacuna.menadzer;
-				    promjenaracun.modifikujKorisnickiRacun(session,imeModifikuj.getText(),pronadiModifikuj.getText(), prezimeModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(),r);
-					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste dodali korisnički račun.");
-					}
-					if(tipModifikuj.getSelectedItem().toString()=="salterskiRadnik")
-					{
-				    TipKorisnickogRacuna r=TipKorisnickogRacuna.salterskiRadnik;
-				    promjenaracun.modifikujKorisnickiRacun(session, imeModifikuj.getText(),pronadiModifikuj.getText(), prezimeModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(),r);
-					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste dodali korisnički račun.");
-					}
-					imeModifikuj.setText("");
-					prezimeModifikuj.setText("");
-					korisnickoModifikuj.setText("");
-					sifraModifikuj.setText("");
-					pronadiModifikuj.setText("");
-				}
-				catch(Exception e9)
-				{
-					JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje korisničkih računa.");
-					JOptionPane.showMessageDialog(modifikujBtn, e9);
-				}
-				
-			}
-		});
-		*/
-		modifikujBtn.setBounds(273, 177, 119, 23);
+		
+		
+		
+		modifikujBtn.setBounds(237, 220, 119, 23);
 		panel_1.add(modifikujBtn);
 		
 		korisnickoModifikuj = new JTextField();
 		korisnickoModifikuj.setColumns(10);
-		korisnickoModifikuj.setBounds(163, 85, 193, 20);
+		korisnickoModifikuj.setBounds(163, 128, 193, 20);
 		panel_1.add(korisnickoModifikuj);
 		
 		JLabel label_6 = new JLabel("Korisničko ime:");
-		label_6.setBounds(67, 88, 70, 14);
+		label_6.setBounds(67, 131, 70, 14);
 		panel_1.add(label_6);
 		
 		JLabel label_10 = new JLabel("Šifra:");
-		label_10.setBounds(109, 126, 34, 14);
+		label_10.setBounds(109, 169, 34, 14);
 		panel_1.add(label_10);
 		
 		sifraModifikuj = new JTextField();
 		sifraModifikuj.setColumns(10);
-		sifraModifikuj.setBounds(163, 123, 193, 20);
+		sifraModifikuj.setBounds(163, 166, 193, 20);
 		panel_1.add(sifraModifikuj);
+		
+		tipModifikuj = new JComboBox();
+		tipModifikuj.setBounds(164, 82, 193, 20);
+		panel_1.add(tipModifikuj);
+		
+		JLabel label = new JLabel("Tip korisničkog računa:");
+		label.setHorizontalAlignment(SwingConstants.RIGHT);
+		label.setBounds(-12, 85, 158, 14);
+		panel_1.add(label);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Izbriši", null, panel_2, null);
@@ -363,7 +348,58 @@ public class KorisniciForma {
 		});
 		izbrisiBtn.setBounds(219, 115, 112, 23);
 		panel_2.add(izbrisiBtn);
+		
+	
+	modifikujBtn.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {  //modifikovanje korisnickih racuna
+			try
+			{
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				TipKorisnickogRacuna r = null;
+				if(tipModifikuj.getSelectedItem().toString()=="administrator")
+				{
+			     r=TipKorisnickogRacuna.administrator;
+			    }
+				else if(tipModifikuj.getSelectedItem().toString()=="menadzer")
+				{
+			     r=TipKorisnickogRacuna.menadzer;
+			    }
+				else if(tipModifikuj.getSelectedItem().toString()=="salterskiRadnik")
+				{
+			     r=TipKorisnickogRacuna.salterskiRadnik;
+			   }
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r);
+				JOptionPane.showMessageDialog(modifikujBtn, "Uspješno modifikovanje korisničkog računa.");
+				
+				tipModifikuj.setSelectedIndex(0);
+				korisnickoModifikuj.setText("");
+				sifraModifikuj.setText("");
+				pronadiModifikuj.setText("");
+			}
+			catch(Exception e9)
+			{
+				JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje korisničkih računa.");
+				JOptionPane.showMessageDialog(modifikujBtn, e9);
+			}
+			
+		}
+	});
+	
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		List<Radnik> sviRadnici = HibernateRadnik.sviRadnici(session);
+		for (Radnik radnik : sviRadnici) {
+			radnikDodajCombo.addItem(radnik);
+		}
+		
+		tipModifikuj.addItem(TipKorisnickogRacuna.administrator);
+		tipModifikuj.addItem(TipKorisnickogRacuna.menadzer);
+		tipModifikuj.addItem(TipKorisnickogRacuna.salterskiRadnik);
+	
 	}
+	
+	
 	public void setVisible(boolean visible) {
 		frmKorisnikiRauni.setVisible(visible);
 	}

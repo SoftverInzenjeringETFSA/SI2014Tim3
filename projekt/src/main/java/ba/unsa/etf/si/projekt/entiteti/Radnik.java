@@ -1,5 +1,7 @@
 package ba.unsa.etf.si.projekt.entiteti;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 public class Radnik implements java.io.Serializable {
 
 	    long id;
@@ -54,5 +56,10 @@ public class Radnik implements java.io.Serializable {
 	}
 	
 	public Radnik(){}
+	
+	@Override
+	public String toString(){
+		return jmbg + " " + ime;
+	}
 
 }
