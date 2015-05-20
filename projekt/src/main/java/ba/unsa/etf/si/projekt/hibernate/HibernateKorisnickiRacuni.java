@@ -36,9 +36,7 @@ public class HibernateKorisnickiRacuni {
 		Transaction t = session.beginTransaction();
 		
 		KorisnickiRacun kr=new KorisnickiRacun();
-		kr.setIme(radnik.getIme());
-		kr.setPrezime(radnik.getPrezime());
-		kr.setJmbg(radnik.getJmbg());
+		kr.setRadnik(radnik);
 		kr.setKorisnickoIme(korisnickoimekorisnika);
 		kr.setTipKorisnickogRacuna(tipracuna);
 		kr.setSifra(passkorisnika);
