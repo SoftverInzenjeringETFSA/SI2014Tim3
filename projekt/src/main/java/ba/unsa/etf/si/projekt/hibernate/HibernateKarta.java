@@ -20,7 +20,7 @@ public class HibernateKarta {
 	public static void dodajKartu(Session session, AutobuskaLinija linija, int godina, int mjesec, int dan, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte,  double cijenakarte)
 	{
 		Transaction t = session.beginTransaction();
-		HibernateAutibuskaLinija.ModifikujZauzetostLinije(session, linija.getBrojLinije());
+		linija.setZauzeto(linija.getZauzeto()+1);
 		Karta k=new Karta();
 		k.setLinija(linija);
 		k.setVrijemePolaska_sati(vrijeme_sati);

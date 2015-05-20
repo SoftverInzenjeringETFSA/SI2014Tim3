@@ -28,7 +28,7 @@ public class HibernateRezervacija {
 		AutobuskaLinija trazenaLinija=new AutobuskaLinija();
 		HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 		trazenaLinija=linija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, vrijeme_sati, vrijeme_minute);
-		linija.ModifikujZauzetostLinije(session,trazenaLinija.getBrojLinije());
+		trazenaLinija.setZauzeto(trazenaLinija.getZauzeto()+1);
 		Rezervacija k=new Rezervacija();
 		k.setLinija(trazenaLinija);
 		k.setVrijemePolaska_sati(vrijeme_sati);
@@ -65,7 +65,7 @@ public class HibernateRezervacija {
 	   HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 		AutobuskaLinija trazenaLinija=new AutobuskaLinija();
 		trazenaLinija=linija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, vrijeme_sati, vrijeme_minute);
-		linija.ModifikujZauzetostLinije(session,trazenaLinija.getBrojLinije());
+		trazenaLinija.setZauzeto(trazenaLinija.getZauzeto()+1);
 		r1.setLinija(trazenaLinija);
 		r1.setVrijemePolaska_sati(vrijeme_sati);
 		r1.setVrijemePolaska_minute(vrijeme_minute);
