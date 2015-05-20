@@ -298,10 +298,12 @@ public class AutobuskeLinijeForma {
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(datum);
 				int godina1=cal.get(Calendar.YEAR);
-				int mjesec1=cal.get(Calendar.MONTH);
+				int mjesec1=cal.get(Calendar.MONTH)+1;
 				int dan1=cal.get(Calendar.DAY_OF_MONTH);
-				int sati=datum.getHours();
-				int minute=datum.getMinutes();
+				
+				String[] vrijeme = vrijemeDodaj.getText().split(":");
+				int sati=Integer.valueOf(vrijeme[0]);
+				int minute=Integer.valueOf(vrijeme[1]);
 				
 				String peron=peronDodajSpinner.getValue().toString();
 				int brojperona=Integer.parseInt(peron);
@@ -547,10 +549,12 @@ public class AutobuskeLinijeForma {
 				Calendar cal=Calendar.getInstance();
 				cal.setTime(datum);
 				int godina1=cal.get(Calendar.YEAR);
-				int mjesec1=cal.get(Calendar.MONTH);
+				int mjesec1=cal.get(Calendar.MONTH)+1;
 				int dan1=cal.get(Calendar.DAY_OF_MONTH);
-				int sati=datum.getHours();
-				int minute=datum.getMinutes();
+				String[] vrijeme = vrijemeModifikuj.getText().split(":");
+				int sati=Integer.valueOf(vrijeme[0]);
+				int minute=Integer.valueOf(vrijeme[1]);
+				
 				
 				String peron=peronModifikujSpinner.getValue().toString();
 				double per=Double.parseDouble(peron);
