@@ -316,13 +316,29 @@ public class AutobuskeLinijeForma {
 				int dvosmjerna=Integer.parseInt(dvosmjernaDodaj.getText());
 				
 				boolean medjunarodnaLinija=false;
+				boolean postoji=false;
 				if(medunarodnaDodaj.isSelected())
 				{
 					medjunarodnaLinija=true;
 				}
-				
+			    HibernateAutibuskaLinija svelinije=new HibernateAutibuskaLinija();
+			    java.util.List lista=svelinije.sveLinije(session);
+			    for(int i=0;i<lista.size();i++)
+			    {
+			    	AutobuskaLinija a=new AutobuskaLinija();
+			    	if(a.getBrojLinije()==brojlinije)postoji=true;
+			    }
+			    
+			    if(postoji==false)
+			    {
 				novalinija.dodajAutobuskuLiniju(session, polazisteDodaj.getText(), odredisteDodaj.getText(),autobuslinije , radnik, godina1, mjesec1, dan1, sati, minute, brojperona, distanca1, trajanje, brojlinije, jednosmjerna, dvosmjerna, medjunarodnaLinija);
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodata autobuska linija.");
+			    }
+			    else
+			    {
+			    	JOptionPane.showMessageDialog(dodajBtn, "Već postoji linija sa tim rednim brojem linije.");	
+			    }
+			    
 				polazisteDodaj.setText("");
 				odredisteDodaj.setText("");
 				peronDodajSpinner.setValue(0);

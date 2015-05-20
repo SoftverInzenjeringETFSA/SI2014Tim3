@@ -91,7 +91,7 @@ public class PrijavaForma {
 		frmPrijava.getContentPane().add(lblDobrodoli);
 		
 		
-		JButton prijavaBtn = new JButton("Prijava");
+		final JButton prijavaBtn = new JButton("Prijava");
 		prijavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try
@@ -99,6 +99,8 @@ public class PrijavaForma {
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateKorisnickiRacuni kr=new HibernateKorisnickiRacuni();
 					KorisnickiRacun korisnik=new KorisnickiRacun();
+					if(korisnik!=null)
+					{
 					korisnik=kr.nadjiKorisnickiRacun(session, ime.getText());
 					
 					String imekorisnika=korisnik.getKorisnickoIme();
@@ -124,11 +126,19 @@ public class PrijavaForma {
 					s.setVisible(true);
 					setVisible(false);
 				}
+					JOptionPane.showMessageDialog(prijavaBtn, "Vaša prijava je bila uspješna.");
 				session.close();
+				}
+				
+				else
+				{
+					JOptionPane.showMessageDialog(prijavaBtn, "Unijeli ste pogrešno korisničko ime ili nemate kreiran korisnički račun.");
+				}
 				}
 				catch(Exception ex)
 				{
-					
+					JOptionPane.showMessageDialog(prijavaBtn, "Neuspješna pretraga korisničkih računa.");
+					JOptionPane.showMessageDialog(prijavaBtn, ex);
 				}
 			}
 		});

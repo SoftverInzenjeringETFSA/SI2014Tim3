@@ -156,7 +156,21 @@ public class AutobusiForma {
 				{
 				HibernateAutobus noviautobus=new HibernateAutobus();
 				Session session = HibernateUtil.getSessionFactory().openSession();
+				boolean postoji=false;
 				
+				//provjera postojanja tablica
+				java.util.List listaautobusa=noviautobus.sviAutobusi(session);
+				for(int i=0;i<listaautobusa.size();i++)
+				{
+					Autobus a=(Autobus) listaautobusa.get(i);
+					if(registracijeDodaj.getText().equals(a.getRegistracija()))
+					{
+						postoji=true;
+					}
+				}
+				
+				if(postoji==false)
+				{
 				int dodavanje=Integer.parseInt(kapacitetDodajSpinner.getValue().toString());
 				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText(), modelDodaj.getText());
 				
@@ -166,6 +180,14 @@ public class AutobusiForma {
 				modelDodaj.setText("");
 				
 				session.close();
+				}
+				else 
+				{
+					JOptionPane.showMessageDialog(dodajBtn, "Već postoji autobus, sa brojem registracija koje ste vi unijeli.");
+					kapacitetDodajSpinner.setValue(0);
+					registracijeDodaj.setText("");
+					modelDodaj.setText("");
+				}
 				}
 				
 				catch(Exception e2)
@@ -261,7 +283,7 @@ public class AutobusiForma {
 					}
 					if(model!=""&& registracije!="" && kapacitet!=0)
 					{
-				
+				        
 						int kap=Integer.parseInt(kapacitetModifikujSpinner.getValue().toString());
 						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1);
 						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");

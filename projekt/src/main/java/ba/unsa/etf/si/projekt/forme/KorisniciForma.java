@@ -7,12 +7,14 @@ import javassist.expr.NewArray;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+
 
 
 
@@ -45,7 +47,7 @@ public class KorisniciForma {
 	private JTextField sifraDodaj;
 	private JTextField pronadiModifikuj;
 	private JTextField korisnickoModifikuj;
-	private JTextField sifraModifikuj;
+	private JPasswordField sifraModifikuj;
 	private JTextField korisnickoIzbrisi;
 	private String tipKorisnika;
 	private JComboBox tipModifikuj;
@@ -299,7 +301,7 @@ public class KorisniciForma {
 		label_10.setBounds(109, 169, 34, 14);
 		panel_1.add(label_10);
 		
-		sifraModifikuj = new JTextField();
+		sifraModifikuj = new JPasswordField();
 		sifraModifikuj.setColumns(10);
 		sifraModifikuj.setBounds(163, 166, 193, 20);
 		panel_1.add(sifraModifikuj);

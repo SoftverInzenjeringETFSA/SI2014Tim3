@@ -329,11 +329,11 @@ public class SalterskiRadnikForma implements ActionListener{
 					HibernateRezervacija.dodajRezervaciju(session, linija, godina, mjesec, dan, sati, minute, k, cijena, ime, prezime);
 					
 					cijenaRezervacije.setText(String.valueOf(cijena));
-					JOptionPane.showMessageDialog(prodajaBtn, "Karta je prodata.");
+					JOptionPane.showMessageDialog(prodajaBtn, "Karta je rezervisan.");
 				}
 				catch(Exception ex)
 				{
-					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna prodaja.");
+					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna rezervacija.");
 					JOptionPane.showMessageDialog(prodajaBtn, ex);
 				}
 			}
