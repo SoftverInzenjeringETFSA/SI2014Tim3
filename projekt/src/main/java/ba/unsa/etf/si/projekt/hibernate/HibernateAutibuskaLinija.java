@@ -7,9 +7,11 @@ import org.hibernate.criterion.Restrictions;
 
 
 
+
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
+import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 
 public class HibernateAutibuskaLinija {
 
@@ -19,18 +21,21 @@ public class HibernateAutibuskaLinija {
 		Autobus a = HibernateAutobus.nadjiAutobus(session, "abc-d-efg");
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
 		
-		 dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,25,100,24,2,20,40,true);
+		 //dodajAutobuskuLiniju(session,"Sarajevo","Mostar",a,r,2015,4,17,2,2,25,100,24,2,20,40,true);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
 		
 		
-		java.util.List linije;
+		AutobuskaLinija a1=NadjiAutobuskuLinijuOdrediste(session,"Mostar",2015,4,17,2,2);
+		if(a1!=null)
+		System.out.println(a1.getBrojLinije());
+		/*java.util.List linije;
 		java.util.List linije1=IzvjestajOAutobuskimLinijama(session,2014,3,2,2015,5,18,1,1,13,13);
 		for(int i=0;i<linije1.size();i++)
 		{
 			AutobuskaLinija au=(AutobuskaLinija)linije1.get(i);
 			System.out.println(au.getBrojLinije());
-		}
+		}*/
 		
 		session.close();
 	}
@@ -121,6 +126,29 @@ public class HibernateAutibuskaLinija {
 		
 	}
 	
+	public static void ModifikujZauzetostLinije(Session session, int brojlinije)
+	{
+
+		Criteria k=session.createCriteria(AutobuskaLinija.class);
+		k.add(Restrictions.eq("brojLinije", brojlinije));
+		AutobuskaLinija izmjenjenalinija=(AutobuskaLinija) k.uniqueResult();
+		
+		int broj=izmjenjenalinija.getZauzeto();
+		izmjenjenalinija.setZauzeto(broj+1);
+		session.save(izmjenjenalinija);
+	}
+	
+	public static AutobuskaLinija NadjiAutobuskuLinijuOdrediste(Session session, String odrediste, int godina, int mjesec, int dan, int sati, int minute)
+	{
+		 //Transaction t = session.beginTransaction();
+		 Criteria k=session.createCriteria(AutobuskaLinija.class);
+		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("datumPolaska_godina",godina)).add(Restrictions.eq("datumPolaska_mjesec", mjesec)).add(Restrictions.eq("datumPolaska_dan",dan)).add(Restrictions.eq("vrijemePolaska_sati",sati)).add(Restrictions.eq("vrijemePolaska_minute",minute));
+		AutobuskaLinija kr= (AutobuskaLinija) k.uniqueResult();
+		//t.commit();
+		return kr;
+		
+		
+	}
 	public static java.util.List sveLinije(Session session)
 	{
 		Transaction t = session.beginTransaction();

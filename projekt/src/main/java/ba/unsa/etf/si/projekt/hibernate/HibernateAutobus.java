@@ -65,6 +65,7 @@ public class HibernateAutobus {
 			{
 			a.setKapacitet(kapacitetautobusa);
 			a.setModel(modelautobusa);
+			a.setRegistracija(registracijaautobusa);
 			session.save(a);
 			t.commit();
 			}

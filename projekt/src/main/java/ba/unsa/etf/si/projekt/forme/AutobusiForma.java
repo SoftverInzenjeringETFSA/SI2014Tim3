@@ -185,8 +185,8 @@ public class AutobusiForma {
 		scrollPane.setBounds(10, 47, 238, 245);
 		panel_1.add(scrollPane);
 		
-		JList autobusiModifikujLista = new JList();
-		autobusiModifikujLista.setModel(new AbstractListModel() {
+		final JList autobusiModifikujLista = new JList();
+		/*autobusiModifikujLista.setModel(new AbstractListModel() {
 			String[] values = new String[] {"Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20", "Mercedes xyz A00-A-000 Kapacitet 20"};
 			public int getSize() {
 				return values.length;
@@ -194,6 +194,20 @@ public class AutobusiForma {
 			public Object getElementAt(int index) {
 				return values[index];
 			}
+		});*/
+		autobusiModifikujLista.setModel(new AbstractListModel(){
+
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			HibernateAutobus autobus=new HibernateAutobus();
+			java.util.List autobusi=autobus.sviAutobusi(session);
+			public int getSize() {
+				return autobusi.size();
+			}
+			public Object getElementAt(int index) {
+				Autobus a=(Autobus)autobusi.get(index);
+				return "Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+			}
+			
 		});
 		scrollPane.setViewportView(autobusiModifikujLista);
 		
@@ -211,7 +225,7 @@ public class AutobusiForma {
 		modelModifikuj.setBounds(324, 47, 155, 20);
 		panel_1.add(modelModifikuj);
 		
-		JSpinner kapacitetModifikujSpinner = new JSpinner();
+		final JSpinner kapacitetModifikujSpinner = new JSpinner();
 		kapacitetModifikujSpinner.setBounds(324, 83, 155, 20);
 		panel_1.add(kapacitetModifikujSpinner);
 		
@@ -228,7 +242,48 @@ public class AutobusiForma {
 		registracijeModifikuj.setBounds(324, 116, 155, 20);
 		panel_1.add(registracijeModifikuj);
 		
-		JButton izmijeniBtn = new JButton("Izmijeni");
+		final JButton izmijeniBtn = new JButton("Izmijeni");
+		izmijeniBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) { //izmjena autobusa
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateAutobus autobus=new HibernateAutobus();
+					java.util.List listaautobusa=autobus.sviAutobusi(session);
+					String selektovan=autobusiModifikujLista.getSelectedValue().toString();
+					String model="";
+					String registracije="";
+					int kapacitet=0;
+					Autobus a1=new Autobus();
+					for(int i=0;i<listaautobusa.size();i++)
+					{
+						Autobus a=(Autobus)listaautobusa.get(i);
+						String string="Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+						if(string.equals(selektovan))
+						{
+							model=a.getModel();
+							registracije=a.getRegistracija();
+							kapacitet=a.getKapacitet();
+							a1=a;
+						}
+					}
+					if(model!=""&& registracije!="" && kapacitet!=0)
+					{
+						//modelModifikuj.setText(model);
+						//registracijeModifikuj.setText(registracije);
+						//kapacitetModifikujSpinner.setValue(kapacitet);
+						int kap=Integer.parseInt(kapacitetModifikujSpinner.getValue().toString());
+						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1);
+						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");
+					}
+				}
+				catch(Exception ex1)
+				{
+					JOptionPane.showMessageDialog(izmijeniBtn, "Neuspješno mijenjena podataka o autobusu.");
+					JOptionPane.showMessageDialog(izmijeniBtn, ex1);
+				}
+			}
+		});
 		izmijeniBtn.setBounds(390, 269, 89, 23);
 		panel_1.add(izmijeniBtn);
 		

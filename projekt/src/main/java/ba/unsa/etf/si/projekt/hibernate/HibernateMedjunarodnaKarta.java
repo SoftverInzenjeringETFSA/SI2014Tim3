@@ -27,7 +27,8 @@ public class HibernateMedjunarodnaKarta {
 	public static void dodajMedjunarodnuKartu(Session session, String odrediste, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte, int godina, int mjesec, int dan, double cijenakarte, String imekupca, String prezimekupca )
 	{
         Transaction t = session.beginTransaction();
-		
+        HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
+		//linija.ModifikujZauzetostLinije(session, );
 		MedjunarodnaKarta k=new MedjunarodnaKarta();
 		k.setOdrediste(odrediste);
 		k.setVrijemePolaska_sati(vrijeme_sati);
