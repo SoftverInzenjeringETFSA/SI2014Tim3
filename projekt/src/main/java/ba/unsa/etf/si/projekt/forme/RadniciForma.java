@@ -145,8 +145,7 @@ public class RadniciForma {
 					{
 						TipRadnogMjesta r=TipRadnogMjesta.Administrator;
 						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r);
-						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
-						
+						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");	
 					}
 					
 					else if(tipDodajCombo.getSelectedItem().toString()=="Menadzer")
@@ -168,6 +167,9 @@ public class RadniciForma {
 					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r2);
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
 					}
+					imeDodaj.setText("");
+					prezimeDodaj.setText("");
+					jmbgDodaj.setText("");
 				}
 				catch(Exception e4)
 				{
@@ -252,7 +254,11 @@ public class RadniciForma {
 						TipRadnogMjesta v=TipRadnogMjesta.Vozac;
 						promjenaradnik.modifikujRadnika(session, imeModifikuj.getText(), prezimeModifikuj.getText(), jmbgModifikujPronadji.getText(), v);
 						JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
+						
 					}
+					imeModifikuj.setText("");
+					prezimeModifikuj.setText("");
+					jmbgModifikujPronadji.setText("");
 				}
 				
 				catch(Exception e6)
@@ -394,6 +400,9 @@ public class RadniciForma {
 				HibernateRadnik brisanjeradnik= new HibernateRadnik();
 				brisanjeradnik.brisiRadnika(session, jmbgIzbrisiPronadi.getText());
 				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje.");
+				jmbgIzbrisiPronadi.setText("");
+				imeIzbrisi.setText("");
+				prezimeIzbrisi.setText("");
 				
 			}
 			catch(Exception e7)

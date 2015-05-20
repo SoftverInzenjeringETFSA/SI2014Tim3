@@ -96,21 +96,10 @@ public class NaloziForma {
 				}
 				public Object getElementAt(int index) {
 					AutobuskaLinija a=(AutobuskaLinija)lista.get(index);
-					//return a.getOdrediste()+" "+a.getPolaziste()+" "+a.getBrojLinije()+" "+a.getDatumPolaska_dan()+" "+a.getDatumPolaska_mjesec()+" "+a.getDatumPolaska_godina();
-				return "Odredište:"+a.getOdrediste()+" "+"Polazište:"+a.getPolaziste()+" "+"Broj linije:"+" "+a.getBrojLinije()+"Datum polaska:"+ " "+a.getDatumPolaska_dan()+"."+a.getDatumPolaska_mjesec()+"."+ a.getDatumPolaska_godina();
+				return "Odredište:"+a.getOdrediste()+" "+"Polazište:"+a.getPolaziste()+" "+"Broj linije:"+" "+a.getBrojLinije()+" Datum polaska:"+ " "+a.getDatumPolaska_dan()+"."+a.getDatumPolaska_mjesec()+"."+ a.getDatumPolaska_godina();
 				}
 			});
 			
-		
-		/*linijeList.setModel(new AbstractListModel() {
-			String[] values = new String[] {"Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30", "Sarajevo-Kakanj A00-A-000 Meho Mehic Peron 3 12:30"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});*/
 		scrollPane.setViewportView(linijeList);
 		
 		JButton nazadBtn = new JButton("Nazad");
@@ -179,7 +168,7 @@ public class NaloziForma {
 					for(int i=0;i<listasvihlinija.size();i++)
 					{
 						AutobuskaLinija a=(AutobuskaLinija)listasvihlinija.get(i);
-						String uporedi="Odredište:"+a.getOdrediste()+" "+"Polazište:"+a.getPolaziste()+" "+"Broj linije:"+" "+a.getBrojLinije()+"Datum polaska:"+ " "+a.getDatumPolaska_dan()+"."+a.getDatumPolaska_mjesec()+"."+ a.getDatumPolaska_godina();
+						String uporedi="Odredište:"+a.getOdrediste()+" "+"Polazište:"+a.getPolaziste()+" "+"Broj linije:"+" "+a.getBrojLinije()+" Datum polaska:"+ " "+a.getDatumPolaska_dan()+"."+a.getDatumPolaska_mjesec()+"."+ a.getDatumPolaska_godina();
 					    if(selektovano.equals(uporedi)==true)
 					    	broj=a.getBrojLinije();
 					}
@@ -190,16 +179,19 @@ public class NaloziForma {
 					int godina=cal.get(Calendar.YEAR);
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
 					int mjesec=cal.get(Calendar.MONTH);
-					int sati=d.getHours();
-					int minute=d.getMinutes();
+					String[] nizvremena=vrijeme.getText().split(":");
+					int sati=Integer.valueOf(nizvremena[0]);
+					int minute=Integer.valueOf(nizvremena[1]);
 					n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
 					JOptionPane.showMessageDialog(napraviBtn, "Uspješno ste kreirali nalog.");
+					vrijeme.setText("");
+					datumDate.setDate(null);
 
 				}
 				catch(Exception ec)
 				{
 					JOptionPane.showMessageDialog(napraviBtn, "Neuspješno kreiranje naloga.");
-					JOptionPane.showMessageDialog(napraviBtn, "ec");
+					JOptionPane.showMessageDialog(napraviBtn, ec);
 				}
 			}
 		});

@@ -170,6 +170,8 @@ public class IzvjestajiForma {
 					GenerisanjePDF.prodaneKartePDF(karte,datum1,datum2);
 					
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o prodanim kartama.");
+					pocetniProdaneDate.setDate(null);
+					krajnjiProdaneDate.setDate(null);
 					
 				}
 				catch(Exception ex4)
@@ -278,6 +280,12 @@ public class IzvjestajiForma {
 					GenerisanjePDF.autobuskeLinijePDF(l, datum1, datum2);
 					
 					JOptionPane.showMessageDialog(generisiLinijeBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
+					pocetnoVrijemeSati.setText("");
+					pocetnoVrijemeMinute.setText("");
+					krajnjeVrijemeSati.setText("");
+					krajnjeVrijemeMinute.setText("");
+					krajnjiLinijeDate.setDate(null);
+					pocetniLinijeDate.setDate(null);
 				}
 				catch(Exception ex1)
 				{
@@ -316,6 +324,7 @@ public class IzvjestajiForma {
 					GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
 					
 					JOptionPane.showMessageDialog(generisiVozaciBtn, "Uspješno ste kreirali izvještaj o vozačima.");
+					JMBGVozac.setText("");
 
 				}
 				catch(Exception ex3)

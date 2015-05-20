@@ -46,7 +46,7 @@ public class Nalog implements java.io.Serializable{
 		return vrijemePolaska_sati;
 	}
 
-	public void setVrijemePolaska_sati(double vrijemePolaska_sati) {
+	public void setVrijemePolaska_sati(int vrijemePolaska_sati) {
 		this.vrijemePolaska_sati = vrijemePolaska_sati;
 	}
 
@@ -54,7 +54,7 @@ public class Nalog implements java.io.Serializable{
 		return vrijemePolaska_minute;
 	}
 
-	public void setVrijemePolaska_minute(double vrijemePolaska_minute) {
+	public void setVrijemePolaska_minute(int vrijemePolaska_minute) {
 		this.vrijemePolaska_minute = vrijemePolaska_minute;
 	}
 
@@ -62,8 +62,8 @@ public class Nalog implements java.io.Serializable{
 	int datumPolaska_dan;
 	int datumPolaska_mjesec;
 	int datumPolaska_godina;
-	double vrijemePolaska_sati;
-	double vrijemePolaska_minute;
+	int vrijemePolaska_sati;
+	int vrijemePolaska_minute;
 	
 	public Nalog() {}
 }
