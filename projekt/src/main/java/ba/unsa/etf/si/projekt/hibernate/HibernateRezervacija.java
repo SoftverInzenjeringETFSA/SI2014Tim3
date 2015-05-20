@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
+import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
 import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 
@@ -15,35 +16,9 @@ public class HibernateRezervacija {
 
 	public static void main( String[] args)
 	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		TipKarte k=TipKarte.jednosmjerna;
-		dodajRezervaciju(session,"Mostar",2,2,k,2015,4,17,23.0,"Elma","Brankovic");
-		//Rezervacija r=nadjiRezervaciju(session,"Gradacac","Ilvana","Brankovic");
-		
 		
 	}
-	public static void dodajRezervaciju(Session session, String odrediste, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte, int godina, int mjesec, int dan, double cijenakarte,String ime,String prezime)
-	{
-		Transaction t = session.beginTransaction();
-		AutobuskaLinija trazenaLinija=new AutobuskaLinija();
-		HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
-		trazenaLinija=linija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, vrijeme_sati, vrijeme_minute);
-		trazenaLinija.setZauzeto(trazenaLinija.getZauzeto()+1);
-		Rezervacija k=new Rezervacija();
-		k.setLinija(trazenaLinija);
-		k.setVrijemePolaska_sati(vrijeme_sati);
-		k.setVrijemePolaska_minute(vrijeme_minute);
-		k.setTipKarte(tipkarte);
-		k.setDatumPolaska_godina(godina);
-		k.setDatumPolaska_mjesec(mjesec);
-		k.setDatumPolaska_dan(dan);
-		k.setCijena(cijenakarte);
-		k.setIme(ime);
-		k.setPrezime(prezime);
-		
-		Long id=(Long) session.save(k);
-		t.commit();
-	}
+	
 	
 	public static java.util.List sveRezervacije(Session session)
 	{
@@ -99,6 +74,26 @@ public class HibernateRezervacija {
 		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", Prezime));
 		Rezervacija kr= (Rezervacija) k.uniqueResult();
 		return kr;
+	}
+	public static void dodajRezervaciju(Session session,
+			AutobuskaLinija linija, int godina, int mjesec, int dan, int sati,
+			int minute, TipKarte tip, double cijena, String ime, String prezime) {
+		Transaction t = session.beginTransaction();
+		linija.setZauzeto(linija.getZauzeto()+1);
+		Rezervacija k=new Rezervacija();
+		k.setLinija(linija);
+		k.setVrijemePolaska_sati(sati);
+		k.setVrijemePolaska_minute(minute);
+		k.setTipKarte(tip);
+		k.setDatumPolaska_godina(godina);
+		k.setDatumPolaska_mjesec(mjesec);
+		k.setDatumPolaska_dan(dan);
+		k.setCijena(cijena);
+		k.setIme(ime);
+		k.setPrezime(prezime);
+		
+		Long id=(Long) session.save(k);
+		t.commit();
 	}
 	
 	
