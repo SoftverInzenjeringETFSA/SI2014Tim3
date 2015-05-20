@@ -93,7 +93,7 @@ public class GenerisanjePDF {
 				}
 		    	brojac++;
 		    	
-				t.addCell(karta.getOdrediste());
+				t.addCell(karta.getLinija().getOdrediste());
 				t.addCell(String.valueOf(karta.getVrijemePolaska_sati()) + ":" + String.valueOf(karta.getVrijemePolaska_minute()));
 				t.addCell(String.valueOf(karta.getDatumPolaska_dan())+"."+String.valueOf(karta.getDatumPolaska_mjesec())
 						+"."+String.valueOf(karta.getDatumPolaska_godina()));

@@ -8,14 +8,14 @@
             <column name="ID" />
             <generator class="native" />
         </id>
-        <property name="odrediste" type="java.lang.String">
-            <column name="ODREDISTE" />
-        </property>
+        <many-to-one name="linija" class="ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija" fetch="join">
+            <column name="linija" />
+        </many-to-one>
         <property name="vrijemePolaska_sati" type="int">
-            <column name="VRIJEMEPOLASKA_SATI" />
+            <column name="VRIJEMEKupovine_SATI" />
         </property>
         <property name="vrijemePolaska_minute" type="int">
-            <column name="VRIJEMEPOLASKA_MINUTE" />
+            <column name="VRIJEMEkupovine_MINUTE" />
         </property>
         <property name="tipKarte">
             <column name="TIPKARTE" />
@@ -25,13 +25,13 @@
             </type>
         </property>
         <property name="datumPolaska_dan" type="int">
-            <column name="DATUMPOLASKA_DAN" />
+            <column name="DATUMkupovine_DAN" />
         </property>
         <property name="datumPolaska_mjesec" type="int">
-            <column name="DATUMPOLASKA_MJESEC" />
+            <column name="DATUMkupovine_MJESEC" />
         </property>
         <property name="datumPolaska_godina" type="int">
-            <column name="DATUMPOLASKA_GODINA" />
+            <column name="DATUMkupovine_GODINA" />
         </property>
         <property name="cijena" type="double">
             <column name="CIJENA" />

@@ -1,5 +1,7 @@
 package ba.unsa.etf.si.projekt.entiteti;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+
 public class AutobuskaLinija implements java.io.Serializable{
 	long id;
 	public long getId() {
@@ -165,7 +167,8 @@ public class AutobuskaLinija implements java.io.Serializable{
 	boolean medjunarodna;
 	int zauzeto;
 	
-	
-
-	public AutobuskaLinija () {} 
+	@Override
+	public String toString(){
+		return odrediste;
+	}
 }

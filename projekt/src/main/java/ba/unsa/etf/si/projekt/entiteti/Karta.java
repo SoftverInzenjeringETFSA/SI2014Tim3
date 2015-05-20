@@ -8,12 +8,6 @@ public class Karta implements java.io.Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getOdrediste() {
-		return odrediste;
-	}
-	public void setOdrediste(String odrediste) {
-		this.odrediste = odrediste;
-	}
 	public int getVrijemePolaska_sati() {
 		return vrijemePolaska_sati;
 	}
@@ -56,7 +50,15 @@ public class Karta implements java.io.Serializable{
 	public void setCijena(double cijena) {
 		this.cijena = cijena;
 	}
-	String odrediste;
+
+	public AutobuskaLinija getLinija() {
+		return linija;
+	}
+	public void setLinija(AutobuskaLinija linija) {
+		this.linija = linija;
+	}
+	
+	AutobuskaLinija linija;
 	int vrijemePolaska_sati;
 	int vrijemePolaska_minute;
 	TipKarte tipKarte;
