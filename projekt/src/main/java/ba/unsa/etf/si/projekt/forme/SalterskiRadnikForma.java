@@ -158,15 +158,6 @@ public class SalterskiRadnikForma implements ActionListener{
 		lblTipKarte.setBounds(56, 128, 46, 14);
 		panel.add(lblTipKarte);
 		
-		final JDateChooser datumProdajaDate = new JDateChooser();
-		datumProdajaDate.setDateFormatString("dd/M/yyy");
-		datumProdajaDate.setBounds(112, 189, 142, 20);
-		panel.add(datumProdajaDate);
-		
-		JLabel label = new JLabel("Datum polaska:");
-		label.setBounds(28, 191, 74, 14);
-		panel.add(label);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setName("");
 		panel_1.setToolTipText("");
@@ -212,12 +203,10 @@ public class SalterskiRadnikForma implements ActionListener{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateKarta karta=new HibernateKarta();
 					TipKarte k=TipKarte.jednosmjerna;
-					
-					Date datum1=datumProdajaDate.getDate();
+								
 					Calendar cal=Calendar.getInstance();
-					cal.setTime(datum1);
 					int godina=cal.get(Calendar.YEAR);
-					int mjesec=cal.get(Calendar.MONTH) + 1;
+					int mjesec=cal.get(Calendar.MONTH)+1;
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
 					String[] vrijeme=comboBox_1.getSelectedItem().toString().split(":");
 					int sati=cal.get(Calendar.HOUR);

@@ -167,8 +167,4 @@ public class AutobuskaLinija implements java.io.Serializable{
 	boolean medjunarodna;
 	int zauzeto;
 	
-	@Override
-	public String toString(){
-		return odrediste;
-	}
 }

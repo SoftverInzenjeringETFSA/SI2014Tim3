@@ -141,6 +141,7 @@ public class HibernateAutibuskaLinija {
 	public static AutobuskaLinija NadjiAutobuskuLinijuOdrediste(Session session, String odrediste, int godina, int mjesec, int dan, int sati, int minute)
 	{
 		 //Transaction t = session.beginTransaction();
+		session.flush();
 		 Criteria k=session.createCriteria(AutobuskaLinija.class);
 		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("datumPolaska_godina",godina)).add(Restrictions.eq("datumPolaska_mjesec", mjesec)).add(Restrictions.eq("datumPolaska_dan",dan)).add(Restrictions.eq("vrijemePolaska_sati",sati)).add(Restrictions.eq("vrijemePolaska_minute",minute));
 		AutobuskaLinija kr= (AutobuskaLinija) k.uniqueResult();
