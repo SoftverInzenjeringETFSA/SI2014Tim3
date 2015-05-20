@@ -2,6 +2,7 @@ package ba.unsa.etf.si.projekt.entiteti;
 
 public class Karta implements java.io.Serializable{
 	long id;
+	
 	public long getId() {
 		return id;
 	}
