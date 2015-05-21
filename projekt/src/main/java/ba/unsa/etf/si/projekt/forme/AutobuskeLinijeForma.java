@@ -444,8 +444,10 @@ public class AutobuskeLinijeForma {
 					autobusModifikujCombo.setSelectedItem(aut);
 					Date d=new Date();
 					Calendar cal=Calendar.getInstance();
-					cal.setTime(d);
-					cal.set(lin.getDatumPolaska_godina(), lin.getDatumPolaska_mjesec(), lin.getDatumPolaska_dan());
+					cal.set(Calendar.YEAR,lin.getDatumPolaska_godina());
+					cal.set(Calendar.MONTH, lin.getDatumPolaska_mjesec()-1);
+					cal.set(Calendar.DAY_OF_MONTH,lin.getDatumPolaska_dan());
+					d=cal.getTime();
 					polazakModifikujDate.setDate(d);
 					peronModifikujSpinner.setValue(lin.getPeron());
 					//brojModifikujSpinner.setValue(lin.getBrojLinije());
@@ -719,8 +721,10 @@ public class AutobuskeLinijeForma {
 					autobusIzbrisiCombo.setSelectedItem(aut);
 					Date d=new Date();
 					Calendar cal=Calendar.getInstance();
-					cal.setTime(d);
-					cal.set(linija.getDatumPolaska_godina(), linija.getDatumPolaska_mjesec(), linija.getDatumPolaska_dan());
+					cal.set(Calendar.YEAR,linija.getDatumPolaska_godina());
+					cal.set(Calendar.MONTH,linija.getDatumPolaska_mjesec()-1);
+					cal.set(Calendar.DAY_OF_MONTH,linija.getDatumPolaska_dan());
+					d=cal.getTime();
 					polazakIzbrisiDate.setDate(d);
 					peronIzbrisiSpinner.setValue(linija.getPeron());
 					distancaIzbrisiSpinner.setValue(linija.getDistanca());

@@ -14,7 +14,6 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.UIManager;
-
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -42,6 +41,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.border.LineBorder;
@@ -453,12 +453,15 @@ public class SalterskiRadnikForma implements ActionListener{
 						
 						//datum
 						Date d=new Date();
+						Date d1=new Date();
 						staralinija=r.getLinija();
 						staroime=r.getIme();
 						staroprezime=r.getPrezime();
 						Calendar cal=Calendar.getInstance();
-						cal.setTime(d);
-						cal.set(r.getDatumPolaska_godina(), r.getDatumPolaska_mjesec(), r.getDatumPolaska_dan());
+						cal.set(Calendar.YEAR, r.getDatumPolaska_godina());
+						cal.set(Calendar.MONTH,r.getDatumPolaska_mjesec()-1);
+						cal.set(Calendar.DAY_OF_MONTH,r.getDatumPolaska_dan());
+						d=cal.getTime();
 						datumModifikacijeDate.setDate(d);
 						textField.setText(r.getIme());
 						textField_1.setText(r.getPrezime());
