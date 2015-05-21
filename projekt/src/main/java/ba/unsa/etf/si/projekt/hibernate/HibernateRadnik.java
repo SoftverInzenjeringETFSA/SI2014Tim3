@@ -14,7 +14,9 @@ public class HibernateRadnik {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		TipRadnogMjesta m=TipRadnogMjesta.Vozac;
+		
+		TipRadnogMjesta m=TipRadnogMjesta.Administrator;
+		dodajRadnika(session, "Larisa","Besic","1223493827163", m);
 	//	dodajRadnika(session, "Sumeja","Botulja","1223493827163",m);
 	//	modifikujRadnika(session,"Sumeja1","Botulja1","1223493827163",m);
 		//dodajRadnika(session,"Mirhat","Babic","2412993178514",m);
