@@ -20,7 +20,6 @@ import javax.swing.event.ListSelectionListener;
 
 import ba.unsa.etf.si.projekt.dodatno.Java2sAutoComboBox;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
-import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
 import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
@@ -79,6 +78,9 @@ public class SalterskiRadnikForma implements ActionListener{
 	private JTextField textField;
 	private JTextField textField_1;
 	private JPanel panel_4;
+	private AutobuskaLinija staralinija;
+	private String staroime;
+	private String staroprezime;
 	/**
 	 * Launch the application.
 	 */
@@ -336,7 +338,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					String ime = imeRezervacije.getText();
 					String prezime = prezimeRezervacije.getText();
 					
-					HibernateRezervacija.dodajRezervaciju(session, linija, godina, mjesec, dan, sati, minute, k, cijena, ime, prezime);
+					HibernateRezervacija.dodajRezervaciju(session, linija, godina, mjesec, dan, Integer.valueOf(vrijeme[0]), Integer.valueOf(vrijeme[1]), k, cijena, ime, prezime);
 					
 					cijenaRezervacije.setText(String.valueOf(cijena));
 					JOptionPane.showMessageDialog(prodajaBtn, "Karta je rezervisan.");
@@ -451,6 +453,9 @@ public class SalterskiRadnikForma implements ActionListener{
 						
 						//datum
 						Date d=new Date();
+						staralinija=r.getLinija();
+						staroime=r.getIme();
+						staroprezime=r.getPrezime();
 						Calendar cal=Calendar.getInstance();
 						cal.setTime(d);
 						cal.set(r.getDatumPolaska_godina(), r.getDatumPolaska_mjesec(), r.getDatumPolaska_dan());
@@ -494,23 +499,24 @@ public class SalterskiRadnikForma implements ActionListener{
 					int minute=Integer.valueOf(vrijeme[1]);
 					TipKarte r=TipKarte.dvosmjerna;
 					
-					//datum
 					Date d=new Date();
 					Calendar cal=Calendar.getInstance();
 					cal.setTime(datumModifikacijeDate.getDate());
 					int godina=cal.get(Calendar.YEAR);
-					int mjesec=cal.get(Calendar.MONTH);
-					int dan=cal.get(Calendar.DAY_OF_MONTH)+1;
+					int mjesec=cal.get(Calendar.MONTH)+1;
+					int dan=cal.get(Calendar.DAY_OF_MONTH);
 					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
 					double cijena=linija.getCijenaDvosmjerna();
+					
 					if(jednosmjernaModifikacije.isSelected()==true)
 					{
 					    r=TipKarte.jednosmjerna;
 					    cijena=linija.getCijenaJednosmjerna();
 					}
+					JOptionPane.showMessageDialog(modifikujBtn, cijena);
 					if(linija!=null)
 					{
-					HibernateRezervacija.ModifikujRezervaciju(session, odrediste, sati, minute, r, godina, mjesec, dan,cijena, textField.getText(), textField_1.getText());
+					HibernateRezervacija.ModifikujRezervaciju(session, staralinija, linija, staroime, staroprezime, textField.getText(), textField_1.getText(),cijena,r);
 					JOptionPane.showMessageDialog(modifikujBtn, "Rezervacija je uspješno modifikovana.");
 					}
 					else
@@ -536,12 +542,9 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					String odrediste=comboBox_4.getSelectedItem().toString();
-					JOptionPane.showMessageDialog(obrisiBtn, odrediste);
 					String[] vrijeme=comboBox_5.getSelectedItem().toString().split(":");
 					int sati=Integer.valueOf(vrijeme[0]);
-					JOptionPane.showMessageDialog(obrisiBtn, sati);
 					int minute=Integer.valueOf(vrijeme[1]);
-					JOptionPane.showMessageDialog(obrisiBtn, minute);;
 					TipKarte r=TipKarte.dvosmjerna;
 					
 					//datum
@@ -549,11 +552,8 @@ public class SalterskiRadnikForma implements ActionListener{
 					Calendar cal=Calendar.getInstance();
 					cal.setTime(datumModifikacijeDate.getDate());
 					int godina=cal.get(Calendar.YEAR);
-					JOptionPane.showMessageDialog(obrisiBtn, godina);
 					int mjesec=cal.get(Calendar.MONTH)+1;
-					JOptionPane.showMessageDialog(obrisiBtn, mjesec);
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
-					JOptionPane.showMessageDialog(obrisiBtn, dan);
 					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
 					double cijena=linija.getCijenaDvosmjerna();
 					if(jednosmjernaModifikacije.isSelected()==true)
@@ -561,7 +561,6 @@ public class SalterskiRadnikForma implements ActionListener{
 					    r=TipKarte.jednosmjerna;
 					    cijena=linija.getCijenaJednosmjerna();
 					}
-					JOptionPane.showMessageDialog(obrisiBtn, cijena);
 					if(linija!=null)
 					{
 						HibernateRezervacija.brisanjeRezervacije(session, linija, textField.getText(), textField_1.getText());

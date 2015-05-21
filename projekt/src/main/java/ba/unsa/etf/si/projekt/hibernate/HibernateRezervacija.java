@@ -31,36 +31,36 @@ public class HibernateRezervacija {
 		
 	}
 	//pretraga po odredistu i ime i prezime
-	public static void ModifikujRezervaciju(Session session, String odrediste, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte, int godina, int mjesec, int dan, double cijenakarte,String ime,String prezime)
+	public static void ModifikujRezervaciju(Session session, AutobuskaLinija staralinija,AutobuskaLinija novalinija,String staroime,String staroprezime,String novoime, String novoprezime, double cijena, TipKarte karta)
     {
 		Criteria k=session.createCriteria(Rezervacija.class);
-		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", prezime));
+		k.add(Restrictions.eq("linija",staralinija)).add(Restrictions.eq("ime",staroime)).add(Restrictions.eq("prezime", staroprezime));
 		Rezervacija r1= (Rezervacija) k.uniqueResult();
 		
 	   Transaction t = session.beginTransaction();
-	   HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
-		AutobuskaLinija trazenaLinija=new AutobuskaLinija();
-		trazenaLinija=linija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, vrijeme_sati, vrijeme_minute);
-		if(trazenaLinija!=null)
+		if(novalinija!=null)
 		{
-			if(trazenaLinija.getAutobus().getKapacitet()<=trazenaLinija.getZauzeto())
+			System.out.println(novalinija.getAutobus().getKapacitet());
+            System.out.println(novalinija.getZauzeto());
+			if(novalinija.getAutobus().getKapacitet()>=novalinija.getZauzeto())
 			{
-		trazenaLinija.setZauzeto(trazenaLinija.getZauzeto()+1);
+		     novalinija.setZauzeto(novalinija.getZauzeto()+1);
+		     staralinija.setZauzeto(staralinija.getZauzeto()-1);
 			}
 			else
 			{
 				throw new IllegalArgumentException("Nema više mjesta u busu.");
 			}
-		r1.setLinija(trazenaLinija);
-		r1.setVrijemePolaska_sati(vrijeme_sati);
-		r1.setVrijemePolaska_minute(vrijeme_minute);
-		r1.setTipKarte(tipkarte);
-		r1.setDatumPolaska_godina(godina);
-		r1.setDatumPolaska_mjesec(mjesec);
-		r1.setDatumPolaska_dan(dan);
-		r1.setCijena(cijenakarte);
-		r1.setIme(ime);
-		r1.setPrezime(prezime);
+		r1.setLinija(novalinija);
+	    r1.setCijena(cijena);
+	    r1.setDatumPolaska_dan(novalinija.getDatumPolaska_dan());
+	    r1.setDatumPolaska_godina(novalinija.getDatumPolaska_godina());
+	    r1.setDatumPolaska_mjesec(novalinija.getDatumPolaska_mjesec());
+	    r1.setTipKarte(karta);
+	    r1.setVrijemePolaska_minute(novalinija.getVrijemePolaska_minute());
+	    r1.setVrijemePolaska_sati(novalinija.getVrijemePolaska_sati());
+		r1.setIme(novoime);
+		r1.setPrezime(novoprezime);
 	   
 		session.save(r1);
 	   t.commit();
