@@ -31,7 +31,7 @@ public class HibernateRezervacija {
 		
 	}
 	//pretraga po odredistu i ime i prezime
-	public static void ModifikujRezervaciju(Session session, String odrediste, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte, int godina, int mjesec, int dan, double cijenakarte,String ime,String prezime,Rezervacija r)
+	public static void ModifikujRezervaciju(Session session, String odrediste, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte, int godina, int mjesec, int dan, double cijenakarte,String ime,String prezime)
     {
 		Criteria k=session.createCriteria(Rezervacija.class);
 		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", prezime));
@@ -41,7 +41,16 @@ public class HibernateRezervacija {
 	   HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 		AutobuskaLinija trazenaLinija=new AutobuskaLinija();
 		trazenaLinija=linija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, vrijeme_sati, vrijeme_minute);
+		if(trazenaLinija!=null)
+		{
+			if(trazenaLinija.getAutobus().getKapacitet()<=trazenaLinija.getZauzeto())
+			{
 		trazenaLinija.setZauzeto(trazenaLinija.getZauzeto()+1);
+			}
+			else
+			{
+				throw new IllegalArgumentException("Nema više mjesta u busu.");
+			}
 		r1.setLinija(trazenaLinija);
 		r1.setVrijemePolaska_sati(vrijeme_sati);
 		r1.setVrijemePolaska_minute(vrijeme_minute);
@@ -55,6 +64,11 @@ public class HibernateRezervacija {
 	   
 		session.save(r1);
 	   t.commit();
+		}
+		else
+		{
+			throw new NullPointerException("Ne postoji linija, čije ste parametre unijeli.");
+		}
     }
 	
 	public static void brisanjeRezervacije(Session session, AutobuskaLinija linija, String ime, String prezime)

@@ -20,7 +20,14 @@ public class HibernateKarta {
 	public static void dodajKartu(Session session, AutobuskaLinija linija, int godina, int mjesec, int dan, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte,  double cijenakarte)
 	{
 		Transaction t = session.beginTransaction();
+		if(linija.getAutobus().getKapacitet()<=linija.getZauzeto())
+		{
 		linija.setZauzeto(linija.getZauzeto()+1);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Nema više mjesta u busu.");
+		}
 		Karta k=new Karta();
 		k.setLinija(linija);
 		k.setVrijemePolaska_sati(vrijeme_sati);

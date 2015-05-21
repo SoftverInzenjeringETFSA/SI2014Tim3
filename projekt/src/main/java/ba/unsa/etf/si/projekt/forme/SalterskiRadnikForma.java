@@ -2,6 +2,7 @@ package ba.unsa.etf.si.projekt.forme;
 
 import java.awt.EventQueue;
 
+import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -13,6 +14,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.UIManager;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import ba.unsa.etf.si.projekt.dodatno.Java2sAutoComboBox;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
@@ -46,6 +50,7 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.ButtonGroup;
 
 public class SalterskiRadnikForma implements ActionListener{
@@ -392,7 +397,71 @@ public class SalterskiRadnikForma implements ActionListener{
 		scrollPane.setBounds(23, 149, 270, 212);
 		panel_4.add(scrollPane);
 		
-		JList rezervacijeList = new JList();
+		final JRadioButton jednosmjernaModifikacije = new JRadioButton("Jednosmjerna");
+		jednosmjernaModifikacije.setSelected(true);
+		jednosmjernaModifikacije.setBounds(418, 30, 109, 23);
+		panel_4.add(jednosmjernaModifikacije);
+		
+		final JRadioButton povratnaModifikacije = new JRadioButton("Povratna");
+		povratnaModifikacije.setBounds(418, 57, 109, 23);
+		panel_4.add(povratnaModifikacije);
+		
+		final JDateChooser datumModifikacijeDate = new JDateChooser();
+		datumModifikacijeDate.setDateFormatString("dd/M/yyy");
+		datumModifikacijeDate.setBounds(418, 95, 142, 20);
+		panel_4.add(datumModifikacijeDate);
+		
+		final JList rezervacijeList = new JList();   //popuni listu sa postojecim rezervacijama
+		rezervacijeList.setModel(new AbstractListModel()
+		{
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			java.util.List rezervacijelista=HibernateRezervacija.sveRezervacije(session);
+			public int getSize() {
+				return rezervacijelista.size();
+			}
+			public Object getElementAt(int index) {
+				Rezervacija r=(Rezervacija)rezervacijelista.get(index);
+				return "Autobuska linija: "+r.getLinija().getBrojLinije()+ " Datum polaska: "+r.getDatumPolaska_dan()+"."+r.getDatumPolaska_mjesec()+"."+r.getDatumPolaska_godina()+"."+" Rezervisao: "+r.getIme()+" "+r.getPrezime()+"Tip karte: "+r.getTipKarte();
+			}
+		});
+		
+		rezervacijeList.addListSelectionListener(new ListSelectionListener() //event za selektovani autobus
+		{
+			public void valueChanged(ListSelectionEvent arg0)
+			{
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				java.util.List listarezervacija=HibernateRezervacija.sveRezervacije(session);
+				String selektovan=rezervacijeList.getSelectedValue().toString();
+				for(int i=0;i<listarezervacija.size();i++)
+				{
+					Rezervacija r=(Rezervacija)listarezervacija.get(i);
+					String s="Autobuska linija: "+r.getLinija().getBrojLinije()+ " Datum polaska: "+r.getDatumPolaska_dan()+"."+r.getDatumPolaska_mjesec()+"."+r.getDatumPolaska_godina()+"."+" Rezervisao: "+r.getIme()+" "+r.getPrezime()+"Tip karte: "+r.getTipKarte();
+					if(selektovan.equals(s))
+					{
+						comboBox_4.setSelectedItem(r.getLinija().getOdrediste());
+						comboBox_5.setSelectedItem(r.getVrijemePolaska_sati()+":"+r.getVrijemePolaska_minute());
+						if(r.getTipKarte()==TipKarte.jednosmjerna)
+						{
+						    jednosmjernaModifikacije.setSelected(true);
+						}
+						else
+						{
+							povratnaModifikacije.setSelected(true);
+						}
+						
+						//datum
+						Date d=new Date();
+						Calendar cal=Calendar.getInstance();
+						cal.setTime(d);
+						cal.set(r.getDatumPolaska_godina(), r.getDatumPolaska_mjesec(), r.getDatumPolaska_dan());
+						datumModifikacijeDate.setDate(d);
+						textField.setText(r.getIme());
+						textField_1.setText(r.getPrezime());
+						
+					}
+				}
+			}
+		});
 		scrollPane.setViewportView(rezervacijeList);
 		
 		JLabel label_16 = new JLabel("Rezervacije");
@@ -400,23 +469,13 @@ public class SalterskiRadnikForma implements ActionListener{
 		label_16.setBounds(23, 118, 105, 20);
 		panel_4.add(label_16);
 		
-		JRadioButton jednosmjernaModifikacije = new JRadioButton("Jednosmjerna");
-		jednosmjernaModifikacije.setSelected(true);
-		jednosmjernaModifikacije.setBounds(418, 30, 109, 23);
-		panel_4.add(jednosmjernaModifikacije);
+	
 		
 		JLabel label_17 = new JLabel("Tip karte:");
 		label_17.setBounds(362, 34, 46, 14);
 		panel_4.add(label_17);
 		
-		JRadioButton povratnaModifikacije = new JRadioButton("Povratna");
-		povratnaModifikacije.setBounds(418, 57, 109, 23);
-		panel_4.add(povratnaModifikacije);
 		
-		JDateChooser datumModifikacijeDate = new JDateChooser();
-		datumModifikacijeDate.setDateFormatString("dd/M/yyy");
-		datumModifikacijeDate.setBounds(418, 95, 142, 20);
-		panel_4.add(datumModifikacijeDate);
 		
 		JLabel label_18 = new JLabel("Datum polaska:");
 		label_18.setBounds(334, 97, 74, 14);
@@ -428,11 +487,41 @@ public class SalterskiRadnikForma implements ActionListener{
 			
 				try
 				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					String odrediste=comboBox_4.getSelectedItem().toString();
+					String[] vrijeme=comboBox_5.getSelectedItem().toString().split(":");
+					int sati=Integer.valueOf(vrijeme[0]);
+					int minute=Integer.valueOf(vrijeme[1]);
+					TipKarte r=TipKarte.dvosmjerna;
+					
+					//datum
+					Date d=new Date();
+					Calendar cal=Calendar.getInstance();
+					cal.setTime(datumModifikacijeDate.getDate());
+					int godina=cal.get(Calendar.YEAR);
+					int mjesec=cal.get(Calendar.MONTH);
+					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
+					double cijena=linija.getCijenaDvosmjerna();
+					if(jednosmjernaModifikacije.isSelected()==true)
+					{
+					    r=TipKarte.jednosmjerna;
+					    cijena=linija.getCijenaJednosmjerna();
+					}
+					if(linija!=null)
+					{
+					HibernateRezervacija.ModifikujRezervaciju(session, odrediste, sati, minute, r, godina, mjesec, dan,cijena, textField.getText(), textField_1.getText());
+					JOptionPane.showMessageDialog(rezervisiBtn, "Rezervacija je uspješno modifikovana.");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(rezervisiBtn, "Ne postoji autobuska linija, sa parametrima koje ste unijeli.");
+					}
 					
 				}
 				catch(Exception ex)
 				{
-					JOptionPane.showMessageDialog(rezervisiBtn, "Karta nije rezervisana.");
+					JOptionPane.showMessageDialog(rezervisiBtn,"Neuspješna rezervacija.");
 					JOptionPane.showMessageDialog(rezervisiBtn, ex);
 				}
 			}
