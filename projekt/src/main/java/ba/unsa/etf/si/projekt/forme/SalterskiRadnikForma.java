@@ -374,7 +374,7 @@ public class SalterskiRadnikForma implements ActionListener{
 		
 		
 		
-		comboBox_4 = new Java2sAutoComboBox(odredista);
+		comboBox_4 = new Java2sAutoComboBox(modredista);
 		comboBox_4.setBounds(126, 30, 142, 20);
 		panel_4.add(comboBox_4);
 		comboBox_4.addActionListener(this);
@@ -481,7 +481,7 @@ public class SalterskiRadnikForma implements ActionListener{
 		label_18.setBounds(334, 97, 74, 14);
 		panel_4.add(label_18);
 		
-		JButton modifikujBtn = new JButton("Modifikuj");
+		final JButton modifikujBtn = new JButton("Modifikuj");
 		modifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //modifikovanje rezervacije
 			
@@ -511,18 +511,18 @@ public class SalterskiRadnikForma implements ActionListener{
 					if(linija!=null)
 					{
 					HibernateRezervacija.ModifikujRezervaciju(session, odrediste, sati, minute, r, godina, mjesec, dan,cijena, textField.getText(), textField_1.getText());
-					JOptionPane.showMessageDialog(rezervisiBtn, "Rezervacija je uspješno modifikovana.");
+					JOptionPane.showMessageDialog(modifikujBtn, "Rezervacija je uspješno modifikovana.");
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(rezervisiBtn, "Ne postoji autobuska linija, sa parametrima koje ste unijeli.");
+						JOptionPane.showMessageDialog(modifikujBtn, "Ne postoji autobuska linija, sa parametrima koje ste unijeli.");
 					}
 					
 				}
 				catch(Exception ex)
 				{
-					JOptionPane.showMessageDialog(rezervisiBtn,"Neuspješna rezervacija.");
-					JOptionPane.showMessageDialog(rezervisiBtn, ex);
+					JOptionPane.showMessageDialog(modifikujBtn,"Neuspješna rezervacija.");
+					JOptionPane.showMessageDialog(modifikujBtn, ex);
 				}
 			}
 		});
@@ -532,8 +532,44 @@ public class SalterskiRadnikForma implements ActionListener{
 		final JButton obrisiBtn = new JButton("Obriši");
 		obrisiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //brisanje rezervacije
-				
+				try
+				{
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					String odrediste=comboBox_4.getSelectedItem().toString();
+					String[] vrijeme=comboBox_5.getSelectedItem().toString().split(":");
+					int sati=Integer.valueOf(vrijeme[0]);
+					int minute=Integer.valueOf(vrijeme[1]);
+					TipKarte r=TipKarte.dvosmjerna;
 					
+					//datum
+					Date d=new Date();
+					Calendar cal=Calendar.getInstance();
+					cal.setTime(datumModifikacijeDate.getDate());
+					int godina=cal.get(Calendar.YEAR);
+					int mjesec=cal.get(Calendar.MONTH);
+					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
+					double cijena=linija.getCijenaDvosmjerna();
+					if(jednosmjernaModifikacije.isSelected()==true)
+					{
+					    r=TipKarte.jednosmjerna;
+					    cijena=linija.getCijenaJednosmjerna();
+					}
+					if(linija!=null)
+					{
+						HibernateRezervacija.brisanjeRezervacije(session, linija, textField.getText(), textField_1.getText());
+						JOptionPane.showMessageDialog(obrisiBtn, "Uspješno brisanje");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(obrisiBtn, "Ne postoji linija.");
+					}
+				}
+					catch(Exception ex)
+					{
+						JOptionPane.showMessageDialog(obrisiBtn,"Neuspješno brisanje.");
+						JOptionPane.showMessageDialog(obrisiBtn, ex);
+					}
 				}
 			
 		});
