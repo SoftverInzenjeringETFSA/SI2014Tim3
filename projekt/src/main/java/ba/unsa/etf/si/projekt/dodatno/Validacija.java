@@ -53,7 +53,7 @@ public class Validacija
         return sadrzi;
     }
     
-    public static boolean alphaNumerickaVrijednost(String s)
+    public static boolean alfaNumerickaVrijednost(String s)
     {  
         boolean jeste = true;
         if(s != null && ! s.isEmpty())
@@ -72,14 +72,14 @@ public class Validacija
     
     public static boolean validirajPass(String vrijednost)
     {
-    	if (vrijednost != null && vrijednost.trim().equals( "" ) && vrijednost.length() >= 8 && sadrziCifru(vrijednost) && !alphaNumerickaVrijednost(vrijednost))
+    	if (vrijednost != null && vrijednost.trim().equals( "" ) && vrijednost.length() >= 8 && sadrziCifru(vrijednost) && !alfaNumerickaVrijednost(vrijednost))
     		return true;
     	else
     		return false;
     	
     }
     
-    public static boolean korisnickoIme(List<String> imena, String ime)
+    public static boolean validirajKorisnickoIme(List<String> imena, String ime)
     {
        if(imena.contains(ime)) 
     	   return false;
@@ -117,5 +117,29 @@ public class Validacija
     		return true;
     	else 
     		return false;
+    }
+    
+    public static boolean validirajMjesto(String mjesto, String kapacitet)
+    {
+    	if (Integer.parseInt(mjesto) <= Integer.parseInt(kapacitet)  && Integer.parseInt(mjesto) > 0)
+    		return true;
+    	else 
+    		return false;
+    }
+    
+    public static boolean validirajBrojAutobusa(List<String> autobusi, String autobus)
+    {
+       if(autobusi.contains(autobus)) 
+    	   return false;
+       else 
+    	   return true;
+    }
+    
+    public static boolean validirajBrojLinije(List<String> linije, String linija)
+    {
+       if(linije.contains(linija)) 
+    	   return false;
+       else 
+    	   return true;
     }
 }
