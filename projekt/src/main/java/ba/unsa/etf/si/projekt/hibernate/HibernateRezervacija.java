@@ -1,5 +1,7 @@
 package ba.unsa.etf.si.projekt.hibernate;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
@@ -92,6 +94,8 @@ public class HibernateRezervacija {
 		Long id=(Long) session.save(k);
 		t.commit();
 	}
+
+	
 	
 	
 }

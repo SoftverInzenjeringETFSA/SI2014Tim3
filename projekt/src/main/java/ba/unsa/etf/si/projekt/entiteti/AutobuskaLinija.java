@@ -132,6 +132,10 @@ public class AutobuskaLinija implements java.io.Serializable{
 		this.medjunarodna = medjunarodna;
 	}
 	
+	public boolean getMedjunarodna() {
+		return medjunarodna;
+	}
+	
 	
 	public Radnik getVozac() {
 		return vozac;

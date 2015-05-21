@@ -17,6 +17,7 @@ import javax.swing.UIManager;
 import ba.unsa.etf.si.projekt.dodatno.Java2sAutoComboBox;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
+import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
@@ -52,10 +53,6 @@ public class SalterskiRadnikForma implements ActionListener{
 	private JFrame frmalterskiRadnik;
 	private JTextField imeProdaja;
 	private JTextField prezimeProdaja;
-	private JTextField odredisteModifikacija;
-	private JTextField vrijemeModifikacija;
-	private JTextField imeModifikacije;
-	private JTextField prezimeModifikacije;
 	private JComboBox comboBox;
 	private JComboBox comboBox_1;
 	private JPanel panel;
@@ -66,12 +63,17 @@ public class SalterskiRadnikForma implements ActionListener{
 	private JDateChooser datumRezervacijaDate;
 	private JRadioButton jednosmjernaRezervacije;
 	private JButton btnIsplati;
+	private JComboBox comboBox_4;
+	private JComboBox comboBox_5;
 	/**
 	 * @wbp.nonvisual location=322,309
 	 */
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField imeRezervacije;
 	private JTextField prezimeRezervacije;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JPanel panel_4;
 	/**
 	 * Launch the application.
 	 */
@@ -106,7 +108,7 @@ public class SalterskiRadnikForma implements ActionListener{
 	private void initialize() {
 		frmalterskiRadnik = new JFrame();
 		frmalterskiRadnik.setTitle("Šalterski radnik");
-		frmalterskiRadnik.setBounds(100, 100, 629, 495);
+		frmalterskiRadnik.setBounds(100, 100, 629, 497);
 		frmalterskiRadnik.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmalterskiRadnik.getContentPane().setLayout(null);
 		
@@ -122,7 +124,7 @@ public class SalterskiRadnikForma implements ActionListener{
 		frmalterskiRadnik.getContentPane().add(button);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 45, 593, 400);
+		tabbedPane.setBounds(10, 45, 593, 402);
 		frmalterskiRadnik.getContentPane().add(tabbedPane);
 		
 		panel = new JPanel();
@@ -190,7 +192,7 @@ public class SalterskiRadnikForma implements ActionListener{
 		panel_1.setName("");
 		panel_1.setToolTipText("");
 		panel_1.setBorder(BorderFactory.createTitledBorder("Međunarodni saobraćaj"));
-		panel_1.setBounds(311, 27, 238, 143);
+		panel_1.setBounds(310, 27, 239, 143);
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -256,7 +258,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					
 					
 					
-					if (ime.isEmpty() && prezime.isEmpty()) {
+					if (ime.isEmpty() && prezime.isEmpty() && !linija.getMedjunarodna()) {
 						karta.dodajKartu(session, linija, godina, mjesec, dan, sati, minute, k, cijena);
 					} else if(!ime.isEmpty() && !prezime.isEmpty()){
 						HibernateMedjunarodnaKarta.dodajKartu(session, linija, godina, mjesec, dan, sati, minute, k, cijena, ime, prezime);
@@ -274,7 +276,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				}
 			}
 		});
-		prodajaBtn.setBounds(415, 314, 134, 33);
+		prodajaBtn.setBounds(415, 302, 134, 33);
 		panel.add(prodajaBtn);
 		
 		panel_2 = new JPanel();
@@ -291,11 +293,11 @@ public class SalterskiRadnikForma implements ActionListener{
 		
 		datumRezervacijaDate = new JDateChooser();
 		datumRezervacijaDate.setDateFormatString("dd/M/yyy");
-		datumRezervacijaDate.setBounds(117, 237, 142, 20);
+		datumRezervacijaDate.setBounds(117, 234, 142, 20);
 		panel_2.add(datumRezervacijaDate);
 		
 		JLabel label_8 = new JLabel("Datum polaska:");
-		label_8.setBounds(33, 239, 74, 14);
+		label_8.setBounds(34, 238, 74, 14);
 		panel_2.add(label_8);
 		
 		final JButton rezervisiBtn = new JButton("Rezerviši");
@@ -341,7 +343,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				}
 			}
 		});
-		rezervisiBtn.setBounds(420, 313, 134, 33);
+		rezervisiBtn.setBounds(420, 301, 134, 33);
 		panel_2.add(rezervisiBtn);
 		
 		List<AutobuskaLinija> mlinije = (List<AutobuskaLinija>)HibernateAutibuskaLinija.sveLinije(session);
@@ -361,27 +363,22 @@ public class SalterskiRadnikForma implements ActionListener{
 		comboBox_3 = new Java2sAutoComboBox(new ArrayList<AutobuskaLinija>());
 		panel_2.add(comboBox_3);
 		
-		JPanel panel_4 = new JPanel();
+		panel_4 = new JPanel();
 		tabbedPane.addTab("Modifikacija i brisanje", null, panel_4, null);
 		panel_4.setLayout(null);
 		
-		odredisteModifikacija = new JTextField();
-		odredisteModifikacija.setColumns(10);
-		odredisteModifikacija.setBounds(126, 30, 117, 20);
-		panel_4.add(odredisteModifikacija);
 		
-		vrijemeModifikacija = new JTextField();
-		vrijemeModifikacija.setColumns(10);
-		vrijemeModifikacija.setBounds(126, 77, 117, 20);
-		panel_4.add(vrijemeModifikacija);
 		
-		JComboBox comboBox_4 = new JComboBox();
-		comboBox_4.setBounds(240, 77, 28, 20);
+		comboBox_4 = new Java2sAutoComboBox(odredista);
+		comboBox_4.setBounds(126, 30, 142, 20);
 		panel_4.add(comboBox_4);
+		comboBox_4.addActionListener(this);
 		
-		JComboBox comboBox_5 = new JComboBox();
-		comboBox_5.setBounds(240, 30, 28, 20);
+		comboBox_5 = new Java2sAutoComboBox(new ArrayList<String>());
+		comboBox_5.setBounds(126, 77, 142, 20);
 		panel_4.add(comboBox_5);
+		comboBox_5.addActionListener(this);
+		
 		
 		JLabel label_14 = new JLabel("Odredište:");
 		label_14.setBounds(65, 33, 51, 14);
@@ -425,30 +422,6 @@ public class SalterskiRadnikForma implements ActionListener{
 		label_18.setBounds(334, 97, 74, 14);
 		panel_4.add(label_18);
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setLayout(null);
-		panel_5.setBorder(BorderFactory.createTitledBorder("Međunarodni saobraćaj"));
-		panel_5.setBounds(334, 149, 238, 143);
-		panel_4.add(panel_5);
-		
-		JLabel label_20 = new JLabel("Ime:");
-		label_20.setBounds(23, 49, 22, 14);
-		panel_5.add(label_20);
-		
-		imeModifikacije = new JTextField();
-		imeModifikacije.setColumns(10);
-		imeModifikacije.setBounds(62, 46, 160, 20);
-		panel_5.add(imeModifikacije);
-		
-		prezimeModifikacije = new JTextField();
-		prezimeModifikacije.setColumns(10);
-		prezimeModifikacije.setBounds(62, 93, 160, 20);
-		panel_5.add(prezimeModifikacije);
-		
-		JLabel label_21 = new JLabel("Prezime:");
-		label_21.setBounds(6, 96, 46, 14);
-		panel_5.add(label_21);
-		
 		JButton modifikujBtn = new JButton("Modifikuj");
 		modifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //modifikovanje rezervacije
@@ -478,8 +451,27 @@ public class SalterskiRadnikForma implements ActionListener{
 		obrisiBtn.setBounds(334, 327, 98, 34);
 		panel_4.add(obrisiBtn);
 		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(400, 149, 160, 20);
+		panel_4.add(textField);
+		
+		JLabel label = new JLabel("Ime:");
+		label.setBounds(361, 152, 22, 14);
+		panel_4.add(label);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(400, 196, 160, 20);
+		panel_4.add(textField_1);
+		
+		JLabel label_3 = new JLabel("Prezime:");
+		label_3.setBounds(344, 199, 46, 14);
+		panel_4.add(label_3);
+		
 		popuniVrijeme();
 		popuniVrijeme1();
+		popuniVrijeme2();
 	}
 	
 	public void setVisible(boolean visible) {
@@ -491,9 +483,35 @@ public class SalterskiRadnikForma implements ActionListener{
 			popuniVrijeme();
 		} else if(e.getSource().equals(comboBox_2)){
 			popuniVrijeme1();
+		} else if(e.getSource().equals(comboBox_4)){
+			popuniVrijeme2();
+		} else if (e.getSource().equals(comboBox_5)) {
+			popuniListuRezervacija();
 		}
-		
-		
+	}
+	
+	private void popuniListuRezervacija() {
+	
+	}
+
+	private void popuniVrijeme2() {
+		List<String> vremena = new ArrayList<String>();
+    	Session session = HibernateUtil.getSessionFactory().openSession();
+        for (AutobuskaLinija autobuskaLinija : (List<AutobuskaLinija>) HibernateAutibuskaLinija.sveLinije(session)) {
+			if (autobuskaLinija.getOdrediste().equals(comboBox_4.getSelectedItem())) {
+				if (!vremena.contains(autobuskaLinija.getVrijemePolaska_sati()+":"+autobuskaLinija.getVrijemePolaska_minute())) {
+					vremena.add(autobuskaLinija.getVrijemePolaska_sati()+":"+autobuskaLinija.getVrijemePolaska_minute());
+				}
+			}
+		}
+        panel_4.remove(comboBox_5);
+        comboBox_5 = new Java2sAutoComboBox(vremena);
+        comboBox_5.setBounds(126, 77, 142, 20);
+        
+        panel_4.add(comboBox_5);
+        panel_4.revalidate();
+        panel_4.repaint();
+        
 	}
 	
 	private void popuniVrijeme1() {
@@ -513,10 +531,11 @@ public class SalterskiRadnikForma implements ActionListener{
         
         panel_2.add(comboBox_3);
         
+        
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
         panel_1.setBorder(new TitledBorder(null, "Tip karte", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panel_1.setBounds(97, 128, 169, 90);
+        panel_1.setBounds(97, 124, 169, 83);
         panel_2.add(panel_1);
         
         jednosmjernaRezervacije = new JRadioButton("Jednosmjerna");
@@ -536,12 +555,12 @@ public class SalterskiRadnikForma implements ActionListener{
         
         JLabel label = new JLabel("Cijena(KM):");
         label.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        label.setBounds(33, 297, 151, 41);
+        label.setBounds(34, 279, 151, 41);
         panel_2.add(label);
         
         cijenaRezervacije = new JLabel("30");
         cijenaRezervacije.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        cijenaRezervacije.setBounds(209, 301, 104, 33);
+        cijenaRezervacije.setBounds(211, 283, 104, 33);
         panel_2.add(cijenaRezervacije);
         
         imeRezervacije = new JTextField();
@@ -581,6 +600,8 @@ public class SalterskiRadnikForma implements ActionListener{
         		String ime = imeRezervacije.getText();
         		String prezime = prezimeRezervacije.getText();
         		
+        		linija.setZauzeto(linija.getZauzeto()-1);
+        		
         		HibernateRezervacija.brisanjeRezervacije(session, linija, ime, prezime);
         		
         		TipKarte k = TipKarte.jednosmjerna;
@@ -595,10 +616,10 @@ public class SalterskiRadnikForma implements ActionListener{
 				}		
 				
 				
-				if (ime.isEmpty() && prezime.isEmpty()) {
-					HibernateKarta.dodajKartu(session, linija, godina, mjesec, dan, sati, minute, k, cijena);
+				if (!linija.getMedjunarodna()) {
+					HibernateKarta.dodajKartu(session, linija, godina, mjesec, dan, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), k, cijena);
 				} else if(!ime.isEmpty() && !prezime.isEmpty()){
-					HibernateMedjunarodnaKarta.dodajKartu(session, linija, godina, mjesec, dan, sati, minute, k, cijena, ime, prezime);
+					HibernateMedjunarodnaKarta.dodajKartu(session, linija, godina, mjesec, dan, cal.get(Calendar.HOUR), cal.get(Calendar.MINUTE), k, cijena, ime, prezime);
 				}
 				
 				cijenaRezervacije.setText(String.valueOf(cijena));
