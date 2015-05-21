@@ -19,7 +19,6 @@ public class HibernateRezervacija {
 		
 	}
 	
-	
 	public static java.util.List sveRezervacije(Session session)
 	{
 		Transaction t = session.beginTransaction();
@@ -56,14 +55,12 @@ public class HibernateRezervacija {
 	   t.commit();
     }
 	
-	public static void brisanjeRezervacije(Session session, String odrediste, String ime, String prezime)
+	public static void brisanjeRezervacije(Session session, AutobuskaLinija linija, String ime, String prezime)
 	{
 		Transaction t = session.beginTransaction();
-		 
 		Criteria k=session.createCriteria(Rezervacija.class);
-		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", prezime));
+		k.add(Restrictions.eq("linija",linija.getId())).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", prezime));
 		Rezervacija kr= (Rezervacija) k.uniqueResult();
-		
 		session.delete(k);
 		t.commit();
 	}
