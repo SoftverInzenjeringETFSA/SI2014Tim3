@@ -142,4 +142,30 @@ public class Validacija
        else 
     	   return true;
     }
+    
+    public static boolean validirajTablice(String tablice)
+    {
+    	char prvi = tablice.charAt(0);
+    	char drugi = tablice.charAt(1);
+    	char treci = tablice.charAt(2);
+    	char cetvrti = tablice.charAt(3);
+    	char peti = tablice.charAt(4);
+    	char sesti = tablice.charAt(5);
+    	char sedmi = tablice.charAt(6);
+    	char osmi = tablice.charAt(7);
+    	char deveti = tablice.charAt(8);
+    	if(jeSlovoTablica(prvi) == true && Character.isDigit(drugi) && Character.isDigit(treci) && cetvrti == '-' && jeSlovoTablica(peti) == true && sesti == '-' && Character.isDigit(sedmi) && Character.isDigit(osmi) && Character.isDigit(deveti))
+    		return true;
+    	else 
+    	    return false;
+    }
+    
+    public static boolean jeSlovoTablica(char c)
+    {
+    	if (c == 'A' || c == 'E' || c == 'J' || c == 'K' || c == 'M' || c == 'O' || c == 'T')
+    		return true;
+    	else
+    		return false;
+    }
+    
 }
