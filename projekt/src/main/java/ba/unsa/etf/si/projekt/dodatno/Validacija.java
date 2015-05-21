@@ -6,8 +6,8 @@ public class Validacija
 {
 	public static void main( String[] args)
 	{
-		String proba = "O11-T-985";
-		if (validirajTablice(proba))
+		String proba = "12:12";
+		if (validirajVrijeme(proba))
 			System.out.println("OK");
 		else
 			System.out.println("NOK");
@@ -186,6 +186,21 @@ public class Validacija
     			return false;
     	}
     	return false;
+    }
+    
+    public static boolean validirajVrijeme(String vrijednost)
+    {
+    	if (vrijednost.length() != 5)
+    		return false;
+    	char prvi = vrijednost.charAt(0);
+    	char drugi = vrijednost.charAt(1);
+    	char treci = vrijednost.charAt(2);
+    	char cetvrti = vrijednost.charAt(3);
+    	char peti = vrijednost.charAt(4);
+    	if(Character.isDigit(prvi) && Character.isDigit(drugi) && treci == ':' && Character.isDigit(cetvrti) && Character.isDigit(peti))
+    		return true;
+    	else 
+    	    return false;
     }
     
 }
