@@ -26,7 +26,7 @@ public class HibernateAutibuskaLinija {
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
 		
 		 dodajAutobuskuLiniju(session,"Saudin","Sarajevo",a,r,2015,4,17,2,2,25,100,20,10,20,40,true);
-		modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
+		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
 		
 		

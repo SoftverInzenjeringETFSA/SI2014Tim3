@@ -22,7 +22,7 @@ public class HibernateAutobus {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		dodajAutobus(session, 0,"abc-d-efg","adw");
+		dodajAutobus(session, 10,"A23-M-424","dasdsa");
 	    //brisanjeAutobusa(session,"abc-d-efg");
 		//modifikujAutobus(session,"eee-e-eee","audi",242);
 		//Autobus a=nadjiAutobus(session, "eee-e-eed");
@@ -41,6 +41,8 @@ public class HibernateAutobus {
 		Transaction t = session.beginTransaction();
 		int kap=0;
 		int mod=0;
+		int tablice=0;
+		Validacija v = new Validacija();
 		String string="";
 		if(kapacitetautobusa==0)
 		{
@@ -50,10 +52,14 @@ public class HibernateAutobus {
 		if(modelautobusa=="")
 		{
 			mod=1;
-			string+="Model je prazan";
+			string+=" Model je prazan";
+		}
+		if(!v.validirajTablice(registracijaautobusa)){
+			tablice=1;
+			string+=" Neispravna registarska tablica primjer ispravne A23-M-424";
 		}
 		Autobus a=new Autobus();
-		if(kap==0 && mod==0)//dodati za tablice neki regex u javi 
+		if(kap==0 && mod==0 && tablice==0)
 		{
 		a.setKapacitet(kapacitetautobusa);
 		a.setModel(modelautobusa);
@@ -71,8 +77,27 @@ public class HibernateAutobus {
 	public static void modifikujAutobus(Session session, String registracijaautobusa, String modelautobusa, int kapacitetautobusa, Autobus stari)
 	{
 		Transaction t = session.beginTransaction();
+		int kap=0;
+		int mod=0;
+		int tablice=0;
+		Validacija v = new Validacija();
+		String string="";
+		if(kapacitetautobusa==0)
+		{
+			kap=1;
+			string+="Kapacitet je 0. ";
+		}
+		if(modelautobusa=="")
+		{
+			mod=1;
+			string+=" Model je prazan";
+		}
+		if(!v.validirajTablice(registracijaautobusa)){
+			tablice=1;
+			string+=" Neispravna registarska tablica primjer ispravne A23-M-424";
+		}
 		
-		if(modelautobusa!="" && kapacitetautobusa!=0)//dodati za tablice neki regex u javi
+		if(kap==0 && mod==0 && tablice==0)
 		{
 			Criteria k=session.createCriteria(Autobus.class);
 			k.add(Restrictions.eq("registracija", stari.getRegistracija()));
@@ -84,11 +109,11 @@ public class HibernateAutobus {
 			a.setModel(modelautobusa);
 			a.setRegistracija(registracijaautobusa);
 			session.save(a);
-			t.commit();
-			}
+			t.commit();}}
+		else
+		{
+			throw new IllegalArgumentException(string);
 		}
-		else 
-			throw new IllegalArgumentException("Morate unijeti kapacitet i model autobusa.");
 		
 	}
 	
@@ -109,16 +134,16 @@ public class HibernateAutobus {
 	}
 	
 	public static void brisanjeAutobusa(Session session,String registracijaautobusa)
-	{
+	{	Validacija v = new Validacija();
 		Transaction t = session.beginTransaction();
-		if(registracijaautobusa!="")
+		if(registracijaautobusa!="" && v.validirajTablice(registracijaautobusa))
 		{
 		String s="delete from Autobus where registracija=:registracija";
 		session.createQuery(s).setString("registracija", registracijaautobusa).executeUpdate();
          t.commit();
 		}
 		else 
-			throw new IllegalArgumentException("Morate unijeti kapacitet i model autobusa.");
+			throw new IllegalArgumentException("Neispravne registarske tablice");
 	}
 	
 	public static java.util.List sviAutobusi(Session session)
