@@ -36,20 +36,21 @@ public class HibernateMedjunarodnaKarta {
 		MedjunarodnaKarta k=new MedjunarodnaKarta();
 		Validacija v = new Validacija();
 		int c = 0, i = 0, p = 0;
+		String izuzetak = "";
 		if (v.validirajCijenuKarte(cijena) == false || v.praznoPolje(String.valueOf(cijena)))
 		{
 			c = 1;
-			throw new IllegalArgumentException("Cijena mora biti pozitivan cijeli broj manji od 300 i ne smije biti prazno polje!");
+			izuzetak += "Cijena mora biti pozitivan cijeli broj manji od 300 i ne smije biti prazno polje!";
 		}
 		if (v.jeTekst(ime) == false || v.praznoPolje(ime))
 		{
 			i = 1;
-			throw new IllegalArgumentException("Ime mora biti tekst i ne smije biti prazno polje!");
+			izuzetak += "Ime mora biti tekst i ne smije biti prazno polje!";
 		}
 		if (v.jeTekst(prezime) == false || v.praznoPolje(prezime))
 		{
 			p = 1;
-			throw new IllegalArgumentException("Prezime mora biti tekst i ne smije biti prazno polje!");
+			izuzetak += "Prezime mora biti tekst i ne smije biti prazno polje!";
 		}
 		if (c == 0 && i == 0 && p == 0)
 		{	
@@ -66,6 +67,10 @@ public class HibernateMedjunarodnaKarta {
 			
 			Long id=(Long) session.save(k);
 			t.commit();
+		}
+		else
+		{
+			throw new IllegalArgumentException(izuzetak);
 		}
 	}
 

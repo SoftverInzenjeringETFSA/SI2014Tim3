@@ -36,20 +36,21 @@ public class HibernateRadnik {
 		Transaction t = session.beginTransaction();
 		Validacija v = new Validacija();
 		int i = 0, p = 0, j = 0;
+		String izuzetak = "";
 		if (v.validirajJMBG(JMBGradnika) == false || v.praznoPolje(JMBGradnika))
 		{
 			j = 1;
-			throw new IllegalArgumentException("JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!");
+			izuzetak += "JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!";
 		}
 		if (v.jeTekst(imeradnika) == false || v.praznoPolje(imeradnika))
 		{
 			i = 1;
-			throw new IllegalArgumentException("Ime radnika mora biti tekst i ne smije biti prazno polje!");
+			izuzetak += "Ime radnika mora biti tekst i ne smije biti prazno polje!";
 		}
 		if (v.jeTekst(prezimeradnika) == false || v.praznoPolje(prezimeradnika))
 		{
 			p = 1;
-			throw new IllegalArgumentException("Prezime radnika mora biti tekst i ne smije biti prazno polje!");
+			izuzetak += "Prezime radnika mora biti tekst i ne smije biti prazno polje!";
 		}
 		if (i == 0 && j == 0 && p == 0)
 		{
@@ -62,6 +63,10 @@ public class HibernateRadnik {
 			Long id=(Long) session.save(r);
 			t.commit();
 		}
+		else
+		{
+			throw new IllegalArgumentException(izuzetak);
+		}
 	}
 	
 	public static void modifikujRadnika(Session session, String imeradnika, String prezimeradnika, String JMBGRadnika, TipRadnogMjesta tipradnogmjestaradnika)
@@ -69,6 +74,7 @@ public class HibernateRadnik {
 		Transaction t = session.beginTransaction();
 		Validacija v = new Validacija();
 		int i = 0, p = 0;
+		String izuzetak = "";
 		Criteria k=session.createCriteria(Radnik.class);
 		k.add(Restrictions.eq("jmbg", JMBGRadnika));
 		Radnik r=(Radnik) k.uniqueResult();
@@ -76,12 +82,12 @@ public class HibernateRadnik {
 		if (v.jeTekst(imeradnika) == false || v.praznoPolje(imeradnika))
 		{
 			i = 1;
-			throw new IllegalArgumentException("Ime radnika mora biti tekst i ne smije biti prazno polje!");
+			izuzetak += "Ime radnika mora biti tekst i ne smije biti prazno polje!";
 		}
 		if (v.jeTekst(prezimeradnika) == false || v.praznoPolje(prezimeradnika))
 		{
 			p = 1;
-			throw new IllegalArgumentException("Prezime radnika mora biti tekst i ne smije biti prazno polje!");
+			izuzetak += "Prezime radnika mora biti tekst i ne smije biti prazno polje!";
 		}
 		if (i == 0 && p == 0)
 		{
@@ -91,6 +97,10 @@ public class HibernateRadnik {
 			session.save(r);
 			t.commit();
 		}
+		else
+		{
+			throw new IllegalArgumentException(izuzetak);
+		}	
 	}
 	
 	public static void brisiRadnika(Session session, String JMBGRadnika)
