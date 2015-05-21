@@ -59,9 +59,9 @@ public class HibernateRezervacija {
 	{
 		Transaction t = session.beginTransaction();
 		Criteria k=session.createCriteria(Rezervacija.class);
-		k.add(Restrictions.eq("linija",linija.getId())).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", prezime));
+		k.add(Restrictions.eq("linija",linija)).add(Restrictions.eq("ime",ime)).add(Restrictions.eq("prezime", prezime));
 		Rezervacija kr= (Rezervacija) k.uniqueResult();
-		session.delete(k);
+		session.delete(kr);
 		t.commit();
 	}
 	
