@@ -17,6 +17,8 @@ import javax.swing.UIManager;
 import java.awt.Font;
 
 import javax.swing.AbstractListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.hibernate.Session;
 
@@ -197,12 +199,17 @@ public class AutobusiForma {
 				}
 			}
 		});
+		
 		dodajBtn.setBounds(265, 200, 89, 23);
 		panel.add(dodajBtn);
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Modifikuj", null, panel_1, null);
 		panel_1.setLayout(null);
+		
+		final JSpinner kapacitetModifikujSpinner = new JSpinner();
+		kapacitetModifikujSpinner.setBounds(324, 83, 155, 20);
+		panel_1.add(kapacitetModifikujSpinner);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 47, 238, 245);
@@ -223,6 +230,32 @@ public class AutobusiForma {
 			}
 			
 		});
+		
+		autobusiModifikujLista.addListSelectionListener(new ListSelectionListener() //event za selektovani autobusa 
+		{
+			public void valueChanged(ListSelectionEvent arg0)
+			{
+				HibernateAutobus autobus=new HibernateAutobus();
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				java.util.List autobusi=autobus.sviAutobusi(session);
+				String selektovan=autobusiModifikujLista.getSelectedValue().toString();
+				
+				for(int i=0;i<autobusi.size();i++)
+				{
+					Autobus a=(Autobus) autobusi.get(i);
+					String string="Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+					if(selektovan.equals(string))
+					{
+						registracijeModifikuj.setText(a.getRegistracija());
+						modelModifikuj.setText(a.getModel());
+						Object kap=(Integer)a.getKapacitet();
+						kapacitetModifikujSpinner.setValue(kap);
+					}
+				}
+			}
+			
+		
+		});
 		scrollPane.setViewportView(autobusiModifikujLista);
 		
 		JLabel lblAutobusi = new JLabel("Autobusi:");
@@ -238,11 +271,7 @@ public class AutobusiForma {
 		modelModifikuj.setColumns(10);
 		modelModifikuj.setBounds(324, 47, 155, 20);
 		panel_1.add(modelModifikuj);
-		
-		final JSpinner kapacitetModifikujSpinner = new JSpinner();
-		kapacitetModifikujSpinner.setBounds(324, 83, 155, 20);
-		panel_1.add(kapacitetModifikujSpinner);
-		
+				
 		JLabel label_1 = new JLabel("Kapacitet:");
 		label_1.setBounds(265, 86, 49, 14);
 		panel_1.add(label_1);
@@ -268,6 +297,7 @@ public class AutobusiForma {
 					String model="";
 					String registracije="";
 					int kapacitet=0;
+					boolean postoji=false;
 					Autobus a1=new Autobus();
 					for(int i=0;i<listaautobusa.size();i++)
 					{
@@ -283,10 +313,22 @@ public class AutobusiForma {
 					}
 					if(model!=""&& registracije!="" && kapacitet!=0)
 					{
-				        
+				        for(int i=0;i<listaautobusa.size();i++)
+				        {
+				        	Autobus a=(Autobus)listaautobusa.get(i);
+				        	if(a.getRegistracija().equals(registracijeModifikuj.getText())&& registracijeModifikuj.getText().equals(registracije)==false)
+				        		postoji=true;
+				        }
 						int kap=Integer.parseInt(kapacitetModifikujSpinner.getValue().toString());
+						if(postoji==false)
+						{
 						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1);
 						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(izmijeniBtn, "Ponovo unesite registracije.");
+						}
 						kapacitetModifikujSpinner.setValue(0);
 						registracijeModifikuj.setText("");
 						modelModifikuj.setText("");
@@ -297,6 +339,7 @@ public class AutobusiForma {
 					JOptionPane.showMessageDialog(izmijeniBtn, "Neuspješno mijenjena podataka o autobusu.");
 					JOptionPane.showMessageDialog(izmijeniBtn, ex1);
 				}
+				//autobusiModifikujLista.clearSelection();
 			}
 		});
 		izmijeniBtn.setBounds(390, 269, 89, 23);
