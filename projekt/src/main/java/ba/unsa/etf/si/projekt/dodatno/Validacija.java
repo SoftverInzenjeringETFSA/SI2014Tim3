@@ -176,4 +176,16 @@ public class Validacija
     		return false;
     }
     
+    public static boolean jeTekst(String vrijednost)
+    {
+    	for (int i = 0; i < vrijednost.length(); i++)
+    	{
+    		if (Character.isLetter(vrijednost.charAt(i)))
+    			return true;
+    		else
+    			return false;
+    	}
+    	return false;
+    }
+    
 }
