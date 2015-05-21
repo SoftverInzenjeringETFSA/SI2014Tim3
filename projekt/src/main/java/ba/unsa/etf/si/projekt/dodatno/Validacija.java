@@ -4,6 +4,15 @@ import java.util.List;
 
 public class Validacija 
 {
+	public static void main( String[] args)
+	{
+		String proba = "O11-T-985";
+		if (validirajTablice(proba))
+			System.out.println("OK");
+		else
+			System.out.println("NOK");
+	}
+	
     public static boolean praznoPolje(String vrijednost)
 	{
     	if (vrijednost == null || vrijednost.trim().equals( "" ))
@@ -16,23 +25,20 @@ public class Validacija
 	{
     	if (praznoPolje(vrijednost) == false && jeInt(vrijednost) == true && vrijednost.length() == 13)
     		return true;
-    	else
-    		return false;
+        else
+        	return false;
 	}
     
     public static boolean jeInt(String vrijednost)
     {
-        try 
-        { 
-            Integer.parseInt(vrijednost); 
-        } catch(NumberFormatException e) 
-        { 
-            return false; 
-        } catch(NullPointerException e) 
-        {
-            return false;
-        }
-        return true;
+    	for (int i = 0; i < vrijednost.length(); i++)
+    	{
+    		if (Character.isDigit(vrijednost.charAt(i)))
+    			return true;
+    		else
+    			return false;
+    	}
+    	return false;
     }
     
     public static boolean sadrziCifru(String s)
@@ -72,7 +78,7 @@ public class Validacija
     
     public static boolean validirajPass(String vrijednost)
     {
-    	if (vrijednost != null && vrijednost.trim().equals( "" ) && vrijednost.length() >= 8 && sadrziCifru(vrijednost) && !alfaNumerickaVrijednost(vrijednost))
+    	if (praznoPolje(vrijednost) == false && vrijednost.length() >= 8 && sadrziCifru(vrijednost) && !alfaNumerickaVrijednost(vrijednost))
     		return true;
     	else
     		return false;
@@ -145,6 +151,8 @@ public class Validacija
     
     public static boolean validirajTablice(String tablice)
     {
+    	if (tablice.length() != 9)
+    		return false;
     	char prvi = tablice.charAt(0);
     	char drugi = tablice.charAt(1);
     	char treci = tablice.charAt(2);
