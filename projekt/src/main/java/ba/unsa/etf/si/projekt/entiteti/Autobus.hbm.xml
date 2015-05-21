@@ -6,7 +6,7 @@
     <class name="ba.unsa.etf.si.projekt.entiteti.Autobus" table="AUTOBUS">
         <id name="id" type="long">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="native" />
         </id>
         <property name="model" type="java.lang.String">
             <column name="MODEL" />
