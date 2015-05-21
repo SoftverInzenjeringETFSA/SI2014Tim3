@@ -140,32 +140,68 @@ public class RadniciForma {
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateRadnik noviradnik= new HibernateRadnik();
+					boolean postoji=false;
+					java.util.List radnici=noviradnik.sviRadnici(session);
+					for(int i=0;i<radnici.size();i++)
+					{
+						Radnik r=(Radnik)radnici.get(i);
+						if(r.getJmbg().equals(jmbgDodaj.getText()))
+							postoji=true;
+					}
 					
 					if(tipDodajCombo.getSelectedItem().toString()=="Administrator")
 					{
 						TipRadnogMjesta r=TipRadnogMjesta.Administrator;
+						if(postoji==false)
+						{	
 						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r);
 						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");	
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");	
+						}
 					}
 					
 					else if(tipDodajCombo.getSelectedItem().toString()=="Menadzer")
 					{
 					TipRadnogMjesta r1=TipRadnogMjesta.Menadzer;
+					if(postoji==false)
+					{
 					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");
+					}
 					}
 					
 					else if (tipDodajCombo.getSelectedItem().toString()=="Vozac") {
 						TipRadnogMjesta r1 = TipRadnogMjesta.Vozac;
+						if(postoji==false)
+						{
 						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
 						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik");
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");
+						}
 					}
 					
 					else
 					{
 					TipRadnogMjesta r2=TipRadnogMjesta.SalterskiRadnik;
+					if(postoji==false)
+					{
 					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r2);
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					}
+					else 
+					{
+						JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");
+					}
 					}
 					imeDodaj.setText("");
 					prezimeDodaj.setText("");

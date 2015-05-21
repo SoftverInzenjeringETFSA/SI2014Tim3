@@ -44,7 +44,7 @@ public class KorisniciForma {
 
 	private JFrame frmKorisnikiRauni;
 	private JTextField korisnickoDodaj;
-	private JTextField sifraDodaj;
+	private JPasswordField sifraDodaj;
 	private JTextField pronadiModifikuj;
 	private JTextField korisnickoModifikuj;
 	private JPasswordField sifraModifikuj;
@@ -165,7 +165,7 @@ public class KorisniciForma {
 		korisnickoDodaj.setBounds(186, 133, 193, 20);
 		panel.add(korisnickoDodaj);
 		
-		sifraDodaj = new JTextField();
+		sifraDodaj = new JPasswordField();
 		sifraDodaj.setColumns(10);
 		sifraDodaj.setBounds(186, 171, 193, 20);
 		panel.add(sifraDodaj);
@@ -186,6 +186,7 @@ public class KorisniciForma {
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					TipKorisnickogRacuna r = null;
+					boolean postoji=false;
 					
 					if(tipDodajCombo.getSelectedItem().toString()=="administrator")
 					{
@@ -200,17 +201,30 @@ public class KorisniciForma {
 				     r=TipKorisnickogRacuna.salterskiRadnik;
 					}
 					
+					java.util.List racuni=HibernateKorisnickiRacuni.sviRacuni(session);
+					for(int i=0;i<racuni.size();i++)
+					{
+						KorisnickiRacun k=(KorisnickiRacun)racuni.get(i);
+						if(korisnickoDodaj.getText().equals(k.getKorisnickoIme())) 
+							postoji=true;
+						
+					}
+					
+					if(postoji==false)
+					{
 					HibernateKorisnickiRacuni.dodajKorisnickiRacun(session,(Radnik) radnikDodajCombo.getSelectedItem(),(TipKorisnickogRacuna) tipDodajCombo.getSelectedItem(), korisnickoDodaj.getText(), sifraDodaj.getText());
 					
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno ste dodali korisnički račun.");
-					
-					
+					}
+					else 
+					{
+						JOptionPane.showMessageDialog(dodajBtn, "Morate unijeti drugo korisničko ime.");
+					}
 					
 					radnikDodajCombo.setSelectedIndex(0);
 					korisnickoDodaj.setText("");
 					sifraDodaj.setText("");
-					
-					
+						
 				}
 				catch(Exception e7)
 				{
@@ -359,6 +373,15 @@ public class KorisniciForma {
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				
 				TipKorisnickogRacuna r = null;
+				java.util.List sviracuni=HibernateKorisnickiRacuni.sviRacuni(session);
+				boolean postoji=false;
+				for(int i=0;i<sviracuni.size();i++)
+				{
+					KorisnickiRacun ra=(KorisnickiRacun)sviracuni.get(i);
+					if(ra.getKorisnickoIme().equals(korisnickoModifikuj.getText()) && ra.getKorisnickoIme().equals(pronadiModifikuj.getText())==false)
+						postoji=true;
+						
+				}
 				if(tipModifikuj.getSelectedItem().toString()=="administrator")
 				{
 			     r=TipKorisnickogRacuna.administrator;
@@ -371,10 +394,17 @@ public class KorisniciForma {
 				{
 			     r=TipKorisnickogRacuna.salterskiRadnik;
 			   }
-				
+				if(postoji==false)
+				{
 				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r);
 				JOptionPane.showMessageDialog(modifikujBtn, "Uspješno modifikovanje korisničkog računa.");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(modifikujBtn, "Korisničko ime već postoji.");
+				}
 				
+
 				tipModifikuj.setSelectedIndex(0);
 				korisnickoModifikuj.setText("");
 				sifraModifikuj.setText("");
