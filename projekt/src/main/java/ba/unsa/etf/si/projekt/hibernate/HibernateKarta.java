@@ -10,6 +10,7 @@ import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
+import ba.unsa.etf.si.projekt.dodatno.Validacija;
 
 public class HibernateKarta {
 	
@@ -20,6 +21,7 @@ public class HibernateKarta {
 	public static void dodajKartu(Session session, AutobuskaLinija linija, int godina, int mjesec, int dan, int vrijeme_sati, int vrijeme_minute, TipKarte tipkarte,  double cijenakarte)
 	{
 		Transaction t = session.beginTransaction();
+		Validacija v = new Validacija();
 		if(linija.getAutobus().getKapacitet()>=linija.getZauzeto())
 		{
 		linija.setZauzeto(linija.getZauzeto()+1);
@@ -28,18 +30,23 @@ public class HibernateKarta {
 		{
 			throw new IllegalArgumentException("Nema više mjesta u busu.");
 		}
-		Karta k=new Karta();
-		k.setLinija(linija);
-		k.setVrijemePolaska_sati(vrijeme_sati);
-		k.setVrijemePolaska_minute(vrijeme_minute);
-		k.setTipKarte(tipkarte);
-		k.setDatumPolaska_godina(godina);
-		k.setDatumPolaska_mjesec(mjesec);
-		k.setDatumPolaska_dan(dan);
-		k.setCijena(cijenakarte);
-		
-		Long id=(Long) session.save(k);
-		t.commit();
+		if (v.validirajCijenuKarte(cijenakarte) == false)
+			throw new IllegalArgumentException("Cijena karte mora biti pozitivan broj manji od 300");
+		else
+		{
+			Karta k=new Karta();
+			k.setLinija(linija);
+			k.setVrijemePolaska_sati(vrijeme_sati);
+			k.setVrijemePolaska_minute(vrijeme_minute);
+			k.setTipKarte(tipkarte);
+			k.setDatumPolaska_godina(godina);
+			k.setDatumPolaska_mjesec(mjesec);
+			k.setDatumPolaska_dan(dan);
+			k.setCijena(cijenakarte);
+			
+			Long id=(Long) session.save(k);
+			t.commit();
+		}
 	}
 	
 	public static java.util.List sveKarte(Session session)
