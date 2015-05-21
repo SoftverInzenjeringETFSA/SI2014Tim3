@@ -117,9 +117,9 @@ public class Validacija
     		return false;
     }
     
-    public static boolean validirajCijenuKarte(String cijena)
+    public static boolean validirajCijenuKarte(double cijena)
     {
-    	if (Integer.parseInt(cijena) > 0 && Integer.parseInt(cijena) <= 300)
+    	if (cijena > 0 && cijena <= 300)
     		return true;
     	else 
     		return false;
