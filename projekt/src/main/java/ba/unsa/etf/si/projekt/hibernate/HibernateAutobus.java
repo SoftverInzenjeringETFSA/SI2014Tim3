@@ -13,6 +13,8 @@ import org.hibernate.criterion.Restrictions;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 
+import ba.unsa.etf.si.projekt.dodatno.Validacija;
+
 public class HibernateAutobus {
 	
 	
@@ -20,7 +22,7 @@ public class HibernateAutobus {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		dodajAutobus(session, 32,"abc-d-efg","BMW");
+		dodajAutobus(session, 0,"abc-d-efg","adw");
 	    //brisanjeAutobusa(session,"abc-d-efg");
 		//modifikujAutobus(session,"eee-e-eee","audi",242);
 		//Autobus a=nadjiAutobus(session, "eee-e-eed");
@@ -37,9 +39,21 @@ public class HibernateAutobus {
 	public static void dodajAutobus(Session session,int kapacitetautobusa, String registracijaautobusa, String modelautobusa)
 	{
 		Transaction t = session.beginTransaction();
-		
+		int kap=0;
+		int mod=0;
+		String string="";
+		if(kapacitetautobusa==0)
+		{
+			kap=1;
+			string+="Kapacitet je 0. ";
+		}
+		if(modelautobusa=="")
+		{
+			mod=1;
+			string+="Model je prazan";
+		}
 		Autobus a=new Autobus();
-		if(kapacitetautobusa!=0 && modelautobusa!="")//dodati za tablice neki regex u javi 
+		if(kap==0 && mod==0)//dodati za tablice neki regex u javi 
 		{
 		a.setKapacitet(kapacitetautobusa);
 		a.setModel(modelautobusa);
@@ -48,8 +62,11 @@ public class HibernateAutobus {
 		Long id=(Long) session.save(a);
 		t.commit();
 		}
-		else 
-			throw new IllegalArgumentException("Morate unijeti kapacitet i model autobusa.");
+		else
+		{
+			throw new IllegalArgumentException(string);
+		}
+		
 	}
 	public static void modifikujAutobus(Session session, String registracijaautobusa, String modelautobusa, int kapacitetautobusa, Autobus stari)
 	{
