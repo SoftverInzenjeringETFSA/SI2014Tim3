@@ -500,7 +500,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					cal.setTime(datumModifikacijeDate.getDate());
 					int godina=cal.get(Calendar.YEAR);
 					int mjesec=cal.get(Calendar.MONTH);
-					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					int dan=cal.get(Calendar.DAY_OF_MONTH)+1;
 					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
 					double cijena=linija.getCijenaDvosmjerna();
 					if(jednosmjernaModifikacije.isSelected()==true)
@@ -521,7 +521,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				}
 				catch(Exception ex)
 				{
-					JOptionPane.showMessageDialog(modifikujBtn,"Neuspješna rezervacija.");
+					JOptionPane.showMessageDialog(modifikujBtn,"Neuspješno modifikovanje.");
 					JOptionPane.showMessageDialog(modifikujBtn, ex);
 				}
 			}
@@ -536,9 +536,12 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					String odrediste=comboBox_4.getSelectedItem().toString();
+					JOptionPane.showMessageDialog(obrisiBtn, odrediste);
 					String[] vrijeme=comboBox_5.getSelectedItem().toString().split(":");
 					int sati=Integer.valueOf(vrijeme[0]);
+					JOptionPane.showMessageDialog(obrisiBtn, sati);
 					int minute=Integer.valueOf(vrijeme[1]);
+					JOptionPane.showMessageDialog(obrisiBtn, minute);;
 					TipKarte r=TipKarte.dvosmjerna;
 					
 					//datum
@@ -546,8 +549,11 @@ public class SalterskiRadnikForma implements ActionListener{
 					Calendar cal=Calendar.getInstance();
 					cal.setTime(datumModifikacijeDate.getDate());
 					int godina=cal.get(Calendar.YEAR);
-					int mjesec=cal.get(Calendar.MONTH);
+					JOptionPane.showMessageDialog(obrisiBtn, godina);
+					int mjesec=cal.get(Calendar.MONTH)+1;
+					JOptionPane.showMessageDialog(obrisiBtn, mjesec);
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					JOptionPane.showMessageDialog(obrisiBtn, dan);
 					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
 					double cijena=linija.getCijenaDvosmjerna();
 					if(jednosmjernaModifikacije.isSelected()==true)
@@ -555,6 +561,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					    r=TipKarte.jednosmjerna;
 					    cijena=linija.getCijenaJednosmjerna();
 					}
+					JOptionPane.showMessageDialog(obrisiBtn, cijena);
 					if(linija!=null)
 					{
 						HibernateRezervacija.brisanjeRezervacije(session, linija, textField.getText(), textField_1.getText());
