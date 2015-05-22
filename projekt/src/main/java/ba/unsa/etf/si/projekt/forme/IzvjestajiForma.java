@@ -149,8 +149,22 @@ public class IzvjestajiForma {
 		final JButton generisiProdaneBtn = new JButton("Generiši izvještaj");
 		generisiProdaneBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {//izvjestaj o kartama
+				int d1=0,d2=0;
+				String izuzetak="";
 				try
 				{
+					if(pocetniProdaneDate.getDate()==null)
+					{
+						d1=1;
+						izuzetak+="Morate unijeti početni datum. ";
+					}
+					if(krajnjiProdaneDate.getDate()==null)
+					{
+					d2=1;
+					izuzetak+="Morate unijeti krajnji datum.";
+					}
+					if(d1==0 && d2==0)
+					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateKarta k=new HibernateKarta();
 					Date datum1=pocetniProdaneDate.getDate();
@@ -172,7 +186,11 @@ public class IzvjestajiForma {
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o prodanim kartama.");
 					pocetniProdaneDate.setDate(null);
 					krajnjiProdaneDate.setDate(null);
-					
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(generisiProdaneBtn, izuzetak);
+					}
 				}
 				catch(Exception ex4)
 				{
@@ -254,8 +272,32 @@ public class IzvjestajiForma {
 		final JButton generisiLinijeBtn = new JButton("Generiši izvještaj");
 		generisiLinijeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //generisanje izvjestaja o Autobuskim linijama
+				int d1=0,d2=0,v1=0,v2=0;
+				String izuzetak="";
 				try
 				{
+					if(pocetniLinijeDate.getDate()==null)
+					{
+						d1=1;
+						izuzetak+="Morate unijeti početni datum. ";
+					}
+					if(krajnjiLinijeDate.getDate()==null)
+					{
+						d2=1;
+						izuzetak+="Morate unijeti krajnji datum. ";
+					}
+					if(pocetnoVrijemeSati.getText().length()==0 || pocetnoVrijemeMinute.getText().length()==0)
+					{
+						v1=1;
+						izuzetak+="Morate unijeti pocetno vrijeme i sate i minute. ";
+					}
+					if(krajnjeVrijemeSati.getText().length()==0 || krajnjeVrijemeMinute.getText().length()==0)
+					{
+						v2=1;
+						izuzetak+="Morate unijeti krajnje vrijeme.";
+					}
+					if(d1==0 && d2==0 && v1==0 && v2==0)
+					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					
 					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
@@ -286,6 +328,11 @@ public class IzvjestajiForma {
 					krajnjeVrijemeMinute.setText("");
 					krajnjiLinijeDate.setDate(null);
 					pocetniLinijeDate.setDate(null);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(generisiLinijeBtn, izuzetak);
+					}
 				}
 				catch(Exception ex1)
 				{
@@ -317,6 +364,8 @@ public class IzvjestajiForma {
 			public void actionPerformed(ActionEvent e) {
 				try
 				{
+					if(JMBGVozac.getText().length()!=0)
+					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 					Radnik r = HibernateRadnik.nadjiRadnika(session, JMBGVozac.getText());
@@ -325,6 +374,11 @@ public class IzvjestajiForma {
 					
 					JOptionPane.showMessageDialog(generisiVozaciBtn, "Uspješno ste kreirali izvještaj o vozačima.");
 					JMBGVozac.setText("");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(generisiVozaciBtn, "Morate unijeti JMBG vozaca.");
+					}
 
 				}
 				catch(Exception ex3)
