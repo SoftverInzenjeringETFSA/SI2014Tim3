@@ -28,10 +28,10 @@ public class HibernateKarta {
 		}
 		else
 		{
-			throw new IllegalArgumentException("Nema više mjesta u busu.");
+			throw new IllegalArgumentException("Nema više mjesta u autobusu.");
 		}
 		if (v.validirajCijenuKarte(cijenakarte) == false)
-			throw new IllegalArgumentException("Cijena karte mora biti pozitivan broj manji od 300");
+			throw new IllegalArgumentException("Cijena karte mora biti pozitivan broj manji od 300!");
 		else
 		{
 			Karta k=new Karta();

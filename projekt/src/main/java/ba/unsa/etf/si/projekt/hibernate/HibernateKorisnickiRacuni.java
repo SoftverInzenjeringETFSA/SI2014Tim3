@@ -105,13 +105,20 @@ public class HibernateKorisnickiRacuni {
 	
 	public static void brisiKorisnickiRacun(Session session, String korisnickoimekorisnika)
 	{
-       Transaction t = session.beginTransaction();
-		
-		Criteria k=session.createCriteria(KorisnickiRacun.class);
-		k.add(Restrictions.eq("korisnickoIme",korisnickoimekorisnika));
-		KorisnickiRacun kr= (KorisnickiRacun) k.uniqueResult();
-		session.delete(kr);
-		t.commit();
+        Transaction t = session.beginTransaction();
+        Validacija v = new Validacija();
+		if (v.jeTekst(korisnickoimekorisnika) == false || v.praznoPolje(korisnickoimekorisnika))
+		{
+			throw new IllegalArgumentException("Korisničko ime mora biti tekst i ne smije biti prazno polje!");
+		}
+		else
+		{
+			Criteria k=session.createCriteria(KorisnickiRacun.class);
+			k.add(Restrictions.eq("korisnickoIme",korisnickoimekorisnika));
+			KorisnickiRacun kr= (KorisnickiRacun) k.uniqueResult();
+			session.delete(kr);
+			t.commit();
+		}
 	}
 	 
 	public static KorisnickiRacun nadjiKorisnickiRacun(Session session, String korisnickoimekorisnika)

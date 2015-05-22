@@ -22,7 +22,7 @@ public class HibernateAutobus {
 	public static void main( String[] args)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		dodajAutobus(session, 10,"A23-M-424","dasdsa");
+		dodajAutobus(session, 10,"A23-M-424","model");
 	    //brisanjeAutobusa(session,"abc-d-efg");
 		//modifikujAutobus(session,"eee-e-eee","audi",242);
 		//Autobus a=nadjiAutobus(session, "eee-e-eed");
@@ -44,19 +44,19 @@ public class HibernateAutobus {
 		int tablice=0;
 		Validacija v = new Validacija();
 		String string="";
-		if(kapacitetautobusa==0)
+		if(v.validirajKapacitet(kapacitetautobusa) == false || v.praznoPolje(String.valueOf(kapacitetautobusa)))
 		{
 			kap=1;
-			string+="Kapacitet je 0. ";
+			string+="Kapacitet autobusa ne smije biti prazno polje i mora biti pozitivan broj manji od 60!";
 		}
-		if(modelautobusa=="")
+		if(v.praznoPolje(modelautobusa))
 		{
 			mod=1;
-			string+=" Model je prazan";
+			string+="Polje modela ne smije biti prazno polje!";
 		}
 		if(!v.validirajTablice(registracijaautobusa)){
 			tablice=1;
-			string+=" Neispravna registarska tablica primjer ispravne A23-M-424";
+			string+="Registarske tablice moraju biti oblika: A23-M-424!";
 		}
 		Autobus a=new Autobus();
 		if(kap==0 && mod==0 && tablice==0)
@@ -82,19 +82,19 @@ public class HibernateAutobus {
 		int tablice=0;
 		Validacija v = new Validacija();
 		String string="";
-		if(kapacitetautobusa==0)
+		if(v.validirajKapacitet(kapacitetautobusa) == false || v.praznoPolje(String.valueOf(kapacitetautobusa)))
 		{
 			kap=1;
-			string+="Kapacitet je 0. ";
+			string+="Kapacitet autobusa ne smije biti prazno polje i mora biti pozitivan broj manji od 60!";
 		}
-		if(modelautobusa=="")
+		if(v.praznoPolje(modelautobusa))
 		{
 			mod=1;
-			string+=" Model je prazan";
+			string+="Polje modela ne smije biti prazno polje!";
 		}
 		if(!v.validirajTablice(registracijaautobusa)){
 			tablice=1;
-			string+=" Neispravna registarska tablica primjer ispravne A23-M-424";
+			string+="Registarske tablice moraju biti oblika: A23-M-424!";
 		}
 		
 		if(kap==0 && mod==0 && tablice==0)
@@ -121,7 +121,7 @@ public class HibernateAutobus {
 	{      Validacija v = new Validacija();
          Transaction t = session.beginTransaction();
 		
-		if(registracijaautobusa!="" && !v.validirajTablice(registracijaautobusa))//dodati za tablice neki regex u javi
+		if(registracijaautobusa!="" && v.validirajTablice(registracijaautobusa))
 		{
 			Criteria k=session.createCriteria(Autobus.class);
 			k.add(Restrictions.eq("registracija", registracijaautobusa));
@@ -130,7 +130,7 @@ public class HibernateAutobus {
 			return a;
 		}
 		else 
-			throw new IllegalArgumentException("Neispravne registarske tablice");
+			throw new IllegalArgumentException("Registarske tablice moraju biti oblika: A23-M-424!");
 	}
 	
 	public static void brisanjeAutobusa(Session session,String registracijaautobusa)
@@ -138,12 +138,12 @@ public class HibernateAutobus {
 		Transaction t = session.beginTransaction();
 		if(registracijaautobusa!="" && v.validirajTablice(registracijaautobusa))
 		{
-		String s="delete from Autobus where registracija=:registracija";
-		session.createQuery(s).setString("registracija", registracijaautobusa).executeUpdate();
-         t.commit();
+			String s="delete from Autobus where registracija=:registracija";
+			session.createQuery(s).setString("registracija", registracijaautobusa).executeUpdate();
+	         t.commit();
 		}
 		else 
-			throw new IllegalArgumentException("Neispravne registarske tablice");
+			throw new IllegalArgumentException("Registarske tablice moraju biti oblika: A23-M-424!");
 	}
 	
 	public static java.util.List sviAutobusi(Session session)

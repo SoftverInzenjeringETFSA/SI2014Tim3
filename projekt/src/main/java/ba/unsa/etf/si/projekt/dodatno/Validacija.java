@@ -15,7 +15,7 @@ public class Validacija
 	
     public static boolean praznoPolje(String vrijednost)
 	{
-    	if (vrijednost == null || vrijednost.trim().equals( "" ))
+    	if (vrijednost == null || vrijednost.length() == 0)
     		return true;
     	else
     		return false;
@@ -101,9 +101,9 @@ public class Validacija
     	   return false;
     }
     
-    public static boolean validirajKapacitet(String kapacitet)
+    public static boolean validirajKapacitet(int kapacitet)
     {
-    	if (praznoPolje(kapacitet) == false && jeInt(kapacitet) && Integer.parseInt(kapacitet) > 0 && Integer.parseInt(kapacitet) <= 60)
+    	if (praznoPolje(String.valueOf(kapacitet)) == false && jeInt(String.valueOf(kapacitet)) && kapacitet > 0 && kapacitet <= 60)
     		return true;
     	else
     		return false;
