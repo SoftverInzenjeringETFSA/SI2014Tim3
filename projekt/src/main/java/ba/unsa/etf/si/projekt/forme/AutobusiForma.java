@@ -148,6 +148,24 @@ public class AutobusiForma {
 		lblRegistracije.setBounds(129, 143, 60, 14);
 		panel.add(lblRegistracije);
 		
+		
+		final JList autobusiModifikujLista = new JList();
+		autobusiModifikujLista.setModel(new AbstractListModel(){
+
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			HibernateAutobus autobus=new HibernateAutobus();
+			java.util.List autobusi=autobus.sviAutobusi(session);
+			public int getSize() {
+				return autobusi.size();
+			}
+			public Object getElementAt(int index) {
+				Autobus a=(Autobus)autobusi.get(index);
+				return "Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+			}
+			
+		});
+		
+		
 		final JButton dodajBtn = new JButton("Unesi");
 		dodajBtn.addActionListener(new ActionListener() {
 			
@@ -175,20 +193,30 @@ public class AutobusiForma {
 				{
 				int dodavanje=Integer.parseInt(kapacitetDodajSpinner.getValue().toString());
 				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText(), modelDodaj.getText());
-				
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat autobus.");
+				autobusiModifikujLista.setModel(new AbstractListModel(){
+
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateAutobus autobus=new HibernateAutobus();
+					java.util.List autobusi=autobus.sviAutobusi(session);
+					public int getSize() {
+						return autobusi.size();
+					}
+					public Object getElementAt(int index) {
+						Autobus a=(Autobus)autobusi.get(index);
+						return "Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+					}
+					
+				});
 				kapacitetDodajSpinner.setValue(0);
 				registracijeDodaj.setText("");
 				modelDodaj.setText("");
-				
 				session.close();
 				}
 				else 
 				{
 					JOptionPane.showMessageDialog(dodajBtn, "Već postoji autobus, sa brojem registracija koje ste vi unijeli.");
-					kapacitetDodajSpinner.setValue(0);
 					registracijeDodaj.setText("");
-					modelDodaj.setText("");
 				}
 				}
 				
@@ -215,21 +243,7 @@ public class AutobusiForma {
 		scrollPane.setBounds(10, 47, 238, 245);
 		panel_1.add(scrollPane);
 		
-		final JList autobusiModifikujLista = new JList();
-		autobusiModifikujLista.setModel(new AbstractListModel(){
-
-			Session session = HibernateUtil.getSessionFactory().openSession();
-			HibernateAutobus autobus=new HibernateAutobus();
-			java.util.List autobusi=autobus.sviAutobusi(session);
-			public int getSize() {
-				return autobusi.size();
-			}
-			public Object getElementAt(int index) {
-				Autobus a=(Autobus)autobusi.get(index);
-				return "Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
-			}
-			
-		});
+		
 		
 		autobusiModifikujLista.addListSelectionListener(new ListSelectionListener() //event za selektovani autobusa 
 		{
@@ -324,15 +338,22 @@ public class AutobusiForma {
 						{
 						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1);
 						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");
+						kapacitetModifikujSpinner.setValue(0);
+						registracijeModifikuj.setText("");
+						modelModifikuj.setText("");
 						}
 						else
 						{
 							JOptionPane.showMessageDialog(izmijeniBtn, "Ponovo unesite registracije.");
+							registracijeModifikuj.setText("");
 						}
-						kapacitetModifikujSpinner.setValue(0);
-						registracijeModifikuj.setText("");
-						modelModifikuj.setText("");
+						
 					}
+					else
+					{
+						JOptionPane.showMessageDialog(izmijeniBtn, "Morate selektovati autobus, koji mijenjate.");
+					}
+					session.close();
 				}
 				catch(Exception ex1)
 				{

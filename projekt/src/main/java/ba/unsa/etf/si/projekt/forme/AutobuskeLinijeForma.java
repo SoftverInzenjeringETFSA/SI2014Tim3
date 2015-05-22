@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
+import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
@@ -329,16 +330,10 @@ public class AutobuskeLinijeForma {
 			    	if(a.getBrojLinije()==brojlinije)postoji=true;
 			    }
 			    
-			    if(postoji==false)
+			    if(postoji==false && datumDodajDate!=null && Validacija.validirajVrijeme(vrijemeDodaj.getText()))
 			    {
 				novalinija.dodajAutobuskuLiniju(session, polazisteDodaj.getText(), odredisteDodaj.getText(),autobuslinije , radnik, godina1, mjesec1, dan1, sati, minute, brojperona, distanca1, trajanje, brojlinije, jednosmjerna, dvosmjerna, medjunarodnaLinija);
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodata autobuska linija.");
-			    }
-			    else
-			    {
-			    	JOptionPane.showMessageDialog(dodajBtn, "Već postoji linija sa tim rednim brojem linije.");	
-			    }
-			    
 				polazisteDodaj.setText("");
 				odredisteDodaj.setText("");
 				peronDodajSpinner.setValue(0);
@@ -350,6 +345,18 @@ public class AutobuskeLinijeForma {
 				vrijemeDodaj.setText("");
 				datumDodajDate.setDate(null);
 				
+			    }
+			    else if(postoji ==true)
+			    {
+			    	JOptionPane.showMessageDialog(dodajBtn, "Već postoji linija sa tim rednim brojem linije.");	
+			    	brojDodajSpinner.setValue(0);
+			    	
+			    }
+			    else if(datumDodajDate==null)
+			    {
+			    	JOptionPane.showMessageDialog(dodajBtn, "Morate odabrati datum polaska linije.");
+			    }
+			    
 				}
 				catch(Exception e11)
 				{

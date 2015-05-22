@@ -75,11 +75,16 @@ public class HibernateKorisnickiRacuni {
 		k.add(Restrictions.eq("korisnickoIme",starokorisnickoime));
 		KorisnickiRacun kr= (KorisnickiRacun) k.uniqueResult();
 		Validacija v = new Validacija();
-		int i = 0, p = 0;
+		int i = 0, p = 0, g=0;
 		String izuzetak = "";
 		if(kr!=null)
 		{
-			if (v.validirajPass(passkorisnika) == false)
+			if(v.jeTekst(starokorisnickoime)==false || v.praznoPolje(starokorisnickoime))
+			{
+				g=1;
+				izuzetak+="Morate unijeti ime korisnika, čije podatke želite da mijenjate.";
+			}
+			if (v.validirajPass(passkorisnika) == false || v.praznoPolje(starokorisnickoime))
 			{
 				p = 1;
 				izuzetak += "Šifra mora sadržavati barem jedan broj i znak, imati najmanje 8 karaktera i ne smije biti prazno polje!";
@@ -89,7 +94,7 @@ public class HibernateKorisnickiRacuni {
 				i = 1;
 				izuzetak += "Korisničko ime mora biti tekst i ne smije biti prazno polje!";
 			}
-			if (p == 0 && i == 0)
+			if (p == 0 && i == 0 && g==0)
 			{
 				kr.setTipKorisnickogRacuna(tipracunakorisnika);
 				kr.setSifra(passkorisnika);

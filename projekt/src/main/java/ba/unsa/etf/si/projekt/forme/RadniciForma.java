@@ -156,10 +156,14 @@ public class RadniciForma {
 						{	
 						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r);
 						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");	
+						imeDodaj.setText("");
+						prezimeDodaj.setText("");
+						jmbgDodaj.setText("");
 						}
 						else
 						{
 							JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");	
+							jmbgDodaj.setText("");
 						}
 					}
 					
@@ -170,10 +174,14 @@ public class RadniciForma {
 					{
 					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					imeDodaj.setText("");
+					prezimeDodaj.setText("");
+					jmbgDodaj.setText("");
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");
+						jmbgDodaj.setText("");
 					}
 					}
 					
@@ -183,10 +191,14 @@ public class RadniciForma {
 						{
 						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r1);
 						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik");
+						imeDodaj.setText("");
+						prezimeDodaj.setText("");
+						jmbgDodaj.setText("");
 						}
 						else
 						{
 							JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");
+							jmbgDodaj.setText("");
 						}
 					}
 					
@@ -197,15 +209,17 @@ public class RadniciForma {
 					{
 					noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r2);
 					JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");
+					imeDodaj.setText("");
+					prezimeDodaj.setText("");
+					jmbgDodaj.setText("");
 					}
 					else 
 					{
 						JOptionPane.showMessageDialog(dodajBtn, "Ponovo unesite jmbg.");
+						jmbgDodaj.setText("");
 					}
 					}
-					imeDodaj.setText("");
-					prezimeDodaj.setText("");
-					jmbgDodaj.setText("");
+					
 				}
 				catch(Exception e4)
 				{
@@ -335,6 +349,7 @@ public class RadniciForma {
 					else
 					{
 						JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Ne postoji radnik, čiji ste JMBG unijeli.");
+						jmbgModifikujPronadji.setText("");
 					}
 				}
 				
@@ -397,6 +412,7 @@ public class RadniciForma {
 					else
 					{
 						JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Ne postoji radnik, čiji ste JMBG unijeli.");
+						jmbgIzbrisiPronadi.setText("");
 					}
 				}
 				catch(Exception e6)
