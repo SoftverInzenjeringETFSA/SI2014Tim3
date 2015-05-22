@@ -289,7 +289,7 @@ public class AutobuskeLinijeForma {
 					if(datumDodajDate.getDate()==null)
 					{
 						d1=1;
-						izuzetak+="Morate unijeti datum";
+						izuzetak+="Morate unijeti datum.";
 					}
 					if(vrijemeDodaj.getText().length()==0 ) // ne radi ovo za vrijemeee Larisino 
 					{
@@ -361,7 +361,7 @@ public class AutobuskeLinijeForma {
 			    if(postoji==false)
 			    {
 				novalinija.dodajAutobuskuLiniju(session, polazisteDodaj.getText(), odredisteDodaj.getText(),autobuslinije , radnik, godina1, mjesec1, dan1, sati, minute, brojperona, distanca1, trajanje, brojlinije, jednosmjerna, dvosmjerna, medjunarodnaLinija);
-				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodata autobuska linija.");
+				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodana autobuska linija.");
 				polazisteDodaj.setText("");
 				odredisteDodaj.setText("");
 				peronDodajSpinner.setValue(0);
@@ -594,8 +594,37 @@ public class AutobuskeLinijeForma {
 		final JButton modifikujBtn = new JButton("Spasi izmjene");
 		modifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //modifikovanje linije
+				int d1=0,v1=0, t1=0, j1=0,d2=0;
+				String izuzetak="";
 				try
 				{
+					if(polazakModifikujDate.getDate()==null)
+					{
+						d1=1;
+						izuzetak+="Morate unijeti datum.";
+					}
+					if(vrijemeModifikuj.getText().length()==0 ) // ne radi ovo za vrijemeee Larisino 
+					{
+						v1=1;
+						izuzetak+="Morate unijeti vrijeme i mora biti u formatu 12:12.";
+					}
+					if(trajanjeModifikuj.getText().length()==0)
+					{
+						t1=1;
+						izuzetak+="Morate unijeti trajanje vožnje.";
+					}
+					if(jednosmjernaModifikuj.getText().length()==0)
+					{
+						j1=1;
+						izuzetak+="Morate unijeti cijenu jednosmjerne karte.";
+					}
+					if(dvosmjernaModifikuj.getText().length()==0)
+					{
+						d2=1;
+						izuzetak+="Morate unijeti cijenu dvosmjerne karte.";
+					}
+					if(d1==0 && v1==0 && t1==0 && d2==0 && j1==0)
+					{
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				HibernateAutibuskaLinija izmjenalinija=new HibernateAutibuskaLinija();
 				
@@ -647,7 +676,11 @@ public class AutobuskeLinijeForma {
 				dvosmjernaModifikuj.setText("");
 				vrijemeModifikuj.setText("");
 				polazakModifikujDate.setDate(null);
-				
+					}
+					else
+					{
+				    	JOptionPane.showMessageDialog(modifikujBtn, izuzetak);	
+					}
 				}
 				catch(Exception e13)
 				{
