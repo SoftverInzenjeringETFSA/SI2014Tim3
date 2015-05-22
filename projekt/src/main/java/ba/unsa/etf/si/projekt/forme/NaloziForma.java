@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 
 import java.awt.Font;
 
+import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateNalog;
@@ -155,15 +156,29 @@ public class NaloziForma {
 		final JButton napraviBtn = new JButton("Napravi nalog");
 		napraviBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //pravljenje nalogaaa
-				
+				String string="";
+				int v=0,d1=0;
 				try
 				{
+					if(datumDate.getDate()==null)
+					{
+						string+="Morate unijeti datum";
+						d1=1;
+					}
+					if(vrijeme.getText().length()==0 || Validacija.validirajVrijeme(vrijeme.getText())==false)
+					{
+			           v=1;
+						string+="Morate unijeti vrijeme i ono mora biti u formatu 12:12";
+						
+					}
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateNalog n=new HibernateNalog();
 					HibernateAutibuskaLinija linija1=new HibernateAutibuskaLinija();
 					AutobuskaLinija linija=new AutobuskaLinija();
 					String selektovano=(linijeList.getSelectedValue().toString());
 					java.util.List listasvihlinija=linija1.sveLinije(session);
+					if(v==0 && d1==0)
+					{
 					int broj=0;
 					for(int i=0;i<listasvihlinija.size();i++)
 					{
@@ -182,10 +197,16 @@ public class NaloziForma {
 					String[] nizvremena=vrijeme.getText().split(":");
 					int sati=Integer.valueOf(nizvremena[0]);
 					int minute=Integer.valueOf(nizvremena[1]);
+					
 					n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
 					JOptionPane.showMessageDialog(napraviBtn, "Uspješno ste kreirali nalog.");
 					vrijeme.setText("");
 					datumDate.setDate(null);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(napraviBtn, string);
+					}
 
 				}
 				catch(Exception ec)
