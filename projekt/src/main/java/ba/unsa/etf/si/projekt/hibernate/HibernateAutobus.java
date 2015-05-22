@@ -118,10 +118,10 @@ public class HibernateAutobus {
 	}
 	
 	public static Autobus nadjiAutobus(Session session,String registracijaautobusa)
-	{
+	{      Validacija v = new Validacija();
          Transaction t = session.beginTransaction();
 		
-		if(registracijaautobusa!="")//dodati za tablice neki regex u javi
+		if(registracijaautobusa!="" && !v.validirajTablice(registracijaautobusa))//dodati za tablice neki regex u javi
 		{
 			Criteria k=session.createCriteria(Autobus.class);
 			k.add(Restrictions.eq("registracija", registracijaautobusa));
@@ -130,7 +130,7 @@ public class HibernateAutobus {
 			return a;
 		}
 		else 
-			throw new IllegalArgumentException("Morate unijeti registraciju autobusa");
+			throw new IllegalArgumentException("Neispravne registarske tablice");
 	}
 	
 	public static void brisanjeAutobusa(Session session,String registracijaautobusa)

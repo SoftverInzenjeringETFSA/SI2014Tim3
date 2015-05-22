@@ -25,7 +25,7 @@ public class HibernateAutibuskaLinija {
 		Autobus a = HibernateAutobus.nadjiAutobus(session, "abc-d-efg");
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "2412993178512");
 		
-		 dodajAutobuskuLiniju(session,"Saudin","Sarajevo",a,r,2015,4,17,2,2,25,100,20,10,20,40,true);
+		 dodajAutobuskuLiniju(session,"saudin","Sarajevo",a,r,2015,4,17,2,2,5,100,100,1,20,40,true);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
 		
@@ -68,30 +68,30 @@ public class HibernateAutibuskaLinija {
 		}
 
 		
-			if( peronlinije<=0) {
+			if( !v.validirajBrojPerona(String.valueOf(peronlinije)) ) {
 				peron=1;
-				string+=" Peron mora biti pozitivan broj";
+				string+=" Peron mora biti pozitivan broj i <= od 6";
 				
 			}
-		if( distancalinije<=0) {
+		if(  distancalinije<=0) {
 			distanca=1;
 			string+=" Distanca mora biti pozitivan broj";
 			
 		}
 		if( trajanjelinije<=0) {
 			trajanje=1;
-			string+=" Trajanje mora biti pozitivan broj";
+			string+=" Trajanje mora biti pozitivan broj i manja od 300";
 			
 		}
-		if( cijenajednosmjernakarta<=0) {
+		if( !v.validirajCijenuKarte(cijenajednosmjernakarta) ) {
 			jkarta=1;
-			string+=" Cijena karte mora biti pozitivan broj";
+			string+=" Cijena jednosmjerne karte mora biti pozitivan broj i manja od 300";
 			
 		}
 		
-		if( cijenadvosmjernakarta<=0) {
+		if(!v.validirajCijenuKarte(cijenadvosmjernakarta) ) {
 			dkarta=1;
-			string+=" Cjena karte biti pozitivan broj";
+			string+=" Cjena dvosmjerne karte biti pozitivan broj";
 			
 		}
 		if( brojlinije<=0) {
@@ -154,30 +154,30 @@ public class HibernateAutibuskaLinija {
 		}
 
 		
-			if( peronlinije<=0) {
+			if( !v.validirajBrojPerona(String.valueOf(peronlinije)) ) {
 				peron=1;
-				string+=" Peron mora biti pozitivan broj";
+				string+=" Peron mora biti pozitivan broj i <= od 6";
 				
 			}
-		if( distancalinije<=0) {
+		if(  distancalinije<=0) {
 			distanca=1;
 			string+=" Distanca mora biti pozitivan broj";
 			
 		}
 		if( trajanjelinije<=0) {
 			trajanje=1;
-			string+=" Trajanje mora biti pozitivan broj";
+			string+=" Trajanje mora biti pozitivan broj i manja od 300";
 			
 		}
-		if( cijenajednosmjernakarta<=0) {
+		if( !v.validirajCijenuKarte(cijenajednosmjernakarta) ) {
 			jkarta=1;
-			string+=" Cijena karte mora biti pozitivan broj";
+			string+=" Cijena jednosmjerne karte mora biti pozitivan broj i manja od 300";
 			
 		}
 		
-		if( cijenadvosmjernakarta<=0) {
+		if(!v.validirajCijenuKarte(cijenadvosmjernakarta) ) {
 			dkarta=1;
-			string+=" Cjena karte biti pozitivan broj";
+			string+=" Cjena dvosmjerne karte biti pozitivan broj";
 			
 		}
 		if( brojlinije<=0) {
@@ -185,6 +185,7 @@ public class HibernateAutibuskaLinija {
 			string+=" Broj linije biti pozitivan broj";
 			
 		}
+		
 		
 		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0){
 		Criteria k=session.createCriteria(AutobuskaLinija.class);
@@ -223,7 +224,15 @@ public class HibernateAutibuskaLinija {
 	public static void brisiAutobuskuLiniju(Session session, int brojlinije)
 	{
 		Transaction t = session.beginTransaction();
-		
+		int brlinije=0;
+		String string="";
+		if( brojlinije<=0) {
+			brlinije=1;
+			string+=" Broj linije biti pozitivan broj";
+			
+		}
+		if(brlinije==0){
+			
 		/*String s="delete from AutobuskaLinija where brojLinije=:brojLinije";
 		session.createQuery(s).setParameter("brojLinije", brojlinije).executeUpdate();*/
 		Criteria k=session.createCriteria(AutobuskaLinija.class);
@@ -231,18 +240,28 @@ public class HibernateAutibuskaLinija {
 		AutobuskaLinija izmjenjenalinija=(AutobuskaLinija) k.uniqueResult();
 		session.delete(izmjenjenalinija);
 		
-		t.commit();
+		t.commit();}
+		else { throw new IllegalArgumentException(string);}
 	}
 	
 	public static AutobuskaLinija nadjiAutobuskuLiniju(Session session, int brojlinije)
 	{
 		Transaction t = session.beginTransaction();
+		int brlinije=0;
+		String string="";
+		if( brojlinije<=0) {
+			brlinije=1;
+			string+=" Broj linije biti pozitivan broj";
+			
+		}
+		if(brlinije==0){
 		Criteria k=session.createCriteria(AutobuskaLinija.class);
 		k.add(Restrictions.eq("brojLinije", brojlinije));
 		AutobuskaLinija izmjenjenalinija=(AutobuskaLinija) k.uniqueResult();
 		t.commit();
-		return izmjenjenalinija;
+		return izmjenjenalinija;}
 		
+		else { throw new IllegalArgumentException(string);}
 	}
 	
 	
@@ -250,14 +269,22 @@ public class HibernateAutibuskaLinija {
 	public static AutobuskaLinija NadjiAutobuskuLinijuOdrediste(Session session, String odrediste, int godina, int mjesec, int dan, int sati, int minute)
 	{
 		 //Transaction t = session.beginTransaction();
-		
+		int od=0;
+		String string="";
+		Validacija v = new Validacija();
+		if(v.praznoPolje(odrediste))
+		{od=1;
+			string+="Odrediste linije ne smije biti prazno";
+		}
+		if(od==0){
 		 Criteria k=session.createCriteria(AutobuskaLinija.class);
 		k.add(Restrictions.eq("odrediste",odrediste)).add(Restrictions.eq("datumPolaska_godina",godina)).add(Restrictions.eq("datumPolaska_mjesec", mjesec)).add(Restrictions.eq("datumPolaska_dan",dan)).add(Restrictions.eq("vrijemePolaska_sati",sati)).add(Restrictions.eq("vrijemePolaska_minute",minute));
 		AutobuskaLinija kr= (AutobuskaLinija) k.uniqueResult();
 		//t.commit();
-		return kr;
+		return kr;}
 		
 		
+		else { throw new IllegalArgumentException(string);}
 	}
 	public static java.util.List sveLinije(Session session)
 	{
@@ -270,13 +297,28 @@ public class HibernateAutibuskaLinija {
 	}
 	
 	public static java.util.List IzvjestajORadnicima(Session session,String imevozaca, String prezimevozaca)
-	{
+	{ int ime=0;
+	int prezime=0;
+	String string="";
+	Validacija v = new Validacija();
+	if(v.praznoPolje(imevozaca))
+	{ime=1;
+		string+="Ime ne smije biti prazno";
+	}
+	if(v.praznoPolje(prezimevozaca))
+	{prezime=1;
+		string+="Ime ne smije biti prazno";
+	}
+	
+	if(ime==0 && prezime==0){
 		HibernateRadnik radnik=new HibernateRadnik();
 		Radnik r=radnik.nadjiRadnikaPoImenu(session, imevozaca);
 		java.util.List linije;
 		linije=session.createQuery("FROM AutobuskaLinija where vozac=:vozac1").setParameter("vozac1", r).list();
         System.out.println(linije.size());
-		return linije;
+		return linije;}
+	else { throw new IllegalArgumentException(string);}
+	
 		
 	}
 	

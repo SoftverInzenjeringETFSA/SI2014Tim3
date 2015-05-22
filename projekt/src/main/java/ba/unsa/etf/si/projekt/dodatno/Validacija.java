@@ -111,7 +111,7 @@ public class Validacija
     
     public static boolean validirajBrojPerona(String broj)
     {
-    	if (Integer.parseInt(broj) > 0 && Integer.parseInt(broj) < 6)
+    	if (Integer.parseInt(broj) > 0 && Integer.parseInt(broj) <= 6)
     		return true;
     	else
     		return false;
