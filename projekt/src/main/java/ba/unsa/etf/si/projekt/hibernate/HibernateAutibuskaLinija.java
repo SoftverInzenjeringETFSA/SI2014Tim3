@@ -26,7 +26,7 @@ public class HibernateAutibuskaLinija {
 		Radnik r = HibernateRadnik.nadjiRadnika(session, "1223493827163");
 		
 		//dodajAutobuskuLiniju(session,"Larisa","Zenica",a,r,2015,4,17,2,2,5,100,100,1,20,40,true);
-		dodajAutobuskuLiniju(session,"Larisa","Sarajevo",a,r,2015,4,17,2,2,5,100,100,2,20,40,true);
+		//dodajAutobuskuLiniju(session,"Larisa","Sarajevo",a,r,2015,4,17,2,2,5,100,100,2,20,40,true);
 		// dodajAutobuskuLiniju(session,"saudin","Sarajevo",a,r,2015,4,17,2,2,5,100,100,1,20,40,true);
 		//modifikujAutobuskuLiniju(session,"hghfgfhg","Sarajevo",a,r,2012,2,2,2,2,2,120,22,1,30,60);
 		//brisiAutobuskuLiniju(session,1);
@@ -62,11 +62,11 @@ public class HibernateAutibuskaLinija {
 		Validacija v = new Validacija();
 		if(v.praznoPolje(polazistelinije) || v.jeTekst(polazistelinije) == false)
 		{po=1;
-			string+="Polazište linije ne smije biti prazno!";
+			string+="Polazište linije mora biti tekst i ne smije biti prazno polje!";
 		}
 		if(v.praznoPolje(odredistelinije) || v.jeTekst(odredistelinije) == false)
 		{    od=1;
-			string+=" Odredište linije ne smije biti prazno!";
+			string+=" Odredište linije mora biti tekst i ne smije biti prazno polje!";
 		}
 
 		
@@ -82,7 +82,7 @@ public class HibernateAutibuskaLinija {
 		}
 		if( trajanjelinije<=0) {
 			trajanje=1;
-			string+=" Trajanje mora biti pozitivan broj i manja od 300!";
+			string+=" Trajanje mora biti pozitivan broj!";
 			
 		}
 		if( !v.validirajCijenuKarte(cijenajednosmjernakarta) ) {
@@ -148,11 +148,11 @@ public class HibernateAutibuskaLinija {
 		Validacija v = new Validacija();
 		if(v.praznoPolje(polazistelinije))
 		{po=1;
-			string+="Polazište linije ne smije biti prazno!";
+			string+="Polazište linije mora biti tekst i ne smije biti prazno polje!";
 		}
 		if(v.praznoPolje(odredistelinije))
 		{    od=1;
-			string+=" Odredište linije ne smije biti prazno!";
+			string+=" Odredište linije mora biti tekst i ne smije biti prazno polje!";
 		}
 
 		

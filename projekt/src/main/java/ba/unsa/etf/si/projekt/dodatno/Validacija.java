@@ -6,8 +6,8 @@ public class Validacija
 {
 	public static void main( String[] args)
 	{
-		String proba = "12:12";
-		if (validirajVrijeme(proba))
+		String proba = "1334256463675";
+		if (validirajJMBG(proba))
 			System.out.println("OK");
 		else
 			System.out.println("NOK");
@@ -31,14 +31,12 @@ public class Validacija
     
     public static boolean jeInt(String vrijednost)
     {
-    	for (int i = 0; i < vrijednost.length(); i++)
-    	{
-    		if (Character.isDigit(vrijednost.charAt(i)))
-    			return true;
-    		else
-    			return false;
-    	}
-    	return false;
+    	for (char c : vrijednost.toCharArray())
+        {
+            if (!Character.isDigit(c))
+            	return false;
+        }
+        return true;
     }
     
     public static boolean sadrziCifru(String s)
