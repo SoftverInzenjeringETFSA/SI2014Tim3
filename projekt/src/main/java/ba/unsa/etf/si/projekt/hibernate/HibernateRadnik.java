@@ -107,18 +107,17 @@ public class HibernateRadnik {
 	
 	public static void brisiRadnika(Session session, String JMBGRadnika)
 	{
-        Transaction t = session.beginTransaction();
-		
-		Criteria k=session.createCriteria(Radnik.class);
-		k.add(Restrictions.eq("jmbg", JMBGRadnika));
+		Transaction t = session.beginTransaction();
 		Validacija v = new Validacija();
-		Radnik r=(Radnik) k.uniqueResult();
 		if (v.validirajJMBG(JMBGRadnika) == false || v.praznoPolje(JMBGRadnika))
 		{
 			throw new IllegalArgumentException("JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!");
 		}
 		else
 		{
+			Criteria k=session.createCriteria(Radnik.class);
+			k.add(Restrictions.eq("jmbg", JMBGRadnika));
+			Radnik r=(Radnik) k.uniqueResult();
 			session.delete(r);
 			t.commit();
 		}
