@@ -325,9 +325,18 @@ public class SalterskiRadnikForma implements ActionListener{
 		final JButton rezervisiBtn = new JButton("Rezerviši");
 		rezervisiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //dodavanje rezervacijeee
-
+				int d1=0;
+				String izuzetak="";
 				try
 				{
+					if(datumRezervacijaDate.getDate()==null)
+					{
+						d1=1;
+						izuzetak+="Morate unijeti datum.";
+					}
+					
+					if(d1==0)
+					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					TipKarte k=TipKarte.jednosmjerna;
 					Calendar cal=Calendar.getInstance();
@@ -368,6 +377,11 @@ public class SalterskiRadnikForma implements ActionListener{
 					});
 					cijenaRezervacije.setText(String.valueOf(cijena));
 					JOptionPane.showMessageDialog(prodajaBtn, "Karta je rezervisan.");
+				}
+					else
+					{
+				    	JOptionPane.showMessageDialog(prodajaBtn, izuzetak);	
+					}
 				}
 				catch(Exception ex)
 				{
@@ -506,9 +520,17 @@ public class SalterskiRadnikForma implements ActionListener{
 		final JButton modifikujBtn = new JButton("Modifikuj");
 		modifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //modifikovanje rezervacije
-			
+			 int d1 = 0;
+			 String izuzetak = "";
 				try
 				{
+					if(datumRezervacijaDate.getDate()==null)
+					{
+						d1=1;
+						izuzetak+="Morate unijeti datum.";
+					}
+					if (d1 == 0)
+					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					String odrediste=comboBox_4.getSelectedItem().toString();
 					String[] vrijeme=comboBox_5.getSelectedItem().toString().split(":");
@@ -540,7 +562,11 @@ public class SalterskiRadnikForma implements ActionListener{
 					{
 						JOptionPane.showMessageDialog(modifikujBtn, "Ne postoji autobuska linija, sa parametrima koje ste unijeli.");
 					}
-					
+					}
+					else
+					{
+				    	JOptionPane.showMessageDialog(modifikujBtn, izuzetak);	
+					}
 				}
 				catch(Exception ex)
 				{
