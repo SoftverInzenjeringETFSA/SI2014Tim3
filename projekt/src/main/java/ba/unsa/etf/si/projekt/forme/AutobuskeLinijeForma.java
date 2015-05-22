@@ -281,9 +281,38 @@ public class AutobuskeLinijeForma {
 		final JButton dodajBtn = new JButton("Dodaj");
 		dodajBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //dodavanje linija
-				
+				int d1=0,v1=0, t1=0, j1=0,d2=0;
+				String izuzetak="";
+				boolean postoji=false;
 				try
 				{
+					if(datumDodajDate.getDate()==null)
+					{
+						d1=1;
+						izuzetak+="Morate unijeti datum";
+					}
+					if(vrijemeDodaj.getText().length()==0 ) // ne radi ovo za vrijemeee Larisino 
+					{
+						v1=1;
+						izuzetak+="Morate unijeti vrijeme i mora biti u formatu 12:12.";
+					}
+					if(trajanjeDodaj.getText().length()==0)
+					{
+						t1=1;
+						izuzetak+="Morate unijeti trajanje vožnje.";
+					}
+					if(jednosmjernaDodaj.getText().length()==0)
+					{
+						j1=1;
+						izuzetak+="Morate unijeti cijenu jednosmjerne karte.";
+					}
+					if(dvosmjernaDodaj.getText().length()==0)
+					{
+						d2=1;
+						izuzetak+="Morate unijeti cijenu dvosmjerne karte.";
+					}
+					if(d1==0 && v1==0 && t1==0 && d2==0 && j1==0)
+					{
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				HibernateAutibuskaLinija novalinija=new HibernateAutibuskaLinija();
 				
@@ -317,7 +346,7 @@ public class AutobuskeLinijeForma {
 				int dvosmjerna=Integer.parseInt(dvosmjernaDodaj.getText());
 				
 				boolean medjunarodnaLinija=false;
-				boolean postoji=false;
+				
 				if(medunarodnaDodaj.isSelected())
 				{
 					medjunarodnaLinija=true;
@@ -329,8 +358,7 @@ public class AutobuskeLinijeForma {
 			    	AutobuskaLinija a=new AutobuskaLinija();
 			    	if(a.getBrojLinije()==brojlinije)postoji=true;
 			    }
-			    
-			    if(postoji==false && datumDodajDate!=null && Validacija.validirajVrijeme(vrijemeDodaj.getText()))
+			    if(postoji==false)
 			    {
 				novalinija.dodajAutobuskuLiniju(session, polazisteDodaj.getText(), odredisteDodaj.getText(),autobuslinije , radnik, godina1, mjesec1, dan1, sati, minute, brojperona, distanca1, trajanje, brojlinije, jednosmjerna, dvosmjerna, medjunarodnaLinija);
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodata autobuska linija.");
@@ -344,19 +372,18 @@ public class AutobuskeLinijeForma {
 				dvosmjernaDodaj.setText("");
 				vrijemeDodaj.setText("");
 				datumDodajDate.setDate(null);
-				
 			    }
-			    else if(postoji ==true)
+			    else
 			    {
 			    	JOptionPane.showMessageDialog(dodajBtn, "Već postoji linija sa tim rednim brojem linije.");	
 			    	brojDodajSpinner.setValue(0);
 			    	
 			    }
-			    else if(datumDodajDate==null)
-			    {
-			    	JOptionPane.showMessageDialog(dodajBtn, "Morate odabrati datum polaska linije.");
-			    }
-			    
+				}
+					else
+					{
+				    	JOptionPane.showMessageDialog(dodajBtn, izuzetak);	
+					}
 				}
 				catch(Exception e11)
 				{
