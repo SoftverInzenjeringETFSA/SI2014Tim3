@@ -378,7 +378,7 @@ public class KorisniciForma {
 				for(int i=0;i<sviracuni.size();i++)
 				{
 					KorisnickiRacun ra=(KorisnickiRacun)sviracuni.get(i);
-					if(ra.getKorisnickoIme().equals(korisnickoModifikuj.getText()) && ra.getKorisnickoIme().equals(pronadiModifikuj.getText())==false)
+					if(ra.getKorisnickoIme().equals(pronadiModifikuj.getText()) )
 						postoji=true;
 						
 				}
@@ -394,14 +394,32 @@ public class KorisniciForma {
 				{
 			     r=TipKorisnickogRacuna.salterskiRadnik;
 			   }
-				if(postoji==false)
+				
+				if(postoji==false || korisnickoModifikuj.getText()=="" || sifraModifikuj.getText()=="" )
 				{
-				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r);
-				JOptionPane.showMessageDialog(modifikujBtn, "Uspješno modifikovanje korisničkog računa.");
+			
+				JOptionPane.showMessageDialog(modifikujBtn, "Neuspjesna modifikovanje korisničkog računa.");
 				}
-				else
-				{
-					JOptionPane.showMessageDialog(modifikujBtn, "Korisničko ime već postoji.");
+				 if(korisnickoModifikuj.getText()!="" && postoji==true  && sifraModifikuj.getText()!="" )
+				{	
+					
+						boolean postojiIme=false;
+						for(int i=0;i<sviracuni.size();i++)
+						{
+							KorisnickiRacun ra=(KorisnickiRacun)sviracuni.get(i);
+							if(ra.getKorisnickoIme().equals(korisnickoModifikuj.getText()) )
+								postojiIme=true;
+								
+						}
+					 if(postojiIme){
+						 JOptionPane.showMessageDialog(modifikujBtn, "Korisnicko ime vec postoji!"); 
+						 
+						 
+					 }
+					 
+					 else{
+					 HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r);
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspjesna ste modifikovali korisnički račun.");}
 				}
 				
 
