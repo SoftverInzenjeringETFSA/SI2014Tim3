@@ -89,7 +89,7 @@ public class HibernateRezervacijaTest {
 		hr.ModifikujRezervaciju(session, stara, nova, "staroime", "staroprezime", "novoime", "novoprezime", 30.00, k);
 	
 	}*/
-
+/*
 	@Test
 	public void testBrisanjeRezervacije() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -122,7 +122,7 @@ public class HibernateRezervacijaTest {
 		hr2.brisiRadnika(session, "1223493827127");
 		session.close();	
 	}
-	
+	*/
 	@Test(expected = IllegalArgumentException.class)
 	public void testBrisanjeRezervacijeNevalidnoIme() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
