@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
-import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
@@ -28,37 +27,38 @@ public class HibernateMedjunarodnaKartaTest {
 	}
 	
 	@Test
-	public void testDodajKartu() {
+	public void testDodajMKartu() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		hmk = new HibernateMedjunarodnaKarta();
+		//hmk = new HibernateMedjunarodnaKarta();
 		HibernateAutobus ha = new HibernateAutobus();
-		ha.dodajAutobus(session, 50, "A23-M-000", "Testmodel");
+		ha.dodajAutobus(session, 56, "K77-O-357", "Testmodel300");
 		HibernateRadnik hr = new HibernateRadnik();
 		TipRadnogMjesta vozac = TipRadnogMjesta.Vozac;
-		hr.dodajRadnika(session, "DinaTestTest", "Aaa", "1223493827100", vozac);
-		Autobus a = ha.nadjiAutobus(session, "A23-M-000");  
-		Radnik r = hr.nadjiRadnika(session, "1223493827100");
+		hr.dodajRadnika(session, "RadnikDM", "Dmk", "2040507080904", vozac);
+		Autobus a = ha.nadjiAutobus(session, "K77-O-357");  
+		Radnik r = hr.nadjiRadnika(session, "2040507080904");
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
-		hal.dodajAutobuskuLiniju(session,"SarajevoTest","ZenicaTest",a,r,2015,4,17,7,7,5,100,100,4,20,40,true);
-		linija = hal.nadjiAutobuskuLiniju(session, 4); //linija 4
-		tip = TipKarte.jednosmjerna;
+		hal.dodajAutobuskuLiniju(session,"dmkp","dmko",a,r,2015,9,12,6,54,5,130,130,12,32.00,60.00,true);
+		linija = hal.nadjiAutobuskuLiniju(session, 12); //linija 12
+		//tip = TipKarte.jednosmjerna;
 		//prije dodavanja
 		Query q = session.createQuery("SELECT COUNT(*) FROM MedjunarodnaKarta");
 		Long count = (Long)q.uniqueResult();
 		int prije = count.intValue();
-		hmk.dodajKartu(session, linija, 2015, 4, 17, 7, 7, tip, 20.00, "Dinatesttest", "dk");
+		hmk.dodajKartu(session, linija, 2015, 9, 12, 6, 54, tip, 32.00, "Dinamk", "Dinamk");
 		//poslije dodavanja
-		HibernateKarta hk = new HibernateKarta();
+		//HibernateKarta hk = new HibernateKarta();
 		Query q2 = session.createQuery("SELECT COUNT(*) FROM MedjunarodnaKarta");
 		Long count2 = (Long)q.uniqueResult();
 		int poslije = count2.intValue();
 		assertEquals(poslije, prije+1);
-		Query q3 = session.createQuery("DELETE FROM MedjunarodnaKarta WHERE ime='Dinatesttest'");
+		Query q3 = session.createQuery("DELETE FROM MedjunarodnaKarta WHERE ime='Dinamk'");
 		q3.executeUpdate();
 		//hk.brisanjeKarte(session, linija.getId());
-		hal.brisiAutobuskuLiniju(session, 4);
-		ha.brisanjeAutobusa(session, "A23-M-000");
-		hr.brisiRadnika(session, "1223493827100");
+		//hmk.brisanjeKarte(session, linija.getId());
+		hal.brisiAutobuskuLiniju(session, 12);
+		ha.brisanjeAutobusa(session, "K77-O-357");
+		hr.brisiRadnika(session, "2040507080904");
 		session.close();
 	}
 
@@ -76,7 +76,7 @@ public class HibernateMedjunarodnaKartaTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
-	public void testDodajKartuPrevelikaCijena() {
+	public void testDodajMKartuPrevelikaCijena() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		//HibernateMedjunarodnaKarta hmk = new HibernateMedjunarodnaKarta();
 		//AutobuskaLinija linija = new AutobuskaLinija();
@@ -85,7 +85,7 @@ public class HibernateMedjunarodnaKartaTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testDodajKartuNegativnaCijena() {
+	public void testDodajMKartuNegativnaCijena() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		//HibernateMedjunarodnaKarta hmk = new HibernateMedjunarodnaKarta();
 		//AutobuskaLinija linija = new AutobuskaLinija();
@@ -94,7 +94,7 @@ public class HibernateMedjunarodnaKartaTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testDodajKartuPogresnoIme() {
+	public void testDodajMKartuPogresnoIme() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		//HibernateMedjunarodnaKarta hmk = new HibernateMedjunarodnaKarta();
 		//AutobuskaLinija linija = new AutobuskaLinija();
@@ -103,7 +103,7 @@ public class HibernateMedjunarodnaKartaTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testDodajKartuPogresnoPrezime() {
+	public void testDodajMKartuPogresnoPrezime() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		//HibernateMedjunarodnaKarta hmk = new HibernateMedjunarodnaKarta();
 		//AutobuskaLinija linija = new AutobuskaLinija();
