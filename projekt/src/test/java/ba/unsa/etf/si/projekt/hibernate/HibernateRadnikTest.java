@@ -9,7 +9,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 
@@ -28,7 +27,6 @@ public class HibernateRadnikTest {
 		m1 = TipRadnogMjesta.SalterskiRadnik;
 		m = TipRadnogMjesta.Menadzer;
 		r = new Radnik();
-		//TipRadnogMjesta m = TipRadnogMjesta.Menadzer;
 		r.setIme("Dinaaa");
 		r.setPrezime("A");
 		r.setJmbg("1478523694512");
