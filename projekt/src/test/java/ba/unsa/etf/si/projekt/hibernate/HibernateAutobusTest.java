@@ -26,11 +26,6 @@ public class HibernateAutobusTest {
 	@Test
 	public void testDodajiNadjiAutobus() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//Autobus ab = new Autobus();
-		/*ab.setKapacitet(50);
-		ab.setModel("model");
-		ab.setRegistracija("A23-M-789");
-		HibernateAutobus a = new HibernateAutobus();*/
 		a.dodajAutobus(session, ab.getKapacitet(), ab.getRegistracija(), ab.getModel());
 		Autobus nadjen = a.nadjiAutobus(session, ab.getRegistracija());
 		assertEquals("A23-M-789", nadjen.getRegistracija());
@@ -41,7 +36,6 @@ public class HibernateAutobusTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobusNegativanKapacitet() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//HibernateAutobus a = new HibernateAutobus();
 		a.dodajAutobus(session, -5, "A23-M-789", "model");
 		session.close();
 	}
@@ -49,7 +43,6 @@ public class HibernateAutobusTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobusOgromanKapacitet() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//HibernateAutobus a = new HibernateAutobus();
 		a.dodajAutobus(session, 1000, "A23-M-789", "model");
 		session.close();
 	}
@@ -78,11 +71,6 @@ public class HibernateAutobusTest {
 	@Test
 	public void testModifikujAutobus() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		/*Autobus ab = new Autobus();
-		ab.setKapacitet(50);
-		ab.setModel("model");
-		ab.setRegistracija("A23-M-789");
-		HibernateAutobus a = new HibernateAutobus();*/
 		a.dodajAutobus(session, ab.getKapacitet(), ab.getRegistracija(), ab.getModel());
 		a.modifikujAutobus(session, "A23-J-489", "model3", 50, ab);
 		Autobus nadjen = a.nadjiAutobus(session, "A23-J-489");
@@ -122,7 +110,6 @@ public class HibernateAutobusTest {
 	@Test
 	public void testBrisanjeAutobusa() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//HibernateAutobus a = new HibernateAutobus();
 		a.dodajAutobus(session, 50, "A23-M-456", "model");
 		a.brisanjeAutobusa(session, "A23-M-456");
 		assertEquals(null, a.nadjiAutobus(session, "A23-M-456"));
@@ -142,7 +129,6 @@ public class HibernateAutobusTest {
 		Query q = session.createQuery("SELECT COUNT(*) FROM Autobus");
 		Long count = (Long)q.uniqueResult();
 		int izBaze = count.intValue();
-		//HibernateAutobus a = new HibernateAutobus();
 		java.util.List autobusi;
 		autobusi = a.sviAutobusi(session);
 		int broj = autobusi.size();
