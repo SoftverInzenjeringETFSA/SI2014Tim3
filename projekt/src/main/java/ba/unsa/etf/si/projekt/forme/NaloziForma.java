@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.sql.Date;
 import java.util.Calendar;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class NaloziForma {
 
@@ -76,6 +77,7 @@ public class NaloziForma {
 	 */
 	private void initialize() {
 		frmPravljenjeNaloga = new JFrame();
+		frmPravljenjeNaloga.setIconImage(Toolkit.getDefaultToolkit().getImage(NaloziForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmPravljenjeNaloga.setTitle("Pravljenje naloga");
 		frmPravljenjeNaloga.setBounds(100, 100, 582, 392);
 		frmPravljenjeNaloga.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

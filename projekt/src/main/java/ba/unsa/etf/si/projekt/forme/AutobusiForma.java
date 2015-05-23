@@ -29,6 +29,7 @@ import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class AutobusiForma {
 
@@ -82,6 +83,7 @@ public class AutobusiForma {
 	 */
 	private void initialize() {
 		frmEvidencijaAutobusa = new JFrame();
+		frmEvidencijaAutobusa.setIconImage(Toolkit.getDefaultToolkit().getImage(AutobusiForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmEvidencijaAutobusa.setTitle("Evidencija autobusa");
 		frmEvidencijaAutobusa.setBounds(100, 100, 603, 434);
 		frmEvidencijaAutobusa.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

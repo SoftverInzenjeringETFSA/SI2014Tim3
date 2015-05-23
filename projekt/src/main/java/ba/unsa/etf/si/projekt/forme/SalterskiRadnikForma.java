@@ -52,6 +52,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class SalterskiRadnikForma implements ActionListener{
 
@@ -117,6 +118,7 @@ public class SalterskiRadnikForma implements ActionListener{
 	 */
 	private void initialize() {
 		frmalterskiRadnik = new JFrame();
+		frmalterskiRadnik.setIconImage(Toolkit.getDefaultToolkit().getImage(SalterskiRadnikForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmalterskiRadnik.setTitle("Šalterski radnik");
 		frmalterskiRadnik.setBounds(100, 100, 629, 497);
 		frmalterskiRadnik.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

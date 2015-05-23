@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class IzvjestajiForma {
 
@@ -83,6 +84,7 @@ public class IzvjestajiForma {
 	 */
 	private void initialize() {
 		frmIzvjetaji = new JFrame();
+		frmIzvjetaji.setIconImage(Toolkit.getDefaultToolkit().getImage(IzvjestajiForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmIzvjetaji.setTitle("Izvještaji");
 		frmIzvjetaji.setBounds(100, 100, 502, 393);
 		frmIzvjetaji.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

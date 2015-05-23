@@ -24,6 +24,7 @@ import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class PrijavaForma {
 
@@ -64,6 +65,7 @@ public class PrijavaForma {
 	 */
 	private void initialize() {
 		frmPrijava = new JFrame();
+		frmPrijava.setIconImage(Toolkit.getDefaultToolkit().getImage(PrijavaForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmPrijava.setTitle("Prijava");
 		frmPrijava.setBounds(100, 100, 353, 264);
 		frmPrijava.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -29,6 +29,7 @@ import javax.swing.JPanel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class AdministratorPocetna {
 
@@ -69,6 +70,7 @@ public class AdministratorPocetna {
 	 */
 	private void initialize() {
 		frmAdministratorPoetna = new JFrame();
+		frmAdministratorPoetna.setIconImage(Toolkit.getDefaultToolkit().getImage(AdministratorPocetna.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmAdministratorPoetna.setTitle("Administrator početna");
 		frmAdministratorPoetna.setResizable(false);
 		frmAdministratorPoetna.setBounds(100, 100, 480, 390);

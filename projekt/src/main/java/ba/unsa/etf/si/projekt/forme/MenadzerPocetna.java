@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class MenadzerPocetna {
 
@@ -49,6 +50,7 @@ public class MenadzerPocetna {
 	 */
 	private void initialize() {
 		frmMenaderPoetna = new JFrame();
+		frmMenaderPoetna.setIconImage(Toolkit.getDefaultToolkit().getImage(MenadzerPocetna.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmMenaderPoetna.setTitle("Menadžer početna");
 		frmMenaderPoetna.setResizable(false);
 		frmMenaderPoetna.setBounds(100, 100, 472, 342);

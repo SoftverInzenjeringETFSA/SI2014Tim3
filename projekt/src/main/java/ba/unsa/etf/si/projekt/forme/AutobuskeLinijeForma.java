@@ -33,6 +33,7 @@ import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class AutobuskeLinijeForma {
 
@@ -98,6 +99,7 @@ public class AutobuskeLinijeForma {
 	 */
 	private void initialize() {
 		frmAutobuskeLinije = new JFrame();
+		frmAutobuskeLinije.setIconImage(Toolkit.getDefaultToolkit().getImage(AutobuskeLinijeForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmAutobuskeLinije.setTitle("Autobuske linije");
 		frmAutobuskeLinije.setBounds(100, 100, 583, 506);
 		frmAutobuskeLinije.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

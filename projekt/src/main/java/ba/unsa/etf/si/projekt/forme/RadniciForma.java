@@ -22,6 +22,7 @@ import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class RadniciForma {
 
@@ -76,6 +77,7 @@ public class RadniciForma {
 	 */
 	private void initialize() {
 		frmEvidencijaRadnika = new JFrame();
+		frmEvidencijaRadnika.setIconImage(Toolkit.getDefaultToolkit().getImage(RadniciForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmEvidencijaRadnika.setTitle("Evidencija radnika");
 		frmEvidencijaRadnika.setBounds(100, 100, 479, 373);
 		frmEvidencijaRadnika.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

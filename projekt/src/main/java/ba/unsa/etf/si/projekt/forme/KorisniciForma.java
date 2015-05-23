@@ -39,6 +39,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class KorisniciForma {
 
@@ -92,6 +93,7 @@ public class KorisniciForma {
 	 */
 	private void initialize() {
 		frmKorisnikiRauni = new JFrame();
+		frmKorisnikiRauni.setIconImage(Toolkit.getDefaultToolkit().getImage(KorisniciForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmKorisnikiRauni.setTitle("Korisnički računi");
 		frmKorisnikiRauni.setBounds(100, 100, 533, 412);
 		frmKorisnikiRauni.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
