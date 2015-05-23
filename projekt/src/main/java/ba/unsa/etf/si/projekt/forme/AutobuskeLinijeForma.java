@@ -650,8 +650,8 @@ public class AutobuskeLinijeForma {
 						d2=1;
 						izuzetak+="Morate unijeti cijenu dvosmjerne karte.";
 					}
-					if(d1==0 && v1==0 && t1==0 && d2==0 && j1==0)
-					{
+				if(d1==0 && v1==0 && t1==0 && d2==0 && j1==0)
+				{
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				HibernateAutibuskaLinija izmjenalinija=new HibernateAutibuskaLinija();
 				
@@ -778,16 +778,19 @@ public class AutobuskeLinijeForma {
 		panel_2.add(medunarodnaIzbrisi);
 		
 		trajanjeIzbrisi = new JTextField();
+		trajanjeIzbrisi.setEditable(false);
 		trajanjeIzbrisi.setColumns(10);
 		trajanjeIzbrisi.setBounds(380, 164, 116, 20);
 		panel_2.add(trajanjeIzbrisi);
 		
 		jednosmjernaIzbrisi = new JTextField();
+		jednosmjernaIzbrisi.setEditable(false);
 		jednosmjernaIzbrisi.setColumns(10);
 		jednosmjernaIzbrisi.setBounds(380, 205, 116, 20);
 		panel_2.add(jednosmjernaIzbrisi);
 		
 		dvosmjernaIzbrisi = new JTextField();
+		dvosmjernaIzbrisi.setEditable(false);
 		dvosmjernaIzbrisi.setColumns(10);
 		dvosmjernaIzbrisi.setBounds(380, 248, 116, 20);
 		panel_2.add(dvosmjernaIzbrisi);
@@ -854,10 +857,6 @@ public class AutobuskeLinijeForma {
 		pronadjiIzbrisiBtn.setBounds(304, 26, 89, 23);
 		panel_2.add(pronadjiIzbrisiBtn);
 		
-	
-
-		
-		
 		
 		JLabel label_16 = new JLabel("KM");
 		label_16.setBounds(506, 209, 26, 14);
@@ -898,11 +897,13 @@ public class AutobuskeLinijeForma {
 		panel_2.add(label_23);
 		
 		polazisteIzbrisi = new JTextField();
+		polazisteIzbrisi.setEditable(false);
 		polazisteIzbrisi.setColumns(10);
 		polazisteIzbrisi.setBounds(138, 84, 116, 20);
 		panel_2.add(polazisteIzbrisi);
 		
 		odredisteIzbrisi = new JTextField();
+		odredisteIzbrisi.setEditable(false);
 		odredisteIzbrisi.setColumns(10);
 		odredisteIzbrisi.setBounds(138, 123, 116, 20);
 		panel_2.add(odredisteIzbrisi);
@@ -932,6 +933,7 @@ public class AutobuskeLinijeForma {
 	
 		
 		vrijemeIzbrisi = new JTextField();
+		vrijemeIzbrisi.setEditable(false);
 		vrijemeIzbrisi.setColumns(10);
 		vrijemeIzbrisi.setBounds(138, 291, 116, 20);
 		panel_2.add(vrijemeIzbrisi);
@@ -964,6 +966,7 @@ public class AutobuskeLinijeForma {
 				dvosmjernaIzbrisi.setText("");
 				vrijemeIzbrisi.setText("");
 				polazakIzbrisiDate.setDate(null);
+				pronadiIzbrisiSpinner.setValue(0);
 				
 				}
 				catch(Exception ex1)

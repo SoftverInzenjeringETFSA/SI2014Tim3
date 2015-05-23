@@ -71,34 +71,34 @@ public class HibernateAutibuskaLinija {
 		}
 
 		
-			if( !v.validirajBrojPerona(String.valueOf(peronlinije))&& String.valueOf(peronlinije).length()==0) {
+			if((peronlinije<=0 || peronlinije<=6) || String.valueOf(peronlinije).length()==0) {
 				peron=1;
 				string+="Broj perona mora biti pozitivan broj i <= od 6!";
 				
 			}
-		if(  distancalinije<=0 && distanca1.length()==0) {
+		if(  distancalinije<=0 || distanca1.length()==0) {
 			distanca=1;
 			string+=" Distanca mora biti pozitivan broj!";
 			
 		}
-		if( trajanjelinije<=0 && String.valueOf(trajanjelinije).length()==0) {
+		if( trajanjelinije<=0 || String.valueOf(trajanjelinije).length()==0) {
 			trajanje=1;
 			string+=" Trajanje mora biti pozitivan broj!";
 			
 		}
-		if( !v.validirajCijenuKarte(cijenajednosmjernakarta) && String.valueOf(cijenajednosmjernakarta).length()==0) {
+		if( !v.validirajCijenuKarte(cijenajednosmjernakarta) || String.valueOf(cijenajednosmjernakarta).length()==0) {
 			jkarta=1;
 			string+=" Cijena jednosmjerne karte mora biti pozitivan broj i manja od 300!";
 			
 		}
 		
-		if(!v.validirajCijenuKarte(cijenadvosmjernakarta) && String.valueOf(cijenadvosmjernakarta).length()==0) {
+		if(!v.validirajCijenuKarte(cijenadvosmjernakarta) || String.valueOf(cijenadvosmjernakarta).length()==0) {
 			dkarta=1;
 			string+=" Cjena dvosmjerne karte mora biti pozitivan broj!";
 			
 		}
 		
-		if( brojlinije<=0 && String.valueOf(brojlinije).length()==0) {
+		if( brojlinije<=0 ||  String.valueOf(brojlinije).length()==0) {
 			brlinije=1;
 			string+=" Broj linije mora biti pozitivan broj!";
 			
