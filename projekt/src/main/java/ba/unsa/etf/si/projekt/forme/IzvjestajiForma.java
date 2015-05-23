@@ -134,11 +134,13 @@ public class IzvjestajiForma {
 		panel.add(pocetniProdaneDate);
 		
 		JLabel label_8 = new JLabel("Početni datum:");
-		label_8.setBounds(93, 53, 72, 14);
+		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_8.setBounds(54, 53, 112, 14);
 		panel.add(label_8);
 		
 		JLabel label_9 = new JLabel("Krajnji datum:");
-		label_9.setBounds(94, 100, 72, 14);
+		label_9.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_9.setBounds(55, 100, 111, 14);
 		panel.add(label_9);
 		
 		final JDateChooser krajnjiProdaneDate = new JDateChooser();
@@ -213,11 +215,13 @@ public class IzvjestajiForma {
 		panel_1.add(pocetniLinijeDate);
 		
 		JLabel label = new JLabel("Početni datum:");
-		label.setBounds(89, 14, 72, 14);
+		label.setHorizontalAlignment(SwingConstants.TRAILING);
+		label.setBounds(50, 14, 112, 14);
 		panel_1.add(label);
 		
 		JLabel label_1 = new JLabel("Krajnji datum:");
-		label_1.setBounds(90, 61, 72, 14);
+		label_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_1.setBounds(51, 61, 111, 14);
 		panel_1.add(label_1);
 		
 		final JDateChooser krajnjiLinijeDate = new JDateChooser();
@@ -231,7 +235,8 @@ public class IzvjestajiForma {
 		panel_1.add(pocetnoVrijemeSati);
 		
 		JLabel label_2 = new JLabel("Početno vrijeme:");
-		label_2.setBounds(72, 106, 89, 14);
+		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_2.setBounds(33, 106, 129, 14);
 		panel_1.add(label_2);
 		
 		pocetnoVrijemeMinute = new JTextField();
@@ -250,7 +255,8 @@ public class IzvjestajiForma {
 		panel_1.add(krajnjeVrijemeSati);
 		
 		JLabel label_3 = new JLabel("Krajnje vrijeme:");
-		label_3.setBounds(79, 152, 82, 14);
+		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_3.setBounds(40, 152, 122, 14);
 		panel_1.add(label_3);
 		
 		JLabel label_4 = new JLabel("h");
@@ -355,7 +361,7 @@ public class IzvjestajiForma {
 		panel_2.add(JMBGVozac);
 		
 		JLabel lblImeVozaa = new JLabel("JMBG:");
-		lblImeVozaa.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblImeVozaa.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblImeVozaa.setBounds(135, 70, 59, 14);
 		panel_2.add(lblImeVozaa);
 		

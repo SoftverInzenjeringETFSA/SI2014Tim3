@@ -23,6 +23,7 @@ import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 public class PrijavaForma {
 
@@ -78,11 +79,13 @@ public class PrijavaForma {
 		frmPrijava.getContentPane().add(sifra);
 		
 		JLabel lblNewLabel = new JLabel("Korisničko ime:");
-		lblNewLabel.setBounds(71, 94, 70, 14);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblNewLabel.setBounds(47, 94, 108, 14);
 		frmPrijava.getContentPane().add(lblNewLabel);
 		
 		JLabel lblifra = new JLabel("Šifra:");
-		lblifra.setBounds(115, 140, 26, 14);
+		lblifra.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblifra.setBounds(91, 140, 64, 14);
 		frmPrijava.getContentPane().add(lblifra);
 		
 		JLabel lblDobrodoli = new JLabel("Dobrodošli!");

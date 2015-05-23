@@ -21,6 +21,7 @@ import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+import javax.swing.SwingConstants;
 
 public class RadniciForma {
 
@@ -116,19 +117,23 @@ public class RadniciForma {
 		dodajRadnikaTab.add(tipDodajCombo);
 		
 		JLabel lblIme = new JLabel("Ime:");
-		lblIme.setBounds(103, 29, 22, 14);
+		lblIme.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblIme.setBounds(96, 29, 45, 14);
 		dodajRadnikaTab.add(lblIme);
 		
 		JLabel lblPrezime = new JLabel("Prezime:");
-		lblPrezime.setBounds(79, 67, 46, 14);
+		lblPrezime.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblPrezime.setBounds(77, 67, 64, 14);
 		dodajRadnikaTab.add(lblPrezime);
 		
 		JLabel lblJmbg = new JLabel("JMBG:");
-		lblJmbg.setBounds(93, 105, 34, 14);
+		lblJmbg.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblJmbg.setBounds(88, 105, 53, 14);
 		dodajRadnikaTab.add(lblJmbg);
 		
 		JLabel lblTipRadnogMjesta = new JLabel("Tip radnog mjesta:");
-		lblTipRadnogMjesta.setBounds(32, 149, 101, 14);
+		lblTipRadnogMjesta.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblTipRadnogMjesta.setBounds(28, 149, 113, 14);
 		dodajRadnikaTab.add(lblTipRadnogMjesta);
 		
 		final JButton dodajBtn = new JButton("Dodaj");
@@ -241,11 +246,13 @@ public class RadniciForma {
 		modifikujRadnikaTab.add(imeModifikuj);
 		
 		JLabel label = new JLabel("Ime:");
-		label.setBounds(113, 84, 22, 14);
+		label.setHorizontalAlignment(SwingConstants.TRAILING);
+		label.setBounds(97, 84, 54, 14);
 		modifikujRadnikaTab.add(label);
 		
 		JLabel label_1 = new JLabel("Prezime:");
-		label_1.setBounds(89, 122, 46, 14);
+		label_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_1.setBounds(78, 122, 73, 14);
 		modifikujRadnikaTab.add(label_1);
 		
 		prezimeModifikuj = new JTextField();
@@ -254,7 +261,8 @@ public class RadniciForma {
 		modifikujRadnikaTab.add(prezimeModifikuj);
 		
 		JLabel label_3 = new JLabel("Tip radnog mjesta:");
-		label_3.setBounds(40, 167, 101, 14);
+		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_3.setBounds(23, 167, 128, 14);
 		modifikujRadnikaTab.add(label_3);
 		
 		final JComboBox tipModifikujCombo = new JComboBox();
@@ -319,7 +327,8 @@ public class RadniciForma {
 		modifikujRadnikaTab.add(modifikujBtn);
 		
 		JLabel lblRadnik = new JLabel("JMBG radnika:");
-		lblRadnik.setBounds(52, 36, 68, 14);
+		lblRadnik.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblRadnik.setBounds(23, 36, 96, 14);
 		modifikujRadnikaTab.add(lblRadnik);
 		
 		jmbgModifikujPronadji = new JTextField();
@@ -369,7 +378,8 @@ public class RadniciForma {
 		izbrisiRadnikaTab.setLayout(null);
 		
 		JLabel label_4 = new JLabel("JMBG radnika:");
-		label_4.setBounds(46, 36, 68, 14);
+		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_4.setBounds(21, 36, 89, 14);
 		izbrisiRadnikaTab.add(label_4);
 		
 		jmbgIzbrisiPronadi = new JTextField();
@@ -465,15 +475,18 @@ public class RadniciForma {
 		izbrisiRadnikaTab.add(izbrisiBtn);
 		
 		JLabel label_5 = new JLabel("Tip radnog mjesta:");
-		label_5.setBounds(36, 165, 101, 14);
+		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_5.setBounds(21, 165, 124, 14);
 		izbrisiRadnikaTab.add(label_5);
 		
 		JLabel label_7 = new JLabel("Prezime:");
-		label_7.setBounds(85, 122, 46, 14);
+		label_7.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_7.setBounds(79, 122, 66, 14);
 		izbrisiRadnikaTab.add(label_7);
 		
 		JLabel label_8 = new JLabel("Ime:");
-		label_8.setBounds(107, 84, 22, 14);
+		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_8.setBounds(98, 84, 47, 14);
 		izbrisiRadnikaTab.add(label_8);
 		
 		JButton odjavaBtn = new JButton("Odjava");

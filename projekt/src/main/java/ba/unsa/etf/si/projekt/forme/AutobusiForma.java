@@ -28,6 +28,7 @@ import java.awt.event.ActionEvent;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+import javax.swing.SwingConstants;
 
 public class AutobusiForma {
 
@@ -82,7 +83,7 @@ public class AutobusiForma {
 	private void initialize() {
 		frmEvidencijaAutobusa = new JFrame();
 		frmEvidencijaAutobusa.setTitle("Evidencija autobusa");
-		frmEvidencijaAutobusa.setBounds(100, 100, 557, 434);
+		frmEvidencijaAutobusa.setBounds(100, 100, 603, 434);
 		frmEvidencijaAutobusa.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmEvidencijaAutobusa.getContentPane().setLayout(null);
 		
@@ -94,7 +95,7 @@ public class AutobusiForma {
 				setVisible(false);
 			}
 		});
-		odjavaBtn.setBounds(428, 11, 89, 23);
+		odjavaBtn.setBounds(488, 11, 89, 23);
 		frmEvidencijaAutobusa.getContentPane().add(odjavaBtn);
 		
 		JButton nazadBtn = new JButton("Nazad");
@@ -111,11 +112,11 @@ public class AutobusiForma {
 				}
 			}
 		});
-		nazadBtn.setBounds(329, 11, 89, 23);
+		nazadBtn.setBounds(389, 11, 89, 23);
 		frmEvidencijaAutobusa.getContentPane().add(nazadBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(23, 53, 494, 331);
+		tabbedPane.setBounds(10, 53, 567, 331);
 		frmEvidencijaAutobusa.getContentPane().add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -128,7 +129,8 @@ public class AutobusiForma {
 		modelDodaj.setColumns(10);
 		
 		JLabel lblModel = new JLabel("Model:");
-		lblModel.setBounds(157, 74, 32, 14);
+		lblModel.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblModel.setBounds(114, 74, 75, 14);
 		panel.add(lblModel);
 		
 		 final JSpinner kapacitetDodajSpinner = new JSpinner();
@@ -136,7 +138,8 @@ public class AutobusiForma {
 		panel.add(kapacitetDodajSpinner);
 		
 		JLabel lblKapacitet = new JLabel("Kapacitet:");
-		lblKapacitet.setBounds(140, 110, 49, 14);
+		lblKapacitet.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblKapacitet.setBounds(100, 110, 89, 14);
 		panel.add(lblKapacitet);
 		
 		registracijeDodaj = new JTextField();
@@ -145,7 +148,8 @@ public class AutobusiForma {
 		registracijeDodaj.setColumns(10);
 		
 		JLabel lblRegistracije = new JLabel("Registracije:");
-		lblRegistracije.setBounds(129, 143, 60, 14);
+		lblRegistracije.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblRegistracije.setBounds(78, 143, 111, 14);
 		panel.add(lblRegistracije);
 		
 		
@@ -236,11 +240,11 @@ public class AutobusiForma {
 		panel_1.setLayout(null);
 		
 		final JSpinner kapacitetModifikujSpinner = new JSpinner();
-		kapacitetModifikujSpinner.setBounds(324, 83, 155, 20);
+		kapacitetModifikujSpinner.setBounds(390, 83, 155, 20);
 		panel_1.add(kapacitetModifikujSpinner);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 47, 238, 245);
+		scrollPane.setBounds(10, 47, 267, 245);
 		panel_1.add(scrollPane);
 		
 		
@@ -278,25 +282,28 @@ public class AutobusiForma {
 		panel_1.add(lblAutobusi);
 		
 		JLabel label = new JLabel("Model:");
-		label.setBounds(282, 50, 32, 14);
+		label.setHorizontalAlignment(SwingConstants.TRAILING);
+		label.setBounds(303, 50, 78, 14);
 		panel_1.add(label);
 		
 		modelModifikuj = new JTextField();
 		modelModifikuj.setColumns(10);
-		modelModifikuj.setBounds(324, 47, 155, 20);
+		modelModifikuj.setBounds(390, 47, 155, 20);
 		panel_1.add(modelModifikuj);
 				
 		JLabel label_1 = new JLabel("Kapacitet:");
-		label_1.setBounds(265, 86, 49, 14);
+		label_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_1.setBounds(294, 86, 87, 14);
 		panel_1.add(label_1);
 		
 		JLabel label_2 = new JLabel("Registracije:");
-		label_2.setBounds(254, 119, 60, 14);
+		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_2.setBounds(296, 119, 85, 14);
 		panel_1.add(label_2);
 		
 		registracijeModifikuj = new JTextField();
 		registracijeModifikuj.setColumns(10);
-		registracijeModifikuj.setBounds(324, 116, 155, 20);
+		registracijeModifikuj.setBounds(390, 116, 155, 20);
 		panel_1.add(registracijeModifikuj);
 		
 		final JButton izmijeniBtn = new JButton("Izmijeni");
@@ -363,7 +370,7 @@ public class AutobusiForma {
 				//autobusiModifikujLista.clearSelection();
 			}
 		});
-		izmijeniBtn.setBounds(390, 269, 89, 23);
+		izmijeniBtn.setBounds(456, 269, 89, 23);
 		panel_1.add(izmijeniBtn);
 		
 		JPanel panel_2 = new JPanel();
@@ -371,10 +378,12 @@ public class AutobusiForma {
 		panel_2.setLayout(null);
 		
 		JLabel label_3 = new JLabel("Model:");
-		label_3.setBounds(144, 101, 32, 14);
+		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_3.setBounds(87, 101, 89, 14);
 		panel_2.add(label_3);
 		
 		modelIzbrisi = new JTextField();
+		modelIzbrisi.setEditable(false);
 		modelIzbrisi.setColumns(10);
 		modelIzbrisi.setBounds(186, 98, 155, 20);
 		panel_2.add(modelIzbrisi);
@@ -384,14 +393,17 @@ public class AutobusiForma {
 		panel_2.add(kapacitetIzbrisi);
 		
 		JLabel label_4 = new JLabel("Kapacitet:");
-		label_4.setBounds(127, 137, 49, 14);
+		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_4.setBounds(99, 137, 77, 14);
 		panel_2.add(label_4);
 		
 		JLabel label_5 = new JLabel("Registracije:");
-		label_5.setBounds(116, 170, 60, 14);
+		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_5.setBounds(87, 170, 89, 14);
 		panel_2.add(label_5);
 		
 		registracijeIzbrisi = new JTextField();
+		registracijeIzbrisi.setEditable(false);
 		registracijeIzbrisi.setColumns(10);
 		registracijeIzbrisi.setBounds(186, 167, 155, 20);
 		panel_2.add(registracijeIzbrisi);
@@ -436,7 +448,8 @@ public class AutobusiForma {
 		panel_2.add(izbrisiBtn);
 		
 		JLabel label_6 = new JLabel("Registracije:");
-		label_6.setBounds(85, 46, 60, 14);
+		label_6.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_6.setBounds(56, 46, 89, 14);
 		panel_2.add(label_6);
 		
 		registracijePretraga = new JTextField();

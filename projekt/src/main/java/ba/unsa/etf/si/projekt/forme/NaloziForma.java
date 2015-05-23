@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
 import java.util.Calendar;
+import javax.swing.SwingConstants;
 
 public class NaloziForma {
 
@@ -76,7 +77,7 @@ public class NaloziForma {
 	private void initialize() {
 		frmPravljenjeNaloga = new JFrame();
 		frmPravljenjeNaloga.setTitle("Pravljenje naloga");
-		frmPravljenjeNaloga.setBounds(100, 100, 552, 392);
+		frmPravljenjeNaloga.setBounds(100, 100, 582, 392);
 		frmPravljenjeNaloga.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmPravljenjeNaloga.getContentPane().setLayout(null);
 		
@@ -117,7 +118,7 @@ public class NaloziForma {
 				}
 			}
 		});
-		nazadBtn.setBounds(338, 11, 89, 23);
+		nazadBtn.setBounds(368, 11, 89, 23);
 		frmPravljenjeNaloga.getContentPane().add(nazadBtn);
 		
 		JButton odjavaBtn = new JButton("Odjava");
@@ -128,7 +129,7 @@ public class NaloziForma {
 				setVisible(false);
 			}
 		});
-		odjavaBtn.setBounds(437, 11, 89, 23);
+		odjavaBtn.setBounds(467, 11, 89, 23);
 		frmPravljenjeNaloga.getContentPane().add(odjavaBtn);
 		
 		JLabel lblAutobuskeLinije = new JLabel("Autobuske linije:");
@@ -137,20 +138,22 @@ public class NaloziForma {
 		frmPravljenjeNaloga.getContentPane().add(lblAutobuskeLinije);
 		
 		final JDateChooser datumDate = new JDateChooser();
-		datumDate.setBounds(410, 86, 116, 20);
+		datumDate.setBounds(428, 86, 116, 20);
 		frmPravljenjeNaloga.getContentPane().add(datumDate);
 		
 		vrijeme = new JTextField();
 		vrijeme.setColumns(10);
-		vrijeme.setBounds(410, 129, 116, 20);
+		vrijeme.setBounds(428, 129, 116, 20);
 		frmPravljenjeNaloga.getContentPane().add(vrijeme);
 		
 		JLabel label = new JLabel("Vrijeme polaska:");
-		label.setBounds(322, 132, 78, 14);
+		label.setHorizontalAlignment(SwingConstants.TRAILING);
+		label.setBounds(318, 132, 100, 14);
 		frmPravljenjeNaloga.getContentPane().add(label);
 		
 		JLabel label_1 = new JLabel("Datum polaska:");
-		label_1.setBounds(322, 88, 78, 14);
+		label_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_1.setBounds(318, 88, 100, 14);
 		frmPravljenjeNaloga.getContentPane().add(label_1);
 		
 		final JButton napraviBtn = new JButton("Napravi nalog");
@@ -216,7 +219,7 @@ public class NaloziForma {
 				}
 			}
 		});
-		napraviBtn.setBounds(410, 319, 116, 23);
+		napraviBtn.setBounds(440, 319, 116, 23);
 		frmPravljenjeNaloga.getContentPane().add(napraviBtn);
 	}
 	

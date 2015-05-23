@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.SwingConstants;
 
 public class AutobuskeLinijeForma {
 
@@ -98,7 +99,7 @@ public class AutobuskeLinijeForma {
 	private void initialize() {
 		frmAutobuskeLinije = new JFrame();
 		frmAutobuskeLinije.setTitle("Autobuske linije");
-		frmAutobuskeLinije.setBounds(100, 100, 551, 506);
+		frmAutobuskeLinije.setBounds(100, 100, 583, 506);
 		frmAutobuskeLinije.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAutobuskeLinije.getContentPane().setLayout(null);
 		
@@ -110,7 +111,7 @@ public class AutobuskeLinijeForma {
 				setVisible(false);
 			}
 		});
-		odjavaBtn.setBounds(433, 11, 89, 23);
+		odjavaBtn.setBounds(468, 11, 89, 23);
 		frmAutobuskeLinije.getContentPane().add(odjavaBtn);
 		
 		JButton nazadBtn = new JButton("Nazad");
@@ -127,11 +128,11 @@ public class AutobuskeLinijeForma {
 				}
 			}
 		});
-		nazadBtn.setBounds(334, 11, 89, 23);
+		nazadBtn.setBounds(369, 11, 89, 23);
 		frmAutobuskeLinije.getContentPane().add(nazadBtn);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(20, 64, 502, 400);
+		tabbedPane.setBounds(10, 64, 547, 400);
 		frmAutobuskeLinije.getContentPane().add(tabbedPane);
 		
 		JPanel panel = new JPanel();
@@ -139,117 +140,129 @@ public class AutobuskeLinijeForma {
 		panel.setLayout(null);
 		
 		polazisteDodaj = new JTextField();
-		polazisteDodaj.setBounds(109, 29, 116, 20);
+		polazisteDodaj.setBounds(138, 29, 116, 20);
 		panel.add(polazisteDodaj);
 		polazisteDodaj.setColumns(10);
 		
 		JLabel lblPolazite = new JLabel("Polazište:");
-		lblPolazite.setBounds(53, 32, 46, 14);
+		lblPolazite.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblPolazite.setBounds(50, 32, 78, 14);
 		panel.add(lblPolazite);
 		
 		odredisteDodaj = new JTextField();
-		odredisteDodaj.setBounds(109, 68, 116, 20);
+		odredisteDodaj.setBounds(138, 68, 116, 20);
 		panel.add(odredisteDodaj);
 		odredisteDodaj.setColumns(10);
 		
 		JLabel lblOdredite = new JLabel("Odredište:");
-		lblOdredite.setBounds(48, 71, 51, 14);
+		lblOdredite.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblOdredite.setBounds(50, 71, 78, 14);
 		panel.add(lblOdredite);
 		
 		JLabel lblRegistracije = new JLabel("Autobus:");
-		lblRegistracije.setBounds(53, 112, 46, 14);
+		lblRegistracije.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblRegistracije.setBounds(39, 112, 89, 14);
 		panel.add(lblRegistracije);
 		
 		vrijemeDodaj = new JTextField();
-		vrijemeDodaj.setBounds(109, 236, 116, 20);
+		vrijemeDodaj.setBounds(138, 236, 116, 20);
 		panel.add(vrijemeDodaj);
 		vrijemeDodaj.setColumns(10);
 		
 		final JDateChooser datumDodajDate = new JDateChooser();
-		datumDodajDate.setBounds(109, 193, 116, 20);
+		datumDodajDate.setBounds(138, 193, 116, 20);
 		panel.add(datumDodajDate);
 		
 		JLabel lblImeVozaa = new JLabel("Vozač:");
-		lblImeVozaa.setBounds(67, 154, 32, 14);
+		lblImeVozaa.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblImeVozaa.setBounds(50, 154, 78, 14);
 		panel.add(lblImeVozaa);
 		
 		JLabel lblDatumPolaska = new JLabel("Datum polaska:");
-		lblDatumPolaska.setBounds(21, 195, 78, 14);
+		lblDatumPolaska.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDatumPolaska.setBounds(30, 195, 98, 14);
 		panel.add(lblDatumPolaska);
 		
 		JLabel lblVrijemePolaska = new JLabel("Vrijeme polaska:");
-		lblVrijemePolaska.setBounds(21, 239, 78, 14);
+		lblVrijemePolaska.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblVrijemePolaska.setBounds(30, 239, 98, 14);
 		panel.add(lblVrijemePolaska);
 		
 		JLabel lblPeron = new JLabel("Peron:");
-		lblPeron.setBounds(294, 32, 32, 14);
+		lblPeron.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblPeron.setBounds(306, 32, 71, 14);
 		panel.add(lblPeron);
 		
 		final JSpinner peronDodajSpinner = new JSpinner();
-		peronDodajSpinner.setBounds(336, 29, 116, 20);
+		peronDodajSpinner.setBounds(384, 29, 116, 20);
 		panel.add(peronDodajSpinner);
 		
 		JLabel lblDistanca = new JLabel("Distanca:");
-		lblDistanca.setBounds(280, 71, 46, 14);
+		lblDistanca.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDistanca.setBounds(299, 71, 78, 14);
 		panel.add(lblDistanca);
 		
 		final JSpinner distancaDodajSpinner = new JSpinner();
-		distancaDodajSpinner.setBounds(336, 68, 116, 20);
+		distancaDodajSpinner.setBounds(384, 68, 116, 20);
 		panel.add(distancaDodajSpinner);
 		
 		JLabel lblKm = new JLabel("km");
-		lblKm.setBounds(463, 71, 46, 14);
+		lblKm.setBounds(511, 71, 21, 14);
 		panel.add(lblKm);
 		
 		trajanjeDodaj = new JTextField();
-		trajanjeDodaj.setBounds(336, 109, 116, 20);
+		trajanjeDodaj.setBounds(384, 109, 116, 20);
 		panel.add(trajanjeDodaj);
 		trajanjeDodaj.setColumns(10);
 		
 		JLabel lblTrajanje = new JLabel("Trajanje:");
-		lblTrajanje.setBounds(280, 112, 46, 14);
+		lblTrajanje.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblTrajanje.setBounds(306, 112, 71, 14);
 		panel.add(lblTrajanje);
 		
 		JLabel lblH = new JLabel("h");
-		lblH.setBounds(463, 112, 46, 14);
+		lblH.setBounds(511, 112, 21, 14);
 		panel.add(lblH);
 		
 		final JSpinner brojDodajSpinner = new JSpinner();
-		brojDodajSpinner.setBounds(336, 151, 116, 20);
+		brojDodajSpinner.setBounds(384, 151, 116, 20);
 		panel.add(brojDodajSpinner);
 		
 		JLabel lblBrojLinije = new JLabel("Broj linije:");
-		lblBrojLinije.setBounds(275, 154, 51, 14);
+		lblBrojLinije.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblBrojLinije.setBounds(306, 154, 71, 14);
 		panel.add(lblBrojLinije);
 		
 		jednosmjernaDodaj = new JTextField();
 		jednosmjernaDodaj.setColumns(10);
-		jednosmjernaDodaj.setBounds(336, 193, 116, 20);
+		jednosmjernaDodaj.setBounds(384, 193, 116, 20);
 		panel.add(jednosmjernaDodaj);
 		
 		JLabel lblCijenaJednosmjerne = new JLabel("Jednosmjerna:");
-		lblCijenaJednosmjerne.setBounds(255, 196, 71, 14);
+		lblCijenaJednosmjerne.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblCijenaJednosmjerne.setBounds(288, 196, 89, 14);
 		panel.add(lblCijenaJednosmjerne);
 		
 		JLabel lblKm_1 = new JLabel("KM");
-		lblKm_1.setBounds(463, 196, 46, 14);
+		lblKm_1.setBounds(511, 196, 21, 14);
 		panel.add(lblKm_1);
 		
 		JLabel lblDvosmjerna = new JLabel("Dvosmjerna:");
-		lblDvosmjerna.setBounds(265, 239, 71, 14);
+		lblDvosmjerna.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDvosmjerna.setBounds(288, 239, 89, 14);
 		panel.add(lblDvosmjerna);
 		
 		dvosmjernaDodaj = new JTextField();
 		dvosmjernaDodaj.setColumns(10);
-		dvosmjernaDodaj.setBounds(336, 236, 116, 20);
+		dvosmjernaDodaj.setBounds(384, 236, 116, 20);
 		panel.add(dvosmjernaDodaj);
 		
 		JLabel label_1 = new JLabel("KM");
-		label_1.setBounds(463, 239, 46, 14);
+		label_1.setBounds(511, 239, 21, 14);
 		panel.add(label_1);
 		
 		final JRadioButton medunarodnaDodaj = new JRadioButton("Međunarodna");
-		medunarodnaDodaj.setBounds(108, 282, 109, 23);
+		medunarodnaDodaj.setBounds(137, 282, 109, 23);
 		panel.add(medunarodnaDodaj);
 		
         final JComboBox autobusDodajCombo = new JComboBox(); //svi autobusiiiiiii
@@ -262,7 +275,7 @@ public class AutobuskeLinijeForma {
 			Autobus a=(Autobus)sviautobusi.get(i);
 		   autobusDodajCombo.addItem(a.getRegistracija());	
 		}
-		autobusDodajCombo.setBounds(109, 109, 116, 20);
+		autobusDodajCombo.setBounds(138, 109, 116, 20);
 		panel.add(autobusDodajCombo);
 		
 		final JComboBox vozacDodajCombo = new JComboBox();//svi radniciiii
@@ -274,7 +287,7 @@ public class AutobuskeLinijeForma {
 			if(r.dajTipRadnogMjesta().toString()=="Vozac")
 			vozacDodajCombo.addItem(r.getIme());
 		}
-		vozacDodajCombo.setBounds(109, 151, 116, 20);
+		vozacDodajCombo.setBounds(138, 151, 116, 20);
 		panel.add(vozacDodajCombo);
 		
 		
@@ -392,7 +405,7 @@ public class AutobuskeLinijeForma {
 				}
 			}
 		});
-		dodajBtn.setBounds(398, 338, 89, 23);
+		dodajBtn.setBounds(443, 338, 89, 23);
 		panel.add(dodajBtn);
 		
 		
@@ -402,7 +415,8 @@ public class AutobuskeLinijeForma {
 		panel_1.setLayout(null);
 		
 		JLabel label = new JLabel("Broj linije:");
-		label.setBounds(115, 28, 51, 14);
+		label.setHorizontalAlignment(SwingConstants.TRAILING);
+		label.setBounds(77, 28, 89, 14);
 		panel_1.add(label);
 		
 		final JSpinner brojPretragaSpinner = new JSpinner();
@@ -418,11 +432,12 @@ public class AutobuskeLinijeForma {
 			Autobus a=(Autobus)sviautobusi1.get(i);
 		   autobusModifikujCombo.addItem(a.getRegistracija());	
 		}
-		autobusModifikujCombo.setBounds(98, 159, 116, 20);
+		autobusModifikujCombo.setBounds(141, 159, 116, 20);
 		panel_1.add(autobusModifikujCombo);
 		
 		JLabel label_5 = new JLabel("Vozač:");
-		label_5.setBounds(56, 204, 32, 14);
+		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_5.setBounds(66, 202, 60, 14);
 		panel_1.add(label_5);
 		
 		final JComboBox vozacModifikujCombo = new JComboBox();
@@ -434,28 +449,28 @@ public class AutobuskeLinijeForma {
 			if(r.dajTipRadnogMjesta().toString()=="Vozac")
 			vozacModifikujCombo.addItem(r.getIme());
 		}
-		vozacModifikujCombo.setBounds(98, 201, 116, 20);
+		vozacModifikujCombo.setBounds(141, 201, 116, 20);
 		panel_1.add(vozacModifikujCombo);
 		
 		final JRadioButton medunarodnaModifikuj = new JRadioButton("Međunarodna");
-		medunarodnaModifikuj.setBounds(332, 285, 109, 23);
+		medunarodnaModifikuj.setBounds(381, 285, 109, 23);
 		panel_1.add(medunarodnaModifikuj);
 		
 		final JSpinner peronModifikujSpinner = new JSpinner();
-		peronModifikujSpinner.setBounds(325, 79, 116, 20);
+		peronModifikujSpinner.setBounds(374, 79, 116, 20);
 		panel_1.add(peronModifikujSpinner);
 		
 		final JSpinner distancaModifikujSpinner = new JSpinner();
-		distancaModifikujSpinner.setBounds(325, 118, 116, 20);
+		distancaModifikujSpinner.setBounds(374, 118, 116, 20);
 		panel_1.add(distancaModifikujSpinner);
 		
 		final JDateChooser polazakModifikujDate = new JDateChooser();
-		polazakModifikujDate.setBounds(98, 243, 116, 20);
+		polazakModifikujDate.setBounds(141, 243, 116, 20);
 		panel_1.add(polazakModifikujDate);
 		
 		vrijemeModifikuj = new JTextField();
 		vrijemeModifikuj.setColumns(10);
-		vrijemeModifikuj.setBounds(98, 286, 116, 20);
+		vrijemeModifikuj.setBounds(141, 286, 116, 20);
 		panel_1.add(vrijemeModifikuj);
 		
 		final JButton pronadjiModifikujBtn = new JButton("Pronađi");
@@ -516,79 +531,89 @@ public class AutobuskeLinijeForma {
 		panel_1.add(pronadjiModifikujBtn);
 		
 		JLabel label_2 = new JLabel("Polazište:");
-		label_2.setBounds(42, 82, 46, 14);
+		label_2.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_2.setBounds(52, 80, 74, 14);
 		panel_1.add(label_2);
 		
 		polazisteModifikuj = new JTextField();
 		polazisteModifikuj.setColumns(10);
-		polazisteModifikuj.setBounds(98, 79, 116, 20);
+		polazisteModifikuj.setBounds(141, 79, 116, 20);
 		panel_1.add(polazisteModifikuj);
 		
 		odredisteModifikujBtn = new JTextField();
 		odredisteModifikujBtn.setColumns(10);
-		odredisteModifikujBtn.setBounds(98, 118, 116, 20);
+		odredisteModifikujBtn.setBounds(141, 118, 116, 20);
 		panel_1.add(odredisteModifikujBtn);
 		
 		JLabel label_3 = new JLabel("Odredište:");
-		label_3.setBounds(37, 121, 51, 14);
+		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_3.setBounds(47, 119, 79, 14);
 		panel_1.add(label_3);
 		
 		JLabel label_4 = new JLabel("Autobus:");
-		label_4.setBounds(42, 162, 46, 14);
+		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_4.setBounds(52, 160, 74, 14);
 		panel_1.add(label_4);
 		
 		
 		
 		
 		JLabel label_6 = new JLabel("Datum polaska:");
-		label_6.setBounds(10, 245, 78, 14);
+		label_6.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_6.setBounds(20, 243, 106, 14);
 		panel_1.add(label_6);
 		
 		
 		
 		JLabel label_7 = new JLabel("Vrijeme polaska:");
-		label_7.setBounds(10, 289, 78, 14);
+		label_7.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_7.setBounds(20, 287, 106, 14);
 		panel_1.add(label_7);
 		
 		
 		
 		JLabel label_8 = new JLabel("Dvosmjerna:");
-		label_8.setBounds(254, 246, 71, 14);
+		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_8.setBounds(277, 245, 87, 14);
 		panel_1.add(label_8);
 		
 		dvosmjernaModifikuj = new JTextField();
 		dvosmjernaModifikuj.setColumns(10);
-		dvosmjernaModifikuj.setBounds(325, 243, 116, 20);
+		dvosmjernaModifikuj.setBounds(374, 243, 116, 20);
 		panel_1.add(dvosmjernaModifikuj);
 		
 		jednosmjernaModifikuj = new JTextField();
 		jednosmjernaModifikuj.setColumns(10);
-		jednosmjernaModifikuj.setBounds(325, 200, 116, 20);
+		jednosmjernaModifikuj.setBounds(374, 200, 116, 20);
 		panel_1.add(jednosmjernaModifikuj);
 		
 		JLabel label_9 = new JLabel("Jednosmjerna:");
-		label_9.setBounds(244, 203, 71, 14);
+		label_9.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_9.setBounds(267, 202, 97, 14);
 		panel_1.add(label_9);
 		
 		trajanjeModifikuj = new JTextField();
 		trajanjeModifikuj.setColumns(10);
-		trajanjeModifikuj.setBounds(325, 159, 116, 20);
+		trajanjeModifikuj.setBounds(374, 159, 116, 20);
 		panel_1.add(trajanjeModifikuj);
 		
 		JLabel label_11 = new JLabel("Trajanje:");
-		label_11.setBounds(269, 162, 46, 14);
+		label_11.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_11.setBounds(292, 161, 72, 14);
 		panel_1.add(label_11);
 		
 		
 		
 		JLabel label_12 = new JLabel("Distanca:");
-		label_12.setBounds(269, 121, 46, 14);
+		label_12.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_12.setBounds(292, 120, 72, 14);
 		panel_1.add(label_12);
 		
 		
 		
 		JLabel label_13 = new JLabel("Peron:");
-		label_13.setBounds(283, 82, 32, 14);
+		label_13.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_13.setBounds(306, 81, 58, 14);
 		panel_1.add(label_13);
 		
 		final JButton modifikujBtn = new JButton("Spasi izmjene");
@@ -691,15 +716,15 @@ public class AutobuskeLinijeForma {
 				
 			}
 		});
-		modifikujBtn.setBounds(378, 338, 109, 23);
+		modifikujBtn.setBounds(423, 338, 109, 23);
 		panel_1.add(modifikujBtn);
 		
 		JLabel label_14 = new JLabel("KM");
-		label_14.setBounds(451, 204, 46, 14);
+		label_14.setBounds(500, 204, 32, 14);
 		panel_1.add(label_14);
 		
 		JLabel label_15 = new JLabel("KM");
-		label_15.setBounds(451, 249, 46, 14);
+		label_15.setBounds(500, 249, 32, 14);
 		panel_1.add(label_15);
 		
 		JPanel panel_2 = new JPanel();
@@ -707,7 +732,8 @@ public class AutobuskeLinijeForma {
 		panel_2.setLayout(null);
 		
 		JLabel label_10 = new JLabel("Broj linije:");
-		label_10.setBounds(115, 30, 51, 14);
+		label_10.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_10.setBounds(77, 30, 89, 14);
 		panel_2.add(label_10);
 		
 		final JSpinner pronadiIzbrisiSpinner = new JSpinner();
@@ -722,7 +748,7 @@ public class AutobuskeLinijeForma {
 			Autobus a=(Autobus)sviautobusi2.get(i);
 		   autobusIzbrisiCombo.addItem(a.getRegistracija());	
 		}
-		autobusIzbrisiCombo.setBounds(98, 161, 116, 20);
+		autobusIzbrisiCombo.setBounds(138, 164, 116, 20);
 		panel_2.add(autobusIzbrisiCombo);
 		
 		final JComboBox vozacIzbrisiCombo = new JComboBox();
@@ -734,38 +760,38 @@ public class AutobuskeLinijeForma {
 			if(r.dajTipRadnogMjesta().toString()=="Vozac")
 			vozacIzbrisiCombo.addItem(r.getIme());
 		}
-		vozacIzbrisiCombo.setBounds(98, 203, 116, 20);
+		vozacIzbrisiCombo.setBounds(138, 206, 116, 20);
 		panel_2.add(vozacIzbrisiCombo);
 		
 		final JSpinner peronIzbrisiSpinner = new JSpinner();
-		peronIzbrisiSpinner.setBounds(325, 81, 116, 20);
+		peronIzbrisiSpinner.setBounds(380, 84, 116, 20);
 		panel_2.add(peronIzbrisiSpinner);
 		
 		final JSpinner distancaIzbrisiSpinner = new JSpinner();
-		distancaIzbrisiSpinner.setBounds(325, 120, 116, 20);
+		distancaIzbrisiSpinner.setBounds(380, 123, 116, 20);
 		panel_2.add(distancaIzbrisiSpinner);
 		
 		final JRadioButton medunarodnaIzbrisi = new JRadioButton("Međunarodna");
-		medunarodnaIzbrisi.setBounds(332, 287, 109, 23);
+		medunarodnaIzbrisi.setBounds(387, 290, 109, 23);
 		panel_2.add(medunarodnaIzbrisi);
 		
 		trajanjeIzbrisi = new JTextField();
 		trajanjeIzbrisi.setColumns(10);
-		trajanjeIzbrisi.setBounds(325, 161, 116, 20);
+		trajanjeIzbrisi.setBounds(380, 164, 116, 20);
 		panel_2.add(trajanjeIzbrisi);
 		
 		jednosmjernaIzbrisi = new JTextField();
 		jednosmjernaIzbrisi.setColumns(10);
-		jednosmjernaIzbrisi.setBounds(325, 202, 116, 20);
+		jednosmjernaIzbrisi.setBounds(380, 205, 116, 20);
 		panel_2.add(jednosmjernaIzbrisi);
 		
 		dvosmjernaIzbrisi = new JTextField();
 		dvosmjernaIzbrisi.setColumns(10);
-		dvosmjernaIzbrisi.setBounds(325, 245, 116, 20);
+		dvosmjernaIzbrisi.setBounds(380, 248, 116, 20);
 		panel_2.add(dvosmjernaIzbrisi);
 		
 		final JDateChooser polazakIzbrisiDate = new JDateChooser();
-		polazakIzbrisiDate.setBounds(98, 245, 116, 20);
+		polazakIzbrisiDate.setBounds(138, 248, 116, 20);
 		panel_2.add(polazakIzbrisiDate);
 		
 		final JButton pronadjiIzbrisiBtn = new JButton("Pronađi");
@@ -832,74 +858,85 @@ public class AutobuskeLinijeForma {
 		
 		
 		JLabel label_16 = new JLabel("KM");
-		label_16.setBounds(451, 206, 46, 14);
+		label_16.setBounds(506, 209, 26, 14);
 		panel_2.add(label_16);
 		
 		JLabel label_17 = new JLabel("KM");
-		label_17.setBounds(451, 251, 46, 14);
+		label_17.setBounds(506, 254, 26, 14);
 		panel_2.add(label_17);
 		
 		JLabel label_18 = new JLabel("Peron:");
-		label_18.setBounds(283, 84, 32, 14);
+		label_18.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_18.setBounds(311, 86, 58, 14);
 		panel_2.add(label_18);
 		
 		JLabel label_19 = new JLabel("Distanca:");
-		label_19.setBounds(269, 123, 46, 14);
+		label_19.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_19.setBounds(297, 125, 72, 14);
 		panel_2.add(label_19);
 		
 		JLabel label_20 = new JLabel("Trajanje:");
-		label_20.setBounds(269, 164, 46, 14);
+		label_20.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_20.setBounds(297, 166, 72, 14);
 		panel_2.add(label_20);
 		
 		JLabel label_21 = new JLabel("Jednosmjerna:");
-		label_21.setBounds(244, 205, 71, 14);
+		label_21.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_21.setBounds(272, 207, 97, 14);
 		panel_2.add(label_21);
 		
 		JLabel label_22 = new JLabel("Dvosmjerna:");
-		label_22.setBounds(254, 248, 71, 14);
+		label_22.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_22.setBounds(282, 250, 87, 14);
 		panel_2.add(label_22);
 		
 		JLabel label_23 = new JLabel("Polazište:");
-		label_23.setBounds(42, 84, 46, 14);
+		label_23.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_23.setBounds(48, 86, 79, 14);
 		panel_2.add(label_23);
 		
 		polazisteIzbrisi = new JTextField();
 		polazisteIzbrisi.setColumns(10);
-		polazisteIzbrisi.setBounds(98, 81, 116, 20);
+		polazisteIzbrisi.setBounds(138, 84, 116, 20);
 		panel_2.add(polazisteIzbrisi);
 		
 		odredisteIzbrisi = new JTextField();
 		odredisteIzbrisi.setColumns(10);
-		odredisteIzbrisi.setBounds(98, 120, 116, 20);
+		odredisteIzbrisi.setBounds(138, 123, 116, 20);
 		panel_2.add(odredisteIzbrisi);
 		
 		JLabel label_24 = new JLabel("Odredište:");
-		label_24.setBounds(37, 123, 51, 14);
+		label_24.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_24.setBounds(43, 125, 84, 14);
 		panel_2.add(label_24);
 		
 		JLabel label_25 = new JLabel("Autobus:");
-		label_25.setBounds(42, 164, 46, 14);
+		label_25.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_25.setBounds(48, 166, 79, 14);
 		panel_2.add(label_25);
 		
 		
 		
 		JLabel label_26 = new JLabel("Vozač:");
-		label_26.setBounds(56, 206, 32, 14);
+		label_26.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_26.setBounds(62, 208, 65, 14);
 		panel_2.add(label_26);
 		
 		JLabel label_27 = new JLabel("Datum polaska:");
-		label_27.setBounds(10, 247, 78, 14);
+		label_27.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_27.setBounds(16, 249, 111, 14);
 		panel_2.add(label_27);
 		
 	
 		
 		vrijemeIzbrisi = new JTextField();
 		vrijemeIzbrisi.setColumns(10);
-		vrijemeIzbrisi.setBounds(98, 288, 116, 20);
+		vrijemeIzbrisi.setBounds(138, 291, 116, 20);
 		panel_2.add(vrijemeIzbrisi);
 		
 		JLabel label_28 = new JLabel("Vrijeme polaska:");
-		label_28.setBounds(10, 291, 78, 14);
+		label_28.setHorizontalAlignment(SwingConstants.TRAILING);
+		label_28.setBounds(16, 293, 111, 14);
 		panel_2.add(label_28);
 		
 		final JButton izbrisiBtn = new JButton("Izbriši");
@@ -935,7 +972,7 @@ public class AutobuskeLinijeForma {
 				
 			}
 		});
-		izbrisiBtn.setBounds(398, 338, 89, 23);
+		izbrisiBtn.setBounds(443, 338, 89, 23);
 		panel_2.add(izbrisiBtn);
 	}
 	
