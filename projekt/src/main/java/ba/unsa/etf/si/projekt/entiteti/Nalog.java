@@ -42,7 +42,7 @@ public class Nalog implements java.io.Serializable{
 		this.datumPolaska_godina = datumPolaska_godina;
 	}
 
-	public double getVrijemePolaska_sati() {
+	public int getVrijemePolaska_sati() {
 		return vrijemePolaska_sati;
 	}
 
@@ -50,7 +50,7 @@ public class Nalog implements java.io.Serializable{
 		this.vrijemePolaska_sati = vrijemePolaska_sati;
 	}
 
-	public double getVrijemePolaska_minute() {
+	public int getVrijemePolaska_minute() {
 		return vrijemePolaska_minute;
 	}
 
