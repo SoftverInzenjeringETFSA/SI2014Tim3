@@ -1,8 +1,10 @@
 package ba.unsa.etf.si.projekt.hibernate;
 
-import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+//import ba.unsa.etf.si.projekt.hibernate.HibernateUtil; 
+//nije ovo rijesilo problem
 import static org.junit.Assert.*;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -212,11 +214,14 @@ public class HibernateAutobusTest {
 	@Test
 	public void testSviAutobusi() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query q = session.createQuery("SELECT COUNT(*) FROM Autobus");
+		Long count = (Long)q.uniqueResult();
+		int izBaze = count.intValue();
 		HibernateAutobus a = new HibernateAutobus();
 		java.util.List autobusi;
 		autobusi = a.sviAutobusi(session);
 		int broj = autobusi.size();
-		assertEquals(3, broj); //bila 3 u bazi
+		assertEquals(broj, izBaze); 
 	}
 
 }
