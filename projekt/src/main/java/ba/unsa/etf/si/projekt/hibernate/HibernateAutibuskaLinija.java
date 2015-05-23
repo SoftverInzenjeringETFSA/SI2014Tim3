@@ -328,4 +328,13 @@ public class HibernateAutibuskaLinija {
 		
 	public HibernateAutibuskaLinija()
 	{}
+	public static void updateLinija(Session session,
+			AutobuskaLinija linija) {
+		Transaction t = session.beginTransaction();
+		
+		session.update(linija);
+		
+		t.commit();
+		
+	}
 }

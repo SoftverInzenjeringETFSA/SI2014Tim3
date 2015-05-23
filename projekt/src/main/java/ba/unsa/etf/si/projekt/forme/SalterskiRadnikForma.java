@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import ba.unsa.etf.si.projekt.dodatno.Java2sAutoComboBox;
+import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
@@ -52,6 +53,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
+import javax.transaction.Transaction;
+
 import java.awt.Toolkit;
 
 public class SalterskiRadnikForma implements ActionListener{
@@ -254,13 +257,40 @@ public class SalterskiRadnikForma implements ActionListener{
 					int godina=cal.get(Calendar.YEAR);
 					int mjesec=cal.get(Calendar.MONTH)+1;
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					
+					if (comboBox.getItemCount() == 0) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Nema odredišta!");
+						return;
+					}
+					if (comboBox_1.getItemCount() == 0) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Nema autobuske linije za to odredište!");
+						return;
+					}
+					
 					String[] vrijeme=comboBox_1.getSelectedItem().toString().split(":");
+					
+					if (vrijeme.length != 2) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Vrijeme mora biti u formatu sati:minute!");
+						return;
+					} else if (!Validacija.jeInt(vrijeme[0]) || !Validacija.jeInt(vrijeme[1])) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Sati i minute moraju biti cijeli brojevi!");
+						return;
+					}
+					
 					int sati=cal.get(Calendar.HOUR);
 					int minute=cal.get(Calendar.MINUTE);
-					AutobuskaLinija linija=new AutobuskaLinija();
+					
+					
+					AutobuskaLinija linija=null;
 					HibernateAutibuskaLinija linija1=new HibernateAutibuskaLinija();
 					linija=linija1.NadjiAutobuskuLinijuOdrediste(session, comboBox.getSelectedItem().toString(), godina, mjesec, dan, 
 							Integer.valueOf(vrijeme[0]), Integer.valueOf(vrijeme[1]));
+					
+					if (linija == null) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Ne postoji ta linija!");
+						return;
+					}
+					
 					double cijena=linija.getCijenaJednosmjerna();
 					if(jednosmjernaProdaja.isSelected()==false)
 					{
@@ -268,11 +298,18 @@ public class SalterskiRadnikForma implements ActionListener{
 						//cijenu u labelu upisat
 						cijena=linija.getCijenaDvosmjerna();
 						
-					}
+					}				
 					String ime = imeProdaja.getText();
 					String prezime = prezimeProdaja.getText();
 					
-					
+					if (linija.getMedjunarodna() && (ime.isEmpty() || prezime.isEmpty())) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Morate unijeti ime i prezime za međunarodnu liniju!");
+						return;
+					}
+					if (linija.getMedjunarodna() && (!Validacija.jeTekst(ime) || !Validacija.jeTekst(prezime))) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Ime i prezime sadrže samo slova!");
+						return;
+					}
 					
 					if (ime.isEmpty() && prezime.isEmpty() && !linija.getMedjunarodna()) {
 						karta.dodajKartu(session, linija, godina, mjesec, dan, sati, minute, k, cijena);
@@ -288,7 +325,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna prodaja.");
-					JOptionPane.showMessageDialog(prodajaBtn, ex);
+					//JOptionPane.showMessageDialog(prodajaBtn, ex);
 				}
 			}
 		});
@@ -356,13 +393,38 @@ public class SalterskiRadnikForma implements ActionListener{
 					int godina=cal.get(Calendar.YEAR);
 					int mjesec=cal.get(Calendar.MONTH)+1;
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					
+					if (comboBox_2.getItemCount() == 0) {
+						JOptionPane.showMessageDialog(rezervisiBtn, "Nema odredišta!");
+						return;
+					}
+					if (comboBox_3.getItemCount() == 0) {
+						JOptionPane.showMessageDialog(rezervisiBtn, "Nema autobuske linije za to odredište!");
+						return;
+					}
+					
 					String[] vrijeme=comboBox_3.getSelectedItem().toString().split(":");
+					
+					if (vrijeme.length != 2) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Vrijeme mora biti u formatu sati:minute!");
+						return;
+					} else if (!Validacija.jeInt(vrijeme[0]) || !Validacija.jeInt(vrijeme[1])) {
+						JOptionPane.showMessageDialog(rezervisiBtn, "Sati i minute moraju biti cijeli brojevi!");
+						return;
+					}
+					
 					int sati=cal.get(Calendar.HOUR);
 					int minute=cal.get(Calendar.MINUTE);
 					AutobuskaLinija linija=new AutobuskaLinija();
 					HibernateAutibuskaLinija linija1=new HibernateAutibuskaLinija();
 					linija=linija1.NadjiAutobuskuLinijuOdrediste(session, comboBox_2.getSelectedItem().toString(), godina, mjesec, dan, 
 							Integer.valueOf(vrijeme[0]), Integer.valueOf(vrijeme[1]));
+					
+					if (linija == null) {
+						JOptionPane.showMessageDialog(rezervisiBtn, "Ne postoji ta linija!");
+						return;
+					}
+					
 					double cijena=linija.getCijenaJednosmjerna();
 					if(jednosmjernaProdaja.isSelected()==false)
 					{
@@ -374,11 +436,23 @@ public class SalterskiRadnikForma implements ActionListener{
 					String ime = imeRezervacije.getText();
 					String prezime = prezimeRezervacije.getText();
 					
+					if (ime.isEmpty() || prezime.isEmpty()) {
+						JOptionPane.showMessageDialog(rezervisiBtn, "Morate unijeti ime i prezime za rezervaciju!");
+						return;
+					}
+					if (!Validacija.jeTekst(ime) || !Validacija.jeTekst(prezime)) {
+						JOptionPane.showMessageDialog(rezervisiBtn, "Ime i prezime sadrže samo slova!");
+						return;
+					}
+					
 					HibernateRezervacija.dodajRezervaciju(session, linija, godina, mjesec, dan, Integer.valueOf(vrijeme[0]), Integer.valueOf(vrijeme[1]), k, cijena, ime, prezime);
 					rezervacijeList.setModel(new AbstractListModel()
 					{
 						Session session = HibernateUtil.getSessionFactory().openSession();
 						java.util.List rezervacijelista=HibernateRezervacija.sveRezervacije(session);
+						
+						
+						
 						public int getSize() {
 							return rezervacijelista.size();
 						}
@@ -388,17 +462,16 @@ public class SalterskiRadnikForma implements ActionListener{
 						}
 					});
 					cijenaRezervacije.setText(String.valueOf(cijena));
-					JOptionPane.showMessageDialog(prodajaBtn, "Karta je rezervisan.");
+					JOptionPane.showMessageDialog(rezervisiBtn, "Karta je rezervisan.");
 				}
 					else
 					{
-				    	JOptionPane.showMessageDialog(prodajaBtn, izuzetak);	
+				    	JOptionPane.showMessageDialog(rezervisiBtn, izuzetak);	
 					}
 				}
 				catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna rezervacija.");
-					JOptionPane.showMessageDialog(prodajaBtn, ex);
 				}
 			}
 		});
@@ -592,12 +665,24 @@ public class SalterskiRadnikForma implements ActionListener{
 			public void actionPerformed(ActionEvent e) { //brisanje rezervacije
 				try
 				{
+					if (rezervacijeList.getSelectedIndex() == -1) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Morate odabrati rezervaciju");
+						return;
+					}
+					
+					
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					String odrediste=comboBox_4.getSelectedItem().toString();
 					String[] vrijeme=comboBox_5.getSelectedItem().toString().split(":");
 					int sati=Integer.valueOf(vrijeme[0]);
 					int minute=Integer.valueOf(vrijeme[1]);
 					TipKarte r=TipKarte.dvosmjerna;
+					
+					
+					if (datumModifikacijeDate.getDate() == null) {
+						JOptionPane.showMessageDialog(btnIsplati, "Morate unijeti datum!");
+						return;
+					}
 					
 					//datum
 					Date d=new Date();
@@ -606,13 +691,35 @@ public class SalterskiRadnikForma implements ActionListener{
 					int godina=cal.get(Calendar.YEAR);
 					int mjesec=cal.get(Calendar.MONTH)+1;
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
+					
+					
+					
 					AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
+					
+					if (linija == null) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Ne postoji ta linija!");
+						return;
+					}
+					
 					double cijena=linija.getCijenaDvosmjerna();
 					if(jednosmjernaModifikacije.isSelected()==true)
 					{
 					    r=TipKarte.jednosmjerna;
 					    cijena=linija.getCijenaJednosmjerna();
 					}
+					
+					String ime = textField.getText();
+					String prezime = textField_1.getText();
+					
+					if (ime.isEmpty() || prezime.isEmpty()) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Morate unijeti ime i prezime!");
+						return;
+					}
+					if (!Validacija.jeTekst(ime) || !Validacija.jeTekst(prezime)) {
+						JOptionPane.showMessageDialog(prodajaBtn, "Ime i prezime sadrže samo slova!");
+						return;
+					}
+					
 					if(linija!=null)
 					{
 						HibernateRezervacija.brisanjeRezervacije(session, linija, textField.getText(), textField_1.getText());
@@ -795,23 +902,59 @@ public class SalterskiRadnikForma implements ActionListener{
         	public void actionPerformed(ActionEvent e) {
         		Session session = HibernateUtil.getSessionFactory().openSession();
         		Calendar cal=Calendar.getInstance();
+        		
+        		if (datumRezervacijaDate.getDate() == null) {
+					JOptionPane.showMessageDialog(btnIsplati, "Morate unijeti datum!");
+					return;
+				}
+        		
 				cal.setTime(datumRezervacijaDate.getDate());
 				int godina=cal.get(Calendar.YEAR);
 				int mjesec=cal.get(Calendar.MONTH)+1;
 				int dan=cal.get(Calendar.DAY_OF_MONTH);
 				String[] vrijeme=comboBox_3.getSelectedItem().toString().split(":");
+				
+				if (vrijeme.length != 2) {
+					JOptionPane.showMessageDialog(btnIsplati, "Vrijeme mora biti u formatu sati:minute!");
+					return;
+				} else if (!Validacija.jeInt(vrijeme[0]) || !Validacija.jeInt(vrijeme[1])) {
+					JOptionPane.showMessageDialog(btnIsplati, "Sati i minute moraju biti cijeli brojevi!");
+					return;
+				}
+				
 				int sati = Integer.valueOf(vrijeme[0]);
 				int minute= Integer.valueOf(vrijeme[1]);
         				
         		AutobuskaLinija linija = HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, 
         				comboBox_2.getSelectedItem().toString(), godina, mjesec, dan, sati, minute);
         		
+        		if (linija == null) {
+					JOptionPane.showMessageDialog(btnIsplati, "Ne postoji ta linija!");
+					return;
+				}
+        		
         		String ime = imeRezervacije.getText();
         		String prezime = prezimeRezervacije.getText();
         		
+        		if (ime.isEmpty() || prezime.isEmpty()) {
+					JOptionPane.showMessageDialog(btnIsplati, "Morate unijeti ime i prezime za rezervaciju!");
+					return;
+				}
+				if (!Validacija.jeTekst(ime) || !Validacija.jeTekst(prezime)) {
+					JOptionPane.showMessageDialog(btnIsplati, "Ime i prezime sadrže samo slova!");
+					return;
+				}
+        		
         		linija.setZauzeto(linija.getZauzeto()-1);
         		
-        		HibernateRezervacija.brisanjeRezervacije(session, linija, ime, prezime);
+        		HibernateAutibuskaLinija.updateLinija(session, linija);
+        		
+        		try{       		
+        			HibernateRezervacija.brisanjeRezervacije(session, linija, ime, prezime);
+        		}
+        		catch(Exception ex){
+        			JOptionPane.showMessageDialog(btnIsplati, "Ne postoji ta rezervacija!");
+        		}
         		
         		TipKarte k = TipKarte.jednosmjerna;
         		
