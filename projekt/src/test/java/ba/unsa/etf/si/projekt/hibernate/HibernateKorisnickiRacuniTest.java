@@ -1,6 +1,7 @@
 package ba.unsa.etf.si.projekt.hibernate;
 
 import static org.junit.Assert.*;
+
 import org.hibernate.Query;
 
 import org.hibernate.Session;
@@ -17,10 +18,12 @@ public class HibernateKorisnickiRacuniTest {
 	public void testDodajKorisnickiRacun() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateKorisnickiRacuni hkr= new HibernateKorisnickiRacuni();
-		TipKorisnickogRacuna tkr=TipKorisnickogRacuna.menadzer;
-		HibernateRadnik.dodajRadnika(session, "Neko", "Nekic", "1712993176528", TipRadnogMjesta.Menadzer);
-		Radnik r= HibernateRadnik.nadjiRadnika(session, "1712993176528");
-		hkr.dodajKorisnickiRacun(session, r, tkr, "neko", "nekonnn1#");
+		TipRadnogMjesta mjesto=TipRadnogMjesta.SalterskiRadnik;
+		TipKorisnickogRacuna tkr=TipKorisnickogRacuna.salterskiRadnik;
+		HibernateRadnik.dodajRadnika(session, "Mujo", "Mujic", "1211990126582", mjesto);
+		Radnik r= HibernateRadnik.nadjiRadnika(session, "1211990126582");		
+		
+		hkr.dodajKorisnickiRacun(session, r, tkr, "mujo", "mujokujekonjapomjesecu1*");
 		
 		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
 		Long count =(Long)q.uniqueResult();
@@ -30,8 +33,8 @@ public class HibernateKorisnickiRacuniTest {
 		int br= racuni.size();
 		assertEquals(br,izBaze);
 		session.close();
-	}
-	*/
+	}*/
+	
 	@Test
 	public void testDodajKorisnickiRacunKImeException() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -71,24 +74,21 @@ public class HibernateKorisnickiRacuniTest {
 		session.close();
 	}
 	
-	/*@Test
+	@Test
 	public void testModifikujKorisnickiRacun() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateKorisnickiRacuni hkr= new HibernateKorisnickiRacuni();
 		TipRadnogMjesta mjesto=TipRadnogMjesta.SalterskiRadnik;
 		TipKorisnickogRacuna tkr=TipKorisnickogRacuna.salterskiRadnik;
-		Radnik r= new Radnik();
-		r.setIme("Mujo");
-		r.setPrezime("Mujic");
-		r.setJmbg("1211990126582");
-		r.setTipRadnogMjesta(mjesto);
+		HibernateRadnik.dodajRadnika(session, "Mujo", "Mujic", "1211990126582", mjesto);
+		Radnik r= HibernateRadnik.nadjiRadnika(session, "1211990126582");
 		
-		//hkr.dodajKorisnickiRacun(session, r, tkr, "mujo", "mujokujekonjapomjesecu1*");
-		hkr.modifikujKorisnickiRacun(session, "sumeja","mmujo","mujokujekonjapomjesecu1*", tkr);
+		hkr.dodajKorisnickiRacun(session, r, tkr, "mujo", "mujokujekonjapomjesecu1*");
+		hkr.modifikujKorisnickiRacun(session, "mujo","mmujo","mujokujekonjapomjesecu1*", tkr);
         KorisnickiRacun hib =hkr.nadjiKorisnickiRacun(session, "mmujo");
 		assertEquals("mmujo",hib.getKorisnickoIme());
 		session.close();
-	}*/
+	}
 	
 	@Test
 	public void testModifikujKorisnickiRacunKImeException() {
@@ -171,15 +171,15 @@ public class HibernateKorisnickiRacuniTest {
 	}
 	
 	
-	/*@Test
+/*	@Test
 	public void testNadjiKorisnickiRacun() {
-
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateKorisnickiRacuni hkr= new HibernateKorisnickiRacuni();
-		TipKorisnickogRacuna tkr=TipKorisnickogRacuna.menadzer;
-		HibernateRadnik.dodajRadnika(session, "Neko", "Nekic", "1712993176528", TipRadnogMjesta.Menadzer);
-		Radnik r= HibernateRadnik.nadjiRadnikaPoImenu(session, "Neko");
-		hkr.dodajKorisnickiRacun(session, r,TipKorisnickogRacuna.menadzer, "neko", "nekonn1#");	
+		TipRadnogMjesta mjesto=TipRadnogMjesta.SalterskiRadnik;
+		TipKorisnickogRacuna tkr=TipKorisnickogRacuna.salterskiRadnik;
+		HibernateRadnik.dodajRadnika(session, "Mujo", "Mujic", "1211990126582", mjesto);
+		Radnik r= HibernateRadnik.nadjiRadnika(session, "1211990126582");
+		hkr.dodajKorisnickiRacun(session, r,tkr, "neko", "nekonn1#");	
 		KorisnickiRacun pronadjen= hkr.nadjiKorisnickiRacun(session, "neko");
 		assertEquals("neko",pronadjen.getKorisnickoIme());
 		session.close();				

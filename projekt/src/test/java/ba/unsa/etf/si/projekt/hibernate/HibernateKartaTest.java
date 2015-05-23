@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.junit.Test;
@@ -60,17 +61,20 @@ public class HibernateKartaTest {
 		linija.setZauzeto(5);
 		
 		HibernateKarta karta=new HibernateKarta();
-		Transaction t = session.beginTransaction();
-		Long id=(Long) session.save(k);
-			t.commit();
-		karta.dodajKartu(session,linija,2015,05,22,06,00, k, 25.50);    
+		karta.dodajKartu(session,linija,2015,05,22,12,0,TipKarte.jednosmjerna,25);    
 		java.util.List lista;
 		lista=karta.sveKarte(session);
-		assertEquals(1, lista.size());
+		int br=lista.size();
+		
+		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
+		Long count =(Long)q.uniqueResult();
+		int izBaze=count.intValue();
+		
+		assertEquals(br, izBaze);
 		session.close();
 
-	}*/
-
+	}
+*/
 	@Test
 	public void testdodajKartuPopunjenoException() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -161,11 +165,15 @@ public class HibernateKartaTest {
 
 	@Test
 	public void testSveKarte() {
-		Session session = HibernateUtil.getSessionFactory().openSession();	
-		HibernateKarta karta = new HibernateKarta();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
+		Long count =(Long)q.uniqueResult();
+		int izBaze=count.intValue();
+		HibernateKarta hk= new HibernateKarta();
 		java.util.List karte;
-		karte=karta.sveKarte(session);
-		assertEquals(0,karte.size());
+		karte=hk.sveKarte(session);
+		int br= karte.size();
+		assertEquals(br,izBaze);
 		session.close();
 	}
 
@@ -173,11 +181,14 @@ public class HibernateKartaTest {
 	public void testIzvjestajOProdanimKartama() {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		HibernateKarta karta = new HibernateKarta();
+		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
+		Long count =(Long)q.uniqueResult();
+		int izBaze=count.intValue();
+		HibernateKarta hk= new HibernateKarta();
 		java.util.List izvjestaj;
-		izvjestaj=karta.IzvjestajOProdanimKartama(session, 2015, 05, 01, 2015, 05, 30);
-		
-        assertEquals(0,izvjestaj.size());
+		izvjestaj=hk.IzvjestajOProdanimKartama(session, 2015, 05, 01, 2015, 05, 30);
+		int br=izvjestaj.size();
+		assertEquals(br,izBaze);
 		session.close();
 	}
 
