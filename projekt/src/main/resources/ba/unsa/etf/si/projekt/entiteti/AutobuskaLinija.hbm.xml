@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 20, 2015 10:22:04 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija" table="AUTOBUSKALINIJA">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="polaziste" type="java.lang.String">
+            <column name="POLAZISTE" />
+        </property>
+        <property name="odrediste" type="java.lang.String">
+            <column name="ODREDISTE" />
+        </property>
+        <many-to-one name="autobus" class="ba.unsa.etf.si.projekt.entiteti.Autobus" fetch="join">
+            <column name="AUTOBUS" />
+        </many-to-one>
+        <many-to-one name="vozac" class="ba.unsa.etf.si.projekt.entiteti.Radnik" fetch="join">
+            <column name="VOZAC" />
+        </many-to-one>
+        <property name="datumPolaska_dan" type="int">
+            <column name="DATUMPOLASKA_DAN" />
+        </property>
+        <property name="datumPolaska_mjesec" type="int">
+            <column name="DATUMPOLASKA_MJESEC" />
+        </property>
+        <property name="datumPolaska_godina" type="int">
+            <column name="DATUMPOLASKA_GODINA" />
+        </property>
+        <property name="vrijemePolaska_sati" type="int">
+            <column name="VRIJEMEPOLASKA_SATI" />
+        </property>
+        <property name="vrijemePolaska_minute" type="int">
+            <column name="VRIJEMEPOLASKA_MINUTE" />
+        </property>
+        <property name="peron" type="int">
+            <column name="PERON" />
+        </property>
+        <property name="distanca" type="double">
+            <column name="DISTANCA" />
+        </property>
+        <property name="trajanje" type="double">
+            <column name="TRAJANJE" />
+        </property>
+        <property name="brojLinije" type="int">
+            <column name="BROJLINIJE" />
+        </property>
+        <property name="cijenaJednosmjerna" type="double">
+            <column name="CIJENAJEDNOSMJERNA" />
+        </property>
+        <property name="cijenaDvosmjerna" type="double">
+            <column name="CIJENADVOSMJERNA" />
+        </property>
+        <property name="medjunarodna" type="boolean">
+            <column name="MEDJUNARODNA" />
+        </property>
+        <property name="zauzeto" type="int">
+            <column name="ZAUZETO" />
+        </property>
+    </class>
+</hibernate-mapping>

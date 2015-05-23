@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated May 20, 2015 10:22:04 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ba.unsa.etf.si.projekt.entiteti.Rezervacija" table="REZERVACIJA">
+        <id name="id" type="long">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <many-to-one name="linija" class="ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija" fetch="join">
+            <column name="LINIJA" />
+        </many-to-one>
+        <property name="vrijemePolaska_sati" type="int">
+            <column name="VRIJEMEPOLASKA_SATI" />
+        </property>
+        <property name="vrijemePolaska_minute" type="int">
+            <column name="VRIJEMEPOLASKA_MINUTE" />
+        </property>
+        <property name="tipKarte">
+            <column name="TIPKARTE" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">ba.unsa.etf.si.projekt.entiteti.TipKarte</param>
+            </type>
+        </property>
+        <property name="datumPolaska_dan" type="int">
+            <column name="DATUMPOLASKA_DAN" />
+        </property>
+        <property name="datumPolaska_mjesec" type="int">
+            <column name="DATUMPOLASKA_MJESEC" />
+        </property>
+        <property name="datumPolaska_godina" type="int">
+            <column name="DATUMPOLASKA_GODINA" />
+        </property>
+        <property name="cijena" type="double">
+            <column name="CIJENA" />
+        </property>
+        <property name="ime" type="java.lang.String">
+            <column name="IME" />
+        </property>
+        <property name="prezime" type="java.lang.String">
+            <column name="PREZIME" />
+        </property>
+    </class>
+</hibernate-mapping>
