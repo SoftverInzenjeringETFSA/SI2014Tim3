@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
@@ -33,9 +34,19 @@ public class HibernateKartaTest {
 		karta.dodajKartu(session,al,2015,05,22,12,0,TipKarte.jednosmjerna,25);    
 		//poslije dodavanja
 		Query q2 = session.createQuery("SELECT COUNT(*) FROM Karta");
-		Long count2 =(Long)q.uniqueResult();
+		Long count2 =(Long)q2.uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
+		long idL=al.getId();
+		Query q3=session.createQuery("Select id from Karta where linija="+idL);
+		Long count3 =(Long)q3.uniqueResult();
+		int idK=count3.intValue();
+	    
+		//Karta k=HibernateKarta.nadjiKartu(session, idK);
+	    karta.brisanjeKarte(session,idK);
+	    HibernateAutibuskaLinija.brisiAutobuskuLiniju(session, 2);
+        HibernateRadnik.brisiRadnika(session, "3004989785214");
+		HibernateAutobus.brisanjeAutobusa(session, "A22-M-543");	
 		session.close();
 	}
 
