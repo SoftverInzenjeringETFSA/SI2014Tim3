@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.projekt.hibernate;
 
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 import static org.junit.Assert.*;
 
 import org.hibernate.Session;
