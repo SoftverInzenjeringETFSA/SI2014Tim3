@@ -6,11 +6,6 @@ import org.hibernate.Transaction;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-
-
-
-
-
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
@@ -307,7 +302,7 @@ public class HibernateAutibuskaLinija {
 	}
 	if(v.praznoPolje(prezimevozaca))
 	{prezime=1;
-		string+="Ime ne smije biti prazno";
+		string+="Prezime ne smije biti prazno";
 	}
 	
 	if(ime==0 && prezime==0){
