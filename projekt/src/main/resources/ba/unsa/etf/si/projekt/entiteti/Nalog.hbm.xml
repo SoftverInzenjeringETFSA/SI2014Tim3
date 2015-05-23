@@ -20,10 +20,10 @@
         <property name="datumPolaska_godina" type="int">
             <column name="DATUMPOLASKA_GODINA" />
         </property>
-        <property name="vrijemePolaska_sati" type="double">
+        <property name="vrijemePolaska_sati" type="int">
             <column name="VRIJEMEPOLASKA_SATI" />
         </property>
-        <property name="vrijemePolaska_minute" type="double">
+        <property name="vrijemePolaska_minute" type="int">
             <column name="VRIJEMEPOLASKA_MINUTE" />
         </property>
     </class>
