@@ -130,7 +130,7 @@ public class HibernateRezervacija {
 			throw new IllegalArgumentException(izuzetak);
 	}
 	
-	public static Rezervacija nadjiRezervaciju(Session session, String odrediste, String ime, String Prezime)
+	/*public static Rezervacija nadjiRezervaciju(Session session, String odrediste, String ime, String Prezime)
 	{
 		Validacija v = new Validacija();
 		int o = 0, i = 0, p = 0;
@@ -159,7 +159,7 @@ public class HibernateRezervacija {
 		}
 		else
 			throw new IllegalArgumentException(izuzetak);
-	}
+	}*/
 	public static void dodajRezervaciju(Session session,
 			AutobuskaLinija linija, int godina, int mjesec, int dan, int sati,
 			int minute, TipKarte tip, double cijena, String ime, String prezime)

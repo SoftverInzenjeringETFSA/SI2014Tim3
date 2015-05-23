@@ -163,7 +163,7 @@ public class HibernateRezervacijaTest {
 		*/
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+/*	@Test(expected = IllegalArgumentException.class)
 	public void testNadjiRezervacijuNevalidnoIme() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateRezervacija hr = new HibernateRezervacija();
@@ -185,11 +185,41 @@ public class HibernateRezervacijaTest {
 		HibernateRezervacija hr = new HibernateRezervacija();
 		AutobuskaLinija al = new AutobuskaLinija();
 		hr.nadjiRezervaciju(session, "", "Dinaaa", "A");
-	}
+	}*/
 
 	@Test
 	public void testDodajRezervaciju() {
-		//fail("Not yet implemented"); // TODO
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutobus ha = new HibernateAutobus();
+		ha.dodajAutobus(session, 50, "A23-M-555", "Testmodel");
+		HibernateRadnik hr = new HibernateRadnik();
+		TipRadnogMjesta vozac = TipRadnogMjesta.Vozac;
+		hr.dodajRadnika(session, "SumejaTest", "B", "1223493827163", vozac);
+		Autobus a = ha.nadjiAutobus(session, "A23-M-555");  
+		Radnik r = hr.nadjiRadnika(session, "1223493827163");
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		hal.dodajAutobuskuLiniju(session,"SarajevoTest","Zenica",a,r,2015,4,17,2,2,5,100,100,1,20,40,true);
+		//broj linije 1, peron linije 5
+		AutobuskaLinija linija = hal.nadjiAutobuskuLiniju(session, 1);
+		HibernateRezervacija hrez = new HibernateRezervacija();
+		TipKarte tk = TipKarte.jednosmjerna;
+		//prije dodavanja
+		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
+		Long count = (Long)q.uniqueResult();
+		int prije = count.intValue();
+		hrez.dodajRezervaciju(session, linija, 2015, 5, 20, 14, 35, tk, 20.00, "Dinatest", "A");
+		//Rezervacija nadjena = hrez.nadjiRezervaciju(session, "Zenica", "Dinatest", "A");
+		//assertEquals("Dinatest", nadjena.getIme());
+		//poslije dodavanja
+		Query q2 = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
+		Long count2 = (Long)q.uniqueResult();
+		int poslije = count2.intValue();
+		assertEquals(poslije, prije+1);
+		hrez.brisanjeRezervacije(session, linija, "Dinatest", "A");
+		hal.brisiAutobuskuLiniju(session, 1);
+		ha.brisanjeAutobusa(session, "A23-M-555");
+		hr.brisiRadnika(session, "1223493827163");
+		session.close();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
