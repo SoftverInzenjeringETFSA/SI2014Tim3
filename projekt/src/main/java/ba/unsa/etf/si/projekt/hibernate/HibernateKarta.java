@@ -1,11 +1,14 @@
 package ba.unsa.etf.si.projekt.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.Transaction;
 
 import javax.management.Query;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
+import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
@@ -47,6 +50,16 @@ public class HibernateKarta {
 			Long id=(Long) session.save(k);
 			t.commit();
 		}
+	}
+	
+	public static void brisanjeKarte(Session session, long kartaid)
+	{
+		  Transaction t = session.beginTransaction();
+		  Criteria k=session.createCriteria(Karta.class);
+			k.add(Restrictions.eq("id", kartaid));
+			Karta karta=(Karta)k.uniqueResult();
+			session.delete(karta);
+		    t.commit();	
 	}
 	
 	public static java.util.List sveKarte(Session session)
