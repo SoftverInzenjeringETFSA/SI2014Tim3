@@ -66,7 +66,7 @@ public class HibernateAutibuskaLinija {
 		}
 
 		
-			if((peronlinije<=0 || peronlinije<=6) || String.valueOf(peronlinije).length()==0) {
+			if((peronlinije<=0 || peronlinije>=6) || String.valueOf(peronlinije).length()==0) {
 				peron=1;
 				string+="Broj perona mora biti pozitivan broj i <= od 6!";
 				
