@@ -62,6 +62,16 @@ public class HibernateKarta {
 		    t.commit();	
 	}
 	
+	public static Karta nadjiKartu(Session session, long kartaid)
+	{
+		  Transaction t = session.beginTransaction();
+		  Criteria k=session.createCriteria(Karta.class);
+			k.add(Restrictions.eq("id", kartaid));
+			Karta karta=(Karta)k.uniqueResult();
+		    t.commit();	
+		    return karta;
+	}
+	
 	public static java.util.List sveKarte(Session session)
 	{
 		Transaction t = session.beginTransaction();

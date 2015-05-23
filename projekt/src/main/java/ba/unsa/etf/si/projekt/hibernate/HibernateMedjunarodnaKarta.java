@@ -1,8 +1,10 @@
 
 package ba.unsa.etf.si.projekt.hibernate;
 
+import org.hibernate.Criteria;
 import org.hibernate.Transaction;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
@@ -25,6 +27,27 @@ public class HibernateMedjunarodnaKarta {
 		return karte;
 		
 	}
+	
+	public static void brisanjeKarte(Session session, long kartaid)
+	{
+		  Transaction t = session.beginTransaction();
+		  Criteria k=session.createCriteria(MedjunarodnaKarta.class);
+			k.add(Restrictions.eq("id", kartaid));
+			MedjunarodnaKarta karta=(MedjunarodnaKarta)k.uniqueResult();
+			session.delete(karta);
+		    t.commit();	
+	}
+	
+	public static Karta nadjiKartu(Session session, long kartaid)
+	{
+		  Transaction t = session.beginTransaction();
+		  Criteria k=session.createCriteria(MedjunarodnaKarta.class);
+			k.add(Restrictions.eq("id", kartaid));
+			MedjunarodnaKarta karta=(MedjunarodnaKarta)k.uniqueResult();
+		    t.commit();	
+		    return karta;
+	}
+	
 	public HibernateMedjunarodnaKarta(){}
 	
 	public static void dodajKartu(Session session, AutobuskaLinija linija,
