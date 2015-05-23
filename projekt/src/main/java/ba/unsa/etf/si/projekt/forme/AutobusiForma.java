@@ -186,6 +186,7 @@ public class AutobusiForma {
 				
 				//provjera postojanja tablica
 				java.util.List listaautobusa=noviautobus.sviAutobusi(session);
+				
 				for(int i=0;i<listaautobusa.size();i++)
 				{
 					Autobus a=(Autobus) listaautobusa.get(i);
@@ -219,11 +220,13 @@ public class AutobusiForma {
 				modelDodaj.setText("");
 				session.close();
 				}
+				
 				else 
 				{
 					JOptionPane.showMessageDialog(dodajBtn, "Već postoji autobus, sa brojem registracija koje ste vi unijeli.");
 					registracijeDodaj.setText("");
 				}
+				
 				}
 				
 				catch(Exception e2)
@@ -311,8 +314,20 @@ public class AutobusiForma {
 		final JButton izmijeniBtn = new JButton("Izmijeni");
 		izmijeniBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) { //izmjena autobusa
+				int d1=0;
+				String izuzetak="";
 				try
 				{
+					int broj=(Integer) kapacitetModifikujSpinner.getValue();
+					
+					if(modelModifikuj.getText().length()==0 && broj==0 && registracijeModifikuj.getText().length()==0)// da li je vrijednost selektovana
+					{
+						d1=1;
+						izuzetak+="Morate selektovati autobusku liniju.";
+					}
+					
+					if(d1==0)
+					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutobus autobus=new HibernateAutobus();
 					java.util.List listaautobusa=autobus.sviAutobusi(session);
@@ -322,6 +337,7 @@ public class AutobusiForma {
 					int kapacitet=0;
 					boolean postoji=false;
 					Autobus a1=new Autobus();
+					
 					for(int i=0;i<listaautobusa.size();i++)
 					{
 						Autobus a=(Autobus)listaautobusa.get(i);
@@ -334,23 +350,29 @@ public class AutobusiForma {
 							a1=a;
 						}
 					}
+					
 					if(model!=""&& registracije!="" && kapacitet!=0)
 					{
-				        for(int i=0;i<listaautobusa.size();i++)
+				        
+						for(int i=0;i<listaautobusa.size();i++)
 				        {
 				        	Autobus a=(Autobus)listaautobusa.get(i);
 				        	if(a.getRegistracija().equals(registracijeModifikuj.getText())&& registracijeModifikuj.getText().equals(registracije)==false)
 				        		postoji=true;
 				        }
-						int kap=Integer.parseInt(kapacitetModifikujSpinner.getValue().toString());
+						
+				        int kap=Integer.parseInt(kapacitetModifikujSpinner.getValue().toString());
+						
 						if(postoji==false)
 						{
-						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1);
+						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1); // da ne bi unio postojece registracije
 						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");
 						kapacitetModifikujSpinner.setValue(0);
 						registracijeModifikuj.setText("");
 						modelModifikuj.setText("");
+						session.close();
 						}
+						
 						else
 						{
 							JOptionPane.showMessageDialog(izmijeniBtn, "Ponovo unesite registracije.");
@@ -358,15 +380,19 @@ public class AutobusiForma {
 						}
 						
 					}
+					
+					}
 					else
 					{
 						JOptionPane.showMessageDialog(izmijeniBtn, "Morate selektovati autobus, koji mijenjate.");
 					}
-					session.close();
+					;
 				}
 				catch(Exception ex1)
 				{
 					JOptionPane.showMessageDialog(izmijeniBtn, "Neuspješno mijenjena podataka o autobusu.");
+					if(izuzetak!="")
+					JOptionPane.showMessageDialog(izmijeniBtn, izuzetak);
 					JOptionPane.showMessageDialog(izmijeniBtn, ex1);
 				}
 				//autobusiModifikujLista.clearSelection();

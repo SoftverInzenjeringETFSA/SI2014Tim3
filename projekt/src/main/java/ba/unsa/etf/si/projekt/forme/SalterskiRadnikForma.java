@@ -306,6 +306,7 @@ public class SalterskiRadnikForma implements ActionListener{
 						JOptionPane.showMessageDialog(prodajaBtn, "Morate unijeti ime i prezime za međunarodnu liniju!");
 						return;
 					}
+					
 					if (linija.getMedjunarodna() && (!Validacija.jeTekst(ime) || !Validacija.jeTekst(prezime))) {
 						JOptionPane.showMessageDialog(prodajaBtn, "Ime i prezime sadrže samo slova!");
 						return;
@@ -597,21 +598,24 @@ public class SalterskiRadnikForma implements ActionListener{
 		final JButton modifikujBtn = new JButton("Modifikuj");
 		modifikujBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //modifikovanje rezervacije
-			 int d1 = 0;
+			 int d1 = 0,d2=0;
 			 String izuzetak = "";
 				try
 				{
-					/*if(datumRezervacijaDate.getDate()==null)
+					if(datumModifikacijeDate.getDate()==null )
+					{
+						d2=1;
+						izuzetak="Morate unijeti datum.";
+					}
+					
+					if(datumModifikacijeDate.getDate()==null && textField.getText().length()==0 && textField_1.getText().length()==0)
 					{
 						d1=1;
-						izuzetak+="Morate izabrati autobusku liniju.";
+						izuzetak="Morate izabrati autobusku liniju.";
 					}
-					else
-					{
-						d1=0;
-						
-					}*/
-					if (d1 == 0)
+					
+					
+					if (d1 == 0 && d2==0)
 					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					String odrediste=comboBox_4.getSelectedItem().toString();
@@ -699,8 +703,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					if (linija == null) {
 						JOptionPane.showMessageDialog(prodajaBtn, "Ne postoji ta linija!");
 						return;
-					}
-					
+					}					
 					double cijena=linija.getCijenaDvosmjerna();
 					if(jednosmjernaModifikacije.isSelected()==true)
 					{
