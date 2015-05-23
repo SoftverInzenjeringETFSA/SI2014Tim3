@@ -36,8 +36,8 @@ public class HibernateMedjunarodnaKartaTest {
 		HibernateRadnik hr = new HibernateRadnik();
 		TipRadnogMjesta vozac = TipRadnogMjesta.Vozac;
 		hr.dodajRadnika(session, "DinaTestTest", "Aaa", "1223493827100", vozac);
-		Autobus a = ha.nadjiAutobus(session, "A23-M-111");  
-		Radnik r = hr.nadjiRadnika(session, "1223493827144");
+		Autobus a = ha.nadjiAutobus(session, "A23-M-000");  
+		Radnik r = hr.nadjiRadnika(session, "1223493827100");
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 		hal.dodajAutobuskuLiniju(session,"SarajevoTest","ZenicaTest",a,r,2015,4,17,7,7,5,100,100,4,20,40,true);
 		linija = hal.nadjiAutobuskuLiniju(session, 4); //linija 4

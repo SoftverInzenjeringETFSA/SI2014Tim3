@@ -138,40 +138,40 @@ public class HibernateRezervacijaTest {
 		AutobuskaLinija al = new AutobuskaLinija();
 		hrez.brisanjeRezervacije(session, al, "Dina", "123");
 	}	
-/*
+
 	@Test
 	public void testDodajRezervaciju() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateAutobus ha1 = new HibernateAutobus();
-		ha1.dodajAutobus(session, 50, "A23-M-888", "Testmodel1");
+		ha1.dodajAutobus(session, 40, "E11-J-234", "modeltest1");
 		HibernateRadnik hr1 = new HibernateRadnik();
 		TipRadnogMjesta vozac = TipRadnogMjesta.Vozac;
-		hr1.dodajRadnika(session, "SumejaTest", "Bd", "1223493827188", vozac);
-		Autobus a1 = ha1.nadjiAutobus(session, "A23-M-888");  
-		Radnik r1 = hr1.nadjiRadnika(session, "1223493827188");
+		hr1.dodajRadnika(session, "TestniRadnikD", "D", "1010101010101", vozac);
+		Autobus a1 = ha1.nadjiAutobus(session, "E11-J-234");  
+		Radnik r1 = hr1.nadjiRadnika(session, "1010101010101");
 		HibernateAutibuskaLinija hal1 = new HibernateAutibuskaLinija();
-		hal1.dodajAutobuskuLiniju(session,"SarajevoTest","Zenica",a1,r1,2015,5,20,14,35,4,100,100,2,20,40,true);
-		//broj linije 2, peron linije 4
-		AutobuskaLinija linija1 = hal1.nadjiAutobuskuLiniju(session, 2);
-		HibernateRezervacija hrez1 = new HibernateRezervacija();
+		hal1.dodajAutobuskuLiniju(session,"STest","ZTest",a1,r1,2015,6,29,15,20,1,50,50,3,10.00,20.00,true);
+		//broj linije 3, peron linije 1
+		AutobuskaLinija linija1 = hal1.nadjiAutobuskuLiniju(session, 3);
+		//HibernateRezervacija hrez1 = new HibernateRezervacija();
 		TipKarte tk = TipKarte.jednosmjerna;
 		//prije dodavanja
 		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
 		Long count = (Long)q.uniqueResult();
 		int prije = count.intValue();
-		hrez.dodajRezervaciju(session, linija1, 2015, 5, 20, 14, 35, tk, 20.00, "Dinatest", "A");
+		hrez.dodajRezervaciju(session, linija1, 2015, 6, 29, 15, 20, tk, 10.00, "DodajTest", "Dodaj");
 		//poslije dodavanja
 		Query q2 = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
 		Long count2 = (Long)q.uniqueResult();
 		int poslije = count2.intValue();
 		assertEquals(poslije, prije+1);
-		hrez.brisanjeRezervacije(session, linija1, "Dinatest", "A");
-		hal1.brisiAutobuskuLiniju(session, 2);
-		ha1.brisanjeAutobusa(session, "A23-M-888");
-		hr1.brisiRadnika(session, "1223493827188");
+		hrez.brisanjeRezervacije(session, linija1, "DodajTest", "Dodaj");
+		hal1.brisiAutobuskuLiniju(session, 3);
+		ha1.brisanjeAutobusa(session, "E11-J-234");
+		hr1.brisiRadnika(session, "1010101010101");
 		session.close();
 	}
-	*/
+	
 	@Test(expected = IllegalArgumentException.class)
 	public void testDodajRezervacijuNevalidnoIme() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
