@@ -16,98 +16,37 @@ import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 
 public class HibernateKartaTest {
-	
-	
-	
-	/*@Test
+	@Test
 	public void testDodajKartu() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		int vrijeme_sati=2;
-		int vrijeme_minute=5;
-		TipKarte k=TipKarte.jednosmjerna;
-		int godina=2015;
-		int mjesec=5;
-		int dan=22;
-		double cijenakarte=21.0;
-		Autobus autobus = new Autobus();
-		autobus.setKapacitet(55);
-		autobus.setModel("AudiW2");
-		autobus.setRegistracija("A22-M-543");
-		
-		Radnik vozac = new Radnik();
-		TipRadnogMjesta m= TipRadnogMjesta.Vozac;
-		vozac.setIme("Mujo");
-		vozac.setJmbg("0201959171266");
-		vozac.setPrezime("Mujic");
-		vozac.setTipRadnogMjesta(m);
-		
-		AutobuskaLinija linija= new AutobuskaLinija();
-		linija.setAutobus(autobus);
-		linija.setBrojLinije(2);
-		linija.setCijenaDvosmjerna(45.50);
-		linija.setCijenaJednosmjerna(25.50);
-		linija.setDatumPolaska_dan(22);
-		linija.setDatumPolaska_godina(2015);
-		linija.setDatumPolaska_mjesec(05);
-		linija.setDistanca(555.00);
-		linija.setMedjunarodna(false);
-		linija.setOdrediste("Gradacac");
-		linija.setPeron(4);
-		linija.setPolaziste("Sarajevo");
-		linija.setTrajanje(4.5);
-		linija.setVozac(vozac);
-		linija.setVrijemePolaska_minute(00);
-		linija.setVrijemePolaska_sati(06);
-		linija.setZauzeto(5);
-		
 		HibernateKarta karta=new HibernateKarta();
-		karta.dodajKartu(session,linija,2015,05,22,12,0,TipKarte.jednosmjerna,25);    
-		java.util.List lista;
-		lista=karta.sveKarte(session);
-		int br=lista.size();
-		
-		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
+		HibernateRadnik.dodajRadnika(session, "Radnik", "Radnikovic", "3004989785214", TipRadnogMjesta.Administrator);
+		Radnik r=HibernateRadnik.nadjiRadnikaPoImenu(session, "Radnik");
+		HibernateAutobus.dodajAutobus(session, 60, "A22-M-543", "model98");
+		Autobus a=HibernateAutobus.nadjiAutobus(session, "A22-M-543");
+		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,16.50, 31.00, false);
+		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 2);
+		//prijedodavanja
+	    Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
 		Long count =(Long)q.uniqueResult();
-		int izBaze=count.intValue();
-		
-		assertEquals(br, izBaze);
+		int prije=count.intValue();
+		karta.dodajKartu(session,al,2015,05,22,12,0,TipKarte.jednosmjerna,25);    
+		//poslije dodavanja
+		Query q2 = session.createQuery("SELECT COUNT(*) FROM Karta");
+		Long count2 =(Long)q.uniqueResult();
+		int poslije=count2.intValue();
+		assertEquals(poslije,prije+1);
 		session.close();
-
 	}
-*/
+
 	@Test
 	public void testdodajKartuPopunjenoException() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Autobus autobus = new Autobus();
 			autobus.setKapacitet(55);
-			autobus.setModel("AudiW2");
-			autobus.setRegistracija("A22-M-543");
-			
-			Radnik vozac = new Radnik();
-			TipRadnogMjesta m= TipRadnogMjesta.Vozac;
-			vozac.setIme("Mujo");
-			vozac.setJmbg("0201959171266");
-			vozac.setPrezime("Mujic");
-			vozac.setTipRadnogMjesta(m);
-			
+			Radnik vozac = new Radnik();		
 			AutobuskaLinija linija= new AutobuskaLinija();
-			linija.setAutobus(autobus);
-			linija.setBrojLinije(2);
-			linija.setCijenaDvosmjerna(45.50);
-			linija.setCijenaJednosmjerna(25.50);
-			linija.setDatumPolaska_dan(22);
-			linija.setDatumPolaska_godina(2015);
-			linija.setDatumPolaska_mjesec(05);
-			linija.setDistanca(555.00);
-			linija.setMedjunarodna(false);
-			linija.setOdrediste("Gradacac");
-			linija.setPeron(4);
-			linija.setPolaziste("Sarajevo");
-			linija.setTrajanje(4.5);
-			linija.setVozac(vozac);
-			linija.setVrijemePolaska_minute(00);
-			linija.setVrijemePolaska_sati(06);
 			linija.setZauzeto(56);
 			
 			HibernateKarta karta=new HibernateKarta();
@@ -166,7 +105,7 @@ public class HibernateKartaTest {
 	@Test
 	public void testSveKarte() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
+		Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
 		Long count =(Long)q.uniqueResult();
 		int izBaze=count.intValue();
 		HibernateKarta hk= new HibernateKarta();
@@ -181,7 +120,7 @@ public class HibernateKartaTest {
 	public void testIzvjestajOProdanimKartama() {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
+		Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
 		Long count =(Long)q.uniqueResult();
 		int izBaze=count.intValue();
 		HibernateKarta hk= new HibernateKarta();
