@@ -192,6 +192,8 @@ public class NaloziForma {
 					    if(selektovano.equals(uporedi)==true)
 					    	broj=a.getBrojLinije();
 					}
+					if(broj!=0)
+					{
 					linija=linija1.nadjiAutobuskuLiniju(session, broj);
 					java.util.Date d=datumDate.getDate();
 					Calendar cal=Calendar.getInstance();
@@ -207,6 +209,11 @@ public class NaloziForma {
 					JOptionPane.showMessageDialog(napraviBtn, "Uspješno ste kreirali nalog.");
 					vrijeme.setText("");
 					datumDate.setDate(null);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(napraviBtn, "Morate selektovati autobusku liniju.");
+					}
 					}
 					else
 					{

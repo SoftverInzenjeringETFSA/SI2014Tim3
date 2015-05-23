@@ -500,6 +500,10 @@ public class SalterskiRadnikForma implements ActionListener{
 						textField_1.setText(r.getPrezime());
 						
 					}
+					else
+					{
+						JOptionPane.showMessageDialog(rezervacijeList, "Morate selektovati autobusku liniju");
+					}
 				}
 			}
 		});
@@ -524,11 +528,16 @@ public class SalterskiRadnikForma implements ActionListener{
 			 String izuzetak = "";
 				try
 				{
-					if(datumRezervacijaDate.getDate()==null)
+					/*if(datumRezervacijaDate.getDate()==null)
 					{
 						d1=1;
-						izuzetak+="Morate unijeti datum.";
+						izuzetak+="Morate izabrati autobusku liniju.";
 					}
+					else
+					{
+						d1=0;
+						
+					}*/
 					if (d1 == 0)
 					{
 					Session session = HibernateUtil.getSessionFactory().openSession();
@@ -608,6 +617,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					{
 						HibernateRezervacija.brisanjeRezervacije(session, linija, textField.getText(), textField_1.getText());
 						JOptionPane.showMessageDialog(obrisiBtn, "Uspješno brisanje");
+						
 					}
 					else
 					{
@@ -781,6 +791,7 @@ public class SalterskiRadnikForma implements ActionListener{
         
         btnIsplati = new JButton("Isplati");
         btnIsplati.addActionListener(new ActionListener() {
+        	
         	public void actionPerformed(ActionEvent e) {
         		Session session = HibernateUtil.getSessionFactory().openSession();
         		Calendar cal=Calendar.getInstance();
@@ -822,6 +833,8 @@ public class SalterskiRadnikForma implements ActionListener{
 				
 				cijenaRezervacije.setText(String.valueOf(cijena));
 				JOptionPane.showMessageDialog(btnIsplati, "Karta je prodata.");
+				
+				
         	}
         });
         btnIsplati.setBounds(420, 124, 134, 33);
