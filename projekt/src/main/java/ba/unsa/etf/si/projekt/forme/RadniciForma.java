@@ -18,8 +18,12 @@ import org.hibernate.Session;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
@@ -423,7 +427,7 @@ public class RadniciForma {
 					{
 						imeIzbrisi.setText(r.getIme());
 						prezimeIzbrisi.setText(r.getPrezime());
-						tipIzbrisiCombo.setSelectedItem(r.dajTipRadnogMjesta());
+						tipIzbrisiCombo.setSelectedItem(r.dajTipRadnogMjesta()); 
 					}
 					
 					else
@@ -460,21 +464,49 @@ public class RadniciForma {
 		final JButton izbrisiBtn = new JButton("Izbriši");
 		izbrisiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {//brisanjee radnika
+				String izuzetak="";
 			try
 			{
+				boolean brisi=true;
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				HibernateRadnik brisanjeradnik= new HibernateRadnik();
+				//radnik postoji u korisnickim racunima i u linijama 
+				
+				java.util.List racuni=HibernateKorisnickiRacuni.sviRacuni(session);
+				for(int i=0;i<racuni.size();i++)
+				{
+					KorisnickiRacun k=(KorisnickiRacun)racuni.get(i);
+					Radnik radnik=HibernateRadnik.nadjiRadnika(session, jmbgIzbrisiPronadi.getText());
+					if(k.getRadnik()==radnik) {brisi=false;
+					izuzetak="Ne možete brisati radnika, jer postoji korisnički račun napravljen za njega.";
+					}
+				}
+				
+				java.util.List linije=HibernateAutibuskaLinija.sveLinije(session);
+				for(int i=0;i<linije.size();i++)
+				{
+					AutobuskaLinija l=(AutobuskaLinija)linije.get(i);
+					Radnik radnik=HibernateRadnik.nadjiRadnika(session, jmbgIzbrisiPronadi.getText());
+					if(l.getVozac()==radnik)
+						{brisi=false;
+					izuzetak="Ne možete brisati radnika, jer je dodijeljen liniji kao njen vozač.";
+						}
+				}
+				if(brisi==true)
+				{
 				brisanjeradnik.brisiRadnika(session, jmbgIzbrisiPronadi.getText());
 				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje.");
 				jmbgIzbrisiPronadi.setText("");
 				imeIzbrisi.setText("");
 				prezimeIzbrisi.setText("");
-				
+				}
 			}
 			catch(Exception e7)
 			{
 				JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.");
+				JOptionPane.showMessageDialog(izbrisiBtn, izuzetak);
 				JOptionPane.showMessageDialog(izbrisiBtn, e7);
+				
 			}
 			}
 		});
