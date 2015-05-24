@@ -35,8 +35,9 @@ public class MenadzerPocetna {
 					MenadzerPocetna window = new MenadzerPocetna();
 					window.frmMenaderPoetna.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
+					/*e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);*/
+					logger.log(null, e); 
 				}
 			}
 		});
