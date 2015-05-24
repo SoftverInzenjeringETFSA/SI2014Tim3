@@ -477,7 +477,9 @@ public class RadniciForma {
 				{
 					KorisnickiRacun k=(KorisnickiRacun)racuni.get(i);
 					Radnik radnik=HibernateRadnik.nadjiRadnika(session, jmbgIzbrisiPronadi.getText());
-					if(k.getRadnik()==radnik) {brisi=false;
+					if(k.getRadnik()==radnik) {
+					brisi=false;
+					JOptionPane.showMessageDialog(izbrisiBtn, "1.");
 					izuzetak="Ne možete brisati radnika, jer postoji korisnički račun napravljen za njega.";
 					}
 				}
@@ -488,7 +490,9 @@ public class RadniciForma {
 					AutobuskaLinija l=(AutobuskaLinija)linije.get(i);
 					Radnik radnik=HibernateRadnik.nadjiRadnika(session, jmbgIzbrisiPronadi.getText());
 					if(l.getVozac()==radnik)
-						{brisi=false;
+						{
+					brisi=false;
+					JOptionPane.showMessageDialog(izbrisiBtn, "2.");
 					izuzetak="Ne možete brisati radnika, jer je dodijeljen liniji kao njen vozač.";
 						}
 				}
@@ -500,11 +504,14 @@ public class RadniciForma {
 				imeIzbrisi.setText("");
 				prezimeIzbrisi.setText("");
 				}
+				else
+				{
+					JOptionPane.showMessageDialog(izbrisiBtn, izuzetak);
+				}
 			}
 			catch(Exception e7)
 			{
 				JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.");
-				JOptionPane.showMessageDialog(izbrisiBtn, izuzetak);
 				JOptionPane.showMessageDialog(izbrisiBtn, e7);
 				
 			}
