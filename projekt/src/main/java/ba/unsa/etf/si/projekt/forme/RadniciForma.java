@@ -479,7 +479,6 @@ public class RadniciForma {
 					Radnik radnik=HibernateRadnik.nadjiRadnika(session, jmbgIzbrisiPronadi.getText());
 					if(k.getRadnik()==radnik) {
 					brisi=false;
-					JOptionPane.showMessageDialog(izbrisiBtn, "1.");
 					izuzetak="Ne možete brisati radnika, jer postoji korisnički račun napravljen za njega.";
 					}
 				}
@@ -492,7 +491,6 @@ public class RadniciForma {
 					if(l.getVozac()==radnik)
 						{
 					brisi=false;
-					JOptionPane.showMessageDialog(izbrisiBtn, "2.");
 					izuzetak="Ne možete brisati radnika, jer je dodijeljen liniji kao njen vozač.";
 						}
 				}
