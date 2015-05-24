@@ -270,7 +270,7 @@ public class GenerisanjePDF {
 		    for (AutobuskaLinija linija : linije){
 		        Calendar cal = Calendar.getInstance();
 		        
-		        cal.set(linija.getDatumPolaska_godina(), linija.getDatumPolaska_mjesec(), linija.getDatumPolaska_dan(),
+		        cal.set(linija.getDatumPolaska_godina(), linija.getDatumPolaska_mjesec()-1, linija.getDatumPolaska_dan(),
 		        		linija.getVrijemePolaska_sati(), linija.getVrijemePolaska_minute());
 		        
 		        Date poc = cal.getTime();
