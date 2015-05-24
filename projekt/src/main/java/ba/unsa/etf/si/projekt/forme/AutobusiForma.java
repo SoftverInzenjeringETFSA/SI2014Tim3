@@ -28,6 +28,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
+import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
@@ -447,20 +449,40 @@ public class AutobusiForma {
 		izbrisiBtn.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) { //button za brisanjeeee
-				
+				String izuzetak="";
 				if(registracijeIzbrisi.getText()!="")
 				{
 					try
 					{
+						boolean brisi=true;
 				HibernateAutobus brisanjeautobus=new HibernateAutobus();
 				Session session = HibernateUtil.getSessionFactory().openSession();
+				//provjera da li je dodijeljen nekoj liniji
+				java.util.List linije=HibernateAutibuskaLinija.sveLinije(session);
+				for(int i=0;i<linije.size();i++)
+				{
+					AutobuskaLinija a=(AutobuskaLinija)linije.get(i);
+					Autobus au=HibernateAutobus.nadjiAutobus(session,registracijeIzbrisi.getText());
+					if(a.getAutobus()==au)
+					{
+						izuzetak="Ne možete brisati autobus, dodijeljen je nekoj liniji.";
+								brisi=false;
+					}
+					
+				}
+				if(brisi==true)
+				{
 				brisanjeautobus.brisanjeAutobusa(session, registracijeIzbrisi.getText());
 				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno ste izbrisali autobus.");
 				registracijeIzbrisi.setText("");
 				modelIzbrisi.setText("");
 				kapacitetIzbrisi.setValue(0);
 				registracijePretraga.setText("");
-				
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(izbrisiBtn, izuzetak);
+				}
 				session.close();
 					}
 					
