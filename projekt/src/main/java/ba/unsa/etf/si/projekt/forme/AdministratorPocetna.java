@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.projekt.forme;
 
+import org.apache.log4j.Logger;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -26,19 +27,24 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
+import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
 public class AdministratorPocetna {
-
+	final static Logger logger = Logger.getLogger(GenerisanjePDF.class);
 	private JFrame frmAdministratorPoetna;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
@@ -46,13 +52,16 @@ public class AdministratorPocetna {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				
 				try {
 					AdministratorPocetna window = new AdministratorPocetna();
 					window.frmAdministratorPoetna.setVisible(true);
 				} catch (Exception e) {
+					
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
