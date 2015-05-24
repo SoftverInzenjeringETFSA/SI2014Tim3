@@ -371,12 +371,6 @@ public class HibernateAutibuskaLinijaTest {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
-		/*HibernateAutobus.dodajAutobus(session, 50,"A22-M-424","M11");
-	    Autobus a = HibernateAutobus.nadjiAutobus(session, "A22-M-424");
-	    HibernateRadnik.dodajRadnika(session, "Dundo", "Dundic", "1712984126982", TipRadnogMjesta.Vozac);
-	    Radnik r = HibernateRadnik.nadjiRadnika(session, "1712994126982");
-	    hal.dodajAutobuskuLiniju(session, "Sarajevo", "Pocitelj", a, r, 2015, 05, 23, 13, 55, 2, 380, 3,2,16.50, 31.00, false);
-*/
 		hal.brisiAutobuskuLiniju(session, -2);
 		}
 		catch (Exception e) {
@@ -440,12 +434,6 @@ public class HibernateAutibuskaLinijaTest {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
-		/*HibernateAutobus.dodajAutobus(session, 50,"A73-M-474","M11");
-	    Autobus a = HibernateAutobus.nadjiAutobus(session, "A73-M-474");
-	    HibernateRadnik.dodajRadnika(session, "Vozo", "Vozic", "3012994126982", TipRadnogMjesta.Vozac);
-	    Radnik r = HibernateRadnik.nadjiRadnika(session, "3012994126982");
-	    hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,16.50, 31.00, false);
-*/
 		hal.NadjiAutobuskuLinijuOdrediste(session, " ", 2015, 05, 23, 15, 00);
 		}
 		catch (Exception e) {
