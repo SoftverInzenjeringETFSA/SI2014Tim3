@@ -37,8 +37,9 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
 public class AdministratorPocetna {
-	final static Logger logger = Logger.getLogger(GenerisanjePDF.class);
+	final static Logger logger = Logger.getLogger(AdministratorPocetna.class);
 	private JFrame frmAdministratorPoetna;
+	
 
 	/**
 	 * Launch the application.

@@ -1,5 +1,7 @@
 package ba.unsa.etf.si.projekt.forme;
 
+import org.apache.log4j.Logger;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -28,11 +30,13 @@ import java.awt.event.ActionEvent;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class AutobusiForma {
-
+	final static Logger logger = Logger.getLogger(AutobusiForma.class);
 	private JFrame frmEvidencijaAutobusa;
 	private JTextField modelDodaj;
 	private JTextField registracijeDodaj;
@@ -53,6 +57,7 @@ public class AutobusiForma {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				
 				try {
@@ -60,6 +65,7 @@ public class AutobusiForma {
 					window.frmEvidencijaAutobusa.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
