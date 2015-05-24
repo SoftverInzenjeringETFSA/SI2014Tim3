@@ -1,4 +1,5 @@
 package ba.unsa.etf.si.projekt.forme;
+import org.apache.log4j.Logger;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -9,12 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
 public class MenadzerPocetna {
-
+	final static Logger logger = Logger.getLogger(MenadzerPocetna.class);
 	private JFrame frmMenaderPoetna;
 
 	/**
@@ -27,12 +29,14 @@ public class MenadzerPocetna {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				try {
 					MenadzerPocetna window = new MenadzerPocetna();
 					window.frmMenaderPoetna.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
