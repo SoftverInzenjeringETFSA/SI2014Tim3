@@ -205,7 +205,6 @@ public class IzvjestajiForma {
 				catch(Exception ex4)
 				{
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Niste kreirali izvjestaj.");
-					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o vozačima.");
 					logger.info("Greška!.", ex4);
 				}
 				
