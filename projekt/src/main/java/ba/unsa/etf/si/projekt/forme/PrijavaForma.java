@@ -1,4 +1,5 @@
 package ba.unsa.etf.si.projekt.forme;
+import org.apache.log4j.Logger;
 
 import java.awt.EventQueue;
 
@@ -16,18 +17,19 @@ import javax.swing.JButton;
 import org.hibernate.Session;
 
 import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
-
 import ba.unsa.etf.si.projekt.entiteti.TipKorisnickogRacuna;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class PrijavaForma {
-
+	final static Logger logger = Logger.getLogger(PrijavaForma.class);
 	private JFrame frmPrijava;
 	private JTextField ime;
 	private JPasswordField sifra;
@@ -42,12 +44,14 @@ public class PrijavaForma {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				try {
 					PrijavaForma window = new PrijavaForma();
 					window.frmPrijava.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
