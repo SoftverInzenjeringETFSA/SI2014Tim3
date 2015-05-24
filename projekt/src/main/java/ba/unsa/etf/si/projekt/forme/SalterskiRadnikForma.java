@@ -106,10 +106,8 @@ public class SalterskiRadnikForma implements ActionListener{
 					SalterskiRadnikForma window = new SalterskiRadnikForma();
 					window.frmalterskiRadnik.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
-					
-					logger.error("Greška! " + e.getMessage() , e);
-					 logger.log(null, e);
+				//	e.printStackTrace();
+					logger.log(null, e); 
 				}
 			}
 		});
@@ -481,7 +479,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna rezervacija.");
-					
+					logger.info("Neuspješna rezervacija.", ex);
 				}
 			}
 		});
@@ -968,7 +966,7 @@ public class SalterskiRadnikForma implements ActionListener{
         		}
         		catch(Exception ex){
         			JOptionPane.showMessageDialog(btnIsplati, "Ne postoji ta rezervacija!");
-        			
+        			logger.info("Ne postoji ta rezervacija.", ex);
         		}
         		
         		TipKarte k = TipKarte.jednosmjerna;
