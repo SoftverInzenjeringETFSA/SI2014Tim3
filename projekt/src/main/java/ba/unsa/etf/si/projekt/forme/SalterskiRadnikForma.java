@@ -981,6 +981,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				JOptionPane.showMessageDialog(btnIsplati, "Karta je prodata.");
 				
 				
+				
         	}
         });
         btnIsplati.setBounds(420, 124, 134, 33);

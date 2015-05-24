@@ -165,15 +165,22 @@ public class NaloziForma {
 				int v=0,d1=0;
 				try
 				{
+					if(linijeList.getSelectedIndex()==-1)
+					{
+						JOptionPane.showMessageDialog(napraviBtn, "Morate selektovati autobusku liniju kako biste kreirali nalog.");
+						return;
+					}
+					
 					if(datumDate.getDate()==null)
 					{
-						string+="Morate unijeti datum";
+						string+="Morate unijeti datum. ";
 						d1=1;
 					}
+					
 					if(vrijeme.getText().length()==0 || Validacija.validirajVrijeme(vrijeme.getText())==false)
 					{
 			           v=1;
-						string+="Morate unijeti vrijeme i ono mora biti u formatu 12:12";
+						string+="Morate unijeti vrijeme i ono mora biti u formatu 12:12.";
 						
 					}
 					Session session = HibernateUtil.getSessionFactory().openSession();
@@ -182,9 +189,11 @@ public class NaloziForma {
 					AutobuskaLinija linija=new AutobuskaLinija();
 					String selektovano=(linijeList.getSelectedValue().toString());
 					java.util.List listasvihlinija=linija1.sveLinije(session);
+					
 					if(v==0 && d1==0)
 					{
 					int broj=0;
+					
 					for(int i=0;i<listasvihlinija.size();i++)
 					{
 						AutobuskaLinija a=(AutobuskaLinija)listasvihlinija.get(i);
@@ -192,8 +201,7 @@ public class NaloziForma {
 					    if(selektovano.equals(uporedi)==true)
 					    	broj=a.getBrojLinije();
 					}
-					if(broj!=0)
-					{
+					
 					linija=linija1.nadjiAutobuskuLiniju(session, broj);
 					java.util.Date d=datumDate.getDate();
 					Calendar cal=Calendar.getInstance();
@@ -209,12 +217,9 @@ public class NaloziForma {
 					JOptionPane.showMessageDialog(napraviBtn, "Uspješno ste kreirali nalog.");
 					vrijeme.setText("");
 					datumDate.setDate(null);
+					linijeList.setSelectedIndex(-1);
 					}
-					else
-					{
-						JOptionPane.showMessageDialog(napraviBtn, "Morate selektovati autobusku liniju.");
-					}
-					}
+					
 					else
 					{
 						JOptionPane.showMessageDialog(napraviBtn, string);

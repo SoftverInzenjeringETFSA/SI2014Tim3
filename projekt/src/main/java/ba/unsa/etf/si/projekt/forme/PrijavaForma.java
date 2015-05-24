@@ -118,23 +118,30 @@ public class PrijavaForma {
 				
 					if (ime.getText().equals(imekorisnika) && sifra.getText().equals(sifrakorisnika) && pravakorisnika==r2 ) {
 					AdministratorPocetna a = new AdministratorPocetna();
+					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
 					a.setVisible(true);
 					setVisible(false);
 				}
 					else if (ime.getText().equals(imekorisnika) && sifra.getText().equals(sifrakorisnika) && pravakorisnika==r1) {
 					MenadzerPocetna m = new MenadzerPocetna();
+					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
 					m.setVisible(true);
 					setVisible(false);
 				}
 					else if (ime.getText().equals(imekorisnika) && sifra.getText().equals(sifrakorisnika) && pravakorisnika==r3) {
 					SalterskiRadnikForma s = new SalterskiRadnikForma();
+					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
 					s.setVisible(true);
 					setVisible(false);
 				}
-					JOptionPane.showMessageDialog(prijavaBtn, "Vaša prijava je bila uspješna.");
+					else
+					{
+						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
+						sifra.setText("");
+					}
+					
 				session.close();
 				}
-				
 				else
 				{
 					JOptionPane.showMessageDialog(prijavaBtn, "Unijeli ste pogrešno korisničko ime ili nemate kreiran korisnički račun.");
