@@ -1,5 +1,7 @@
 package ba.unsa.etf.si.projekt.forme;
 
+import org.apache.log4j.Logger;
+
 import java.awt.EventQueue;
 
 import javassist.expr.NewArray;
@@ -14,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+
 
 
 
@@ -39,10 +42,11 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class KorisniciForma {
-
+	final static Logger logger = Logger.getLogger(KorisniciForma.class);
 	private JFrame frmKorisnikiRauni;
 	private JTextField korisnickoDodaj;
 	private JPasswordField sifraDodaj;
@@ -64,12 +68,14 @@ public class KorisniciForma {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				try {
 					KorisniciForma window = new KorisniciForma();
 					window.frmKorisnikiRauni.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
@@ -278,7 +284,7 @@ public class KorisniciForma {
 						sifraModifikuj.setText(kr.getSifra());
 					}
 					else
-					{
+					{ 
 						JOptionPane.showMessageDialog(pronadiBtn, "Ne postoji korisnički račun, sa unesenim korisničkim imenom.");
 					}
 					
