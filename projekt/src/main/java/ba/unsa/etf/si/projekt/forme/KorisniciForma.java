@@ -381,11 +381,15 @@ public class KorisniciForma {
 				TipKorisnickogRacuna r = null;
 				java.util.List sviracuni=HibernateKorisnickiRacuni.sviRacuni(session);
 				boolean postoji=false;
+				String staroIme = "";
 				for(int i=0;i<sviracuni.size();i++)
 				{
 					KorisnickiRacun ra=(KorisnickiRacun)sviracuni.get(i);
-					if(ra.getKorisnickoIme().equals(pronadiModifikuj.getText()) )
+					if(ra.getKorisnickoIme().equals(pronadiModifikuj.getText()))
+					{
 						postoji=true;
+						staroIme = ra.getKorisnickoIme();
+					}
 						
 				}
 				if(tipModifikuj.getSelectedItem().toString()=="administrator")
@@ -413,7 +417,7 @@ public class KorisniciForma {
 						for(int i=0;i<sviracuni.size();i++)
 						{
 							KorisnickiRacun ra=(KorisnickiRacun)sviracuni.get(i);
-							if(ra.getKorisnickoIme().equals(korisnickoModifikuj.getText()) )
+							if(ra.getKorisnickoIme().equals(korisnickoModifikuj.getText()) && !staroIme.equals(korisnickoModifikuj.getText()))
 								postojiIme=true;
 								
 						}

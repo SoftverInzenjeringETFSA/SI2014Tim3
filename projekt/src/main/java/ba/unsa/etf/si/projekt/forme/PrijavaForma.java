@@ -92,7 +92,7 @@ public class PrijavaForma {
 		
 		JLabel lblDobrodoli = new JLabel("Dobrodošli!");
 		lblDobrodoli.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblDobrodoli.setBounds(115, 28, 102, 25);
+		lblDobrodoli.setBounds(91, 28, 215, 25);
 		frmPrijava.getContentPane().add(lblDobrodoli);
 		
 		
