@@ -25,8 +25,8 @@ public class HibernateKartaTest {
 		Radnik r=HibernateRadnik.nadjiRadnikaPoImenu(session, "Radnik");
 		HibernateAutobus.dodajAutobus(session, 60, "A22-M-543", "model98");
 		Autobus a=HibernateAutobus.nadjiAutobus(session, "A22-M-543");
-		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,16.50, 31.00, false);
-		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 2);
+		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Tuzla", a, r, 2015, 05, 23, 13, 55, 2, 330, 3,6,16.50, 31.00, false);
+		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 6);
 		//prijedodavanja
 	    Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
 		Long count =(Long)q.uniqueResult();
@@ -44,7 +44,7 @@ public class HibernateKartaTest {
 	    
 		//Karta k=HibernateKarta.nadjiKartu(session, idK);
 	    karta.brisanjeKarte(session,idK);
-	    HibernateAutibuskaLinija.brisiAutobuskuLiniju(session, 2);
+	    HibernateAutibuskaLinija.brisiAutobuskuLiniju(session, 6);
         HibernateRadnik.brisiRadnika(session, "3004989785214");
 		HibernateAutobus.brisanjeAutobusa(session, "A22-M-543");	
 		session.close();

@@ -20,7 +20,7 @@ public class HibernateNalogTest {
 		HibernateAutobus.dodajAutobus(session, 55, "A23-M-415", "m12");
 		Autobus a=HibernateAutobus.nadjiAutobus(session, "A23-M-415");
 		HibernateRadnik.dodajRadnika(session, "Sara", "Saric", "1911989147824", TipRadnogMjesta.Vozac);
-		Radnik r=HibernateRadnik.nadjiRadnikaPoImenu(session, "Vrijedni");
+		Radnik r=HibernateRadnik.nadjiRadnikaPoImenu(session, "Sara");
 		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Bihac", a, r, 2015, 05, 23, 13, 55, 2, 800, 3,10,16.50, 31.00, false);
 		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 10);
 		//prijedodavanja
@@ -41,7 +41,5 @@ public class HibernateNalogTest {
 		session.close();
 		
 	}
-
-
 
 }

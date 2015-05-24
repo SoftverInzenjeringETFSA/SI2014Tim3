@@ -28,7 +28,7 @@ public class HibernateKorisnickiRacuniTest {
 		hkr.dodajKorisnickiRacun(session, r, tkr, "mujo", "mujokujekonjapomjesecu1*");
 		//poslije dodavanja
 		Query q2 = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
-		Long count2 =(Long)q.uniqueResult();
+		Long count2 =(Long)q2.uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 		hkr.brisiKorisnickiRacun(session, "mujo");
