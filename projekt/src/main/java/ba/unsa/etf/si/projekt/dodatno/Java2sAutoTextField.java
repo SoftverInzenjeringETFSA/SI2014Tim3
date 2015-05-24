@@ -2,6 +2,7 @@ package ba.unsa.etf.si.projekt.dodatno;
 
 /* From http://java.sun.com/docs/books/tutorial/index.html */
 
+
 /*
  * Copyright (c) 2006 Sun Microsystems, Inc. All Rights Reserved.
  *
@@ -35,11 +36,15 @@ package ba.unsa.etf.si.projekt.dodatno;
  * for use in the design, construction, operation or maintenance of any
  * nuclear facility.
  */
+import org.apache.log4j.Logger;
+
 import java.util.List;
+
 import javax.swing.JTextField;
 import javax.swing.text.*;
 
 public class Java2sAutoTextField extends JTextField {
+	final static Logger logger = Logger.getLogger(Java2sAutoTextField.class);
   class AutoDocument extends PlainDocument {
 
     public void replace(int i, int j, String s, AttributeSet attributeset)
@@ -87,6 +92,7 @@ public class Java2sAutoTextField extends JTextField {
         setSelectionStart(k);
         setSelectionEnd(getLength());
       } catch (Exception exception) {
+    	  logger.error("Greška! " + exception.getMessage() , exception);
       }
     }
 
@@ -148,6 +154,7 @@ public class Java2sAutoTextField extends JTextField {
         int j = Math.max(getCaret().getDot(), getCaret().getMark());
         _lb.replace(i, j - i, s, null);
       } catch (Exception exception) {
+    	  logger.error("Greška! " + exception.getMessage() , exception);
       }
   }
 
