@@ -40,7 +40,7 @@ import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 public class AutobuskeLinijeForma {
-	final static Logger logger = Logger.getLogger(AutobuskeLinijeForma .class);
+	final static Logger logger = Logger.getLogger(AutobuskeLinijeForma.class);
 	private JFrame frmAutobuskeLinije;
 	private JTextField polazisteDodaj;
 	private JTextField odredisteDodaj;

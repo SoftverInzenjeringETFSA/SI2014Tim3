@@ -1,5 +1,7 @@
 package ba.unsa.etf.si.projekt.forme;
 
+import org.apache.log4j.Logger;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -33,10 +35,11 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class IzvjestajiForma {
-
+	final static Logger logger = Logger.getLogger(IzvjestajiForma.class);
 	private JFrame frmIzvjetaji;
 	private JTextField pocetnoVrijemeSati;
 	private JTextField pocetnoVrijemeMinute;
@@ -55,6 +58,7 @@ public class IzvjestajiForma {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				
 				try {
@@ -62,6 +66,7 @@ public class IzvjestajiForma {
 					window.frmIzvjetaji.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
