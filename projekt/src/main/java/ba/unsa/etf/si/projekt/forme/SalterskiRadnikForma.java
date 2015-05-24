@@ -151,17 +151,17 @@ public class SalterskiRadnikForma implements ActionListener{
 		
 		JPanel panel_7 = new JPanel();
         panel_7.setBorder(new TitledBorder(null, "Tip karte", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panel_7.setBounds(85, 128, 169, 90);
+        panel_7.setBounds(63, 127, 207, 90);
         panel.add(panel_7);
         panel_7.setLayout(null);
         
         final JRadioButton jednosmjernaProdaja = new JRadioButton("Jednosmjerna");
-        jednosmjernaProdaja.setBounds(38, 22, 109, 23);
+        jednosmjernaProdaja.setBounds(38, 22, 149, 23);
         panel_7.add(jednosmjernaProdaja);
         jednosmjernaProdaja.setSelected(true);
         
         JRadioButton povratnaProdaja = new JRadioButton("Povratna");
-        povratnaProdaja.setBounds(38, 53, 69, 23);
+        povratnaProdaja.setBounds(38, 53, 149, 23);
         panel_7.add(povratnaProdaja);
         
         //Group the radio buttons.
@@ -352,10 +352,10 @@ public class SalterskiRadnikForma implements ActionListener{
 		datumRezervacijaDate.setBounds(117, 234, 142, 20);
 		panel_2.add(datumRezervacijaDate);
 		
-		JLabel label_8 = new JLabel("Datum polaska:");
-		label_8.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_8.setBounds(14, 238, 94, 14);
-		panel_2.add(label_8);
+		JLabel lblPolazak = new JLabel("Polazak:");
+		lblPolazak.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblPolazak.setBounds(14, 238, 94, 14);
+		panel_2.add(lblPolazak);
 		
 		
 		final JList rezervacijeList = new JList();   //popuni listu sa postojecim rezervacijama
@@ -529,7 +529,7 @@ public class SalterskiRadnikForma implements ActionListener{
 		
 		final JDateChooser datumModifikacijeDate = new JDateChooser();
 		datumModifikacijeDate.setDateFormatString("dd/M/yyy");
-		datumModifikacijeDate.setBounds(419, 126, 142, 20);
+		datumModifikacijeDate.setBounds(419, 137, 142, 20);
 		panel_4.add(datumModifikacijeDate);
 		
 		
@@ -590,10 +590,10 @@ public class SalterskiRadnikForma implements ActionListener{
 		
 		
 		
-		JLabel label_18 = new JLabel("Datum polaska:");
-		label_18.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_18.setBounds(303, 128, 106, 14);
-		panel_4.add(label_18);
+		JLabel lblPolazak_1 = new JLabel("Polazak:");
+		lblPolazak_1.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblPolazak_1.setBounds(303, 139, 106, 14);
+		panel_4.add(lblPolazak_1);
 		
 		final JButton modifikujBtn = new JButton("Modifikuj");
 		modifikujBtn.addActionListener(new ActionListener() {
@@ -747,22 +747,22 @@ public class SalterskiRadnikForma implements ActionListener{
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(419, 180, 142, 20);
+		textField.setBounds(419, 191, 142, 20);
 		panel_4.add(textField);
 		
 		JLabel label = new JLabel("Ime:");
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
-		label.setBounds(348, 182, 61, 14);
+		label.setBounds(348, 193, 61, 14);
 		panel_4.add(label);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(419, 227, 142, 20);
+		textField_1.setBounds(419, 238, 142, 20);
 		panel_4.add(textField_1);
 		
 		JLabel label_3 = new JLabel("Prezime:");
 		label_3.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_3.setBounds(336, 229, 73, 14);
+		label_3.setBounds(336, 240, 73, 14);
 		panel_4.add(label_3);
 		
 		popuniVrijeme();
@@ -809,16 +809,16 @@ public class SalterskiRadnikForma implements ActionListener{
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
         panel_1.setBorder(new TitledBorder(null, "Tip karte", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panel_1.setBounds(374, 25, 169, 83);
+        panel_1.setBounds(359, 25, 202, 83);
         panel_4.add(panel_1);
         
         jednosmjernaModifikacije = new JRadioButton("Jednosmjerna");
         jednosmjernaModifikacije.setSelected(true);
-        jednosmjernaModifikacije.setBounds(38, 22, 109, 23);
+        jednosmjernaModifikacije.setBounds(38, 22, 144, 23);
         panel_1.add(jednosmjernaModifikacije);
         
         povratnaModifikacije = new JRadioButton("Povratna");
-        povratnaModifikacije.setBounds(38, 53, 69, 23);
+        povratnaModifikacije.setBounds(38, 53, 137, 23);
         panel_1.add(povratnaModifikacije);
         panel_4.revalidate();
         panel_4.repaint();
@@ -851,16 +851,16 @@ public class SalterskiRadnikForma implements ActionListener{
         JPanel panel_1 = new JPanel();
         panel_1.setLayout(null);
         panel_1.setBorder(new TitledBorder(null, "Tip karte", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panel_1.setBounds(97, 124, 169, 83);
+        panel_1.setBounds(76, 124, 193, 83);
         panel_2.add(panel_1);
         
         jednosmjernaRezervacije = new JRadioButton("Jednosmjerna");
         jednosmjernaRezervacije.setSelected(true);
-        jednosmjernaRezervacije.setBounds(38, 22, 109, 23);
+        jednosmjernaRezervacije.setBounds(38, 22, 135, 23);
         panel_1.add(jednosmjernaRezervacije);
         
         JRadioButton povratnaRezervacije = new JRadioButton("Povratna");
-        povratnaRezervacije.setBounds(38, 53, 69, 23);
+        povratnaRezervacije.setBounds(38, 53, 120, 23);
         panel_1.add(povratnaRezervacije);
         
         //Group the radio buttons.

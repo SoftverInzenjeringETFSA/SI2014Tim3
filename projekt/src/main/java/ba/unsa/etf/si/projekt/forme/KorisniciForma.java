@@ -154,7 +154,7 @@ public class KorisniciForma {
 		
 		JLabel lblTipKorisnikogRauna = new JLabel("Tip korisničkog računa:");
 		lblTipKorisnikogRauna.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTipKorisnikogRauna.setBounds(18, 94, 158, 14);
+		lblTipKorisnikogRauna.setBounds(10, 94, 166, 14);
 		panel.add(lblTipKorisnikogRauna);
 		
 		JLabel label_4 = new JLabel("Korisničko ime:");
@@ -178,7 +178,7 @@ public class KorisniciForma {
 		panel.add(label_5);
 		
 		
-		final JButton dodajBtn = new JButton("Dodaj novog korisnika");
+		final JButton dodajBtn = new JButton("Dodaj korisnika");
 		
 		dodajBtn.addActionListener(new ActionListener() {
 			
@@ -240,7 +240,7 @@ public class KorisniciForma {
 		
 		
 		
-		dodajBtn.setBounds(242, 227, 137, 23);
+		dodajBtn.setBounds(244, 227, 135, 23);
 		panel.add(dodajBtn);
 		
 	    radnikDodajCombo = new JComboBox();
@@ -302,36 +302,36 @@ public class KorisniciForma {
 		
 		
 		
-		modifikujBtn.setBounds(237, 220, 119, 23);
+		modifikujBtn.setBounds(233, 220, 144, 23);
 		panel_1.add(modifikujBtn);
 		
 		korisnickoModifikuj = new JTextField();
 		korisnickoModifikuj.setColumns(10);
-		korisnickoModifikuj.setBounds(163, 128, 193, 20);
+		korisnickoModifikuj.setBounds(184, 128, 193, 20);
 		panel_1.add(korisnickoModifikuj);
 		
 		JLabel label_6 = new JLabel("Korisničko ime:");
 		label_6.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_6.setBounds(58, 131, 96, 14);
+		label_6.setBounds(79, 131, 96, 14);
 		panel_1.add(label_6);
 		
 		JLabel label_10 = new JLabel("Šifra:");
 		label_10.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_10.setBounds(94, 169, 60, 14);
+		label_10.setBounds(115, 169, 60, 14);
 		panel_1.add(label_10);
 		
 		sifraModifikuj = new JPasswordField();
 		sifraModifikuj.setColumns(10);
-		sifraModifikuj.setBounds(163, 166, 193, 20);
+		sifraModifikuj.setBounds(184, 166, 193, 20);
 		panel_1.add(sifraModifikuj);
 		
 		tipModifikuj = new JComboBox();
-		tipModifikuj.setBounds(164, 82, 193, 20);
+		tipModifikuj.setBounds(185, 82, 193, 20);
 		panel_1.add(tipModifikuj);
 		
 		JLabel label = new JLabel("Tip korisničkog računa:");
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
-		label.setBounds(10, 85, 144, 14);
+		label.setBounds(10, 85, 165, 14);
 		panel_1.add(label);
 		
 		JPanel panel_2 = new JPanel();
@@ -368,7 +368,7 @@ public class KorisniciForma {
 				}
 			}
 		});
-		izbrisiBtn.setBounds(219, 115, 112, 23);
+		izbrisiBtn.setBounds(198, 115, 133, 23);
 		panel_2.add(izbrisiBtn);
 		
 	

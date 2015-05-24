@@ -204,7 +204,7 @@ public class IzvjestajiForma {
 				
 			}
 		});
-		generisiProdaneBtn.setBounds(241, 208, 113, 23);
+		generisiProdaneBtn.setBounds(214, 208, 140, 23);
 		panel.add(generisiProdaneBtn);
 		
 		JPanel panel_1 = new JPanel();
@@ -262,19 +262,19 @@ public class IzvjestajiForma {
 		panel_1.add(label_3);
 		
 		JLabel label_4 = new JLabel("h");
-		label_4.setBounds(248, 152, 6, 14);
+		label_4.setBounds(248, 152, 12, 14);
 		panel_1.add(label_4);
 		
 		JLabel label_5 = new JLabel("h");
-		label_5.setBounds(248, 106, 6, 14);
+		label_5.setBounds(248, 106, 12, 14);
 		panel_1.add(label_5);
 		
 		JLabel label_6 = new JLabel("m");
-		label_6.setBounds(341, 106, 8, 14);
+		label_6.setBounds(341, 106, 27, 14);
 		panel_1.add(label_6);
 		
 		JLabel label_7 = new JLabel("m");
-		label_7.setBounds(341, 152, 8, 14);
+		label_7.setBounds(341, 152, 19, 14);
 		panel_1.add(label_7);
 		
 		final JButton generisiLinijeBtn = new JButton("Generiši izvještaj");
@@ -350,7 +350,7 @@ public class IzvjestajiForma {
 				
 			}
 		});
-		generisiLinijeBtn.setBounds(236, 208, 113, 23);
+		generisiLinijeBtn.setBounds(209, 208, 140, 23);
 		panel_1.add(generisiLinijeBtn);
 		
 		JPanel panel_2 = new JPanel();
@@ -396,7 +396,7 @@ public class IzvjestajiForma {
 				}
 			}
 		});
-		generisiVozaciBtn.setBounds(204, 208, 113, 23);
+		generisiVozaciBtn.setBounds(177, 208, 140, 23);
 		panel_2.add(generisiVozaciBtn);
 		
 		

@@ -135,7 +135,7 @@ public class RadniciForma {
 		
 		JLabel lblTipRadnogMjesta = new JLabel("Tip radnog mjesta:");
 		lblTipRadnogMjesta.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblTipRadnogMjesta.setBounds(28, 149, 113, 14);
+		lblTipRadnogMjesta.setBounds(0, 149, 141, 14);
 		dodajRadnikaTab.add(lblTipRadnogMjesta);
 		
 		final JButton dodajBtn = new JButton("Dodaj");
@@ -325,12 +325,12 @@ public class RadniciForma {
 				}
 			}
 		});
-		modifikujBtn.setBounds(271, 214, 109, 23);
+		modifikujBtn.setBounds(240, 214, 140, 23);
 		modifikujRadnikaTab.add(modifikujBtn);
 		
 		JLabel lblRadnik = new JLabel("JMBG radnika:");
 		lblRadnik.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblRadnik.setBounds(23, 36, 96, 14);
+		lblRadnik.setBounds(0, 36, 119, 14);
 		modifikujRadnikaTab.add(lblRadnik);
 		
 		jmbgModifikujPronadji = new JTextField();
@@ -381,7 +381,7 @@ public class RadniciForma {
 		
 		JLabel label_4 = new JLabel("JMBG radnika:");
 		label_4.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_4.setBounds(21, 36, 89, 14);
+		label_4.setBounds(0, 36, 110, 14);
 		izbrisiRadnikaTab.add(label_4);
 		
 		jmbgIzbrisiPronadi = new JTextField();
@@ -478,7 +478,7 @@ public class RadniciForma {
 		
 		JLabel label_5 = new JLabel("Tip radnog mjesta:");
 		label_5.setHorizontalAlignment(SwingConstants.TRAILING);
-		label_5.setBounds(21, 165, 124, 14);
+		label_5.setBounds(0, 165, 145, 14);
 		izbrisiRadnikaTab.add(label_5);
 		
 		JLabel label_7 = new JLabel("Prezime:");
