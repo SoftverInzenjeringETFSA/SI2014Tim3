@@ -1,4 +1,5 @@
 package ba.unsa.etf.si.projekt.forme;
+import org.apache.log4j.Logger;
 
 import java.awt.EventQueue;
 
@@ -29,11 +30,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Date;
 import java.util.Calendar;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class NaloziForma {
-
+	final static Logger logger = Logger.getLogger(NaloziForma.class);
 	private JFrame frmPravljenjeNaloga;
 	private JTextField vrijeme;
 	private String tipKorisnika;
@@ -49,12 +52,14 @@ public class NaloziForma {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				try {
 					NaloziForma window = new NaloziForma();
 					window.frmPravljenjeNaloga.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
