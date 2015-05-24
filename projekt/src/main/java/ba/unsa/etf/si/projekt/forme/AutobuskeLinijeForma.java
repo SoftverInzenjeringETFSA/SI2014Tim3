@@ -16,10 +16,18 @@ import javax.swing.UIManager;
 import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.Karta;
+import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
+import ba.unsa.etf.si.projekt.entiteti.Nalog;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
+import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateMedjunarodnaKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateNalog;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
+import ba.unsa.etf.si.projekt.hibernate.HibernateRezervacija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import com.toedter.calendar.JDateChooser;
@@ -961,13 +969,67 @@ public class AutobuskeLinijeForma {
 		final JButton izbrisiBtn = new JButton("Izbriši");
 		izbrisiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //brisanje autobusa
-				
+				String izuzetak="";
 				try
 				{
+					boolean brisi=true;
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				HibernateAutibuskaLinija brisanjelinija=new HibernateAutibuskaLinija();
-				AutobuskaLinija linija=new AutobuskaLinija();
 				int broj=Integer.parseInt(pronadiIzbrisiSpinner.getValue().toString());
+				
+				//ako je linija dodijeljena rezervaciji ili prodaji
+				java.util.List rezervacije=HibernateRezervacija.sveRezervacije(session);
+				for(int i=0;i<rezervacije.size();i++)
+				{
+					Rezervacija r=(Rezervacija)rezervacije.get(i);
+					AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
+					if(r.getLinija()==linija1)
+				{
+						brisi=false;
+						izuzetak+="Ne možete brisati liniju, jer postoje rezervacije vezena za nju.";
+				}
+				}
+					
+					java.util.List karte=HibernateKarta.sveKarte(session);
+					for(int i=0;i<karte.size();i++)
+					{
+						Karta k=(Karta)karte.get(i);
+						AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
+						if(k.getLinija()==linija1)
+						{
+							brisi=false;
+							izuzetak+="Ne možete brisati liniju, jer su za nju izdate karte.";
+						}
+					}
+					
+				java.util.List nalog=HibernateNalog.sviNalozi(session);
+				for(int i=0;i<nalog.size();i++)
+				{
+					Nalog n=(Nalog)nalog.get(i);
+					AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
+					if(n.getAutobuskaLinija()==linija1)
+					{
+						brisi=false;
+						izuzetak+="Ne mozete brisati linije, jer postoji nalog kreiran za nju.";
+					}
+				}
+				
+				java.util.List medjunarodne=HibernateMedjunarodnaKarta.sveMedjunarodneKarte(session);
+				for(int i=0;i<medjunarodne.size();i++)
+				{
+					MedjunarodnaKarta k=(MedjunarodnaKarta)medjunarodne.get(i);
+					AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
+					if(k.getLinija()==linija1)
+					{
+						brisi=false;
+						izuzetak+="Ne možete brisati linju, jer je prodata karta za nju.";
+					}
+					
+				}
+				
+				AutobuskaLinija linija=new AutobuskaLinija();
+				if(brisi==true)
+				{
 				linija=brisanjelinija.nadjiAutobuskuLiniju(session, broj);
 				brisanjelinija.brisiAutobuskuLiniju(session,broj);
 				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno ste izbrisali autobusku liniju.");
@@ -982,7 +1044,11 @@ public class AutobuskeLinijeForma {
 				vrijemeIzbrisi.setText("");
 				polazakIzbrisiDate.setDate(null);
 				pronadiIzbrisiSpinner.setValue(0);
-				
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(izbrisiBtn, izuzetak);
+				}
 				}
 				catch(Exception ex1)
 				{

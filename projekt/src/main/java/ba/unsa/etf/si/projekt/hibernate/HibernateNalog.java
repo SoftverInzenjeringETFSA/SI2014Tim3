@@ -59,7 +59,15 @@ public class HibernateNalog {
 		session.delete(r);
 		t.commit();
 	}
-	
+	public static java.util.List sviNalozi(Session session)
+	{
+		Transaction t = session.beginTransaction();
+		java.util.List nalozi;
+		nalozi=session.createQuery("FROM Nalog").list();
+		t.commit();
+		return nalozi;
+		
+	}
 	public HibernateNalog(){}
 
 }
