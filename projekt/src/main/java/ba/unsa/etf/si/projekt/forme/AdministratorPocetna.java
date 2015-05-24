@@ -61,8 +61,9 @@ public class AdministratorPocetna {
 					window.frmAdministratorPoetna.setVisible(true);
 				} catch (Exception e) {
 					
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
+					/*e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);*/
+					logger.log(null, e); 
 				}
 			}
 		});

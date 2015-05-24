@@ -74,8 +74,9 @@ public class KorisniciForma {
 					KorisniciForma window = new KorisniciForma();
 					window.frmKorisnikiRauni.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
+					/*e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);*/
+					logger.log(null, e); 
 				}
 			}
 		});
@@ -293,6 +294,7 @@ public class KorisniciForma {
 				catch(Exception e8)
 				{
 					JOptionPane.showMessageDialog(pronadiBtn, "Neuspješna pretraga korisničkih računa.");
+					logger.info("Greška!.", e8);
 				}
 				
 			}

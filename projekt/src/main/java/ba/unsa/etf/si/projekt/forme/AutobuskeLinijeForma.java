@@ -80,8 +80,9 @@ public class AutobuskeLinijeForma {
 					AutobuskeLinijeForma window = new AutobuskeLinijeForma();
 					window.frmAutobuskeLinije.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
+				/*	e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);*/
+					logger.log(null, e); 
 				}
 			}
 		});

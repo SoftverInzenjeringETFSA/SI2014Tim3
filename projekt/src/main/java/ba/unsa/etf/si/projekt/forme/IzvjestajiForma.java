@@ -65,8 +65,9 @@ public class IzvjestajiForma {
 					IzvjestajiForma window = new IzvjestajiForma();
 					window.frmIzvjetaji.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
+				/*	e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);*/
+					logger.log(null, e); 
 				}
 			}
 		});
@@ -205,6 +206,7 @@ public class IzvjestajiForma {
 				{
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Niste kreirali izvjestaj.");
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o vozačima.");
+					logger.info("Greška!.", ex4);
 				}
 				
 			}

@@ -64,8 +64,9 @@ public class AutobusiForma {
 					AutobusiForma window = new AutobusiForma();
 					window.frmEvidencijaAutobusa.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
+				/*	e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);*/
+					logger.log(null, e); 
 				}
 			}
 		});
