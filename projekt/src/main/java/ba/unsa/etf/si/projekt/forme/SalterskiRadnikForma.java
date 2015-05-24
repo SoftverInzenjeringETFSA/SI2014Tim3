@@ -1,4 +1,5 @@
 package ba.unsa.etf.si.projekt.forme;
+import org.apache.log4j.Logger;
 
 import java.awt.EventQueue;
 
@@ -17,6 +18,7 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
 import ba.unsa.etf.si.projekt.dodatno.Java2sAutoComboBox;
 import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
@@ -58,7 +60,7 @@ import javax.transaction.Transaction;
 import java.awt.Toolkit;
 
 public class SalterskiRadnikForma implements ActionListener{
-
+	final static Logger logger = Logger.getLogger(SalterskiRadnikForma.class);
 	private JFrame frmalterskiRadnik;
 	private JTextField imeProdaja;
 	private JTextField prezimeProdaja;
@@ -98,12 +100,14 @@ public class SalterskiRadnikForma implements ActionListener{
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				try {
 					SalterskiRadnikForma window = new SalterskiRadnikForma();
 					window.frmalterskiRadnik.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});
@@ -327,6 +331,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna prodaja.");
 					//JOptionPane.showMessageDialog(prodajaBtn, ex);
+					logger.error("Greška! " + ex.getMessage() , ex);
 				}
 			}
 		});
@@ -473,6 +478,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna rezervacija.");
+					logger.error("Greška! " + ex.getMessage() , ex);
 				}
 			}
 		});
@@ -658,6 +664,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					JOptionPane.showMessageDialog(modifikujBtn,"Neuspješno modifikovanje.");
 					JOptionPane.showMessageDialog(modifikujBtn, ex);
+					logger.error("Greška! " + ex.getMessage() , ex);
 				}
 			}
 		});
@@ -738,6 +745,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					{
 						JOptionPane.showMessageDialog(obrisiBtn,"Neuspješno brisanje.");
 						JOptionPane.showMessageDialog(obrisiBtn, ex);
+						logger.error("Greška! " + ex.getMessage() , ex);
 					}
 				}
 			
@@ -957,6 +965,7 @@ public class SalterskiRadnikForma implements ActionListener{
         		}
         		catch(Exception ex){
         			JOptionPane.showMessageDialog(btnIsplati, "Ne postoji ta rezervacija!");
+        			logger.error("Greška! " + ex.getMessage() , ex);
         		}
         		
         		TipKarte k = TipKarte.jednosmjerna;
