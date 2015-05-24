@@ -1,5 +1,6 @@
 package ba.unsa.etf.si.projekt.dodatno;
 import org.apache.log4j.Logger;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,12 +44,13 @@ public class GenerisanjePDF {
 					new FileOutputStream("IKarte.pdf"));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			logger.error("Greška! " + e1.getMessage() , e1);
+		//	e1.printStackTrace();
+			logger.log(null, e1); 
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			logger.error("Greška! " + e1.getMessage() , e1);
+		//	e1.printStackTrace();
+		//	logger.error("Greška! " + e1.getMessage() , e1);
+			logger.log(null, e1); 
 		}
 
 		document.open();
@@ -113,8 +115,9 @@ public class GenerisanjePDF {
 			document.close();
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			logger.error("Greška! " + e.getMessage() , e);
+			logger.log(null, e); 
+		/*	e.printStackTrace();
+			logger.error("Greška! " + e.getMessage() , e);*/
 		}
 
 		if (Desktop.isDesktopSupported()) {
@@ -138,12 +141,14 @@ public class GenerisanjePDF {
 					new FileOutputStream("IRadnik.pdf"));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			logger.error("Greška! " + e1.getMessage() , e1);
+		/*	e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);*/
+			logger.log(null, e1); 
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			logger.error("Greška! " + e1.getMessage() , e1);
+		/*	e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);*/
+			logger.log(null, e1); 
 		}
 
 		document.open();
@@ -202,8 +207,9 @@ public class GenerisanjePDF {
 			document.close();
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			logger.error("Greška! " + e.getMessage() , e);
+		/*	e.printStackTrace();
+			logger.error("Greška! " + e.getMessage() , e);*/
+			logger.log(null, e); 
 		}
 
 		if (Desktop.isDesktopSupported()) {
@@ -227,12 +233,14 @@ public class GenerisanjePDF {
 					new FileOutputStream("ILinije.pdf"));
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			logger.error("Greška! " + e1.getMessage() , e1);
+		/*	e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);*/
+			logger.log(null, e1); 
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			logger.error("Greška! " + e1.getMessage() , e1);
+		/*	e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);*/
+			logger.log(null, e1); 
 		}
 
 		document.open();
@@ -295,8 +303,9 @@ public class GenerisanjePDF {
 			document.close();
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			logger.error("Greška! " + e.getMessage() , e);
+		/*	e.printStackTrace();
+			logger.error("Greška! " + e.getMessage() , e);*/
+			logger.log(null, e); 
 		}
 
 		if (Desktop.isDesktopSupported()) {
