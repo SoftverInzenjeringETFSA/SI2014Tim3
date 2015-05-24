@@ -1,4 +1,5 @@
 package ba.unsa.etf.si.projekt.forme;
+import org.apache.log4j.Logger;
 
 import java.awt.EventQueue;
 
@@ -21,11 +22,13 @@ import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Toolkit;
 
 public class RadniciForma {
-
+	final static Logger logger = Logger.getLogger(RadniciForma.class);
 	private JFrame frmEvidencijaRadnika;
 	private JTextField imeDodaj;
 	private JTextField prezimeDodaj;
@@ -48,12 +51,14 @@ public class RadniciForma {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 				} catch (Exception e) {
 					// TODO: handle exception
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 				try {
 					RadniciForma window = new RadniciForma();
 					window.frmEvidencijaRadnika.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error("Greška! " + e.getMessage() , e);
 				}
 			}
 		});

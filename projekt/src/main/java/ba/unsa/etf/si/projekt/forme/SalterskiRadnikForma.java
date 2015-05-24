@@ -331,7 +331,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna prodaja.");
 					//JOptionPane.showMessageDialog(prodajaBtn, ex);
-					logger.error("Greška! " + ex.getMessage() , ex);
+					
 				}
 			}
 		});
@@ -478,7 +478,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				catch(Exception ex)
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna rezervacija.");
-					logger.error("Greška! " + ex.getMessage() , ex);
+					
 				}
 			}
 		});
@@ -664,7 +664,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					JOptionPane.showMessageDialog(modifikujBtn,"Neuspješno modifikovanje.");
 					JOptionPane.showMessageDialog(modifikujBtn, ex);
-					logger.error("Greška! " + ex.getMessage() , ex);
+					
 				}
 			}
 		});
@@ -745,7 +745,7 @@ public class SalterskiRadnikForma implements ActionListener{
 					{
 						JOptionPane.showMessageDialog(obrisiBtn,"Neuspješno brisanje.");
 						JOptionPane.showMessageDialog(obrisiBtn, ex);
-						logger.error("Greška! " + ex.getMessage() , ex);
+						
 					}
 				}
 			
@@ -965,7 +965,7 @@ public class SalterskiRadnikForma implements ActionListener{
         		}
         		catch(Exception ex){
         			JOptionPane.showMessageDialog(btnIsplati, "Ne postoji ta rezervacija!");
-        			logger.error("Greška! " + ex.getMessage() , ex);
+        			
         		}
         		
         		TipKarte k = TipKarte.jednosmjerna;
