@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 23, 2015 at 11:03 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost
+-- Generation Time: May 24, 2015 at 12:51 PM
+-- Server version: 5.5.43-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,24 +17,28 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `tim3`
+-- Database: `Tim3`
 --
 
-CREATE DATABASE `tim3`;
-USE `tim3`;
+-- --------------------------------------------------------
+
+CREATE DATABASE `Tim3`;
+USE `Tim3`;
 
 -- --------------------------------------------------------
 
 CREATE USER 'EtfSI2014'@'localhost' IDENTIFIED BY '2014SIEtf';
 
-GRANT ALL ON `Tim3`.* TO 'EtfSI2014';
+GRANT ALL ON `Tim3`.* TO `EtfSI2014`;
 
+
+-- --------------------------------------------------------
 
 --
--- Table structure for table `autobus`
+-- Table structure for table `Autobus`
 --
 
-CREATE TABLE IF NOT EXISTS `autobus` (
+CREATE TABLE IF NOT EXISTS `Autobus` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `MODEL` varchar(255) DEFAULT NULL,
   `KAPACITET` int(11) DEFAULT NULL,
@@ -45,10 +49,10 @@ CREATE TABLE IF NOT EXISTS `autobus` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `autobuskalinija`
+-- Table structure for table `AutobuskaLinija`
 --
 
-CREATE TABLE IF NOT EXISTS `autobuskalinija` (
+CREATE TABLE IF NOT EXISTS `AutobuskaLinija` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `POLAZISTE` varchar(255) DEFAULT NULL,
   `ODREDISTE` varchar(255) DEFAULT NULL,
@@ -68,17 +72,17 @@ CREATE TABLE IF NOT EXISTS `autobuskalinija` (
   `MEDJUNARODNA` bit(1) DEFAULT NULL,
   `ZAUZETO` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_j38341cnju2t1qvypfrp8sm3c` (`AUTOBUS`),
-  KEY `FK_lp207a8l8k8sf1ttvjnl63xuy` (`VOZAC`)
+  KEY `FK_6s85fip3v6f0ssgfygehx4myp` (`AUTOBUS`),
+  KEY `FK_49krsit0b1oj279n79rq2rhh6` (`VOZAC`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `karta`
+-- Table structure for table `Karta`
 --
 
-CREATE TABLE IF NOT EXISTS `karta` (
+CREATE TABLE IF NOT EXISTS `Karta` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `linija` bigint(20) DEFAULT NULL,
   `VRIJEMEKupovine_SATI` int(11) DEFAULT NULL,
@@ -89,32 +93,39 @@ CREATE TABLE IF NOT EXISTS `karta` (
   `DATUMkupovine_GODINA` int(11) DEFAULT NULL,
   `CIJENA` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_nb4vtpx7e9tr2a9mivsjue6mg` (`linija`)
+  KEY `FK_2o637y6nuuy4429flb6k9t16o` (`linija`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `korisnickiracun`
+-- Table structure for table `KorisnickiRacun`
 --
 
-CREATE TABLE IF NOT EXISTS `korisnickiracun` (
+CREATE TABLE IF NOT EXISTS `KorisnickiRacun` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `KORISNICKOIME` varchar(255) DEFAULT NULL,
   `SIFRA` varchar(255) DEFAULT NULL,
   `radnik` bigint(20) DEFAULT NULL,
   `TIPKORISNICKOGRACUNA` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_qppepa8vt2jotww7d6fhv901f` (`radnik`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `FK_7w97gmc3yjar1cxat94lblpur` (`radnik`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `KorisnickiRacun`
+--
+
+INSERT INTO `KorisnickiRacun` (`ID`, `KORISNICKOIME`, `SIFRA`, `radnik`, `TIPKORISNICKOGRACUNA`) VALUES
+(4, 'neko', 'neko', 3, 'administrator');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `medjunarodnakarta`
+-- Table structure for table `MedjunarodnaKarta`
 --
 
-CREATE TABLE IF NOT EXISTS `medjunarodnakarta` (
+CREATE TABLE IF NOT EXISTS `MedjunarodnaKarta` (
   `ID` bigint(20) NOT NULL,
   `IME` varchar(255) DEFAULT NULL,
   `PREZIME` varchar(255) DEFAULT NULL,
@@ -124,10 +135,10 @@ CREATE TABLE IF NOT EXISTS `medjunarodnakarta` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nalog`
+-- Table structure for table `Nalog`
 --
 
-CREATE TABLE IF NOT EXISTS `nalog` (
+CREATE TABLE IF NOT EXISTS `Nalog` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `AUTOBUSKALINIJA` bigint(20) DEFAULT NULL,
   `DATUMPOLASKA_DAN` int(11) DEFAULT NULL,
@@ -136,31 +147,38 @@ CREATE TABLE IF NOT EXISTS `nalog` (
   `VRIJEMEPOLASKA_SATI` int(11) DEFAULT NULL,
   `VRIJEMEPOLASKA_MINUTE` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_j8mkp94ni32pk177iw6t1jwfk` (`AUTOBUSKALINIJA`)
+  KEY `FK_a84m1ahi7o58sj09my6xjn6d1` (`AUTOBUSKALINIJA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `radnik`
+-- Table structure for table `Radnik`
 --
 
-CREATE TABLE IF NOT EXISTS `radnik` (
+CREATE TABLE IF NOT EXISTS `Radnik` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `IME` varchar(255) DEFAULT NULL,
   `PREZIME` varchar(255) DEFAULT NULL,
   `JMBG` varchar(255) DEFAULT NULL,
   `TIPRADNOGMJESTA` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `Radnik`
+--
+
+INSERT INTO `Radnik` (`ID`, `IME`, `PREZIME`, `JMBG`, `TIPRADNOGMJESTA`) VALUES
+(3, 'neko', 'neko', 'neko', 'Administrator');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rezervacija`
+-- Table structure for table `Rezervacija`
 --
 
-CREATE TABLE IF NOT EXISTS `rezervacija` (
+CREATE TABLE IF NOT EXISTS `Rezervacija` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `LINIJA` bigint(20) DEFAULT NULL,
   `VRIJEMEPOLASKA_SATI` int(11) DEFAULT NULL,
@@ -173,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `rezervacija` (
   `IME` varchar(255) DEFAULT NULL,
   `PREZIME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
-  KEY `FK_tr1si9pqlsit85x4n5gw6i2ng` (`LINIJA`)
+  KEY `FK_evtdmljwiq1a82fvlakbqmcq6` (`LINIJA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
@@ -181,41 +199,41 @@ CREATE TABLE IF NOT EXISTS `rezervacija` (
 --
 
 --
--- Constraints for table `autobuskalinija`
+-- Constraints for table `AutobuskaLinija`
 --
-ALTER TABLE `autobuskalinija`
-  ADD CONSTRAINT `FK_lp207a8l8k8sf1ttvjnl63xuy` FOREIGN KEY (`VOZAC`) REFERENCES `radnik` (`ID`),
-  ADD CONSTRAINT `FK_j38341cnju2t1qvypfrp8sm3c` FOREIGN KEY (`AUTOBUS`) REFERENCES `autobus` (`ID`);
+ALTER TABLE `AutobuskaLinija`
+  ADD CONSTRAINT `FK_49krsit0b1oj279n79rq2rhh6` FOREIGN KEY (`VOZAC`) REFERENCES `Radnik` (`ID`),
+  ADD CONSTRAINT `FK_6s85fip3v6f0ssgfygehx4myp` FOREIGN KEY (`AUTOBUS`) REFERENCES `Autobus` (`ID`);
 
 --
--- Constraints for table `karta`
+-- Constraints for table `Karta`
 --
-ALTER TABLE `karta`
-  ADD CONSTRAINT `FK_nb4vtpx7e9tr2a9mivsjue6mg` FOREIGN KEY (`linija`) REFERENCES `autobuskalinija` (`ID`);
+ALTER TABLE `Karta`
+  ADD CONSTRAINT `FK_2o637y6nuuy4429flb6k9t16o` FOREIGN KEY (`linija`) REFERENCES `AutobuskaLinija` (`ID`);
 
 --
--- Constraints for table `korisnickiracun`
+-- Constraints for table `KorisnickiRacun`
 --
-ALTER TABLE `korisnickiracun`
-  ADD CONSTRAINT `FK_qppepa8vt2jotww7d6fhv901f` FOREIGN KEY (`radnik`) REFERENCES `radnik` (`ID`);
+ALTER TABLE `KorisnickiRacun`
+  ADD CONSTRAINT `FK_7w97gmc3yjar1cxat94lblpur` FOREIGN KEY (`radnik`) REFERENCES `Radnik` (`ID`);
 
 --
--- Constraints for table `medjunarodnakarta`
+-- Constraints for table `MedjunarodnaKarta`
 --
-ALTER TABLE `medjunarodnakarta`
-  ADD CONSTRAINT `FK_lpxiueoqxkv3yni922a3rxjif` FOREIGN KEY (`ID`) REFERENCES `karta` (`ID`);
+ALTER TABLE `MedjunarodnaKarta`
+  ADD CONSTRAINT `FK_hkqpn8hrcjot38cf64hapjlk2` FOREIGN KEY (`ID`) REFERENCES `Karta` (`ID`);
 
 --
--- Constraints for table `nalog`
+-- Constraints for table `Nalog`
 --
-ALTER TABLE `nalog`
-  ADD CONSTRAINT `FK_j8mkp94ni32pk177iw6t1jwfk` FOREIGN KEY (`AUTOBUSKALINIJA`) REFERENCES `autobuskalinija` (`ID`);
+ALTER TABLE `Nalog`
+  ADD CONSTRAINT `FK_a84m1ahi7o58sj09my6xjn6d1` FOREIGN KEY (`AUTOBUSKALINIJA`) REFERENCES `AutobuskaLinija` (`ID`);
 
 --
--- Constraints for table `rezervacija`
+-- Constraints for table `Rezervacija`
 --
-ALTER TABLE `rezervacija`
-  ADD CONSTRAINT `FK_tr1si9pqlsit85x4n5gw6i2ng` FOREIGN KEY (`LINIJA`) REFERENCES `autobuskalinija` (`ID`);
+ALTER TABLE `Rezervacija`
+  ADD CONSTRAINT `FK_evtdmljwiq1a82fvlakbqmcq6` FOREIGN KEY (`LINIJA`) REFERENCES `AutobuskaLinija` (`ID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
