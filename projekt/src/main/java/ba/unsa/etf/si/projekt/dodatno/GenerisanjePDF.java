@@ -1,5 +1,5 @@
 package ba.unsa.etf.si.projekt.dodatno;
-
+import org.apache.log4j.Logger;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +32,7 @@ import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 
 public class GenerisanjePDF {
 
+	final static Logger logger = Logger.getLogger(GenerisanjePDF.class);
 	public static void prodaneKartePDF(List<Karta> karte, Date pocetak, Date kraj)
 	{
 		Document document = new Document(PageSize.A4, 50, 50, 50, 50);
@@ -43,9 +44,11 @@ public class GenerisanjePDF {
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);
 		}
 
 		document.open();
@@ -111,6 +114,7 @@ public class GenerisanjePDF {
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.error("Greška! " + e.getMessage() , e);
 		}
 
 		if (Desktop.isDesktopSupported()) {
@@ -119,6 +123,7 @@ public class GenerisanjePDF {
 				Desktop.getDesktop().open(myFile);
 			} catch (IOException ex) {
 				// no application registered for PDFs
+				logger.error("Greška! " + ex.getMessage() , ex);
 			}
 		}
 
@@ -134,9 +139,11 @@ public class GenerisanjePDF {
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);
 		}
 
 		document.open();
@@ -196,6 +203,7 @@ public class GenerisanjePDF {
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.error("Greška! " + e.getMessage() , e);
 		}
 
 		if (Desktop.isDesktopSupported()) {
@@ -204,6 +212,7 @@ public class GenerisanjePDF {
 				Desktop.getDesktop().open(myFile);
 			} catch (IOException ex) {
 				// no application registered for PDFs
+				logger.error("Greška! " + ex.getMessage() , ex);
 			}
 		}
 	}
@@ -219,9 +228,11 @@ public class GenerisanjePDF {
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);
 		} catch (DocumentException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			logger.error("Greška! " + e1.getMessage() , e1);
 		}
 
 		document.open();
@@ -285,6 +296,7 @@ public class GenerisanjePDF {
 		} catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.error("Greška! " + e.getMessage() , e);
 		}
 
 		if (Desktop.isDesktopSupported()) {
@@ -293,6 +305,7 @@ public class GenerisanjePDF {
 				Desktop.getDesktop().open(myFile);
 			} catch (IOException ex) {
 				// no application registered for PDFs
+				logger.error("Greška! " + ex.getMessage() , ex);
 			}
 		}
 	}
