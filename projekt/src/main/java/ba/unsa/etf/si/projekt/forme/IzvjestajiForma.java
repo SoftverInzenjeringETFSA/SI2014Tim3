@@ -384,10 +384,16 @@ public class IzvjestajiForma {
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 					Radnik r = HibernateRadnik.nadjiRadnika(session, JMBGVozac.getText());
-					
+					if(r!=null)
+					{
 					GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
 					
 					JOptionPane.showMessageDialog(generisiVozaciBtn, "Uspješno ste kreirali izvještaj o vozačima.");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(generisiVozaciBtn, "Ne postoji vozač, sa jmbg koji ste unijeli.");
+					}
 					JMBGVozac.setText("");
 					}
 					else
