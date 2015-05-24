@@ -56,6 +56,7 @@ public class HibernateNalog {
 		Criteria k=session.createCriteria(Nalog.class);
 		k.add(Restrictions.eq("autobuskaLinija", linija)).add(Restrictions.eq("datumPolaska_dan",dan)).add(Restrictions.eq("datumPolaska_mjesec", mjesec)).add(Restrictions.eq("datumPolaska_godina", godina)).add(Restrictions.eq("vrijemePolaska_sati", sati)).add(Restrictions.eq("vrijemePolaska_minute", minute));
 		Nalog r=(Nalog) k.uniqueResult();
+		session.delete(r);
 		t.commit();
 	}
 	
