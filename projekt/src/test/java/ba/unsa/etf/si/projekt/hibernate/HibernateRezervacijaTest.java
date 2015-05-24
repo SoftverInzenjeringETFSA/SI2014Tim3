@@ -37,40 +37,40 @@ public class HibernateRezervacijaTest {
 	@Test
 	public void testModifikujRezervaciju() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		//stara linija 7, peron 5
+		//stara linija 17, peron 5
 		HibernateAutobus ha3 = new HibernateAutobus();
-		ha3.dodajAutobus(session, 54, "O99-J-753", "Testmodel200");
+		ha3.dodajAutobus(session, 55, "T24-T-951", "Testmodel200");
 		HibernateRadnik hr3 = new HibernateRadnik();
 		TipRadnogMjesta vozac = TipRadnogMjesta.Vozac;
-		hr3.dodajRadnika(session, "RadnikTestMod", "Mod", "1020304050607", vozac);
-		Autobus a3 = ha3.nadjiAutobus(session, "O99-J-753");  
-		Radnik r3 = hr3.nadjiRadnika(session, "1020304050607");
+		hr3.dodajRadnika(session, "RadnikTestMod", "Mod", "1204507809907", vozac);
+		Autobus a3 = ha3.nadjiAutobus(session, "T24-T-951");  
+		Radnik r3 = hr3.nadjiRadnika(session, "1204507809907");
 		HibernateAutibuskaLinija stara = new HibernateAutibuskaLinija();
-		stara.dodajAutobuskuLiniju(session,"mst","zst",a3,r3,2015,8,15,22,10,5,200,111,7,35.00,70.00,true);
+		stara.dodajAutobuskuLiniju(session,"mst","zst",a3,r3,2015,8,15,22,10,5,200,111,17,35.00,70.00,true);
 		//nova
 		HibernateAutibuskaLinija nova = new HibernateAutibuskaLinija();
-		//linija postaje 9, peron 2
-		nova.dodajAutobuskuLiniju(session,"mstnovo","zstnovo",a3,r3,2015,8,15,22,10,2,201,112,9,36.00,71.00,true);
-		AutobuskaLinija linijaS = stara.nadjiAutobuskuLiniju(session, 7);
-		AutobuskaLinija linijaN = nova.nadjiAutobuskuLiniju(session, 9);
+		//linija postaje 19, peron 2
+		nova.dodajAutobuskuLiniju(session,"mstnovo","zstnovo",a3,r3,2015,8,15,22,10,2,201,112,19,36.00,71.00,true);
+		AutobuskaLinija linijaS = stara.nadjiAutobuskuLiniju(session, 17);
+		AutobuskaLinija linijaN = nova.nadjiAutobuskuLiniju(session, 19);
 		//HibernateRezervacija hrez = new HibernateRezervacija();
 		TipKarte tk = TipKarte.jednosmjerna;
 		//prije
-		hrez.dodajRezervaciju(session, linijaS, 2015, 8, 15, 22, 10, tk, 35.00, "Dinatestmod", "Amod");
+		hrez.dodajRezervaciju(session, linijaS, 2015, 8, 15, 22, 10, tk, 35.00, "Dinaatestmod", "Aamod");
 		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
 		Long count = (Long)q.uniqueResult();
 		int prije = count.intValue();
 		//poslije
-		hrez.ModifikujRezervaciju(session, linijaS, linijaN, "Dinatestmod", "Amod", "Dinamodnovo", "Amodnovo", 36.00, tk);
+		hrez.ModifikujRezervaciju(session, linijaS, linijaN, "Dinaatestmod", "Aamod", "Dinaamodnovo", "Aamodnovo", 36.00, tk);
 		Query q2 = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
 		Long count2 = (Long)q.uniqueResult();
 		int poslije = count2.intValue();
 		assertEquals(poslije, prije);	//treba ostati isto
-		hrez.brisanjeRezervacije(session, linijaN, "Dinamodnovo", "Amodnovo");
-		stara.brisiAutobuskuLiniju(session, 7);
-		nova.brisiAutobuskuLiniju(session, 9);
-		ha3.brisanjeAutobusa(session, "O99-J-753");
-		hr3.brisiRadnika(session, "1020304050607");
+		hrez.brisanjeRezervacije(session, linijaN, "Dinaamodnovo", "Aamodnovo");
+		stara.brisiAutobuskuLiniju(session, 17);
+		nova.brisiAutobuskuLiniju(session, 19);
+		ha3.brisanjeAutobusa(session, "T24-T-951");
+		hr3.brisiRadnika(session, "1204507809907");
 		session.close();
 	}
 	
@@ -88,7 +88,32 @@ public class HibernateRezervacijaTest {
 		hr.ModifikujRezervaciju(session, stara, nova, "staroime", "staroprezime", "novoime", "novoprezime", 30.00, k);
 	
 	}*/
-
+	
+/*	@Test(expected = IllegalArgumentException.class)
+	public void testModifikujRezervacijeNevalidnoIme() {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		AutobuskaLinija al = new AutobuskaLinija();
+		HibernateAutobus ha3 = new HibernateAutobus();
+		ha3.dodajAutobus(session, 54, "O99-K-007", "Testmodel50");
+		HibernateRadnik hr3 = new HibernateRadnik();
+		TipRadnogMjesta vozac = TipRadnogMjesta.Vozac;
+		hr3.dodajRadnika(session, "RadnikTMod", "Modd", "1020304050688", vozac);
+		HibernateAutibuskaLinija stara = new HibernateAutibuskaLinija();
+		HibernateAutibuskaLinija nova = new HibernateAutibuskaLinija();
+		Autobus aa = ha3.nadjiAutobus(session, "O99-K-007"); 
+		Radnik rr = hr3.nadjiRadnika(session, "1020304050688");
+		stara.dodajAutobuskuLiniju(session,"msts","zsts",aa,rr,2015,8,15,22,10,5,200,111,77,35.00,70.00,true);
+		nova.dodajAutobuskuLiniju(session,"mstn","zstn",aa,rr,2015,8,15,22,10,5,200,111,99,35.00,70.00,true);
+		AutobuskaLinija linijaSs = stara.nadjiAutobuskuLiniju(session, 77);
+		AutobuskaLinija linijaNn = nova.nadjiAutobuskuLiniju(session, 99);
+		TipKarte tk = TipKarte.dvosmjerna;
+		hrez.ModifikujRezervaciju(session, linijaSs, linijaNn, "staroime", "staroprezime", "<a", "novoprezime", 30.00, tk);
+		stara.brisiAutobuskuLiniju(session, 77);
+		nova.brisiAutobuskuLiniju(session, 99);
+		ha3.brisanjeAutobusa(session, "O99-K-007");
+		hr3.brisiRadnika(session, "1020304050688");
+	}
+*/
 	@Test
 	public void testBrisanjeRezervacije() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
