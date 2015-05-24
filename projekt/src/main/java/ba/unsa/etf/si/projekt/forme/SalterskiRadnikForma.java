@@ -107,7 +107,9 @@ public class SalterskiRadnikForma implements ActionListener{
 					window.frmalterskiRadnik.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 					logger.error("Greška! " + e.getMessage() , e);
+					 logger.log(null, e);
 				}
 			}
 		});
@@ -331,6 +333,7 @@ public class SalterskiRadnikForma implements ActionListener{
 				{
 					JOptionPane.showMessageDialog(prodajaBtn, "Neuspješna prodaja.");
 					//JOptionPane.showMessageDialog(prodajaBtn, ex);
+					logger.info("Neuspješna prodaja.", ex);
 					
 				}
 			}
