@@ -15,6 +15,7 @@ import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
+import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
@@ -404,7 +405,10 @@ public class IzvjestajiForma {
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 					Radnik r = HibernateRadnik.nadjiRadnika(session, JMBGVozac.getText());
-					if(r!=null && r.dajTipRadnogMjesta().equals("Vozac"))
+					TipRadnogMjesta r2=TipRadnogMjesta.Vozac;
+					TipRadnogMjesta r1=r.dajTipRadnogMjesta();
+					JOptionPane.showMessageDialog(generisiVozaciBtn, r.dajTipRadnogMjesta().equals(r));
+					if(r!=null && r1==r2)
 					{
 					GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
 					
