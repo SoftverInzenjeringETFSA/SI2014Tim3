@@ -190,12 +190,21 @@ public class IzvjestajiForma {
 					int mjesec2=cal1.get(Calendar.MONTH)+1;
 					int dan2=cal1.get(Calendar.DAY_OF_MONTH);
 					
+					Calendar currentDate = Calendar.getInstance(); //Get the current date
+					Date danas=currentDate.getTime();
+					if(datum1.before(danas )&& datum2.before(danas) && datum1.before(datum2))
+					{
 					List<Karta> karte = k.IzvjestajOProdanimKartama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2);
 					GenerisanjePDF.prodaneKartePDF(karte,datum1,datum2);
 					
 					JOptionPane.showMessageDialog(generisiProdaneBtn, "Uspješno ste kreirali izvještaj o prodanim kartama.");
 					pocetniProdaneDate.setDate(null);
 					krajnjiProdaneDate.setDate(null);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(generisiProdaneBtn, "Ne možete kreirati izvještaje za budućnost i početni datum mora biti prije krajnjeg.");
+					}
 					}
 					else
 					{
@@ -327,14 +336,21 @@ public class IzvjestajiForma {
 					int godina2=cal1.get(Calendar.YEAR);
 					int mjesec2=cal1.get(Calendar.MONTH)+1;
 					int dan2=cal1.get(Calendar.DAY_OF_MONTH);
+					if(pocetnoVrijemeSati.getText().contains(".") || pocetnoVrijemeMinute.getText().contains(".") || krajnjeVrijemeSati.getText().contains(".") || krajnjeVrijemeMinute.getText().contains("."))
+					{
+						izuzetak+="Minute i sati ne smiju biti decimalni brojevi.";
+					}
 					int pocetnisati=Integer.parseInt(pocetnoVrijemeSati.getText());
 					int pocetneminute=Integer.parseInt(pocetnoVrijemeMinute.getText());
 					int krajnjisati=Integer.parseInt(krajnjeVrijemeSati.getText());
 					int krajnjeminute=Integer.parseInt(krajnjeVrijemeMinute.getText());
 					
+					Calendar currentDate = Calendar.getInstance(); //Get the current date
+					Date danas=currentDate.getTime();
+					if(datum1.before(datum2) && datum1.before(danas)&& datum2.before(danas) && pocetnisati>=0 && pocetnisati<=24 && krajnjisati>=0 && krajnjisati<=24 && pocetneminute>=0 && pocetneminute<=60 && krajnjeminute>=0 && krajnjeminute<=60)
+					{
 					List<AutobuskaLinija> l = linija.IzvjestajOAutobuskimLinijama(session, godina1, mjesec1, dan1, godina2, mjesec2, dan2, pocetnisati, pocetneminute, krajnjisati, krajnjeminute);
 					GenerisanjePDF.autobuskeLinijePDF(l, datum1, datum2);
-					
 					JOptionPane.showMessageDialog(generisiLinijeBtn, "Uspješno ste kreirali izvještaj o autobuskim linijama.");
 					pocetnoVrijemeSati.setText("");
 					pocetnoVrijemeMinute.setText("");
@@ -345,13 +361,18 @@ public class IzvjestajiForma {
 					}
 					else
 					{
+						JOptionPane.showMessageDialog(generisiLinijeBtn, "Nemoguće je kreirati izvještaje za budućnost i početni datum mora biti prije krajnjeg i neispravne vrijednosti sati i minuta.");
+					}
+					
+					}
+					else
+					{
 						JOptionPane.showMessageDialog(generisiLinijeBtn, izuzetak);
 					}
 				}
 				catch(Exception ex1)
 				{
-					JOptionPane.showMessageDialog(generisiLinijeBtn, "Neuspješno kreiranje izvještaja.");
-					JOptionPane.showMessageDialog(generisiLinijeBtn, ex1);
+					JOptionPane.showMessageDialog(generisiLinijeBtn, "Neuspješno kreiranje izvještaja:\n"+izuzetak);
 				}
 				
 			}
@@ -383,7 +404,7 @@ public class IzvjestajiForma {
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutibuskaLinija linija=new HibernateAutibuskaLinija();
 					Radnik r = HibernateRadnik.nadjiRadnika(session, JMBGVozac.getText());
-					if(r!=null)
+					if(r!=null && r.dajTipRadnogMjesta().equals("Vozac"))
 					{
 					GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
 					
@@ -391,7 +412,7 @@ public class IzvjestajiForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(generisiVozaciBtn, "Ne postoji vozač, sa jmbg koji ste unijeli.");
+						JOptionPane.showMessageDialog(generisiVozaciBtn, "Ne postoji vozač, sa jmbg koji ste unijeli ili nije vozać.");
 					}
 					JMBGVozac.setText("");
 					}
@@ -403,8 +424,7 @@ public class IzvjestajiForma {
 				}
 				catch(Exception ex3)
 				{
-					JOptionPane.showMessageDialog(generisiVozaciBtn, "Niste uspješno kreirali izvještaj.");
-					JOptionPane.showMessageDialog(generisiVozaciBtn, ex3);
+					JOptionPane.showMessageDialog(generisiVozaciBtn, "Niste uspješno kreirali izvještaj:\n"+ex3.getMessage());
 				}
 			}
 		});
