@@ -234,8 +234,7 @@ public class NaloziForma {
 				}
 				catch(Exception ec)
 				{
-					JOptionPane.showMessageDialog(napraviBtn, "Neuspješno kreiranje naloga.");
-					JOptionPane.showMessageDialog(napraviBtn, ec);
+					JOptionPane.showMessageDialog(napraviBtn, "Neuspješno kreiranje naloga:\n"+ec.getMessage());
 				}
 			}
 		});

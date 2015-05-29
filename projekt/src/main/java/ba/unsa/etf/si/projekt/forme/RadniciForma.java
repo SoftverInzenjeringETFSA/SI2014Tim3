@@ -296,7 +296,10 @@ public class RadniciForma {
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateRadnik promjenaradnik= new HibernateRadnik();
-
+					Radnik r=new Radnik();
+					r=HibernateRadnik.nadjiRadnika(session, jmbgModifikujPronadji.getText());
+                    if(r!=null)
+                    {
 					if(tipModifikujCombo.getSelectedItem().toString()=="Administrator")
 					{
 					TipRadnogMjesta k=TipRadnogMjesta.Administrator;
@@ -321,9 +324,15 @@ public class RadniciForma {
 						JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali radnika.");
 						
 					}
+                    }
+                    else
+                    {
+                    	JOptionPane.showMessageDialog(modifikujBtn, "Ne postoji korisnik sa jmbg koji ste unijeli.");
+                    }
 					imeModifikuj.setText("");
 					prezimeModifikuj.setText("");
 					jmbgModifikujPronadji.setText("");
+					
 				}
 				
 				catch(Exception e6)
