@@ -109,10 +109,11 @@ public class PrijavaForma {
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateKorisnickiRacuni kr=new HibernateKorisnickiRacuni();
 					KorisnickiRacun korisnik=new KorisnickiRacun();
-					if(korisnik!=null)
-					{
+					
 					korisnik=kr.nadjiKorisnickiRacun(session, ime.getText());
 					
+					if(korisnik!=null)
+					{
 					String imekorisnika=korisnik.getKorisnickoIme();
 					String sifrakorisnika=korisnik.getSifra();
 					TipKorisnickogRacuna pravakorisnika=korisnik.getTipKorisnickogRacuna();
@@ -121,28 +122,49 @@ public class PrijavaForma {
 					TipKorisnickogRacuna r2=TipKorisnickogRacuna.administrator;
 					TipKorisnickogRacuna r3=TipKorisnickogRacuna.salterskiRadnik;
 				
-					if (ime.getText().equals(imekorisnika) && sifra.getText().equals(sifrakorisnika) && pravakorisnika==r2 ) {
+					if (ime.getText().equals(imekorisnika) && pravakorisnika==r2 ) {
+                    if(sifra.getText().equals(sifrakorisnika))
+                    {
 					AdministratorPocetna a = new AdministratorPocetna();
 					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
 					a.setVisible(true);
 					setVisible(false);
-				}
-					else if (ime.getText().equals(imekorisnika) && sifra.getText().equals(sifrakorisnika) && pravakorisnika==r1) {
-					MenadzerPocetna m = new MenadzerPocetna();
-					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
-					m.setVisible(true);
-					setVisible(false);
-				}
-					else if (ime.getText().equals(imekorisnika) && sifra.getText().equals(sifrakorisnika) && pravakorisnika==r3) {
-					SalterskiRadnikForma s = new SalterskiRadnikForma();
-					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
-					s.setVisible(true);
-					setVisible(false);
-				}
+				    }
 					else
 					{
 						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
 						sifra.setText("");
+					}
+					}
+					
+					if (ime.getText().equals(imekorisnika)  && pravakorisnika==r1) {
+					if(sifra.getText().equals(sifrakorisnika))
+					{
+					MenadzerPocetna m = new MenadzerPocetna();
+					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
+					m.setVisible(true);
+					setVisible(false);
+				    }
+					else
+					{
+						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
+						sifra.setText("");
+					}
+					 }
+					
+					if (ime.getText().equals(imekorisnika)  && pravakorisnika==r3) {
+						if(sifra.getText().equals(sifrakorisnika))
+				    {
+					SalterskiRadnikForma s = new SalterskiRadnikForma();
+					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
+					s.setVisible(true);
+					setVisible(false);
+				     }
+					else
+					{
+						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
+						sifra.setText("");
+					}
 					}
 					
 				session.close();
@@ -154,8 +176,7 @@ public class PrijavaForma {
 				}
 				catch(Exception ex)
 				{
-					JOptionPane.showMessageDialog(prijavaBtn, "Neuspješna pretraga korisničkih računa.");
-					JOptionPane.showMessageDialog(prijavaBtn, ex);
+					JOptionPane.showMessageDialog(prijavaBtn, "Morate unijeti Vaše korisničko ime i šfru.");
 				}
 			}
 		});
