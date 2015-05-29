@@ -47,16 +47,16 @@ public class HibernateAutobus {
 		if(v.validirajKapacitet(kapacitetautobusa) == false || v.praznoPolje(String.valueOf(kapacitetautobusa)))
 		{
 			kap=1;
-			string+="Kapacitet autobusa ne smije biti prazno polje i mora biti pozitivan broj manji od 60!";
+			string+="Kapacitet autobusa ne smije biti prazno polje i mora biti pozitivan broj manji od 60 ili jednak! \n";
 		}
 		if(v.praznoPolje(modelautobusa))
 		{
 			mod=1;
-			string+="Polje modela ne smije biti prazno polje!";
+			string+="Polje modela ne smije biti prazno polje!\n";
 		}
 		if(!v.validirajTablice(registracijaautobusa)){
 			tablice=1;
-			string+="Registarske tablice moraju biti oblika: A23-M-424!";
+			string+="Registarske tablice moraju biti oblika: A23-M-424! \n";
 		}
 		Autobus a=new Autobus();
 		if(kap==0 && mod==0 && tablice==0)
@@ -85,7 +85,7 @@ public class HibernateAutobus {
 		if(v.validirajKapacitet(kapacitetautobusa) == false || v.praznoPolje(String.valueOf(kapacitetautobusa)))
 		{
 			kap=1;
-			string+="Kapacitet autobusa ne smije biti prazno polje i mora biti pozitivan broj manji od 60!";
+			string+="Kapacitet autobusa ne smije biti prazno polje i mora biti pozitivan broj manji od 60 ili jednak! \n";
 		}
 		if(v.praznoPolje(modelautobusa))
 		{
@@ -94,7 +94,7 @@ public class HibernateAutobus {
 		}
 		if(!v.validirajTablice(registracijaautobusa)){
 			tablice=1;
-			string+="Registarske tablice moraju biti oblika: A23-M-424!";
+			string+="Registarske tablice moraju biti oblika: A23-M-424! \n";
 		}
 		
 		if(kap==0 && mod==0 && tablice==0)
@@ -130,7 +130,7 @@ public class HibernateAutobus {
 			return a;
 		}
 		else 
-			throw new IllegalArgumentException("Registarske tablice moraju biti oblika: A23-M-424!");
+			throw new IllegalArgumentException("Registarske tablice moraju biti oblika: A23-M-424! \n");
 	}
 	
 	public static void brisanjeAutobusa(Session session,String registracijaautobusa)
@@ -143,7 +143,7 @@ public class HibernateAutobus {
 	         t.commit();
 		}
 		else 
-			throw new IllegalArgumentException("Registarske tablice moraju biti oblika: A23-M-424!");
+			throw new IllegalArgumentException("Registarske tablice moraju biti oblika: A23-M-424! \n");
 	}
 	
 	public static java.util.List sviAutobusi(Session session)

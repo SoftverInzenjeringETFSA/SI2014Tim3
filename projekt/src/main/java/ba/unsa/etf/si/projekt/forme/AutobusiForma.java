@@ -210,7 +210,7 @@ public class AutobusiForma {
 				int dodavanje=Integer.parseInt(kapacitetDodajSpinner.getValue().toString());
 				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText(), modelDodaj.getText());
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat autobus.");
-				autobusiModifikujLista.setModel(new AbstractListModel(){
+				autobusiModifikujLista.setModel(new AbstractListModel(){   //osvjezavanje liste
 
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateAutobus autobus=new HibernateAutobus();
@@ -240,8 +240,7 @@ public class AutobusiForma {
 				
 				catch(Exception e2)
 				{
-					JOptionPane.showMessageDialog(dodajBtn, "Neuspješno dodavanje.");
-					JOptionPane.showMessageDialog(dodajBtn, e2);
+					JOptionPane.showMessageDialog(dodajBtn, e2.getMessage());
 				}
 			}
 		});
@@ -376,6 +375,7 @@ public class AutobusiForma {
 						{
 						autobus.modifikujAutobus(session, registracijeModifikuj.getText(), modelModifikuj.getText(), kap, a1); // da ne bi unio postojece registracije
 						JOptionPane.showMessageDialog(izmijeniBtn, "Uspješno je izmijenjen autobus.");
+						
 						kapacitetModifikujSpinner.setValue(0);
 						registracijeModifikuj.setText("");
 						modelModifikuj.setText("");
@@ -395,16 +395,31 @@ public class AutobusiForma {
 					{
 						JOptionPane.showMessageDialog(izmijeniBtn, "Morate selektovati autobus, koji mijenjate.");
 					}
-					;
+					
 				}
 				catch(Exception ex1)
 				{
-					JOptionPane.showMessageDialog(izmijeniBtn, "Neuspješno mijenjena podataka o autobusu.");
+					
+					//JOptionPane.showMessageDialog(izmijeniBtn, "Neuspješno mijenjena podataka o autobusu.");
 					if(izuzetak!="")
 					JOptionPane.showMessageDialog(izmijeniBtn, izuzetak);
-					JOptionPane.showMessageDialog(izmijeniBtn, ex1);
+					JOptionPane.showMessageDialog(izmijeniBtn, ex1.getMessage());
 				}
-				//autobusiModifikujLista.clearSelection();
+				
+				autobusiModifikujLista.setModel(new AbstractListModel(){  //osvjezavanje liste autobusa
+
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateAutobus autobus=new HibernateAutobus();
+					java.util.List autobusi=autobus.sviAutobusi(session);
+					public int getSize() {
+						return autobusi.size();
+					}
+					public Object getElementAt(int index) {
+						Autobus a=(Autobus)autobusi.get(index);
+						return "Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+					}
+					
+				});
 			}
 		});
 		izmijeniBtn.setBounds(456, 269, 89, 23);
@@ -488,8 +503,8 @@ public class AutobusiForma {
 					
 					catch(Exception e1)
 					{
-						JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.");
-						JOptionPane.showMessageDialog(izbrisiBtn, e1);
+						//JOptionPane.showMessageDialog(izbrisiBtn, );
+						JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.\n"+e1.getMessage());
 					}
 					
 				}
@@ -498,7 +513,20 @@ public class AutobusiForma {
 					JOptionPane.showMessageDialog(izbrisiBtn, "Autobus čije ste registracije unijeli ne postoji!.");
 				}
 				
-				
+				autobusiModifikujLista.setModel(new AbstractListModel(){    //osvjezavanje
+
+					Session session = HibernateUtil.getSessionFactory().openSession();
+					HibernateAutobus autobus=new HibernateAutobus();
+					java.util.List autobusi=autobus.sviAutobusi(session);
+					public int getSize() {
+						return autobusi.size();
+					}
+					public Object getElementAt(int index) {
+						Autobus a=(Autobus)autobusi.get(index);
+						return "Model autobusa:"+" " +a.getModel()+" "+"Registracije autobus:"+" "+a.getRegistracija()+" "+"Kapacitet autobusa:"+a.getKapacitet();
+					}
+					
+				});
 			}
 		});
 		izbrisiBtn.setBounds(252, 220, 89, 23);
@@ -546,8 +574,7 @@ public class AutobusiForma {
 			    
 				catch(Exception e)
 			    {
-			    	JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Neuspješna pretraga.");
-			    	JOptionPane.showMessageDialog(pronadiIzbrisiBtn, e);
+			    	JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Neuspješna pretraga.\n"+e.getMessage());
 			    }
 			}
 		});
