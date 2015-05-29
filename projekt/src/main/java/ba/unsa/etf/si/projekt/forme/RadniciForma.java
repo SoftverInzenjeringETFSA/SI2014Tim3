@@ -239,8 +239,7 @@ public class RadniciForma {
 				}
 				catch(Exception e4)
 				{
-					JOptionPane.showMessageDialog(dodajBtn, "Dodavanje nije bilo uspješno.");
-					JOptionPane.showMessageDialog(dodajBtn, e4);	
+					JOptionPane.showMessageDialog(dodajBtn, "Dodavanje nije bilo uspješno:\n"+e4.getMessage());	
 				}
 			}
 		});
@@ -329,8 +328,7 @@ public class RadniciForma {
 				
 				catch(Exception e6)
 				{
-					JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje radnika.");
-					JOptionPane.showMessageDialog(modifikujBtn, e6);
+					JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje radnika:\n"+e6.getMessage());
 				}
 			}
 		});
@@ -375,8 +373,7 @@ public class RadniciForma {
 				
 				catch(Exception e5)
 				{
-					JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Neusješna pretraga");
-					JOptionPane.showMessageDialog(pronadjiModifikujBtn, e5);
+					JOptionPane.showMessageDialog(pronadjiModifikujBtn,  "Neusješna pretraga:\n"+e5.getMessage());
 				}
 			
 			}
@@ -438,8 +435,7 @@ public class RadniciForma {
 				}
 				catch(Exception e6)
 				{
-					JOptionPane.showMessageDialog(pronadiIzbrisiBtn, "Neusješna pretraga");
-					JOptionPane.showMessageDialog(pronadiIzbrisiBtn, e6);
+					JOptionPane.showMessageDialog(pronadiIzbrisiBtn,  "Neusješna pretraga:\n"+e6.getMessage());
 				}
 				
 			}
@@ -509,8 +505,7 @@ public class RadniciForma {
 			}
 			catch(Exception e7)
 			{
-				JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.");
-				JOptionPane.showMessageDialog(izbrisiBtn, e7);
+				JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje.\n"+e7.getMessage());
 				
 			}
 			}

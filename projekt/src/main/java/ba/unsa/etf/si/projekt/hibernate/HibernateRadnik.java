@@ -42,17 +42,17 @@ public class HibernateRadnik {
 		if (v.validirajJMBG(JMBGradnika) == false || v.praznoPolje(JMBGradnika))
 		{
 			j = 1;
-			izuzetak += "JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!";
+			izuzetak += "JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!\n";
 		}
 		if (v.jeTekst(imeradnika) == false || v.praznoPolje(imeradnika))
 		{
 			i = 1;
-			izuzetak += "Ime radnika mora biti tekst i ne smije biti prazno polje!";
+			izuzetak += "Ime radnika mora biti tekst i ne smije biti prazno polje!\n";
 		}
 		if (v.jeTekst(prezimeradnika) == false || v.praznoPolje(prezimeradnika))
 		{
 			p = 1;
-			izuzetak += "Prezime radnika mora biti tekst i ne smije biti prazno polje!";
+			izuzetak += "Prezime radnika mora biti tekst i ne smije biti prazno polje!\n";
 		}
 		if (i == 0 && j == 0 && p == 0)
 		{
@@ -84,12 +84,12 @@ public class HibernateRadnik {
 		if (v.jeTekst(imeradnika) == false || v.praznoPolje(imeradnika))
 		{
 			i = 1;
-			izuzetak += "Ime radnika mora biti tekst i ne smije biti prazno polje!";
+			izuzetak += "Ime radnika mora biti tekst i ne smije biti prazno polje!\n";
 		}
 		if (v.jeTekst(prezimeradnika) == false || v.praznoPolje(prezimeradnika))
 		{
 			p = 1;
-			izuzetak += "Prezime radnika mora biti tekst i ne smije biti prazno polje!";
+			izuzetak += "Prezime radnika mora biti tekst i ne smije biti prazno polje!\n";
 		}
 		if (i == 0 && p == 0)
 		{
@@ -111,7 +111,7 @@ public class HibernateRadnik {
 		Validacija v = new Validacija();
 		if (v.validirajJMBG(JMBGRadnika) == false || v.praznoPolje(JMBGRadnika))
 		{
-			throw new IllegalArgumentException("JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!");
+			throw new IllegalArgumentException("JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!\n");
 		}
 		else
 		{
@@ -132,7 +132,7 @@ public class HibernateRadnik {
 		Radnik r=(Radnik) k.uniqueResult();
 		if (v.validirajJMBG(JMBGRadnika) == false || v.praznoPolje(JMBGRadnika))
 		{
-			throw new IllegalArgumentException("JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!");
+			throw new IllegalArgumentException("JMBG mora biti validan (13 cifara) i ne smije biti prazno polje!\n");
 		}
 		else
 		{
@@ -150,7 +150,7 @@ public class HibernateRadnik {
 		Radnik r=(Radnik) k.uniqueResult();
 		if (v.jeTekst(ime) == false || v.praznoPolje(ime))
 		{
-			throw new IllegalArgumentException("Ime radnika mora biti tekst i ne smije biti prazno polje!");
+			throw new IllegalArgumentException("Ime radnika mora biti tekst i ne smije biti prazno polje!\n");
 		}
 		else
 		{
