@@ -216,7 +216,6 @@ public class KorisniciForma {
 						KorisnickiRacun k=(KorisnickiRacun)racuni.get(i);
 						if(korisnickoDodaj.getText().equals(k.getKorisnickoIme())) 
 							postoji=true;
-						
 					}
 					
 					if(postoji==false)
@@ -237,8 +236,7 @@ public class KorisniciForma {
 				}
 				catch(Exception e7)
 				{
-					JOptionPane.showMessageDialog(dodajBtn, "Neuspješno kreiranje korisničkog računa.");
-					JOptionPane.showMessageDialog(dodajBtn, e7);
+					JOptionPane.showMessageDialog(dodajBtn, "Neuspješno kreiranje korisničkog računa:\n"+e7.getMessage());
 				}
 					
 			
@@ -364,15 +362,30 @@ public class KorisniciForma {
 				{
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateKorisnickiRacuni brisanjeracun=new HibernateKorisnickiRacuni();
+					java.util.List racuni=HibernateKorisnickiRacuni.sviRacuni(session);
+					if(brisanjeracun!=null)
+					{
+					if(racuni.size()>1)
+					{
 					brisanjeracun.brisiKorisnickiRacun(session, korisnickoIzbrisi.getText());
 					JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje korisničkog računa");
 					
 					korisnickoIzbrisi.setText("");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(izbrisiBtn,"Ne možete izbrisati ovog korisnika, jer neće ostat nijedan u bazi.");
+						korisnickoIzbrisi.setText("");
+					}
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(izbrisiBtn, "Korisnik čije ste korisničko ime unijeli, ne postoji.");
+					}
 				}
 				catch(Exception e10)
 				{
-					JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje korisničkog računa");
-					JOptionPane.showMessageDialog(izbrisiBtn, e10);
+					JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje korisničkog računa:\n"+e10.getMessage());
 				}
 			}
 		});
@@ -416,7 +429,7 @@ public class KorisniciForma {
 				if(postoji==false || korisnickoModifikuj.getText()=="" || sifraModifikuj.getText()=="" )
 				{
 			
-				JOptionPane.showMessageDialog(modifikujBtn, "Neuspjesna modifikovanje korisničkog računa.");
+				JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje korisničkog računa.");
 				}
 				 if(korisnickoModifikuj.getText()!="" && postoji==true  && sifraModifikuj.getText()!="" )
 				{	
@@ -437,7 +450,7 @@ public class KorisniciForma {
 					 
 					 else{
 					 HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r);
-					JOptionPane.showMessageDialog(modifikujBtn, "Uspjesna ste modifikovali korisnički račun.");}
+					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali korisnički račun.");}
 				}
 				
 
@@ -448,8 +461,7 @@ public class KorisniciForma {
 			}
 			catch(Exception e9)
 			{
-				JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje korisničkih računa.");
-				JOptionPane.showMessageDialog(modifikujBtn, e9);
+				JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje korisničkih računa:\n"+e9.getMessage());
 			}
 			
 		}

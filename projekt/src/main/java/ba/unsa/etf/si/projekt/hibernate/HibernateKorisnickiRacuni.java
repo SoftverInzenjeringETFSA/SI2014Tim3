@@ -46,12 +46,12 @@ public class HibernateKorisnickiRacuni {
 		if (v.jeTekst(korisnickoimekorisnika) == false || v.praznoPolje(korisnickoimekorisnika))
 		{
 			i = 1;
-			izuzetak += "Korisničko ime mora biti tekst i ne smije biti prazno polje!";
+			izuzetak += "Korisničko ime mora biti tekst i ne smije biti prazno polje!\n";
 		}
 		if (v.validirajPass(passkorisnika) == false)
 		{
 			p = 1;
-			izuzetak += "Šifra mora sadržavati barem jedan broj i znak, imati najmanje 8 karaktera i ne smije biti prazno polje!";
+			izuzetak += "Šifra mora sadržavati barem jedan broj i znak, imati najmanje 8 karaktera i ne smije biti prazno polje!\n";
 		}
 		if (i == 0 && p == 0)
 		{
@@ -82,17 +82,17 @@ public class HibernateKorisnickiRacuni {
 			if(v.jeTekst(starokorisnickoime)==false || v.praznoPolje(starokorisnickoime))
 			{
 				g=1;
-				izuzetak+="Morate unijeti ime korisnika, čije podatke želite da mijenjate.";
+				izuzetak+="Morate unijeti ime korisnika, čije podatke želite da mijenjate.\n";
 			}
 			if (v.validirajPass(passkorisnika) == false || v.praznoPolje(starokorisnickoime))
 			{
 				p = 1;
-				izuzetak += "Šifra mora sadržavati barem jedan broj i znak, imati najmanje 8 karaktera i ne smije biti prazno polje!";
+				izuzetak += "Šifra mora sadržavati barem jedan broj i znak, imati najmanje 8 karaktera i ne smije biti prazno polje!\n";
 			}
 			if (v.jeTekst(korisnickoimekorisnika) == false || v.praznoPolje(korisnickoimekorisnika))
 			{
 				i = 1;
-				izuzetak += "Korisničko ime mora biti tekst i ne smije biti prazno polje!";
+				izuzetak += "Korisničko ime mora biti tekst i ne smije biti prazno polje!\n";
 			}
 			if (p == 0 && i == 0 && g==0)
 			{
@@ -114,7 +114,7 @@ public class HibernateKorisnickiRacuni {
         Validacija v = new Validacija();
 		if (v.jeTekst(korisnickoimekorisnika) == false || v.praznoPolje(korisnickoimekorisnika))
 		{
-			throw new IllegalArgumentException("Korisničko ime mora biti tekst i ne smije biti prazno polje!");
+			throw new IllegalArgumentException("Korisničko ime mora biti tekst i ne smije biti prazno polje!\n");
 		}
 		else
 		{
@@ -132,7 +132,7 @@ public class HibernateKorisnickiRacuni {
 		Validacija v = new Validacija();
 		if (v.jeTekst(korisnickoimekorisnika) == false || v.praznoPolje(korisnickoimekorisnika))
 		{
-			throw new IllegalArgumentException("Korisničko ime mora biti tekst i ne smije biti prazno polje!");
+			throw new IllegalArgumentException("Korisničko ime mora biti tekst i ne smije biti prazno polje!\n");
 		}
 		else
 		{
