@@ -70,6 +70,7 @@ public class PrijavaForma {
 	 */
 	private void initialize() {
 		frmPrijava = new JFrame();
+		frmPrijava.setResizable(false);
 		frmPrijava.setIconImage(Toolkit.getDefaultToolkit().getImage(PrijavaForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmPrijava.setTitle("Prijava");
 		frmPrijava.setBounds(100, 100, 353, 264);

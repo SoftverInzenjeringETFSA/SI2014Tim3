@@ -100,6 +100,7 @@ public class KorisniciForma {
 	 */
 	private void initialize() {
 		frmKorisnikiRauni = new JFrame();
+		frmKorisnikiRauni.setResizable(false);
 		frmKorisnikiRauni.setIconImage(Toolkit.getDefaultToolkit().getImage(KorisniciForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmKorisnikiRauni.setTitle("Korisnički računi");
 		frmKorisnikiRauni.setBounds(100, 100, 533, 412);

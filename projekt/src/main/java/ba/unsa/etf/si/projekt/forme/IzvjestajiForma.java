@@ -91,6 +91,7 @@ public class IzvjestajiForma {
 	 */
 	private void initialize() {
 		frmIzvjetaji = new JFrame();
+		frmIzvjetaji.setResizable(false);
 		frmIzvjetaji.setIconImage(Toolkit.getDefaultToolkit().getImage(IzvjestajiForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmIzvjetaji.setTitle("Izvještaji");
 		frmIzvjetaji.setBounds(100, 100, 502, 393);

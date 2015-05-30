@@ -114,6 +114,7 @@ public class AutobuskeLinijeForma {
 	 */
 	private void initialize() {
 		frmAutobuskeLinije = new JFrame();
+		frmAutobuskeLinije.setResizable(false);
 		frmAutobuskeLinije.setIconImage(Toolkit.getDefaultToolkit().getImage(AutobuskeLinijeForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmAutobuskeLinije.setTitle("Autobuske linije");
 		frmAutobuskeLinije.setBounds(100, 100, 583, 506);

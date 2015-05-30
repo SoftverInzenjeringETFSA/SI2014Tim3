@@ -81,9 +81,9 @@ public class AdministratorPocetna {
 	 */
 	private void initialize() {
 		frmAdministratorPoetna = new JFrame();
+		frmAdministratorPoetna.setResizable(false);
 		frmAdministratorPoetna.setIconImage(Toolkit.getDefaultToolkit().getImage(AdministratorPocetna.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmAdministratorPoetna.setTitle("Administrator početna");
-		frmAdministratorPoetna.setResizable(false);
 		frmAdministratorPoetna.setBounds(100, 100, 480, 390);
 		frmAdministratorPoetna.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAdministratorPoetna.getContentPane().setLayout(null);

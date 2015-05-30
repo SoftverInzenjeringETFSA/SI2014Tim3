@@ -125,6 +125,7 @@ public class SalterskiRadnikForma implements ActionListener{
 	 */
 	private void initialize() {
 		frmalterskiRadnik = new JFrame();
+		frmalterskiRadnik.setResizable(false);
 		frmalterskiRadnik.setIconImage(Toolkit.getDefaultToolkit().getImage(SalterskiRadnikForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmalterskiRadnik.setTitle("Šalterski radnik");
 		frmalterskiRadnik.setBounds(100, 100, 629, 497);

@@ -83,6 +83,7 @@ public class NaloziForma {
 	 */
 	private void initialize() {
 		frmPravljenjeNaloga = new JFrame();
+		frmPravljenjeNaloga.setResizable(false);
 		frmPravljenjeNaloga.setIconImage(Toolkit.getDefaultToolkit().getImage(NaloziForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmPravljenjeNaloga.setTitle("Pravljenje naloga");
 		frmPravljenjeNaloga.setBounds(100, 100, 622, 392);

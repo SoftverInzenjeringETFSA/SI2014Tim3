@@ -86,6 +86,7 @@ public class RadniciForma {
 	 */
 	private void initialize() {
 		frmEvidencijaRadnika = new JFrame();
+		frmEvidencijaRadnika.setResizable(false);
 		frmEvidencijaRadnika.setIconImage(Toolkit.getDefaultToolkit().getImage(RadniciForma.class.getResource("/ba/unsa/etf/si/projekt/dodatno/icon.png")));
 		frmEvidencijaRadnika.setTitle("Evidencija radnika");
 		frmEvidencijaRadnika.setBounds(100, 100, 479, 373);
