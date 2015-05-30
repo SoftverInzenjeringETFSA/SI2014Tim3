@@ -301,8 +301,11 @@ public class AutobuskeLinijeForma {
 		for(int i=0;i<sviradnici.size();i++)
 		{
 			Radnik r=(Radnik)sviradnici.get(i);
-			if(r.dajTipRadnogMjesta().toString()=="Vozac")
-			vozacDodajCombo.addItem(r.getIme());
+			if(r.dajTipRadnogMjesta().toString()=="Vozac"){
+				String lista=r.getIme()+" "+r.getJmbg();
+				vozacDodajCombo.addItem(lista);
+			}
+			
 		}
 		vozacDodajCombo.setBounds(138, 151, 116, 20);
 		panel.add(vozacDodajCombo);
@@ -352,7 +355,12 @@ public class AutobuskeLinijeForma {
 				
 				Radnik radnik=new Radnik(); //selektovani radnik
 				HibernateRadnik rad1=new HibernateRadnik();
-				radnik=rad1.nadjiRadnikaPoImenu(session, vozacDodajCombo.getSelectedItem().toString());
+				String string=vozacDodajCombo.getSelectedItem().toString();
+				String ime = null;
+				if(string.contains(" ")){
+				   ime= string.substring(0, string.indexOf(" ")); 
+				}
+				radnik=rad1.nadjiRadnikaPoImenu(session, ime);
 				
 				Date datum=datumDodajDate.getDate();
 				Calendar cal=Calendar.getInstance();
@@ -463,8 +471,11 @@ public class AutobuskeLinijeForma {
 		for(int i=0;i<sviradnici1.size();i++)
 		{
 			Radnik r=(Radnik)sviradnici1.get(i);
-			if(r.dajTipRadnogMjesta().toString()=="Vozac")
-			vozacModifikujCombo.addItem(r.getIme());
+			if(r.dajTipRadnogMjesta().toString()=="Vozac"){
+				String lista=r.getIme()+" "+r.getJmbg();
+				vozacModifikujCombo.addItem(lista);
+			}
+			
 		}
 		vozacModifikujCombo.setBounds(141, 201, 116, 20);
 		panel_1.add(vozacModifikujCombo);
@@ -504,8 +515,12 @@ public class AutobuskeLinijeForma {
 				{
 					polazisteModifikuj.setText(lin.getPolaziste());
 					odredisteModifikujBtn.setText(lin.getOdrediste());
+					
 					String imevozaca=lin.getVozac().getIme();
-					vozacModifikujCombo.setSelectedItem(imevozaca);
+					String jmbgvozaca=lin.getVozac().getJmbg();
+					String lista=imevozaca+" "+jmbgvozaca;
+					vozacModifikujCombo.setSelectedItem(lista);
+					
 					String aut=lin.getAutobus().getRegistracija();
 					autobusModifikujCombo.setSelectedItem(aut);
 					Date d=new Date();
@@ -676,7 +691,13 @@ public class AutobuskeLinijeForma {
 				
 				Radnik radnik=new Radnik(); //selektovani radnik
 				HibernateRadnik rad1=new HibernateRadnik();
-				radnik=rad1.nadjiRadnikaPoImenu(session, vozacModifikujCombo.getSelectedItem().toString());
+				String string=vozacModifikujCombo.getSelectedItem().toString();
+				String ime = null;
+				if(string.contains(" ")){
+				   ime= string.substring(0, string.indexOf(" ")); 
+				}
+				radnik=rad1.nadjiRadnikaPoImenu(session, ime);
+				
 				
 				Date datum=polazakModifikujDate.getDate();
 				Calendar cal=Calendar.getInstance();
@@ -782,8 +803,12 @@ public class AutobuskeLinijeForma {
 		for(int i=0;i<sviradnici3.size();i++)
 		{
 			Radnik r=(Radnik)sviradnici3.get(i);
-			if(r.dajTipRadnogMjesta().toString()=="Vozac")
-			vozacIzbrisiCombo.addItem(r.getIme());
+			if(r.dajTipRadnogMjesta().toString()=="Vozac"){
+				String lista=r.getIme()+" "+r.getJmbg();
+				vozacIzbrisiCombo.addItem(lista);
+			}
+				
+			
 		}
 		vozacIzbrisiCombo.setBounds(138, 206, 116, 20);
 		panel_2.add(vozacIzbrisiCombo);
@@ -836,8 +861,12 @@ public class AutobuskeLinijeForma {
 				{
 					polazisteIzbrisi.setText(linija.getPolaziste());
 					odredisteIzbrisi.setText(linija.getOdrediste());
+					
 					String imevozaca=linija.getVozac().getIme();
-					vozacIzbrisiCombo.setSelectedItem(imevozaca);
+					String jmbgvozaca=linija.getVozac().getJmbg();
+					String lista=imevozaca+" "+jmbgvozaca;
+					vozacIzbrisiCombo.setSelectedItem(lista);
+					
 					String aut=linija.getAutobus().getRegistracija();
 					autobusIzbrisiCombo.setSelectedItem(aut);
 					Date d=new Date();
