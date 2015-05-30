@@ -408,7 +408,6 @@ public class IzvjestajiForma {
 					Radnik r = HibernateRadnik.nadjiRadnika(session, JMBGVozac.getText());
 					TipRadnogMjesta r2=TipRadnogMjesta.Vozac;
 					TipRadnogMjesta r1=r.dajTipRadnogMjesta();
-					JOptionPane.showMessageDialog(generisiVozaciBtn, r.dajTipRadnogMjesta().equals(r));
 					if(r!=null && r1==r2)
 					{
 					GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
