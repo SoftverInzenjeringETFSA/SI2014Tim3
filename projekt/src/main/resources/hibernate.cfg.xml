@@ -5,9 +5,6 @@
  <session-factory name="">
   <property name="hibernate.hbm2ddl.auto">update</property>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url"> jdbc:mysql://localhost:3306/Tim3?characterEncoding=UTF-8</property>
-  <property name="hibernate.connection.username">EtfSI2014</property>
-  <property name="hibernate.connection.password">2014SIEtf</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/Autobus.hbm.xml"/>
   <mapping resource="ba/unsa/etf/si/projekt/entiteti/AutobuskaLinija.hbm.xml"/>
