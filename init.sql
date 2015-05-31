@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `Radnik` (
 --
 
 INSERT INTO `Radnik` (`ID`, `IME`, `PREZIME`, `JMBG`, `TIPRADNOGMJESTA`) VALUES
-(3, 'neko', 'neko', 'neko', 'Administrator');
+(3, 'neko', 'neko', '0303992110034', 'Administrator');
 
 -- --------------------------------------------------------
 

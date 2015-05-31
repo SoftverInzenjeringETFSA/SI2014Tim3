@@ -427,7 +427,7 @@ public class IzvjestajiForma {
 						if(r!=null && r1==r2)
 						{
 							try{
-							GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, r.getIme() , r.getPrezime()), r);
+							GenerisanjePDF.radniciPDF(linija.IzvjestajORadnicima(session, JMBGVozac.getText()), r);
 								JMBGVozac.setText("");
 							} catch (DocumentException e1) {
 								JOptionPane.showMessageDialog(generisiProdaneBtn, "Ne može se kreirati izvještaj");
@@ -435,6 +435,9 @@ public class IzvjestajiForma {
 							} catch (IOException e1) {
 								JOptionPane.showMessageDialog(generisiProdaneBtn, "Zatvorite otvorene izvještaje");
 								e1.printStackTrace();
+							} catch (IllegalArgumentException e2) {
+								JOptionPane.showMessageDialog(generisiProdaneBtn, e2.getMessage());
+								e2.printStackTrace();
 							}	
 						}
 						else

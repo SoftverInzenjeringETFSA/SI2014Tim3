@@ -217,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `Radnik` (
 --
 
 INSERT INTO `Radnik` (`ID`, `IME`, `PREZIME`, `JMBG`, `TIPRADNOGMJESTA`) VALUES
-(3, 'neko', 'neko', 'neko', 'Administrator'),
+(3, 'neko', 'neko', '0303992110034', 'Administrator'),
 (4, 'Fahrudin', 'Brbutovi?', '0303992110034', 'Menadzer'),
 (5, 'Huso', 'Efendi?', '0202992110034', 'SalterskiRadnik'),
 (6, 'Aida', 'Curi?', '0103991110034', 'SalterskiRadnik'),

@@ -314,8 +314,7 @@ public class AutobuskeLinijeForma {
                 {
                         Radnik r=(Radnik)sviradnici.get(i);
                         if(r.dajTipRadnogMjesta().toString()=="Vozac"){
-                                String lista=r.getIme()+" "+r.getJmbg();
-                                vozacDodajCombo.addItem(lista);
+                                vozacDodajCombo.addItem(r);
                         }
                        
                 }
@@ -376,7 +375,7 @@ public class AutobuskeLinijeForma {
                                 if(string.contains(" ")){
                                    ime= string.substring(0, string.indexOf(" "));
                                 }
-                                radnik=rad1.nadjiRadnikaPoImenu(session, ime);
+                                radnik=rad1.nadjiRadnika(session, ((Radnik)vozacDodajCombo.getSelectedItem()).getJmbg());
                                
                                 Date datum=datumDodajDate.getDate();
                                 Calendar cal=Calendar.getInstance();
@@ -494,8 +493,8 @@ public class AutobuskeLinijeForma {
                 {
                         Radnik r=(Radnik)sviradnici1.get(i);
                         if(r.dajTipRadnogMjesta().toString()=="Vozac"){
-                                String lista=r.getIme()+" "+r.getJmbg();
-                                vozacModifikujCombo.addItem(lista);
+                                
+                                vozacModifikujCombo.addItem(r);
                         }
                        
                 }
@@ -713,7 +712,7 @@ public class AutobuskeLinijeForma {
                                 if(string.contains(" ")){
                                    ime= string.substring(0, string.indexOf(" "));
                                 }
-                                radnik=rad1.nadjiRadnikaPoImenu(session, ime);
+                                radnik=rad1.nadjiRadnika(session, ((Radnik)vozacModifikujCombo.getSelectedItem()).getJmbg());
                                
                                
                                 Date datum=polazakModifikujDate.getDate();
@@ -824,8 +823,7 @@ public class AutobuskeLinijeForma {
                 {
                         Radnik r=(Radnik)sviradnici3.get(i);
                         if(r.dajTipRadnogMjesta().toString()=="Vozac"){
-                                String lista=r.getIme()+" "+r.getJmbg();
-                                vozacIzbrisiCombo.addItem(lista);
+                                vozacIzbrisiCombo.addItem(r);
                         }
                                
                        

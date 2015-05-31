@@ -59,7 +59,7 @@ public class Radnik implements java.io.Serializable {
 	
 	@Override
 	public String toString(){
-		return jmbg + " " + ime;
+		return  ime + " " + jmbg;
 	}
 
 }
