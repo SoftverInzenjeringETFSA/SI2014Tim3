@@ -462,7 +462,7 @@ public class HibernateAutibuskaLinijaTest {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List izvjestaji;
-		izvjestaji= hal.IzvjestajORadnicima(session, "Vozo", "Vozic");
+		izvjestaji= hal.IzvjestajORadnicima(session, "1712993176528");
 		Query q = session.createQuery("SELECT COUNT(*) FROM	AutobuskaLinija");
 		Long count =(Long)q.uniqueResult();
 		int izBaze=count.intValue();
@@ -473,12 +473,12 @@ public class HibernateAutibuskaLinijaTest {
 	}
 	
 	@Test
-	public void testIzvjestajORadnicimaImeExc() {
+	public void testIzvjestajORadnicimaJMBGExc() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List izvjestaji;
-		izvjestaji= hal.IzvjestajORadnicima(session, "123", "Vozic");
+		izvjestaji= hal.IzvjestajORadnicima(session, "123Vozic12358");
 		}
 		catch (Exception e) {
 			assertTrue(true);
@@ -486,7 +486,7 @@ public class HibernateAutibuskaLinijaTest {
 		session.close();
 	}
 	
-	@Test
+	/*@Test
 	public void testIzvjestajORadnicimaPrezimeExc() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
@@ -498,7 +498,7 @@ public class HibernateAutibuskaLinijaTest {
 			assertTrue(true);
 			}
 		session.close();
-	}
+	}*/
 
 	@Test
 	public void testIzvjestajOAutobuskimLinijama() {
