@@ -35,7 +35,7 @@ public class HibernateNalog {
 	}
 	
 	public static void dodajNalog(Session session, AutobuskaLinija linija, int dan, int mjesec, int godina, int sati, int minute)
-	{   int s1=0,s2=0;
+	{   int s1=0,s2=0,s3=0;
 	String string="";
 				
 			 if( sati>24) {
@@ -48,7 +48,12 @@ public class HibernateNalog {
 					string+=" Minute ne mogu biti veće od 60 min!";
 					
 				}
-		if(s1==0 && s2==0){
+				if(sati==24 && minute !=0){
+					s3=1;
+					string+="Za unos 24h minute mogu biti samo 00!";
+					
+				}
+		if(s1==0 && s2==0 && s3==0){
 		Transaction t = session.beginTransaction();
 		
 		Nalog n=new Nalog();

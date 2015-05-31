@@ -55,6 +55,7 @@ public class HibernateAutibuskaLinija {
 		int brlinije=0;
 		int s1=0;
 		int s2=0;
+		int s3=0;
 		int cdkarta=0;
 		String string="";
 		Validacija v = new Validacija();
@@ -118,9 +119,14 @@ public class HibernateAutibuskaLinija {
 			string+=" Minute ne mogu biti veće od 60 min!";
 			
 		}
+		if(sati==24 && minute !=0){
+			s3=1;
+			string+="Za unos 24h minute mogu biti samo 00!";
+			
+		}
 		
 		
-		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0 && cdkarta==0){
+		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0 && cdkarta==0 && s3==0){
 		
 		
 		AutobuskaLinija linija=new AutobuskaLinija();

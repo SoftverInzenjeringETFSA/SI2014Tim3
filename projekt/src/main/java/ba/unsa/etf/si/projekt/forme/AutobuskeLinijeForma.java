@@ -92,7 +92,7 @@ public class AutobuskeLinijeForma {
                                 } catch (Exception e) {
                                 /*      e.printStackTrace();
                                         logger.error("Greška! " + e.getMessage() , e);*/
-                                        logger.log(null, e);
+                                        logger.log(null, e.getMessage());
                                 }
                         }
                 });
@@ -440,8 +440,7 @@ public class AutobuskeLinijeForma {
                                 }
                                 catch(Exception e11)
                                 {
-                                        JOptionPane.showMessageDialog(dodajBtn, "Neuspješno dodavanje autobuske linije.");
-                                        JOptionPane.showMessageDialog(dodajBtn, e11);
+                                        JOptionPane.showMessageDialog(dodajBtn, "Neuspješno dodavanje autobuske linije.\n"+ e11.getMessage());
                                 }
                         }
                 });
@@ -569,8 +568,7 @@ public class AutobuskeLinijeForma {
                                 }
                                 catch(Exception e12)
                                 {
-                                        JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Neuspješna pretraga.");
-                                        JOptionPane.showMessageDialog(pronadjiModifikujBtn, e12);
+                                        JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Neuspješna pretraga.\n"+e12.getMessage());
                                 }
                                
                         }
@@ -763,8 +761,7 @@ public class AutobuskeLinijeForma {
                                 }
                                 catch(Exception e13)
                                 {
-                                        JOptionPane.showMessageDialog(modifikujBtn,"Nespješno modifikovanje autobuske linije." );
-                                        JOptionPane.showMessageDialog(modifikujBtn, e13 );
+                                        JOptionPane.showMessageDialog(modifikujBtn,"Nespješno modifikovanje autobuske linije.\n"+e13.getMessage() );
                                 }
                                
                                
@@ -917,8 +914,7 @@ public class AutobuskeLinijeForma {
                                 }
                                 catch(Exception ex)
                                 {
-                                        JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, "Neuspješna pretraga." );
-                                        JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, ex);
+                                        JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, "Neuspješna pretraga.\n"+ex.getMessage() );
                                        
                                 }
                                
@@ -1099,8 +1095,7 @@ public class AutobuskeLinijeForma {
                                 }
                                 catch(Exception ex1)
                                 {
-                                        JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje autobuske linije.");
-                                        JOptionPane.showMessageDialog(izbrisiBtn, ex1);
+                                        JOptionPane.showMessageDialog(izbrisiBtn, "Neuspješno brisanje autobuske linije.\n"+ ex1.getMessage());
                                 }
                                
                         }
