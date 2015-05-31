@@ -331,23 +331,20 @@ public class HibernateAutibuskaLinija {
 		
 	}
 	
-	public static java.util.List IzvjestajORadnicima(Session session,String imevozaca, String prezimevozaca)
-	{ int ime=0;
-	int prezime=0;
+	public static java.util.List IzvjestajORadnicima(Session session,String JMBG)
+	{ 
+	boolean ispravno = true;
 	String string="";
 	Validacija v = new Validacija();
-	if(v.praznoPolje(imevozaca))
-	{ime=1;
-		string+="Ime ne smije biti prazno";
-	}
-	if(v.praznoPolje(prezimevozaca))
-	{prezime=1;
-		string+="Prezime ne smije biti prazno";
+	if(!Validacija.validirajJMBG(JMBG))
+	{
+		string += "JMBG mora imati 13 cifara";
+		ispravno = false;
 	}
 	
-	if(ime==0 && prezime==0){
+	if(ispravno){
 		HibernateRadnik radnik=new HibernateRadnik();
-		Radnik r=radnik.nadjiRadnikaPoImenu(session, imevozaca);
+		Radnik r=radnik.nadjiRadnika(session, JMBG);
 		java.util.List linije;
 		linije=session.createQuery("FROM AutobuskaLinija where vozac=:vozac1").setParameter("vozac1", r).list();
         System.out.println(linije.size());
