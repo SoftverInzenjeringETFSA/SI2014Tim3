@@ -87,6 +87,7 @@ public class AutobuskeLinijeForma {
  
         /**
          * Create the application.
+         * @wbp.parser.entryPoint
          */
         public AutobuskeLinijeForma() {
                 initialize();
@@ -389,8 +390,8 @@ public class AutobuskeLinijeForma {
                                 int trajanje=Integer.parseInt(trajanjeDodaj.getText());
                                 int brojlinije=Integer.parseInt(brojDodajSpinner.getValue().toString());
                                
-                                int jednosmjerna=Integer.parseInt(jednosmjernaDodaj.getText());
-                                int dvosmjerna=Integer.parseInt(dvosmjernaDodaj.getText());
+                                double jednosmjerna=Double.valueOf(jednosmjernaDodaj.getText());
+                                double dvosmjerna=Double.valueOf(dvosmjernaDodaj.getText());
                                
                                 boolean medjunarodnaLinija=false;
                                
