@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 -- Database: `tim3`
 --
 
-CREATE DATABASE `Tim3`;
+CREATE DATABASE `Tim3` DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 USE `Tim3`;
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `Autobus` (
   `KAPACITET` int(11) DEFAULT NULL,
   `REGISTRACIJA` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `autobus`
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `AutobuskaLinija` (
   PRIMARY KEY (`ID`),
   KEY `FK_6s85fip3v6f0ssgfygehx4myp` (`AUTOBUS`),
   KEY `FK_49krsit0b1oj279n79rq2rhh6` (`VOZAC`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `autobuskalinija`
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `Karta` (
   `CIJENA` double DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_2o637y6nuuy4429flb6k9t16o` (`linija`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `karta`
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `KorisnickiRacun` (
   `TIPKORISNICKOGRACUNA` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_7w97gmc3yjar1cxat94lblpur` (`radnik`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `korisnickiracun`
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `MedjunarodnaKarta` (
   `IME` varchar(255) DEFAULT NULL,
   `PREZIME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB ;
 
 -- --------------------------------------------------------
 
@@ -184,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `Nalog` (
   `VRIJEMEPOLASKA_MINUTE` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_a84m1ahi7o58sj09my6xjn6d1` (`AUTOBUSKALINIJA`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `nalog`
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `Radnik` (
   `JMBG` varchar(255) DEFAULT NULL,
   `TIPRADNOGMJESTA` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `radnik`
@@ -248,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `Rezervacija` (
   `PREZIME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_evtdmljwiq1a82fvlakbqmcq6` (`LINIJA`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB   AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `rezervacija`
