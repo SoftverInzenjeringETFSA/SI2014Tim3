@@ -54,7 +54,7 @@ public class HibernateAutobus {
 			mod=1;
 			string+="Polje modela ne smije biti prazno polje!\n";
 		}
-		if(!v.validirajTablice(registracijaautobusa)){
+		if(!v.validirajTablice(registracijaautobusa.toUpperCase())){
 			tablice=1;
 			string+="Registarske tablice moraju biti oblika: A23-M-424! \n";
 		}

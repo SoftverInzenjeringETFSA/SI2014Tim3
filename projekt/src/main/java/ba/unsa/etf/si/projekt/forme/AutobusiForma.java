@@ -201,7 +201,7 @@ public class AutobusiForma {
 				if(postoji==false)
 				{
 				int dodavanje=Integer.parseInt(kapacitetDodajSpinner.getValue().toString());
-				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText(), modelDodaj.getText());
+				noviautobus.dodajAutobus(session, dodavanje, registracijeDodaj.getText().trim().toUpperCase(), modelDodaj.getText());
 				JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat autobus.");
 				autobusiModifikujLista.setModel(new AbstractListModel(){   //osvjezavanje liste
 

@@ -149,6 +149,7 @@ public class Validacija
     
     public static boolean validirajTablice(String tablice)
     {
+    	tablice = tablice.trim();
     	if (tablice.length() != 9)
     		return false;
     	char prvi = tablice.charAt(0);
