@@ -22,7 +22,7 @@ SET time_zone = "+00:00";
 
 -- --------------------------------------------------------
 
-CREATE DATABASE `Tim3` DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
+CREATE DATABASE `Tim3` DEFAULT CHARSET=utf8 COLLATE=latin2_croatian_ci;
 USE `Tim3`;
 
 -- --------------------------------------------------------

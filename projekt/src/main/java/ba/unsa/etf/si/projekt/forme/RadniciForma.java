@@ -171,6 +171,8 @@ public class RadniciForma {
 						TipRadnogMjesta r=TipRadnogMjesta.Administrator;
 						if(postoji==false)
 						{	
+							
+							
 						noviradnik.dodajRadnika(session, imeDodaj.getText(), prezimeDodaj.getText(), jmbgDodaj.getText(), r);
 						JOptionPane.showMessageDialog(dodajBtn, "Uspješno je dodat radnik.");	
 						imeDodaj.setText("");
