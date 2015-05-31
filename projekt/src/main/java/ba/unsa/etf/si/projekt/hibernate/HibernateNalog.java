@@ -38,22 +38,18 @@ public class HibernateNalog {
 	{   int s1=0,s2=0,s3=0;
 	String string="";
 				
-			 if( sati>24) {
+			 if( sati>23) {
 					s1=1;
-					string+=" Sati ne mogu biti veći od 24h!";
+					string+=" Sati ne mogu biti veći od 23h!";
 					
 				}
-				if( minute>60) {
+				if( minute>59) {
 					s2=1;
-					string+=" Minute ne mogu biti veće od 60 min!";
+					string+=" Minute ne mogu biti veće od 59 min!";
 					
 				}
-				if(sati==24 && minute !=0){
-					s3=1;
-					string+="Za unos 24h minute mogu biti samo 00!";
-					
-				}
-		if(s1==0 && s2==0 && s3==0){
+				
+		if(s1==0 && s2==0){
 		Transaction t = session.beginTransaction();
 		
 		Nalog n=new Nalog();
