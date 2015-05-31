@@ -35,10 +35,12 @@ import javax.swing.SwingConstants;
 
 import java.awt.Toolkit;
 
+import javax.swing.JFormattedTextField;
+import javax.swing.text.MaskFormatter;
+
 public class NaloziForma {
 	final static Logger logger = Logger.getLogger(NaloziForma.class);
 	private JFrame frmPravljenjeNaloga;
-	private JTextField vrijeme;
 	private String tipKorisnika;
 
 	/**
@@ -130,6 +132,20 @@ public class NaloziForma {
 		nazadBtn.setBounds(408, 11, 89, 23);
 		frmPravljenjeNaloga.getContentPane().add(nazadBtn);
 		
+		 MaskFormatter maska = new MaskFormatter();
+ 		try{
+ 			maska = new MaskFormatter("##:##");
+ 		}
+ 		catch( Exception e)
+ 		{
+ 			
+ 		}
+ 		maska.setPlaceholderCharacter('_');
+		
+		final JFormattedTextField formattedTextFieldNalogVrijeme = new JFormattedTextField(maska);
+		formattedTextFieldNalogVrijeme.setBounds(468, 129, 116, 20);
+		frmPravljenjeNaloga.getContentPane().add(formattedTextFieldNalogVrijeme);
+		
 		JButton odjavaBtn = new JButton("Odjava");
 		odjavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,11 +166,6 @@ public class NaloziForma {
 		datumDate.setBounds(468, 86, 116, 20);
 		frmPravljenjeNaloga.getContentPane().add(datumDate);
 		
-		vrijeme = new JTextField();
-		vrijeme.setColumns(10);
-		vrijeme.setBounds(468, 129, 116, 20);
-		frmPravljenjeNaloga.getContentPane().add(vrijeme);
-		
 		JLabel label = new JLabel("Vrijeme polaska:");
 		label.setHorizontalAlignment(SwingConstants.TRAILING);
 		label.setBounds(324, 132, 134, 14);
@@ -169,9 +180,10 @@ public class NaloziForma {
 		napraviBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) { //pravljenje nalogaaa
 				String string="";
-				int v=0,d1=0;
+				int v=0,d1=0,v1=0,s1=0,s2=0;
 				try
 				{
+     				
 					if(linijeList.getSelectedIndex()==-1)
 					{
 						JOptionPane.showMessageDialog(napraviBtn, "Morate selektovati autobusku liniju kako biste kreirali nalog.");
@@ -184,12 +196,12 @@ public class NaloziForma {
 						d1=1;
 					}
 					
-					if(vrijeme.getText().length()==0 || Validacija.validirajVrijeme(vrijeme.getText())==false)
+					if(formattedTextFieldNalogVrijeme.getText().equals("__:__") ) // ne radi ovo za vrijemeee Larisino 
 					{
-			           v=1;
-						string+="Morate unijeti vrijeme i ono mora biti u formatu 12:12.";
-						
+						v1=1;
+						string+="Morate unijeti vrijeme i mora biti u formatu 12:12.";
 					}
+					 
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateNalog n=new HibernateNalog();
 					HibernateAutibuskaLinija linija1=new HibernateAutibuskaLinija();
@@ -197,7 +209,7 @@ public class NaloziForma {
 					String selektovano=(linijeList.getSelectedValue().toString());
 					java.util.List listasvihlinija=linija1.sveLinije(session);
 					
-					if(v==0 && d1==0)
+					if(v==0 && d1==0 && v1==0 && s1==0 && s2==0)
 					{
 					int broj=0;
 					
@@ -216,13 +228,13 @@ public class NaloziForma {
 					int godina=cal.get(Calendar.YEAR);
 					int dan=cal.get(Calendar.DAY_OF_MONTH);
 					int mjesec=cal.get(Calendar.MONTH);
-					String[] nizvremena=vrijeme.getText().split(":");
-					int sati=Integer.valueOf(nizvremena[0]);
-					int minute=Integer.valueOf(nizvremena[1]);
+					String[] nizvremena=formattedTextFieldNalogVrijeme.getText().split(":");
+					int h=Integer.valueOf(nizvremena[0]);
+					int min=Integer.valueOf(nizvremena[1]);
 					
-					n.dodajNalog(session, linija, dan, mjesec, godina, sati, minute);
+					n.dodajNalog(session, linija, dan, mjesec, godina,h, min);
 					JOptionPane.showMessageDialog(napraviBtn, "Uspješno ste kreirali nalog.");
-					vrijeme.setText("");
+					formattedTextFieldNalogVrijeme.setText("");
 					datumDate.setDate(null);
 					linijeList.setSelectedIndex(-1);
 					}
@@ -241,9 +253,12 @@ public class NaloziForma {
 		});
 		napraviBtn.setBounds(480, 319, 116, 23);
 		frmPravljenjeNaloga.getContentPane().add(napraviBtn);
+		
+		
 	}
 	
 	public void setVisible(boolean visible) {
 		frmPravljenjeNaloga.setVisible(visible);
 	}
 }
+

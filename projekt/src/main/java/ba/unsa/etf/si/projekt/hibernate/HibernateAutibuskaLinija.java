@@ -268,8 +268,6 @@ public class HibernateAutibuskaLinija {
 		}
 		if(brlinije==0){
 			
-		/*String s="delete from AutobuskaLinija where brojLinije=:brojLinije";
-		session.createQuery(s).setParameter("brojLinije", brojlinije).executeUpdate();*/
 		Criteria k=session.createCriteria(AutobuskaLinija.class);
 		k.add(Restrictions.eq("brojLinije", brojlinije));
 		AutobuskaLinija izmjenjenalinija=(AutobuskaLinija) k.uniqueResult();

@@ -35,7 +35,20 @@ public class HibernateNalog {
 	}
 	
 	public static void dodajNalog(Session session, AutobuskaLinija linija, int dan, int mjesec, int godina, int sati, int minute)
-	{
+	{   int s1=0,s2=0;
+	String string="";
+				
+			 if( sati>24) {
+					s1=1;
+					string+=" Sati ne mogu biti veći od 24h!";
+					
+				}
+				if( minute>60) {
+					s2=1;
+					string+=" Minute ne mogu biti veće od 60 min!";
+					
+				}
+		if(s1==0 && s2==0){
 		Transaction t = session.beginTransaction();
 		
 		Nalog n=new Nalog();
@@ -48,6 +61,8 @@ public class HibernateNalog {
 		
 		Long id=(Long) session.save(n);
 		t.commit();
+		}
+		else { throw new IllegalArgumentException(string);}
 	}
 	
 	public static void brisiNalog(Session session, AutobuskaLinija linija, int dan, int mjesec, int godina, int sati, int minute)
