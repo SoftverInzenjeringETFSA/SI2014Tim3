@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
@@ -446,8 +447,7 @@ public class HibernateAutibuskaLinijaTest {
 	@Test
 	public void testSveLinije() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM	AutobuskaLinija");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List linije;
@@ -463,8 +463,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List izvjestaji;
 		izvjestaji= hal.IzvjestajORadnicima(session, "1712993176528");
-		Query q = session.createQuery("SELECT COUNT(*) FROM	AutobuskaLinija");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		izvjestaji= hal.sveLinije(session);
 		int br= izvjestaji.size();
@@ -506,8 +505,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List izvjestaji;
 		izvjestaji=hal.IzvjestajOAutobuskimLinijama(session, 2015, 05, 23, 2015, 05, 30, 12, 30, 21, 30);
-		Query q = session.createQuery("SELECT COUNT(*) FROM	AutobuskaLinija");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		izvjestaji= hal.sveLinije(session);
 		int br= izvjestaji.size();

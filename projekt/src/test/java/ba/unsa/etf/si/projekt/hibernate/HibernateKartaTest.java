@@ -7,6 +7,7 @@ import java.util.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
@@ -29,13 +30,11 @@ public class HibernateKartaTest {
 		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Tuzla", a, r, 2015, 05, 23, 13, 55, 2, 330, 3,16,16.50, 31.00, false);
 		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 16);
 		//prijedodavanja
-	    Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("Karta").setProjection(Projections.rowCount()).uniqueResult();		
 		int prije=count.intValue();
 		karta.dodajKartu(session,al,2015,05,22,12,0,TipKarte.jednosmjerna,25);    
 		//poslije dodavanja
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM Karta");
-		Long count2 =(Long)q2.uniqueResult();
+		Long count2 = (Long) session.createCriteria("Karta").setProjection(Projections.rowCount()).uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 		long idL=al.getId();

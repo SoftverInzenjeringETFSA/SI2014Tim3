@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
@@ -24,13 +25,11 @@ public class HibernateNalogTest {
 		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Bihac", a, r, 2015, 05, 23, 13, 55, 2, 800, 3,10,16.50, 31.00, false);
 		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 10);
 		//prijedodavanja
-		Query q = session.createQuery("SELECT COUNT(*) FROM	Nalog");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("Nalog").setProjection(Projections.rowCount()).uniqueResult();
 		int prije=count.intValue();
 		HibernateNalog.dodajNalog(session, al, 24, 5, 2015, 3, 45);
 		//poslije dodavanja
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM Nalog");
-		Long count2 =(Long)q2.uniqueResult();
+		Long count2 = (Long) session.createCriteria("Nalog").setProjection(Projections.rowCount()).uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 	

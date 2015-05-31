@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,14 +41,11 @@ public class HibernateMedjunarodnaKartaTest {
 		hal.dodajAutobuskuLiniju(session,"dmkp","dmko",a,r,2015,9,12,6,54,5,130,130,12,32.00,60.00,true);
 		linija = hal.nadjiAutobuskuLiniju(session, 12); //linija 12
 		//prije dodavanja
-		Query q = session.createQuery("SELECT COUNT(*) FROM MedjunarodnaKarta");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("MedjunarodnaKarta").setProjection(Projections.rowCount()).uniqueResult();
 		int prije = count.intValue();
 		hmk.dodajKartu(session, linija, 2015, 9, 12, 6, 54, tip, 32.00, "Dinamk", "Dinamk");
 		//poslije dodavanja
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM MedjunarodnaKarta");
-		Long count2 = (Long)q.uniqueResult();
-		int poslije = count2.intValue();
+		Long count2 = (Long) session.createCriteria("MedjunarodnaKarta").setProjection(Projections.rowCount()).uniqueResult();		int poslije = count2.intValue();
 		assertEquals(poslije, prije+1);
 		Query q3 = session.createQuery("DELETE FROM MedjunarodnaKarta WHERE ime='Dinamk'");
 		q3.executeUpdate();
@@ -60,8 +58,7 @@ public class HibernateMedjunarodnaKartaTest {
 	@Test
 	public void testSveMedjunarodneKarte() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM MedjunarodnaKarta");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("MedjunarodnaKarta").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze = count.intValue();
 		java.util.List karte;
 		karte = hmk.sveMedjunarodneKarte(session);

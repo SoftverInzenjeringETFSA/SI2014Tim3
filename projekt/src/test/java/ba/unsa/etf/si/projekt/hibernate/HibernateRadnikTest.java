@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -150,8 +151,7 @@ public class HibernateRadnikTest {
 	@Test
 	public void testSviRadnici() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM Radnik");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("Radnik").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze = count.intValue();
 		java.util.List radnici;
 		radnici = hr.sviRadnici(session);

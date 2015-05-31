@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -126,8 +127,7 @@ public class HibernateAutobusTest {
 	@Test
 	public void testSviAutobusi() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM Autobus");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze = count.intValue();
 		java.util.List autobusi;
 		autobusi = a.sviAutobusi(session);

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
@@ -22,13 +23,11 @@ public class HibernateKorisnickiRacuniTest {
 		HibernateRadnik.dodajRadnika(session, "Mujo", "Mujic", "1211990126582", mjesto);
 		Radnik r= HibernateRadnik.nadjiRadnika(session, "1211990126582");		
 		//prijedodavanja
-		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("KorisnickiRacun").setProjection(Projections.rowCount()).uniqueResult();
 		int prije=count.intValue();
 		hkr.dodajKorisnickiRacun(session, r, tkr, "mujo", "mujokujekonjapomjesecu1*");
 		//poslije dodavanja
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
-		Long count2 =(Long)q2.uniqueResult();
+		Long count2 = (Long) session.createCriteria("KorisnickiRacun").setProjection(Projections.rowCount()).uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 		hkr.brisiKorisnickiRacun(session, "mujo");
@@ -205,8 +204,7 @@ public class HibernateKorisnickiRacuniTest {
 	@Test
 	public void testSviRacuni() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM	KorisnickiRacun");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria("KorisnickiRacun").setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		HibernateKorisnickiRacuni hkr= new HibernateKorisnickiRacuni();
 		java.util.List racuni;
