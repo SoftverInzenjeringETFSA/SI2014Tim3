@@ -53,6 +53,8 @@ public class HibernateAutibuskaLinija {
 		int jkarta=0;
 		int dkarta=0;
 		int brlinije=0;
+		int s1=0;
+		int s2=0;
 		String string="";
 		Validacija v = new Validacija();
 		String distanca1=String.valueOf(distancalinije);
@@ -99,8 +101,19 @@ public class HibernateAutibuskaLinija {
 			
 		}
 		
+		if( sati>24) {
+			s1=1;
+			string+=" Sati ne mogu biti veći od 24h!";
+			
+		}
+		if( minute>60) {
+			s2=1;
+			string+=" Minute ne mogu biti veće od 60 min!";
+			
+		}
 		
-		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0){
+		
+		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0){
 		
 		
 		AutobuskaLinija linija=new AutobuskaLinija();
@@ -141,6 +154,9 @@ public class HibernateAutibuskaLinija {
 		int jkarta=0;
 		int dkarta=0;
 		int brlinije=0;
+		int s1=0;
+		int s2=0;
+		
 		String string="";
 		Validacija v = new Validacija();
 		if(v.praznoPolje(polazistelinije))
@@ -184,9 +200,19 @@ public class HibernateAutibuskaLinija {
 			string+=" Broj linije mora biti pozitivan broj!";
 			
 		}
+		if( sati>24) {
+			s1=1;
+			string+=" Sati ne mogu biti veći od 24h!";
+			
+		}
+		if( minute>60) {
+			s2=1;
+			string+=" Minute ne mogu biti veće od 60 min!";
+			
+		}
 		
 		
-		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0){
+		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0){
 		Criteria k=session.createCriteria(AutobuskaLinija.class);
 		k.add(Restrictions.eq("brojLinije", brojlinije));
 		AutobuskaLinija izmjenjenalinija=(AutobuskaLinija) k.uniqueResult();
