@@ -321,10 +321,10 @@ public class AutobusiForma {
 				{
 					int broj=(Integer) kapacitetModifikujSpinner.getValue();
 					
-					if(modelModifikuj.getText().length()==0 && broj==0 && registracijeModifikuj.getText().length()==0)// da li je vrijednost selektovana
+					if(autobusiModifikujLista.getSelectedIndex()==-1)// da li je vrijednost selektovana
 					{
-						d1=1;
-						izuzetak+="Morate selektovati autobusku liniju.";
+						JOptionPane.showMessageDialog(izmijeniBtn, "Morate selektovati liniju.");
+						return;
 					}
 					
 					if(d1==0)
