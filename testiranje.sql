@@ -151,7 +151,7 @@ CREATE TABLE IF NOT EXISTS `KorisnickiRacun` (
 --
 
 INSERT INTO `KorisnickiRacun` (`ID`, `KORISNICKOIME`, `SIFRA`, `radnik`, `TIPKORISNICKOGRACUNA`) VALUES
-(4, 'neko', 'neko', 3, 'administrator'),
+(4, 'admin', 'admin123!', 3, 'administrator'),
 (5, 'Fahrudin', 'fahrudin10!', 4, 'menadzer'),
 (6, 'Aida', 'Aida1000!', 6, 'salterskiRadnik');
 
