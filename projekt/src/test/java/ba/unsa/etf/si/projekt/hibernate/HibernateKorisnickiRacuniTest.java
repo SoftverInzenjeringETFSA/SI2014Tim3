@@ -86,7 +86,7 @@ public class HibernateKorisnickiRacuniTest {
 		Radnik r= HibernateRadnik.nadjiRadnika(session, "1712993176529");
 		
 		hkr.dodajKorisnickiRacun(session, r, tkr, "suljo", "suljokujekonjapomjesecu1*");
-		hkr.modifikujKorisnickiRacun(session, "suljo","ssuljo","suljokujekonjapomjesecu1*", tkr);
+		hkr.modifikujKorisnickiRacun(session, "suljo","ssuljo","suljokujekonjapomjesecu1*", tkr, true);
         KorisnickiRacun hib =hkr.nadjiKorisnickiRacun(session, "ssuljo");
 		assertEquals("ssuljo",hib.getKorisnickoIme());
 		hkr.brisiKorisnickiRacun(session, "ssuljo");
@@ -103,7 +103,7 @@ public class HibernateKorisnickiRacuniTest {
 			TipRadnogMjesta mjesto=TipRadnogMjesta.SalterskiRadnik;
 			TipKorisnickogRacuna tkr=TipKorisnickogRacuna.salterskiRadnik;
 			Radnik r= new Radnik();		
-			hkr.modifikujKorisnickiRacun(session," ", "korisnik","korisnik1*", tkr);	
+			hkr.modifikujKorisnickiRacun(session," ", "korisnik","korisnik1*", tkr, true);	
 			} 
 		catch (Exception e) {
 			assertTrue(true);
@@ -121,7 +121,7 @@ public class HibernateKorisnickiRacuniTest {
 			TipRadnogMjesta mjesto=TipRadnogMjesta.SalterskiRadnik;
 			TipKorisnickogRacuna tkr=TipKorisnickogRacuna.salterskiRadnik;
 			Radnik r= new Radnik();		
-			hkr.modifikujKorisnickiRacun(session,"sumeja", "korisnik","korisnik", tkr);	
+			hkr.modifikujKorisnickiRacun(session,"sumeja", "korisnik","korisnik", tkr, true);	
 			} 
 		catch (Exception e) {
 			assertTrue(true);
@@ -137,7 +137,7 @@ public class HibernateKorisnickiRacuniTest {
 			TipRadnogMjesta mjesto=TipRadnogMjesta.SalterskiRadnik;
 			TipKorisnickogRacuna tkr=TipKorisnickogRacuna.salterskiRadnik;
 			Radnik r= new Radnik();		
-			hkr.modifikujKorisnickiRacun(session,"sumeja","123","korisnik1*", tkr);	
+			hkr.modifikujKorisnickiRacun(session,"sumeja","123","korisnik1*", tkr, true);	
 			} 
 		catch (Exception e) {
 			assertTrue(true);
