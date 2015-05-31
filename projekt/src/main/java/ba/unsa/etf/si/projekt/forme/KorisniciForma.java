@@ -58,6 +58,7 @@ public class KorisniciForma {
 	private JComboBox tipModifikuj;
 	private JComboBox radnikDodajCombo;
 
+	private KorisnickiRacun korisnik;
 	/**
 	 * Launch the application.
 	 */
@@ -89,9 +90,10 @@ public class KorisniciForma {
 		initialize();
 	}
 
-	public KorisniciForma(String tipKorisnika) {
+	public KorisniciForma(KorisnickiRacun kr) {
 		// TODO Auto-generated constructor stub
-		this.tipKorisnika = tipKorisnika;
+		this.tipKorisnika = kr.getTipKorisnickogRacuna().toString();
+		korisnik = kr;
 		initialize();
 	}
 
@@ -111,11 +113,11 @@ public class KorisniciForma {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (tipKorisnika == "administrator") {
-					AdministratorPocetna a = new AdministratorPocetna();
+					AdministratorPocetna a = new AdministratorPocetna(korisnik);
 					a.setVisible(true);
 					setVisible(false);
 				} else if (tipKorisnika == "menadjer") {
-					MenadzerPocetna m = new MenadzerPocetna();
+					MenadzerPocetna m = new MenadzerPocetna(korisnik);
 					m.setVisible(true);
 					setVisible(false);
 				}
@@ -127,6 +129,11 @@ public class KorisniciForma {
 		JButton button_1 = new JButton("Odjava");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+				
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);
@@ -368,8 +375,8 @@ public class KorisniciForma {
 					{
 					if(racuni.size()>1)
 					{
-					brisanjeracun.brisiKorisnickiRacun(session, korisnickoIzbrisi.getText());
-					JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje korisničkog računa");
+						brisanjeracun.brisiKorisnickiRacun(session, korisnickoIzbrisi.getText());
+						JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje korisničkog računa");
 					
 					korisnickoIzbrisi.setText("");
 					}
@@ -404,6 +411,7 @@ public class KorisniciForma {
 				java.util.List sviracuni=HibernateKorisnickiRacuni.sviRacuni(session);
 				boolean postoji=false;
 				String staroIme = "";
+				KorisnickiRacun stari = null;
 				for(int i=0;i<sviracuni.size();i++)
 				{
 					KorisnickiRacun ra=(KorisnickiRacun)sviracuni.get(i);
@@ -411,6 +419,7 @@ public class KorisniciForma {
 					{
 						postoji=true;
 						staroIme = ra.getKorisnickoIme();
+						stari = ra;
 					}
 						
 				}
@@ -450,7 +459,7 @@ public class KorisniciForma {
 					 }
 					 
 					 else{
-					 HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r);
+					 HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, pronadiModifikuj.getText(), korisnickoModifikuj.getText(), sifraModifikuj.getText(), r, stari.isOnline());
 					JOptionPane.showMessageDialog(modifikujBtn, "Uspješno ste modifikovali korisnički račun.");}
 				}
 				

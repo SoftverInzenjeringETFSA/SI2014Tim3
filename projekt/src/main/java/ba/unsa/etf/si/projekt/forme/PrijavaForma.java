@@ -76,32 +76,32 @@ public class PrijavaForma {
 		frmPrijava.setBounds(100, 100, 353, 264);
 		frmPrijava.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmPrijava.getContentPane().setLayout(null);
-		
+
 		ime = new JTextField();
 		ime.setBounds(165, 91, 118, 20);
 		frmPrijava.getContentPane().add(ime);
 		ime.setColumns(10);
-		
+
 		sifra = new JPasswordField();
 		sifra.setBounds(165, 137, 118, 20);
 		frmPrijava.getContentPane().add(sifra);
-		
+
 		JLabel lblNewLabel = new JLabel("Korisničko ime:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblNewLabel.setBounds(47, 94, 108, 14);
 		frmPrijava.getContentPane().add(lblNewLabel);
-		
+
 		JLabel lblifra = new JLabel("Šifra:");
 		lblifra.setHorizontalAlignment(SwingConstants.TRAILING);
 		lblifra.setBounds(91, 140, 64, 14);
 		frmPrijava.getContentPane().add(lblifra);
-		
+
 		JLabel lblDobrodoli = new JLabel("Dobrodošli!");
 		lblDobrodoli.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDobrodoli.setBounds(91, 28, 215, 25);
 		frmPrijava.getContentPane().add(lblDobrodoli);
-		
-		
+
+
 		final JButton prijavaBtn = new JButton("Prijava");
 		prijavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -110,70 +110,78 @@ public class PrijavaForma {
 					Session session = HibernateUtil.getSessionFactory().openSession();
 					HibernateKorisnickiRacuni kr=new HibernateKorisnickiRacuni();
 					KorisnickiRacun korisnik=new KorisnickiRacun();
-					
+
 					korisnik=kr.nadjiKorisnickiRacun(session, ime.getText());
-					
+
 					if(korisnik!=null)
 					{
-					String imekorisnika=korisnik.getKorisnickoIme();
-					String sifrakorisnika=korisnik.getSifra();
-					TipKorisnickogRacuna pravakorisnika=korisnik.getTipKorisnickogRacuna();
-					
-					TipKorisnickogRacuna r1=TipKorisnickogRacuna.menadzer;
-					TipKorisnickogRacuna r2=TipKorisnickogRacuna.administrator;
-					TipKorisnickogRacuna r3=TipKorisnickogRacuna.salterskiRadnik;
-				
-					if (ime.getText().equals(imekorisnika) && pravakorisnika==r2 ) {
-                    if(sifra.getText().equals(sifrakorisnika))
-                    {
-					AdministratorPocetna a = new AdministratorPocetna();
-					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
-					a.setVisible(true);
-					setVisible(false);
-				    }
+						String imekorisnika=korisnik.getKorisnickoIme();
+						String sifrakorisnika=korisnik.getSifra();
+						TipKorisnickogRacuna pravakorisnika=korisnik.getTipKorisnickogRacuna();
+
+						TipKorisnickogRacuna r1=TipKorisnickogRacuna.menadzer;
+						TipKorisnickogRacuna r2=TipKorisnickogRacuna.administrator;
+						TipKorisnickogRacuna r3=TipKorisnickogRacuna.salterskiRadnik;
+
+						if(ime.getText().equals(imekorisnika)){
+							korisnik.setOnline(true);
+							
+							HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+									korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), true);
+							
+							
+							
+							if (pravakorisnika==r2 ) {
+								if(sifra.getText().equals(sifrakorisnika))
+								{
+									AdministratorPocetna a = new AdministratorPocetna(korisnik);
+									JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
+									a.setVisible(true);
+									setVisible(false);
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
+									sifra.setText("");
+								}
+							}
+
+							if (pravakorisnika==r1) {
+								if(sifra.getText().equals(sifrakorisnika))
+								{
+									MenadzerPocetna m = new MenadzerPocetna(korisnik);
+									JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
+									m.setVisible(true);
+									setVisible(false);
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
+									sifra.setText("");
+								}
+							}
+
+							if (pravakorisnika==r3) {
+								if(sifra.getText().equals(sifrakorisnika))
+								{
+									SalterskiRadnikForma s = new SalterskiRadnikForma(korisnik);
+									JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
+									s.setVisible(true);
+									setVisible(false);
+								}
+								else
+								{
+									JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
+									sifra.setText("");
+								}
+							}
+						}
+						session.close();
+					}
 					else
 					{
-						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
-						sifra.setText("");
+						JOptionPane.showMessageDialog(prijavaBtn, "Unijeli ste pogrešno korisničko ime ili nemate kreiran korisnički račun.");
 					}
-					}
-					
-					if (ime.getText().equals(imekorisnika)  && pravakorisnika==r1) {
-					if(sifra.getText().equals(sifrakorisnika))
-					{
-					MenadzerPocetna m = new MenadzerPocetna();
-					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
-					m.setVisible(true);
-					setVisible(false);
-				    }
-					else
-					{
-						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
-						sifra.setText("");
-					}
-					 }
-					
-					if (ime.getText().equals(imekorisnika)  && pravakorisnika==r3) {
-						if(sifra.getText().equals(sifrakorisnika))
-				    {
-					SalterskiRadnikForma s = new SalterskiRadnikForma();
-					JOptionPane.showMessageDialog(prijavaBtn, "Uspješno ste se prijavili.");
-					s.setVisible(true);
-					setVisible(false);
-				     }
-					else
-					{
-						JOptionPane.showMessageDialog(prijavaBtn, "Ponovite unos password-a.");
-						sifra.setText("");
-					}
-					}
-					
-				session.close();
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(prijavaBtn, "Unijeli ste pogrešno korisničko ime ili nemate kreiran korisnički račun.");
-				}
 				}
 				catch(Exception ex)
 				{
@@ -183,10 +191,10 @@ public class PrijavaForma {
 		});
 		prijavaBtn.setBounds(194, 179, 89, 23);
 		frmPrijava.getContentPane().add(prijavaBtn);
-		
-		
+
+
 	}
-	
+
 	public void setVisible(boolean visible) {
 		frmPrijava.setVisible(visible);
 	}

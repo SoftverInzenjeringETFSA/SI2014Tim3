@@ -22,10 +22,12 @@ import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
 import ba.unsa.etf.si.projekt.dodatno.Java2sAutoComboBox;
 import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
 import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
 import ba.unsa.etf.si.projekt.hibernate.HibernateMedjunarodnaKarta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRezervacija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
@@ -81,6 +83,7 @@ public class SalterskiRadnikForma implements ActionListener{
 	private JRadioButton jednosmjernaModifikacije;
 	private JButton rezervisiBtn;
 	private JList rezervacijeList;
+	private KorisnickiRacun korisnik;
 	/**
 	 * @wbp.nonvisual location=322,309
 	 */
@@ -99,19 +102,7 @@ public class SalterskiRadnikForma implements ActionListener{
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error("Greška! " + e.getMessage() , e);
-				}
-				try {
-					SalterskiRadnikForma window = new SalterskiRadnikForma();
-					window.frmalterskiRadnik.setVisible(true);
-				} catch (Exception e) {
-					//	e.printStackTrace();
-					logger.log(null, e); 
-				}
+				
 			}
 		});
 	}
@@ -119,7 +110,8 @@ public class SalterskiRadnikForma implements ActionListener{
 	/**
 	 * Create the application.
 	 */
-	public SalterskiRadnikForma() {
+	public SalterskiRadnikForma(KorisnickiRacun kr) {
+		korisnik = kr;
 		initialize();
 	}
 
@@ -138,6 +130,11 @@ public class SalterskiRadnikForma implements ActionListener{
 		JButton button = new JButton("Odjava");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);

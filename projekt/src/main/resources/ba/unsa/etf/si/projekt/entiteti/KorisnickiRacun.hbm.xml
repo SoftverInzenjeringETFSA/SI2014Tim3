@@ -24,5 +24,8 @@
                 <param name="enumClass">ba.unsa.etf.si.projekt.entiteti.TipKorisnickogRacuna</param>
             </type>
         </property>
+        <property name="online" type="java.lang.Boolean">
+            <column name="ONLINE" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,6 +1,7 @@
 package ba.unsa.etf.si.projekt.forme;
 
 import org.apache.log4j.Logger;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -28,8 +29,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 
 import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -39,7 +44,7 @@ import java.awt.Toolkit;
 public class AdministratorPocetna {
 	final static Logger logger = Logger.getLogger(AdministratorPocetna.class);
 	private JFrame frmAdministratorPoetna;
-	
+	private KorisnickiRacun korisnik;
 
 	/**
 	 * Launch the application.
@@ -49,22 +54,6 @@ public class AdministratorPocetna {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error("Greška! " + e.getMessage() , e);
-				}
-				
-				try {
-					AdministratorPocetna window = new AdministratorPocetna();
-					window.frmAdministratorPoetna.setVisible(true);
-				} catch (Exception e) {
-					
-					/*e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);*/
-					logger.log(null, e); 
-				}
 			}
 		});
 	}
@@ -72,7 +61,8 @@ public class AdministratorPocetna {
 	/**
 	 * Create the application.
 	 */
-	public AdministratorPocetna() {
+	public AdministratorPocetna(KorisnickiRacun kr) {
+		this.korisnik = kr;
 		initialize();
 	}
 
@@ -96,6 +86,11 @@ public class AdministratorPocetna {
 		JButton odjavaAdminPocetna = new JButton("Odjava");
 		odjavaAdminPocetna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+			
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);
@@ -114,7 +109,7 @@ public class AdministratorPocetna {
 		// Klik na dugme za pravljenje izvjestaja
 		izvjestajiAdminPocetna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				IzvjestajiForma i = new IzvjestajiForma("administrator");
+				IzvjestajiForma i = new IzvjestajiForma(korisnik);
 				i.setVisible(true);
 				frmAdministratorPoetna.setVisible(false);
 			}
@@ -126,7 +121,7 @@ public class AdministratorPocetna {
 		// Klik na dugme za evidenciju radnika
 		radniciAdminPocetna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RadniciForma r = new RadniciForma("administrator");
+				RadniciForma r = new RadniciForma(korisnik);
 				r.setVisible(true);
 				setVisible(false);
 			}
@@ -138,7 +133,7 @@ public class AdministratorPocetna {
 		// Klik na dugme za evidenciju autobuskih linija
 		linijeAdminPocetna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AutobuskeLinijeForma a = new AutobuskeLinijeForma("administrator");
+				AutobuskeLinijeForma a = new AutobuskeLinijeForma(korisnik);
 				a.setVisible(true);
 				setVisible(false);
 			}
@@ -150,7 +145,7 @@ public class AdministratorPocetna {
 		// Klik na dugme za evidenciju autobusa
 		autobusiAdminPocetna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AutobusiForma a = new AutobusiForma("administrator");
+				AutobusiForma a = new AutobusiForma(korisnik);
 				a.setVisible(true);
 				setVisible(false);
 			}
@@ -162,7 +157,7 @@ public class AdministratorPocetna {
 		// Klik na dugme za evidenciju korisničkih računa
 		racuniAdminPocetna.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				KorisniciForma k = new KorisniciForma("administrator");
+				KorisniciForma k = new KorisniciForma(korisnik);
 				k.setVisible(true);
 				setVisible(false);
 			}

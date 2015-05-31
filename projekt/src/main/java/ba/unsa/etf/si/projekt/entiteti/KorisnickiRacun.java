@@ -5,6 +5,15 @@ public class KorisnickiRacun implements java.io.Serializable{
 	String korisnickoIme;
 	String sifra;
 	Radnik radnik;
+	boolean online;
+	
+	
+	public boolean isOnline() {
+		return online;
+	}
+	public void setOnline(boolean online) {
+		this.online = online;
+	}
 	public long getId() {
 		return id;
 	}

@@ -14,7 +14,9 @@ import java.awt.Font;
 
 import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
 import ba.unsa.etf.si.projekt.hibernate.HibernateNalog;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
@@ -42,7 +44,7 @@ public class NaloziForma {
 	final static Logger logger = Logger.getLogger(NaloziForma.class);
 	private JFrame frmPravljenjeNaloga;
 	private String tipKorisnika;
-
+	private KorisnickiRacun korisnik;
 	/**
 	 * Launch the application.
 	 */
@@ -50,20 +52,7 @@ public class NaloziForma {
 		EventQueue.invokeLater(new Runnable() {
 			
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error("Greška! " + e.getMessage() , e);
-				}
-				try {
-					NaloziForma window = new NaloziForma();
-					window.frmPravljenjeNaloga.setVisible(true);
-				} catch (Exception e) {
-				/*	e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);*/
-					logger.log(null, e); 
-				}
+	
 			}
 		});
 	}
@@ -75,9 +64,10 @@ public class NaloziForma {
 		initialize();
 	}
 	
-	public NaloziForma(String tipKorisnika) {
+	public NaloziForma(KorisnickiRacun kr) {
 		initialize();
-		this.tipKorisnika = tipKorisnika;
+		this.tipKorisnika = kr.getTipKorisnickogRacuna().toString();
+		korisnik = kr;
 	}
 	
 	/**
@@ -119,11 +109,11 @@ public class NaloziForma {
 		nazadBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (tipKorisnika == "administrator") {
-					AdministratorPocetna a = new AdministratorPocetna();
+					AdministratorPocetna a = new AdministratorPocetna(korisnik);
 					a.setVisible(true);
 					setVisible(false);
 				} else if (tipKorisnika == "menadjer") {
-					MenadzerPocetna m = new MenadzerPocetna();
+					MenadzerPocetna m = new MenadzerPocetna(korisnik);
 					m.setVisible(true);
 					setVisible(false);
 				}
@@ -149,6 +139,11 @@ public class NaloziForma {
 		JButton odjavaBtn = new JButton("Odjava");
 		odjavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);

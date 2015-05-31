@@ -1,5 +1,10 @@
 package ba.unsa.etf.si.projekt.forme;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
+import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -17,6 +22,7 @@ import java.awt.Toolkit;
 
 public class MenadzerPocetna {
 	final static Logger logger = Logger.getLogger(MenadzerPocetna.class);
+	private KorisnickiRacun korisnik;
 	private JFrame frmMenaderPoetna;
 
 	/**
@@ -25,20 +31,7 @@ public class MenadzerPocetna {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error("Greška! " + e.getMessage() , e);
-				}
-				try {
-					MenadzerPocetna window = new MenadzerPocetna();
-					window.frmMenaderPoetna.setVisible(true);
-				} catch (Exception e) {
-					/*e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);*/
-					logger.log(null, e); 
-				}
+				
 			}
 		});
 	}
@@ -46,7 +39,8 @@ public class MenadzerPocetna {
 	/**
 	 * Create the application.
 	 */
-	public MenadzerPocetna() {
+	public MenadzerPocetna(KorisnickiRacun kr) {
+		korisnik = kr;
 		initialize();
 	}
 
@@ -70,6 +64,11 @@ public class MenadzerPocetna {
 		JButton odjavaBtn = new JButton("Odjava");
 		odjavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);
@@ -88,7 +87,7 @@ public class MenadzerPocetna {
 		// Klik na dugme za pravljenje izvjestaja
 		izvjestajiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IzvjestajiForma i = new IzvjestajiForma("menadjer");
+				IzvjestajiForma i = new IzvjestajiForma(korisnik);
 				i.setVisible(true);
 				setVisible(false);
 			}
@@ -100,7 +99,7 @@ public class MenadzerPocetna {
 		// Klik na dugme za evidenciju radnika
 		radniciBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RadniciForma i = new RadniciForma("menadjer");
+				RadniciForma i = new RadniciForma(korisnik);
 				i.setVisible(true);
 				setVisible(false);
 			}
@@ -112,7 +111,7 @@ public class MenadzerPocetna {
 		// Klik na dugme za evidenciju autobuskih linija
 		linijeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AutobuskeLinijeForma i = new AutobuskeLinijeForma("menadjer");
+				AutobuskeLinijeForma i = new AutobuskeLinijeForma(korisnik);
 				i.setVisible(true);
 				setVisible(false);
 			}
@@ -124,7 +123,7 @@ public class MenadzerPocetna {
 		// Klik na dugme za evidenciju autobusa
 		autobusiBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AutobusiForma i = new AutobusiForma("menadjer");
+				AutobusiForma i = new AutobusiForma(korisnik);
 				i.setVisible(true);
 				setVisible(false);
 			}
@@ -136,7 +135,7 @@ public class MenadzerPocetna {
 		// Klik na dugme za pravljenje naloga
 		naloziBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NaloziForma i = new NaloziForma("menadjer");
+				NaloziForma i = new NaloziForma(korisnik);
 				i.setVisible(true);
 				setVisible(false);
 			}

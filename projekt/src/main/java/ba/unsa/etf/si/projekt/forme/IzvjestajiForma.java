@@ -14,10 +14,12 @@ import javax.swing.UIManager;
 import ba.unsa.etf.si.projekt.dodatno.GenerisanjePDF;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
 import ba.unsa.etf.si.projekt.hibernate.HibernateUtil;
 
@@ -49,6 +51,7 @@ public class IzvjestajiForma {
 	private JTextField krajnjeVrijemeMinute;
 	private JTextField krajnjeVrijemeSati;
 	private JTextField JMBGVozac;
+	private KorisnickiRacun korisnik;
 
 	private String tipKorisnika;
 	/**
@@ -57,21 +60,7 @@ public class IzvjestajiForma {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error("Greška! " + e.getMessage() , e);
-				}
-
-				try {
-					IzvjestajiForma window = new IzvjestajiForma();
-					window.frmIzvjetaji.setVisible(true);
-				} catch (Exception e) {
-					/*	e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);*/
-					logger.log(null, e); 
-				}
+		
 			}
 		});
 	}
@@ -83,9 +72,10 @@ public class IzvjestajiForma {
 		initialize();
 	}
 
-	public IzvjestajiForma(String tipKorisnika) {
+	public IzvjestajiForma(KorisnickiRacun kr) {
 		initialize();
-		this.tipKorisnika = tipKorisnika;
+		this.tipKorisnika = kr.getTipKorisnickogRacuna().toString();
+		korisnik = kr;
 	}
 
 	/**
@@ -106,11 +96,11 @@ public class IzvjestajiForma {
 		nazadBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (tipKorisnika == "administrator") {
-					AdministratorPocetna a = new AdministratorPocetna();
+					AdministratorPocetna a = new AdministratorPocetna(korisnik);
 					a.setVisible(true);
 					setVisible(false);
 				} else if (tipKorisnika == "menadjer") {
-					MenadzerPocetna m = new MenadzerPocetna();
+					MenadzerPocetna m = new MenadzerPocetna(korisnik);
 					m.setVisible(true);
 					setVisible(false);
 				}				
@@ -124,6 +114,11 @@ public class IzvjestajiForma {
 		// Klik na dugme odjava
 		odjavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);

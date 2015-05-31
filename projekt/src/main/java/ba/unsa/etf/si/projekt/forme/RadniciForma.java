@@ -44,26 +44,14 @@ public class RadniciForma {
 	private JTextField imeIzbrisi;
 	private JTextField prezimeIzbrisi;
 	private String tipKorisnika;
-
+	private KorisnickiRacun korisnik;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception e) {
-					// TODO: handle exception
-					logger.error("Greška! " + e.getMessage() , e);
-				}
-				try {
-					RadniciForma window = new RadniciForma();
-					window.frmEvidencijaRadnika.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-					logger.error("Greška! " + e.getMessage() , e);
-				}
+		
 			}
 		});
 	}
@@ -75,10 +63,12 @@ public class RadniciForma {
 		initialize();
 	}
 
-	public RadniciForma(String tipKorisnika) {
+	public RadniciForma(KorisnickiRacun kr) {
 		// TODO Auto-generated constructor stub
+		this.tipKorisnika = kr.getTipKorisnickogRacuna().toString();
+		korisnik = kr;
 		initialize();
-		this.tipKorisnika = tipKorisnika;
+		
 	}
 
 	/**
@@ -543,6 +533,11 @@ public class RadniciForma {
 		JButton odjavaBtn = new JButton("Odjava");
 		odjavaBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Session session = HibernateUtil.getSessionFactory().openSession();
+				
+				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+
 				PrijavaForma p = new PrijavaForma();
 				p.setVisible(true);
 				setVisible(false);
@@ -555,11 +550,11 @@ public class RadniciForma {
 		nazadBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (tipKorisnika == "administrator") {
-					AdministratorPocetna a = new AdministratorPocetna();
+					AdministratorPocetna a = new AdministratorPocetna(korisnik);
 					a.setVisible(true);
 					setVisible(false);
 				} else if (tipKorisnika == "menadjer") {
-					MenadzerPocetna m = new MenadzerPocetna();
+					MenadzerPocetna m = new MenadzerPocetna(korisnik);
 					m.setVisible(true);
 					setVisible(false);
 				}

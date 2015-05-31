@@ -17,6 +17,7 @@ import ba.unsa.etf.si.projekt.dodatno.Validacija;
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
+import ba.unsa.etf.si.projekt.entiteti.KorisnickiRacun;
 import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
 import ba.unsa.etf.si.projekt.entiteti.Nalog;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
@@ -24,6 +25,7 @@ import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutibuskaLinija;
 import ba.unsa.etf.si.projekt.hibernate.HibernateAutobus;
 import ba.unsa.etf.si.projekt.hibernate.HibernateKarta;
+import ba.unsa.etf.si.projekt.hibernate.HibernateKorisnickiRacuni;
 import ba.unsa.etf.si.projekt.hibernate.HibernateMedjunarodnaKarta;
 import ba.unsa.etf.si.projekt.hibernate.HibernateNalog;
 import ba.unsa.etf.si.projekt.hibernate.HibernateRadnik;
@@ -71,29 +73,14 @@ public class AutobuskeLinijeForma {
         private JTextField odredisteIzbrisi;
        private JTextField vrijemeIzbrisi;
         private String tipKorisnika;
- 
+        private KorisnickiRacun korisnik;
         /**
          * Launch the application.
          */
         public static void main(String[] args) {
                 EventQueue.invokeLater(new Runnable() {
                         public void run() {
-                                try {
-                                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                                } catch (Exception e) {
-                                        // TODO: handle exception
-                                        logger.error("Greška! " + e.getMessage() , e);
-                                }
-                               
-                                try {
-                                       
-                                        AutobuskeLinijeForma window = new AutobuskeLinijeForma();
-                                        window.frmAutobuskeLinije.setVisible(true);
-                                } catch (Exception e) {
-                                /*      e.printStackTrace();
-                                        logger.error("Greška! " + e.getMessage() , e);*/
-                                        logger.log(null, e.getMessage());
-                                }
+                                
                         }
                 });
         }
@@ -105,9 +92,10 @@ public class AutobuskeLinijeForma {
                 initialize();
         }
  
-        public AutobuskeLinijeForma(String tipKorisnika) {
+        public AutobuskeLinijeForma(KorisnickiRacun kr) {
                 // TODO Auto-generated constructor stub
-                this.tipKorisnika = tipKorisnika;
+                this.tipKorisnika = kr.getTipKorisnickogRacuna().toString();
+                korisnik = kr;
                 initialize();
         }
  
@@ -126,6 +114,12 @@ public class AutobuskeLinijeForma {
                 JButton odjavaBtn = new JButton("Odjava");
                 odjavaBtn.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
+            				Session session = HibernateUtil.getSessionFactory().openSession();
+            				
+            				HibernateKorisnickiRacuni.modifikujKorisnickiRacun(session, korisnik.getKorisnickoIme(), korisnik.getKorisnickoIme(), 
+            						korisnik.getSifra(), korisnik.getTipKorisnickogRacuna(), false);
+
+                        	
                                 PrijavaForma p = new PrijavaForma();
                                 p.setVisible(true);
                                 setVisible(false);
@@ -138,11 +132,11 @@ public class AutobuskeLinijeForma {
                 nazadBtn.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                                 if (tipKorisnika == "administrator") {
-                                        AdministratorPocetna a = new AdministratorPocetna();
+                                        AdministratorPocetna a = new AdministratorPocetna(korisnik);
                                         a.setVisible(true);
                                         setVisible(false);
                                 } else if (tipKorisnika == "menadjer") {
-                                        MenadzerPocetna m = new MenadzerPocetna();
+                                        MenadzerPocetna m = new MenadzerPocetna(korisnik);
                                         m.setVisible(true);
                                         setVisible(false);
                                 }

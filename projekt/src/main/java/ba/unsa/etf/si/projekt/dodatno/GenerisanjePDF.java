@@ -8,12 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
@@ -29,7 +27,6 @@ import com.itextpdf.text.pdf.PdfWriter;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
 import ba.unsa.etf.si.projekt.entiteti.Karta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
-import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 
 public class GenerisanjePDF {
 
@@ -40,12 +37,12 @@ public class GenerisanjePDF {
 		PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("IKarte.pdf"));
 		document.open();
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-		document.add(new Paragraph("Izvještaj o prodanim kartama izmedju " + df.format(pocetak) + " i " + df.format(kraj), 
+		document.add(new Paragraph("Izvještaj o prodanim kartama između " + df.format(pocetak) + " i " + df.format(kraj), 
 				FontFactory.getFont(FontFactory.COURIER, 14, Font.BOLD,	new CMYKColor(89, 78, 0, 100))));
 		PdfPTable t = new PdfPTable(5);
 		t.setSpacingBefore(25);
 		t.setSpacingAfter(25);
-		PdfPCell c1 = new PdfPCell(new Phrase("Odrediste"));  
+		PdfPCell c1 = new PdfPCell(new Phrase("Odredište"));  
 		t.addCell(c1);
 		PdfPCell c2 = new PdfPCell(new Phrase("Vrijeme"));  
 		t.addCell(c2);
@@ -91,7 +88,7 @@ public class GenerisanjePDF {
 		PdfPTable t = new PdfPTable(5);
 		t.setSpacingBefore(25);
 		t.setSpacingAfter(25);
-		PdfPCell c1 = new PdfPCell(new Phrase("Odrediste"));  
+		PdfPCell c1 = new PdfPCell(new Phrase("Odredište"));  
 		t.addCell(c1);
 		PdfPCell c2 = new PdfPCell(new Phrase("Autobus"));  
 		t.addCell(c2);
@@ -135,7 +132,7 @@ public class GenerisanjePDF {
 
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
-		document.add(new Paragraph("Izvještaj o autobuskim linijama izmedju " + df.format(pocetak) + " i " + df.format(kraj), 
+		document.add(new Paragraph("Izvještaj o autobuskim linijama između " + df.format(pocetak) + " i " + df.format(kraj), 
 				FontFactory.getFont(FontFactory.COURIER, 14, Font.BOLD,	new CMYKColor(89, 78, 0, 100))));
 		PdfPTable t = new PdfPTable(5);
 

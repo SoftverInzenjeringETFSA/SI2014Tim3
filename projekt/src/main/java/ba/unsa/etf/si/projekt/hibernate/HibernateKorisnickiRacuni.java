@@ -17,23 +17,7 @@ public class HibernateKorisnickiRacuni {
  
 	public static void main( String[] args)
 	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		TipKorisnickogRacuna r=TipKorisnickogRacuna.menadzer;
-		Radnik radnik = HibernateRadnik.nadjiRadnika(session, "2412993178512");
-		//dodajKorisnickiRacun(session, "Ilvana","Brankovic","2412993178512","Ive","ilv123",r);
-		//dodajKorisnickiRacun(session, radnik, r, "Lara", "pass1-aaaaa");
-		//modifikujKorisnickiRacun(session, "Ilvana","Ive","Branković","2412993178512","Ive1","ilv123",r);
-		modifikujKorisnickiRacun(session, "Lara", "Lara1", "pass1-aaadd", r);
-		//brisiKorisnickiRacun(session,"2");
-	/*	nadjiKorisnickiRacun(session,"Ive");
-		java.util.List racuni;
-		racuni=sviRacuni(session);
-		for(int i=0;i<racuni.size();i++)
-		{
-			KorisnickiRacun au=(KorisnickiRacun)racuni.get(i);
-			System.out.println(au.getKorisnickoIme());
-		}*/
-		session.close();
+		
 	}
 	
 	public static void dodajKorisnickiRacun(Session session, Radnik radnik, TipKorisnickogRacuna tipracuna, String korisnickoimekorisnika, String passkorisnika)
@@ -59,7 +43,7 @@ public class HibernateKorisnickiRacuni {
 			kr.setKorisnickoIme(korisnickoimekorisnika);
 			kr.setTipKorisnickogRacuna(tipracuna);
 			kr.setSifra(passkorisnika);
-			
+			kr.setOnline(false);
 			Long id=(Long) session.save(kr);
 			t.commit();
 		}
@@ -67,7 +51,7 @@ public class HibernateKorisnickiRacuni {
 			throw new IllegalArgumentException(izuzetak);
 	}
 	
-	public static void modifikujKorisnickiRacun(Session session, String starokorisnickoime, String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika)
+	public static void modifikujKorisnickiRacun(Session session, String starokorisnickoime, String korisnickoimekorisnika, String passkorisnika, TipKorisnickogRacuna tipracunakorisnika, Boolean status)
 	{
 		Transaction t = session.beginTransaction();
 		
@@ -99,7 +83,7 @@ public class HibernateKorisnickiRacuni {
 				kr.setTipKorisnickogRacuna(tipracunakorisnika);
 				kr.setSifra(passkorisnika);
 				kr.setKorisnickoIme(korisnickoimekorisnika);
-				
+				kr.setOnline(status);
 				session.save(kr);
 				t.commit();
 			}
@@ -116,11 +100,17 @@ public class HibernateKorisnickiRacuni {
 		{
 			throw new IllegalArgumentException("Korisničko ime mora biti tekst i ne smije biti prazno polje!\n");
 		}
+		
 		else
 		{
+			
 			Criteria k=session.createCriteria(KorisnickiRacun.class);
 			k.add(Restrictions.eq("korisnickoIme",korisnickoimekorisnika));
 			KorisnickiRacun kr= (KorisnickiRacun) k.uniqueResult();
+			if (kr.isOnline()) {
+				throw new IllegalArgumentException("Korisnik je online!\n");
+			}
+			
 			session.delete(kr);
 			t.commit();
 		}
