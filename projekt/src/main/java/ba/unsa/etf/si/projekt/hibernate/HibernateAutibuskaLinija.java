@@ -55,6 +55,7 @@ public class HibernateAutibuskaLinija {
 		int brlinije=0;
 		int s1=0;
 		int s2=0;
+		int cdkarta=0;
 		String string="";
 		Validacija v = new Validacija();
 		String distanca1=String.valueOf(distancalinije);
@@ -95,6 +96,12 @@ public class HibernateAutibuskaLinija {
 			
 		}
 		
+		if(cijenadvosmjernakarta<=cijenajednosmjernakarta) {
+			cdkarta=1;
+			string+=" Cjena dvosmjerne karte ne može biti manja od cijene ili jednaka cijeni jednosmjerne karte!";
+			
+		}
+		
 		if( brojlinije<=0 ||  String.valueOf(brojlinije).length()==0) {
 			brlinije=1;
 			string+=" Broj linije mora biti pozitivan broj!";
@@ -113,7 +120,7 @@ public class HibernateAutibuskaLinija {
 		}
 		
 		
-		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0){
+		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0 && cdkarta==0){
 		
 		
 		AutobuskaLinija linija=new AutobuskaLinija();
@@ -156,6 +163,7 @@ public class HibernateAutibuskaLinija {
 		int brlinije=0;
 		int s1=0;
 		int s2=0;
+		int cdkarta=0;
 		
 		String string="";
 		Validacija v = new Validacija();
@@ -195,6 +203,12 @@ public class HibernateAutibuskaLinija {
 			string+=" Cjena dvosmjerne karte biti pozitivan broj manji od 300!";
 			
 		}
+		
+		if(cijenadvosmjernakarta<=cijenajednosmjernakarta) {
+			cdkarta=1;
+			string+=" Cjena dvosmjerne karte ne može biti manja od cijene ili jednaka cijeni jednosmjerne karte.";
+			
+		}
 		if( brojlinije<=0) {
 			brlinije=1;
 			string+=" Broj linije mora biti pozitivan broj!";
@@ -212,7 +226,7 @@ public class HibernateAutibuskaLinija {
 		}
 		
 		
-		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0){
+		if(po==0 && od==0 && peron==0 && distanca==0 && trajanje==0 && jkarta==0 && dkarta==0 && brlinije==0 && s1==0 && s2==0 && cdkarta==0){
 		Criteria k=session.createCriteria(AutobuskaLinija.class);
 		k.add(Restrictions.eq("brojLinije", brojlinije));
 		AutobuskaLinija izmjenjenalinija=(AutobuskaLinija) k.uniqueResult();
