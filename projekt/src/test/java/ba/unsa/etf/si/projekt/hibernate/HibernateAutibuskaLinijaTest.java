@@ -264,7 +264,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 		Autobus a = new Autobus();
 		Radnik r = new Radnik();
-		hal.modifikujAutobuskuLiniju(session, "", "Mostar", a, r, 2015, 05, 23, 14, 55, 2, 800, 3, 9, 16.50, 31.00);
+		hal.modifikujAutobuskuLiniju(session, "123", "Mostar", a, r, 2015, 05, 23, 14, 55, 2, 800, 3, 9, 16.50, 31.00);
 		session.close();
 	}
 	
@@ -288,7 +288,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 		Autobus a = new Autobus();
 		Radnik r = new Radnik();
-		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "", a, r, 2015, 05, 24, 06, 55, 2, 1000.00, 3, 2, 16.50, 31.00);
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "123", a, r, 2015, 05, 24, 06, 55, 2, 1000.00, 3, 2, 16.50, 31.00);
 		session.close();
 	}
 	
