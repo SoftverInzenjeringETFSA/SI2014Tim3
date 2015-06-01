@@ -553,7 +553,7 @@ public class RadniciForma {
 					AdministratorPocetna a = new AdministratorPocetna(korisnik);
 					a.setVisible(true);
 					setVisible(false);
-				} else if (tipKorisnika == "menadjer") {
+				} else if (tipKorisnika == "menadzer") {
 					MenadzerPocetna m = new MenadzerPocetna(korisnik);
 					m.setVisible(true);
 					setVisible(false);
