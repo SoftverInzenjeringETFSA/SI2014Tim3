@@ -323,7 +323,7 @@ public class AutobusiForma {
 					
 					if(autobusiModifikujLista.getSelectedIndex()==-1)// da li je vrijednost selektovana
 					{
-						JOptionPane.showMessageDialog(izmijeniBtn, "Morate selektovati liniju.");
+						JOptionPane.showMessageDialog(izmijeniBtn, "Morate selektovati autobus.");
 						return;
 					}
 					
