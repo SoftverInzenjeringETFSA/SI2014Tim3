@@ -117,6 +117,7 @@ public class SalterskiRadnikForma implements ActionListener{
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @wbp.parser.entryPoint
 	 */
 	private void initialize() {
 		frmalterskiRadnik = new JFrame();
@@ -466,7 +467,8 @@ public class SalterskiRadnikForma implements ActionListener{
 					if(selektovan.equals(s))
 					{
 						comboBox_4.setSelectedItem(r.getLinija().getOdrediste());
-						comboBox_5.setSelectedItem(r.getVrijemePolaska_sati()+":"+r.getVrijemePolaska_minute());
+						
+						comboBox_5.setSelectedItem(r.getLinija().getVrijemePolaska_sati()+":"+r.getLinija().getVrijemePolaska_minute());
 						if(r.getTipKarte()==TipKarte.jednosmjerna)
 						{
 							jednosmjernaModifikacije.setSelected(true);
@@ -544,6 +546,9 @@ public class SalterskiRadnikForma implements ActionListener{
 						int godina=cal.get(Calendar.YEAR);
 						int mjesec=cal.get(Calendar.MONTH)+1;
 						int dan=cal.get(Calendar.DAY_OF_MONTH);
+						
+						
+						
 						AutobuskaLinija linija=HibernateAutibuskaLinija.NadjiAutobuskuLinijuOdrediste(session, odrediste, godina, mjesec, dan, sati, minute);
 						double cijena=linija.getCijenaDvosmjerna();
 
@@ -645,6 +650,7 @@ public class SalterskiRadnikForma implements ActionListener{
 						textField_1.setText("");
 						datumModifikacijeDate.setDate(null);
 
+						try{
 						rezervacijeList.setModel(new AbstractListModel()
 						{
 							Session session = HibernateUtil.getSessionFactory().openSession();
@@ -660,6 +666,10 @@ public class SalterskiRadnikForma implements ActionListener{
 								return "Autobuska linija: "+r.getLinija().getBrojLinije()+ " Datum polaska: "+r.getDatumPolaska_dan()+"."+r.getDatumPolaska_mjesec()+"."+r.getDatumPolaska_godina()+"."+" Rezervisao: "+r.getIme()+" "+r.getPrezime()+"Tip karte: "+r.getTipKarte();
 							}
 						});
+						}
+						catch(Exception ex){
+							
+						}
 
 					}
 					else
@@ -786,6 +796,8 @@ public class SalterskiRadnikForma implements ActionListener{
 						Calendar cal2 = Calendar.getInstance();
 
 						HibernateRezervacija.dodajRezervaciju(session, linija, cal2.get(Calendar.YEAR), cal2.get(Calendar.MONTH)+1, cal2.get(Calendar.DAY_OF_MONTH), cal2.get(Calendar.HOUR_OF_DAY), cal2.get(Calendar.MINUTE), k, cijena, ime, prezime);
+						
+						try{
 						rezervacijeList.setModel(new AbstractListModel()
 						{
 							Session session = HibernateUtil.getSessionFactory().openSession();
@@ -799,6 +811,10 @@ public class SalterskiRadnikForma implements ActionListener{
 								return "Autobuska linija: "+r.getLinija().getBrojLinije()+ " Datum polaska: "+r.getDatumPolaska_dan()+"."+r.getDatumPolaska_mjesec()+"."+r.getDatumPolaska_godina()+"."+" Rezervisao: "+r.getIme()+" "+r.getPrezime()+"Tip karte: "+r.getTipKarte();
 							}
 						});
+						}
+						catch(Exception exxxx){
+							
+						}
 						cijenaRezervacije.setText(String.valueOf(cijena));
 						JOptionPane.showMessageDialog(rezervisiBtn, "Karta je rezervisana.");
 					}
