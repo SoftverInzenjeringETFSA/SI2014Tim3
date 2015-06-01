@@ -164,12 +164,12 @@ public class IzvjestajiForma {
 				if(pocetniProdaneDate.getDate()==null)
 				{
 					d1=1;
-					izuzetak+="Morate unijeti početni datum. ";
+					izuzetak+="Morate unijeti početni datum!\n";
 				}
 				if(krajnjiProdaneDate.getDate()==null)
 				{
 					d2=1;
-					izuzetak+="Morate unijeti krajnji datum.";
+					izuzetak+="Morate unijeti krajnji datum!\n";
 				}
 				if(d1==0 && d2==0)
 				{
@@ -212,7 +212,7 @@ public class IzvjestajiForma {
 				}
 				else
 				{
-					JOptionPane.showMessageDialog(generisiProdaneBtn, izuzetak);
+					JOptionPane.showMessageDialog(generisiProdaneBtn, "Neuspješno kreiranje izvještaja:\n"+izuzetak);
 				}
 
 				/*
@@ -307,22 +307,22 @@ public class IzvjestajiForma {
 					if(pocetniLinijeDate.getDate()==null)
 					{
 						d1=1;
-						izuzetak+="Morate unijeti početni datum. ";
+						izuzetak+="Morate unijeti početni datum!\n";
 					}
 					if(krajnjiLinijeDate.getDate()==null)
 					{
 						d2=1;
-						izuzetak+="Morate unijeti krajnji datum. ";
+						izuzetak+="Morate unijeti krajnji datum!\n";
 					}
 					if(pocetnoVrijemeSati.getText().length()==0 || pocetnoVrijemeMinute.getText().length()==0)
 					{
 						v1=1;
-						izuzetak+="Morate unijeti pocetno vrijeme i sate i minute. ";
+						izuzetak+="Morate unijeti pocetno vrijeme i sate i minute!\n";
 					}
 					if(krajnjeVrijemeSati.getText().length()==0 || krajnjeVrijemeMinute.getText().length()==0)
 					{
 						v2=1;
-						izuzetak+="Morate unijeti krajnje vrijeme.";
+						izuzetak+="Morate unijeti krajnje vrijeme!\n";
 					}
 					if(d1==0 && d2==0 && v1==0 && v2==0)
 					{
@@ -343,7 +343,7 @@ public class IzvjestajiForma {
 						int dan2=cal1.get(Calendar.DAY_OF_MONTH);
 						if(pocetnoVrijemeSati.getText().contains(".") || pocetnoVrijemeMinute.getText().contains(".") || krajnjeVrijemeSati.getText().contains(".") || krajnjeVrijemeMinute.getText().contains("."))
 						{
-							izuzetak+="Minute i sati ne smiju biti decimalni brojevi.";
+							izuzetak+="Minute i sati ne smiju biti decimalni brojevi!";
 						}
 						int pocetnisati=Integer.parseInt(pocetnoVrijemeSati.getText());
 						int pocetneminute=Integer.parseInt(pocetnoVrijemeMinute.getText());
@@ -380,7 +380,7 @@ public class IzvjestajiForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(generisiLinijeBtn, izuzetak);
+						JOptionPane.showMessageDialog(generisiLinijeBtn, "Neuspješno generisanje izvještaja:\n"+izuzetak);
 					}
 				}
 				catch(Exception ex1)
@@ -443,7 +443,7 @@ public class IzvjestajiForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(generisiVozaciBtn, "Morate unijeti JMBG vozaca.");
+						JOptionPane.showMessageDialog(generisiVozaciBtn, "Morate unijeti JMBG vozača!");
 					}
 
 				}
