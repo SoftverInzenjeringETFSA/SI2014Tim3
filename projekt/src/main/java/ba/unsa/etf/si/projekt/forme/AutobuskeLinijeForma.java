@@ -1030,6 +1030,7 @@ public class AutobuskeLinijeForma {
 						{
 							brisi=false;
 							izuzetak+="Ne možete brisati liniju, jer postoje rezervacije vezena za nju.";
+							break;
 						}
 					}
 
@@ -1042,7 +1043,9 @@ public class AutobuskeLinijeForma {
 						{
 							brisi=false;
 							izuzetak+="Ne možete brisati liniju, jer su za nju izdate karte.";
+							break;
 						}
+						
 					}
 
 					java.util.List nalog=HibernateNalog.sviNalozi(session);
@@ -1054,7 +1057,9 @@ public class AutobuskeLinijeForma {
 						{
 							brisi=false;
 							izuzetak+="Ne mozete brisati linije, jer postoji nalog kreiran za nju.";
+							break;
 						}
+						
 					}
 
 					java.util.List medjunarodne=HibernateMedjunarodnaKarta.sveMedjunarodneKarte(session);
@@ -1066,6 +1071,7 @@ public class AutobuskeLinijeForma {
 						{
 							brisi=false;
 							izuzetak+="Ne možete brisati linju, jer je prodata karta za nju.";
+							break;
 						}
 
 					}
