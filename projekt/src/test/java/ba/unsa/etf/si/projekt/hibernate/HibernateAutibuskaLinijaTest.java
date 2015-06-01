@@ -36,14 +36,13 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutobus.brisanjeAutobusa(session, "A20-M-524");
 		HibernateRadnik.brisiRadnika(session, "0611992176509");
 		
-		
 		session.close();
 		
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuPolazisteExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -56,11 +55,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "123", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,16.50, 31.00, false);
     }
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuOdredisteExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -73,11 +78,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", " ", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,16.50, 31.00, false);
     }
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuBrojPeronaExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -90,11 +101,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 8, 300, 3,2,16.50, 31.00, false);
     }
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuDistancaExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -107,11 +124,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, -300, 3,2,16.50, 31.00, false);
     }
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuCijenaJednosmjerneExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -124,11 +147,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,1650, 31.00, false);
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuCijenaDvosmjerneExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -141,11 +170,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,2,16.50, -31, false);
     }
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuTrajanjeExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -158,11 +193,17 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, -3,2,16.50, 31.00, false);
     }
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testDodajAutobuskuLinijuBrojLinijeExc() {
-		
+		/*
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
@@ -175,6 +216,12 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 13, 55, 2, 300, 3,-2,16.50, 31.00, false);
     }
 		
 	
@@ -197,9 +244,9 @@ public class HibernateAutibuskaLinijaTest {
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuPolazisteExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A83-M-484","M11");
@@ -212,13 +259,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "", "Mostar", a, r, 2015, 05, 23, 14, 55, 2, 800, 3, 9, 16.50, 31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuOdredisteExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A93-M-484","MT1");
@@ -231,13 +283,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "", a, r, 2015, 05, 24, 06, 55, 2, 1000.00, 3, 2, 16.50, 31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuPeronExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A23-I-424","M11");
@@ -250,13 +307,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "Mostar", a, r, 2015, 05, 23, 14, 55, -2, 1200.00, 3, 2, 16.50, 31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuDistancaExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A23-L-424","M11");
@@ -269,13 +331,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "Dubrovnik", a, r, 2015, 05, 23, 14, 55, 2, -300.00, 3, 10, 16.50, 31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuTrajanjeExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A23-P-424","M11");
@@ -288,13 +355,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "Gradacac", a, r, 2015, 05, 23, 14, 55, 2, 600.00, -3, 2, 16.50, 31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuCijenaJednosmjernaExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A23-R-424","M11");
@@ -307,13 +379,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "Stolac", a, r, 2015, 05, 23, 14, 55, 2, 200.00, 3, 2, 1650, 31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuCijenaDvosmjernaExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A23-N-424","M11");
@@ -326,13 +403,18 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "Konjic", a, r, 2015, 05, 23, 14, 55, 2, 350.00, 3, 3, 16.50, -31.00);
 		session.close();
 	}
 	
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testModifikujAutobuskuLinijuBrojLinijeExc() {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		/*Session session = HibernateUtil.getSessionFactory().openSession();
 		try{
 		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
 	    HibernateAutobus.dodajAutobus(session, 50,"A23-E-424","M11");
@@ -345,11 +427,16 @@ public class HibernateAutibuskaLinijaTest {
 		catch (Exception e) {
 			assertTrue(true);
 			}
-		
+		*/
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		HibernateAutibuskaLinija hal = new HibernateAutibuskaLinija();
+		Autobus a = new Autobus();
+		Radnik r = new Radnik();
+		hal.modifikujAutobuskuLiniju(session, "Sarajevo", "Kljuc", a, r, 2015, 05, 23, 14, 55, 2, 400.00, 3, -2, 16.50, 31.00);
 		session.close();
 	}
 	
-    @Test
+    @Test(expected = IllegalArgumentException.class)
 	public void testBrisiAutobuskuLiniju() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
@@ -360,9 +447,11 @@ public class HibernateAutibuskaLinijaTest {
 	    hal.dodajAutobuskuLiniju(session, "Sarajevo", "Livno", a, r, 2015, 05, 23, 13, 55, 2, 600, 3,7,16.50, 31.00, false);
 
 		hal.brisiAutobuskuLiniju(session, 7);
-		assertEquals(null, hal.nadjiAutobuskuLiniju(session, 7));
+		//assertEquals(null, hal.nadjiAutobuskuLiniju(session, 7));
 		HibernateAutobus.brisanjeAutobusa(session,"A03-M-434");
 		HibernateRadnik.brisiRadnika(session, "1712997126982");
+		//izuzetak Ne postoji ta linija
+		hal.nadjiAutobuskuLiniju(session, 7);
 		session.close();
 	}
 	
