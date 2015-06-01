@@ -331,27 +331,27 @@ public class AutobuskeLinijeForma {
 					if(datumDodajDate.getDate()==null)
 					{
 						d1=1;
-						izuzetak+="Morate unijeti datum.";
+						izuzetak+="Morate unijeti datum!\n";
 					}
 					if(formattedTextFieldVrijeme.getText().equals("__:__") ) // ne radi ovo za vrijemeee Larisino 
 					{
 						v1=1;
-						izuzetak+="Morate unijeti vrijeme i mora biti u formatu 12:12.";
+						izuzetak+="Morate unijeti vrijeme i mora biti u formatu 12:12!\n";
 					}
 					if(trajanjeDodaj.getText().length()==0)
 					{
 						t1=1;
-						izuzetak+="Morate unijeti trajanje vožnje.";
+						izuzetak+="Morate unijeti trajanje vožnje!\n";
 					}
 					if(jednosmjernaDodaj.getText().length()==0)
 					{
 						j1=1;
-						izuzetak+="Morate unijeti cijenu jednosmjerne karte.";
+						izuzetak+="Morate unijeti cijenu jednosmjerne karte!\n";
 					}
 					if(dvosmjernaDodaj.getText().length()==0)
 					{
 						d2=1;
-						izuzetak+="Morate unijeti cijenu dvosmjerne karte.";
+						izuzetak+="Morate unijeti cijenu dvosmjerne karte!\n";
 					}
 
 					if(d1==0 && v1==0 && t1==0 && d2==0 && j1==0)
@@ -430,7 +430,7 @@ public class AutobuskeLinijeForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(dodajBtn, izuzetak);     
+						JOptionPane.showMessageDialog(dodajBtn, "Neuspješno dodavanje autobuske linije:\n"+izuzetak);     
 					}
 				}
 				catch(Exception e11)
@@ -561,12 +561,12 @@ public class AutobuskeLinijeForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Ne postoji autobuska linija s tim brojem linije.");
+						JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Ne postoji autobuska linija s tim brojem linije!");
 					}
 				}
 				catch(Exception e12)
 				{
-					JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Neuspješna pretraga.\n"+e12.getMessage());
+					JOptionPane.showMessageDialog(pronadjiModifikujBtn, "Neuspješna pretraga:\n"+e12.getMessage());
 				}
 
 			}
@@ -672,27 +672,27 @@ public class AutobuskeLinijeForma {
 					if(polazakModifikujDate.getDate()==null)
 					{
 						d1=1;
-						izuzetak+="Morate unijeti datum.";
+						izuzetak+="Morate unijeti datum!\n";
 					}
-					if(formattedTextFieldVrijemeMod.getText().equals("__:__") ) // ne radi ovo za vrijemeee Larisino 
+					if(formattedTextFieldVrijemeMod.getText().equals("__:__") ) 
 					{
 						v1=1;
-						izuzetak+="Vrijeme mora biti u formatu 12:12.";
+						izuzetak+="Vrijeme mora biti u formatu 12:12!\n";
 					}
 					if(trajanjeModifikuj.getText().length()==0)
 					{
 						t1=1;
-						izuzetak+="Morate unijeti trajanje vožnje.";
+						izuzetak+="Morate unijeti trajanje vožnje!\n";
 					}
 					if(jednosmjernaModifikuj.getText().length()==0)
 					{
 						j1=1;
-						izuzetak+="Morate unijeti cijenu jednosmjerne karte.";
+						izuzetak+="Morate unijeti cijenu jednosmjerne karte!\n";
 					}
 					if(dvosmjernaModifikuj.getText().length()==0)
 					{
 						d2=1;
-						izuzetak+="Morate unijeti cijenu dvosmjerne karte.";
+						izuzetak+="Morate unijeti cijenu dvosmjerne karte!\n";
 					}
 					if(d1==0 && v1==0 && t1==0 && d2==0 && j1==0)
 					{
@@ -756,12 +756,12 @@ public class AutobuskeLinijeForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(modifikujBtn, izuzetak); 
+						JOptionPane.showMessageDialog(modifikujBtn, "Neuspješno modifikovanje autobuske linije:\n"+izuzetak); 
 					}
 				}
 				catch(Exception e13)
 				{
-					JOptionPane.showMessageDialog(modifikujBtn,"Nespješno modifikovanje autobuske linije.\n"+e13.getMessage() );
+					JOptionPane.showMessageDialog(modifikujBtn,"Neuspješno modifikovanje autobuske linije:\n"+e13.getMessage() );
 				}
 
 
@@ -908,13 +908,13 @@ public class AutobuskeLinijeForma {
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, "Ne postoji autobuska linija ciji ste broj unijeli" );
+						JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, "Ne postoji autobuska linija čiji ste broj unijeli" );
 					}
 
 				}
 				catch(Exception ex)
 				{
-					JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, "Neuspješna pretraga.\n"+ex.getMessage() );
+					JOptionPane.showMessageDialog(pronadjiIzbrisiBtn, "Neuspješna pretraga:\n"+ex.getMessage() );
 
 				}
 
@@ -1079,7 +1079,7 @@ public class AutobuskeLinijeForma {
 						if(k.getLinija()==linija1)
 						{
 							brisi=false;
-							izuzetak+="Ne možete brisati linju, jer je prodata karta za nju.";
+							izuzetak+="Ne možete brisati liniju, jer je prodata karta za nju.";
 							break;
 						}
 
