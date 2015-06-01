@@ -136,24 +136,25 @@ INSERT INTO `Karta` (`ID`, `linija`, `VRIJEMEKupovine_SATI`, `VRIJEMEkupovine_MI
 -- Table structure for table `korisnickiracun`
 --
 
-CREATE TABLE IF NOT EXISTS `KorisnickiRacun` (
+CREATE TABLE IF NOT EXISTS `korisnickiracun` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `KORISNICKOIME` varchar(255) DEFAULT NULL,
-  `SIFRA` varchar(255) DEFAULT NULL,
+  `KORISNICKOIME` varchar(255) COLLATE utf8_slovenian_ci DEFAULT NULL,
+  `SIFRA` varchar(255) COLLATE utf8_slovenian_ci DEFAULT NULL,
   `radnik` bigint(20) DEFAULT NULL,
-  `TIPKORISNICKOGRACUNA` varchar(255) DEFAULT NULL,
+  `TIPKORISNICKOGRACUNA` varchar(255) COLLATE utf8_slovenian_ci DEFAULT NULL,
+  `ONLINE` bit(1) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_7w97gmc3yjar1cxat94lblpur` (`radnik`)
-) ENGINE=InnoDB   AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `korisnickiracun`
 --
 
-INSERT INTO `KorisnickiRacun` (`ID`, `KORISNICKOIME`, `SIFRA`, `radnik`, `TIPKORISNICKOGRACUNA`) VALUES
-(4, 'admin', 'admin123!', 3, 'administrator'),
-(5, 'Fahrudin', 'fahrudin10!', 4, 'menadzer'),
-(6, 'Aida', 'Aida1000!', 6, 'salterskiRadnik');
+INSERT INTO `KorisnickiRacun` (`ID`, `KORISNICKOIME`, `SIFRA`, `radnik`, `TIPKORISNICKOGRACUNA`, `ONLINE`) VALUES
+(4, 'admin', 'admin123!', 3, 'administrator', 0),
+(5, 'Fahrudin', 'fahrudin10!', 4, 'menadzer', 0),
+(6, 'Aida', 'Aida1000!', 6, 'salterskiRadnik', 0);
 
 -- --------------------------------------------------------
 
