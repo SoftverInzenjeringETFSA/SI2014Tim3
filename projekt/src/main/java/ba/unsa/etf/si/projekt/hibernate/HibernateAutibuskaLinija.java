@@ -168,11 +168,11 @@ public class HibernateAutibuskaLinija {
 
 		String string="";
 		Validacija v = new Validacija();
-		if(v.praznoPolje(polazistelinije))
+		if(v.praznoPolje(polazistelinije) || v.jeTekst(polazistelinije) == false)
 		{po=1;
 		string+="Polazište linije mora biti tekst i ne smije biti prazno polje!";
 		}
-		if(v.praznoPolje(odredistelinije))
+		if(v.praznoPolje(odredistelinije) || v.jeTekst(odredistelinije) == false)
 		{    od=1;
 		string+=" Odredište linije mora biti tekst i ne smije biti prazno polje!";
 		}
