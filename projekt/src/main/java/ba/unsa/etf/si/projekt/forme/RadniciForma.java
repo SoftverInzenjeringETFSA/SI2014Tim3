@@ -493,7 +493,7 @@ public class RadniciForma {
 						}
 				}
 				if(brisi==true)
-				{
+				{ 
 				brisanjeradnik.brisiRadnika(session, jmbgIzbrisiPronadi.getText());
 				JOptionPane.showMessageDialog(izbrisiBtn, "Uspješno brisanje.");
 				jmbgIzbrisiPronadi.setText("");
