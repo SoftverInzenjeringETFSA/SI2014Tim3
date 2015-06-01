@@ -36,6 +36,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutobus.brisanjeAutobusa(session, "A20-M-524");
 		HibernateRadnik.brisiRadnika(session, "0611992176509");
 		
+		
 		session.close();
 		
 	}
