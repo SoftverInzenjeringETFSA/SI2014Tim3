@@ -1037,6 +1037,9 @@ public class AutobuskeLinijeForma {
 					java.util.List karte=HibernateKarta.sveKarte(session);
 					for(int i=0;i<karte.size();i++)
 					{
+						if (!brisi) {
+							break;
+						}
 						Karta k=(Karta)karte.get(i);
 						AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
 						if(k.getLinija()==linija1)
@@ -1051,12 +1054,15 @@ public class AutobuskeLinijeForma {
 					java.util.List nalog=HibernateNalog.sviNalozi(session);
 					for(int i=0;i<nalog.size();i++)
 					{
+						if (!brisi) {
+							break;
+						}
 						Nalog n=(Nalog)nalog.get(i);
 						AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
 						if(n.getAutobuskaLinija()==linija1)
 						{
 							brisi=false;
-							izuzetak+="Ne mozete brisati linije, jer postoji nalog kreiran za nju.";
+							izuzetak+="Ne možete brisati linije, jer postoji nalog kreiran za nju.";
 							break;
 						}
 						
@@ -1065,6 +1071,9 @@ public class AutobuskeLinijeForma {
 					java.util.List medjunarodne=HibernateMedjunarodnaKarta.sveMedjunarodneKarte(session);
 					for(int i=0;i<medjunarodne.size();i++)
 					{
+						if (!brisi) {
+							break;
+						}
 						MedjunarodnaKarta k=(MedjunarodnaKarta)medjunarodne.get(i);
 						AutobuskaLinija linija1=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session,broj );
 						if(k.getLinija()==linija1)
