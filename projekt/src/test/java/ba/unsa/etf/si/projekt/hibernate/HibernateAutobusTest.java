@@ -127,7 +127,7 @@ public class HibernateAutobusTest {
 	@Test
 	public void testSviAutobusi() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(Autobus.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze = count.intValue();
 		java.util.List autobusi;
 		autobusi = a.sviAutobusi(session);

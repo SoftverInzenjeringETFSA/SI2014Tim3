@@ -151,7 +151,7 @@ public class HibernateRadnikTest {
 	@Test
 	public void testSviRadnici() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Long count = (Long) session.createCriteria("Radnik").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(Radnik.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze = count.intValue();
 		java.util.List radnici;
 		radnici = hr.sviRadnici(session);

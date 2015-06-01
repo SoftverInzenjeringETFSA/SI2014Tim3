@@ -4,12 +4,15 @@ import static org.junit.Assert.*;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 import org.junit.Before;
 import org.junit.Test;
 
 import ba.unsa.etf.si.projekt.entiteti.Autobus;
 import ba.unsa.etf.si.projekt.entiteti.AutobuskaLinija;
+import ba.unsa.etf.si.projekt.entiteti.MedjunarodnaKarta;
 import ba.unsa.etf.si.projekt.entiteti.Radnik;
+import ba.unsa.etf.si.projekt.entiteti.Rezervacija;
 import ba.unsa.etf.si.projekt.entiteti.TipKarte;
 import ba.unsa.etf.si.projekt.entiteti.TipRadnogMjesta;
 
@@ -25,8 +28,8 @@ public class HibernateRezervacijaTest {
 	@Test
 	public void testSveRezervacije() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int izBaze = count.intValue();
 		java.util.List rez;
 		rez = hrez.sveRezervacije(session);
@@ -56,13 +59,13 @@ public class HibernateRezervacijaTest {
 		TipKarte tk = TipKarte.jednosmjerna;
 		//prije
 		hrez.dodajRezervaciju(session, linijaS, 2015, 8, 15, 22, 10, tk, 35.00, "Dinaatestmod", "Aamod");
-		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int prije = count.intValue();
 		//poslije
 		hrez.ModifikujRezervaciju(session, linijaS, linijaN, "Dinaatestmod", "Aamod", "Dinaamodnovo", "Aamodnovo", 36.00, tk);
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count2 = (Long)q.uniqueResult();
+		Long count2 = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int poslije = count2.intValue();
 		assertEquals(poslije, prije);	//treba ostati isto
 		hrez.brisanjeRezervacije(session, linijaN, "Dinaamodnovo", "Aamodnovo");
@@ -91,13 +94,13 @@ public class HibernateRezervacijaTest {
 		TipKarte tk = TipKarte.jednosmjerna;
 		//prije brisanja
 		hrez.dodajRezervaciju(session, linija2, 2015, 7, 21, 16, 16, tk, 20.00, "Dinatestbrisanje", "Brisanje");
-		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int prije = count.intValue();
 		//poslije brisanja
 		hrez.brisanjeRezervacije(session, linija2, "Dinatestbrisanje", "Brisanje");
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count2 = (Long)q.uniqueResult();
+		Long count2 = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int poslije = count2.intValue();
 		assertEquals(poslije, prije-1);
 		hal2.brisiAutobuskuLiniju(session, 8);
@@ -136,13 +139,13 @@ public class HibernateRezervacijaTest {
 		AutobuskaLinija linija1 = hal1.nadjiAutobuskuLiniju(session, 3);
 		TipKarte tk = TipKarte.jednosmjerna;
 		//prije dodavanja
-		Query q = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count = (Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int prije = count.intValue();
 		hrez.dodajRezervaciju(session, linija1, 2015, 6, 29, 15, 20, tk, 10.00, "DodajTest", "Dodaj");
 		//poslije dodavanja
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM Rezervacija");
-		Long count2 = (Long)q.uniqueResult();
+		Long count2 = (Long) session.createCriteria(Rezervacija.class).setProjection(Projections.rowCount()).uniqueResult();
+		
 		int poslije = count2.intValue();
 		assertEquals(poslije, prije+1);
 		hrez.brisanjeRezervacije(session, linija1, "DodajTest", "Dodaj");

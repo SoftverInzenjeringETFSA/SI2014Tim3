@@ -23,11 +23,11 @@ public class HibernateKorisnickiRacuniTest {
 		HibernateRadnik.dodajRadnika(session, "Mujo", "Mujic", "1211990126582", mjesto);
 		Radnik r= HibernateRadnik.nadjiRadnika(session, "1211990126582");		
 		//prijedodavanja
-		Long count = (Long) session.createCriteria("KorisnickiRacun").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(KorisnickiRacun.class).setProjection(Projections.rowCount()).uniqueResult();
 		int prije=count.intValue();
 		hkr.dodajKorisnickiRacun(session, r, tkr, "mujo", "mujokujekonjapomjesecu1*");
 		//poslije dodavanja
-		Long count2 = (Long) session.createCriteria("KorisnickiRacun").setProjection(Projections.rowCount()).uniqueResult();
+		Long count2 = (Long) session.createCriteria(KorisnickiRacun.class).setProjection(Projections.rowCount()).uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 		hkr.brisiKorisnickiRacun(session, "mujo");
@@ -85,7 +85,7 @@ public class HibernateKorisnickiRacuniTest {
 		Radnik r= HibernateRadnik.nadjiRadnika(session, "1712993176529");
 		
 		hkr.dodajKorisnickiRacun(session, r, tkr, "suljo", "suljokujekonjapomjesecu1*");
-		hkr.modifikujKorisnickiRacun(session, "suljo","ssuljo","suljokujekonjapomjesecu1*", tkr, true);
+		hkr.modifikujKorisnickiRacun(session, "suljo","ssuljo","suljokujekonjapomjesecu1*", tkr, false);
         KorisnickiRacun hib =hkr.nadjiKorisnickiRacun(session, "ssuljo");
 		assertEquals("ssuljo",hib.getKorisnickoIme());
 		hkr.brisiKorisnickiRacun(session, "ssuljo");
@@ -204,7 +204,7 @@ public class HibernateKorisnickiRacuniTest {
 	@Test
 	public void testSviRacuni() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Long count = (Long) session.createCriteria("KorisnickiRacun").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(KorisnickiRacun.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		HibernateKorisnickiRacuni hkr= new HibernateKorisnickiRacuni();
 		java.util.List racuni;

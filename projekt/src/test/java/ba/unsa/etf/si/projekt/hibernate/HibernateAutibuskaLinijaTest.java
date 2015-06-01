@@ -25,13 +25,11 @@ public class HibernateAutibuskaLinijaTest {
 	    HibernateRadnik.dodajRadnika(session, "Dinko", "Dinkic", "0611992176509", TipRadnogMjesta.Vozac);
 	    Radnik r = HibernateRadnik.nadjiRadnika(session, "0611992176509");
 		//prijedodavanja
-		Query q = session.createQuery("SELECT COUNT(*) FROM	AutobuskaLinija");
-		Long count =(Long)q.uniqueResult();
+	    Long count = (Long) session.createCriteria(AutobuskaLinija.class).setProjection(Projections.rowCount()).uniqueResult();
 		int prije=count.intValue();
 		hal.dodajAutobuskuLiniju(session, "Sarajevo", "Kakanj", a, r, 2015, 05, 24, 13, 55, 1, 100, 1,7,7.50, 11.00, false);
 		//poslije dodavanja
-		Query q2 = session.createQuery("SELECT COUNT(*) FROM AutobuskaLinija");
-		Long count2 =(Long)q2.uniqueResult();
+		Long count2 = (Long) session.createCriteria(AutobuskaLinija.class).setProjection(Projections.rowCount()).uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 		HibernateAutibuskaLinija.brisiAutobuskuLiniju(session, 7);
@@ -447,7 +445,7 @@ public class HibernateAutibuskaLinijaTest {
 	@Test
 	public void testSveLinije() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(AutobuskaLinija.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List linije;
@@ -463,7 +461,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List izvjestaji;
 		izvjestaji= hal.IzvjestajORadnicima(session, "1712993176528");
-		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(AutobuskaLinija.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		izvjestaji= hal.sveLinije(session);
 		int br= izvjestaji.size();
@@ -505,7 +503,7 @@ public class HibernateAutibuskaLinijaTest {
 		HibernateAutibuskaLinija hal= new HibernateAutibuskaLinija();
 		java.util.List izvjestaji;
 		izvjestaji=hal.IzvjestajOAutobuskimLinijama(session, 2015, 05, 23, 2015, 05, 30, 12, 30, 21, 30);
-		Long count = (Long) session.createCriteria("AutobuskaLinija").setProjection(Projections.rowCount()).uniqueResult();
+		Long count = (Long) session.createCriteria(AutobuskaLinija.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		izvjestaji= hal.sveLinije(session);
 		int br= izvjestaji.size();

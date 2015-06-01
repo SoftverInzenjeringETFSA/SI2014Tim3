@@ -30,11 +30,11 @@ public class HibernateKartaTest {
 		HibernateAutibuskaLinija.dodajAutobuskuLiniju(session, "Sarajevo", "Tuzla", a, r, 2015, 05, 23, 13, 55, 2, 330, 3,16,16.50, 31.00, false);
 		AutobuskaLinija al=HibernateAutibuskaLinija.nadjiAutobuskuLiniju(session, 16);
 		//prijedodavanja
-		Long count = (Long) session.createCriteria("Karta").setProjection(Projections.rowCount()).uniqueResult();		
+		Long count = (Long) session.createCriteria(Karta.class).setProjection(Projections.rowCount()).uniqueResult();		
 		int prije=count.intValue();
 		karta.dodajKartu(session,al,2015,05,22,12,0,TipKarte.jednosmjerna,25);    
 		//poslije dodavanja
-		Long count2 = (Long) session.createCriteria("Karta").setProjection(Projections.rowCount()).uniqueResult();
+		Long count2 = (Long) session.createCriteria(Karta.class).setProjection(Projections.rowCount()).uniqueResult();
 		int poslije=count2.intValue();
 		assertEquals(poslije,prije+1);
 		long idL=al.getId();
@@ -116,8 +116,7 @@ public class HibernateKartaTest {
 	@Test
 	public void testSveKarte() {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria(Karta.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		HibernateKarta hk= new HibernateKarta();
 		java.util.List karte;
@@ -131,8 +130,7 @@ public class HibernateKartaTest {
 	public void testIzvjestajOProdanimKartama() {
 		
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		Query q = session.createQuery("SELECT COUNT(*) FROM	Karta");
-		Long count =(Long)q.uniqueResult();
+		Long count = (Long) session.createCriteria(Karta.class).setProjection(Projections.rowCount()).uniqueResult();
 		int izBaze=count.intValue();
 		HibernateKarta hk= new HibernateKarta();
 		java.util.List izvjestaj;
