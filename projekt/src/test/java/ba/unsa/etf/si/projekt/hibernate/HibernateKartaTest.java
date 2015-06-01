@@ -126,19 +126,7 @@ public class HibernateKartaTest {
 		session.close();
 	}
 
-	@Test
-	public void testIzvjestajOProdanimKartama() {
-		
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Long count = (Long) session.createCriteria(Karta.class).setProjection(Projections.rowCount()).uniqueResult();
-		int izBaze=count.intValue();
-		HibernateKarta hk= new HibernateKarta();
-		java.util.List izvjestaj;
-		izvjestaj=hk.IzvjestajOProdanimKartama(session, 2015, 01, 01, 2015, 05, 31);
-		int br=izvjestaj.size();
-		assertEquals(br,izBaze);
-		session.close();
-	}
+	
 
 	
 }
