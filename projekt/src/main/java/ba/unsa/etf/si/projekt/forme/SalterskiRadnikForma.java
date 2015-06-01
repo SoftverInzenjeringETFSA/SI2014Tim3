@@ -324,8 +324,6 @@ public class SalterskiRadnikForma implements ActionListener{
 						HibernateMedjunarodnaKarta.dodajKartu(session, linija, godina, mjesec, dan, sati, minute, k, cijena, ime, prezime);
 					}
 
-
-
 					cijenaProdajaLabel.setText(String.valueOf(cijena));
 					JOptionPane.showMessageDialog(prodajaBtn, "Karta je prodata.");
 				}
@@ -530,6 +528,7 @@ public class SalterskiRadnikForma implements ActionListener{
 						izuzetak="Morate izabrati autobusku liniju.";
 					}
 
+					
 
 					if (d1 == 0 && d2==0)
 					{
@@ -563,6 +562,10 @@ public class SalterskiRadnikForma implements ActionListener{
 						}
 						if(linija!=null)
 						{
+							linija.setZauzeto(linija.getZauzeto()-1);
+
+							HibernateAutibuskaLinija.updateLinija(session, linija);
+							
 							HibernateRezervacija.ModifikujRezervaciju(session, staralinija, linija, staroime, staroprezime, textField.getText(), textField_1.getText(),cijena,r);
 							JOptionPane.showMessageDialog(modifikujBtn, "Rezervacija je uspješno modifikovana.");
 							try{
