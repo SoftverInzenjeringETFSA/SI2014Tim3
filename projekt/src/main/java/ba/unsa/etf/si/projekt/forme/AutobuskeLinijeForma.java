@@ -403,7 +403,7 @@ public class AutobuskeLinijeForma {
 						java.util.List lista=svelinije.sveLinije(session);
 						for(int i=0;i<lista.size();i++)
 						{
-							AutobuskaLinija a=new AutobuskaLinija();
+							AutobuskaLinija a=(AutobuskaLinija)lista.get(i);
 							if(a.getBrojLinije()==brojlinije)postoji=true;
 						}
 						if(postoji==false)
